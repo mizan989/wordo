@@ -1,7 +1,25 @@
-// Platform abstraction service for Tauri 2 and Web environments
+// Platform abstraction service for Tauri 2 and browser environments.
 import { saveAs } from 'file-saver';
 
 export type PlatformType = 'linux' | 'windows' | 'macos' | 'web';
+export interface OpenedFile {
+  name: string;
+  path?: string;
+  content: string | ArrayBuffer;
+  isBinary: boolean;
+}
+
+function tauriInvoke<T>(command: string, args?: Record<string, unknown>): Promise<T> {
+  const invoke = (window as any).__TAURI__?.core?.invoke;
+  if (typeof invoke !== 'function') throw new Error('Tauri desktop API is unavailable');
+  return invoke(command, args);
+}
+
+function tauriDialog() {
+  const dialog = (window as any).__TAURI__?.dialog;
+  if (!dialog) throw new Error('Tauri dialog plugin is unavailable');
+  return dialog;
+}
 
 export class PlatformService {
   private static isTauriEnv(): boolean {
@@ -17,145 +35,101 @@ export class PlatformService {
     return 'web';
   }
 
-  public static isDesktop(): boolean {
-    return this.isTauriEnv();
-  }
+  public static isDesktop(): boolean { return this.isTauriEnv(); }
 
-  /**
-   * Prompts the user to select a file from their local disk.
-   */
-  public static async openFileDialog(acceptTypes: string = '.docx,.txt,.html'): Promise<{ name: string; content: string | ArrayBuffer; isBinary: boolean } | null> {
+  public static async openFileDialog(acceptTypes = '.docx,.txt,.html'): Promise<OpenedFile | null> {
+    if (this.isTauriEnv()) {
+      const extensions = acceptTypes.split(',').map((value) => value.trim().replace(/^\./, '')).filter(Boolean);
+      const selected = await tauriDialog().open({ multiple: false, filters: [{ name: 'Documents', extensions }] });
+      const path = Array.isArray(selected) ? selected[0] : selected;
+      if (!path) return null;
+      const bytes = await tauriInvoke<number[]>('read_document_file', { path });
+      const binary = Uint8Array.from(bytes);
+      const name = path.split(/[\\/]/).pop() || 'Document';
+      const isBinary = name.toLowerCase().endsWith('.docx');
+      return {
+        name,
+        path,
+        content: isBinary ? binary.buffer.slice(binary.byteOffset, binary.byteOffset + binary.byteLength) : new TextDecoder().decode(binary),
+        isBinary,
+      };
+    }
+
     return new Promise((resolve) => {
       const input = document.createElement('input');
       input.type = 'file';
       input.accept = acceptTypes;
-
-      input.onchange = async (e: Event) => {
-        const target = e.target as HTMLInputElement;
-        const file = target.files?.[0];
-        if (!file) {
-          resolve(null);
-          return;
-        }
-
-        const isDocx = file.name.toLowerCase().endsWith('.docx');
+      input.onchange = () => {
+        const file = input.files?.[0];
+        if (!file) return resolve(null);
+        const isBinary = file.name.toLowerCase().endsWith('.docx');
         const reader = new FileReader();
-
-        if (isDocx) {
-          reader.onload = () => {
-            resolve({
-              name: file.name,
-              content: reader.result as ArrayBuffer,
-              isBinary: true,
-            });
-          };
-          reader.readAsArrayBuffer(file);
-        } else {
-          reader.onload = () => {
-            resolve({
-              name: file.name,
-              content: reader.result as string,
-              isBinary: false,
-            });
-          };
-          reader.readAsText(file);
-        }
+        reader.onload = () => resolve({ name: file.name, content: reader.result as string | ArrayBuffer, isBinary });
+        reader.onerror = () => resolve(null);
+        if (isBinary) reader.readAsArrayBuffer(file);
+        else reader.readAsText(file);
       };
-
+      input.oncancel = () => resolve(null);
       input.click();
     });
   }
 
-  /**
-   * Prompts the user to save a file to their local disk.
-   */
+  public static async readDocument(path: string): Promise<OpenedFile> {
+    const bytes = Uint8Array.from(await tauriInvoke<number[]>('read_document_file', { path }));
+    const name = path.split(/[\\/]/).pop() || 'Document';
+    const isBinary = name.toLowerCase().endsWith('.docx');
+    return { name, path, content: isBinary ? bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) : new TextDecoder().decode(bytes), isBinary };
+  }
+
   public static async saveFile(
     filename: string,
     data: Blob | string | Uint8Array,
-    mimeType: string = 'application/octet-stream'
-  ): Promise<boolean> {
+    mimeType = 'application/octet-stream',
+    destinationPath?: string,
+  ): Promise<string | false> {
     try {
-      let blob: Blob;
-      if (data instanceof Blob) {
-        blob = data;
-      } else if (typeof data === 'string') {
-        blob = new Blob([data], { type: mimeType });
-      } else {
-        blob = new Blob([data as unknown as BlobPart], { type: mimeType });
+      const blob = data instanceof Blob ? data : new Blob([data as BlobPart], { type: mimeType });
+      if (this.isTauriEnv()) {
+        const path = destinationPath || await tauriDialog().save({ defaultPath: filename, filters: [{ name: 'Document', extensions: [filename.split('.').pop() || 'docx'] }] });
+        if (!path) return false;
+        const bytes = Array.from(new Uint8Array(await blob.arrayBuffer()));
+        await tauriInvoke<void>('write_document_file', { path, data: bytes });
+        return path;
       }
 
-      // Check if modern File System Access API is available
       if (typeof window !== 'undefined' && 'showSaveFilePicker' in window) {
         try {
           const extension = filename.split('.').pop() || 'docx';
           const handle = await (window as any).showSaveFilePicker({
             suggestedName: filename,
-            types: [
-              {
-                description: `${extension.toUpperCase()} File`,
-                accept: { [mimeType]: [`.${extension}`] },
-              },
-            ],
+            types: [{ description: `${extension.toUpperCase()} File`, accept: { [mimeType]: [`.${extension}`] } }],
           });
           const writable = await handle.createWritable();
           await writable.write(blob);
           await writable.close();
-          return true;
-        } catch (pickerErr: any) {
-          // If user cancelled, return false; otherwise fallback to file-saver
-          if (pickerErr.name === 'AbortError') return false;
+          return filename;
+        } catch (err: any) {
+          if (err.name === 'AbortError') return false;
         }
       }
-
-      // Fallback save using file-saver
       saveAs(blob, filename);
-      return true;
+      return filename;
     } catch (err) {
       console.error('Failed to save file:', err);
-      return false;
+      throw err;
     }
   }
 
-  /**
-   * Desktop window controls (simulated in browser, native in Tauri)
-   */
   public static minimizeWindow(): void {
-    if (this.isTauriEnv()) {
-      try {
-        (window as any).__TAURI_INTERNALS__?.invoke('plugin:window|minimize');
-      } catch (e) {
-        console.log('Tauri minimize');
-      }
-    }
+    if (this.isTauriEnv()) void tauriInvoke('plugin:window|minimize');
   }
-
   public static toggleMaximizeWindow(): void {
-    if (this.isTauriEnv()) {
-      try {
-        (window as any).__TAURI_INTERNALS__?.invoke('plugin:window|toggle_maximize');
-      } catch (e) {
-        console.log('Tauri toggle maximize');
-      }
-    } else {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
-      } else {
-        document.exitFullscreen().catch(() => {});
-      }
-    }
+    if (this.isTauriEnv()) void tauriInvoke('plugin:window|toggle_maximize');
+    else if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+    else void document.exitFullscreen().catch(() => {});
   }
-
   public static closeWindow(): void {
-    if (this.isTauriEnv()) {
-      try {
-        (window as any).__TAURI_INTERNALS__?.invoke('plugin:window|close');
-      } catch (e) {
-        console.log('Tauri close');
-      }
-    } else {
-      if (window.confirm('Are you sure you want to exit Word-Client? Any unsaved changes will be recovered on next launch.')) {
-        window.close();
-      }
-    }
+    if (this.isTauriEnv()) void tauriInvoke('plugin:window|close');
+    else if (window.confirm('Are you sure you want to exit Wordo? Unsaved work may be recovered next time.')) window.close();
   }
 }

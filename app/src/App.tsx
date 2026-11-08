@@ -18,6 +18,7 @@ import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
 import CharacterCount from '@tiptap/extension-character-count';
 import { TypographyExtension } from './extensions/typography';
+import { PageBreak } from './extensions/pageBreak';
 
 import { TitleBar } from './components/TitleBar';
 import { MenuBar } from './components/MenuBar';
@@ -45,7 +46,10 @@ import { PageSettings, RecoveryDraft, RecentDocument, SpellIssue, DocumentStats 
 export const App: React.FC = () => {
   // Document state
   const [documentTitle, setDocumentTitle] = useState('Document 1');
+  const [currentFilePath, setCurrentFilePath] = useState<string | null>(null);
+  const [currentFileFormat, setCurrentFileFormat] = useState<'docx' | 'txt' | 'html'>('docx');
   const [isDirty, setIsDirty] = useState(false);
+  const [editRevision, setEditRevision] = useState(0);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => StorageService.getSavedTheme());
   const [zoom, setZoom] = useState(100);
   const [showRuler, setShowRuler] = useState(true);
@@ -78,7 +82,7 @@ export const App: React.FC = () => {
     size: 'a4',
     orientation: 'portrait',
     margins: { top: 96, bottom: 96, left: 96, right: 96 },
-    showPageNumbers: true,
+    showPageNumbers: false,
   });
 
   // Apply dark theme class to root html element
@@ -91,8 +95,8 @@ export const App: React.FC = () => {
     StorageService.saveTheme(theme);
   }, [theme]);
 
-  // Initial template (Project proposal as rich default)
-  const initialContent = DOCUMENT_TEMPLATES.find((t) => t.id === 'business-proposal')?.contentHtml || '<p>Welcome to Word-Client</p>';
+  // A new document starts empty; templates are only opened from the template picker.
+  const initialContent = '<p></p>';
 
   // Initialize Tiptap Editor
   const editor = useEditor({
@@ -133,11 +137,13 @@ export const App: React.FC = () => {
       }),
       CharacterCount,
       TypographyExtension,
+      PageBreak,
     ],
     content: initialContent,
     autofocus: true,
     onUpdate: ({ editor: ed }) => {
       setIsDirty(true);
+      setEditRevision((revision) => revision + 1);
       updateDocumentStats(ed);
     },
   });
@@ -196,6 +202,19 @@ export const App: React.FC = () => {
     }
   }, []);
 
+  // Flush the current draft synchronously before a native window closes.
+  useEffect(() => {
+    const getCurrentWindow = (window as any).__TAURI__?.window?.getCurrentWindow;
+    if (!getCurrentWindow) return;
+    let unlisten: (() => void) | undefined;
+    getCurrentWindow().onCloseRequested(() => {
+      if (isDirty && editor) {
+        StorageService.saveDraft(documentTitle, editor.getHTML(), editor.getJSON(), pageSettings);
+      }
+    }).then((stop: () => void) => { unlisten = stop; }).catch(() => {});
+    return () => unlisten?.();
+  }, [editor, isDirty, documentTitle, pageSettings]);
+
   // Autosave periodically (every 4 seconds if dirty)
   useEffect(() => {
     if (!editor || !isDirty) return;
@@ -203,11 +222,11 @@ export const App: React.FC = () => {
     const timer = setTimeout(() => {
       const html = editor.getHTML();
       const json = editor.getJSON();
-      StorageService.saveDraft(documentTitle, html, json);
+      StorageService.saveDraft(documentTitle, html, json, pageSettings);
     }, 4000);
 
     return () => clearTimeout(timer);
-  }, [editor, isDirty, documentTitle]);
+  }, [editor, isDirty, documentTitle, editRevision, pageSettings]);
 
   // Check URL paths for Craft Anything routes
   useEffect(() => {
@@ -357,27 +376,35 @@ export const App: React.FC = () => {
     if (!editor) return;
     if (isDirty) {
       const confirmLeave = window.confirm(
-        'You have unsaved changes. Do you want to create a new blank document?'
+        'You have unsaved changes. Start a new blank document and keep the current work in recovery?'
       );
       if (!confirmLeave) return;
+      StorageService.saveDraft(documentTitle, editor.getHTML(), editor.getJSON(), pageSettings);
     }
     editor.commands.setContent('<p></p>');
     setDocumentTitle('Document 1');
+    setCurrentFilePath(null);
+    setCurrentFileFormat('docx');
     setIsDirty(false);
   };
 
   const handleSelectTemplate = (template: DocumentTemplate) => {
     if (!editor) return;
+    if (isDirty && !window.confirm('Replace the current document with this template and keep your work in recovery?')) return;
+    if (isDirty) StorageService.saveDraft(documentTitle, editor.getHTML(), editor.getJSON(), pageSettings);
     editor.commands.setContent(template.contentHtml);
     setDocumentTitle(template.name);
+    setCurrentFilePath(null);
+    setCurrentFileFormat('docx');
     setIsDirty(true);
-    StorageService.addRecentDocument(template.name, editor.getText());
+    StorageService.addRecentDocument(template.name, editor.getText(), undefined, editor.getHTML(), pageSettings);
     setRecentDocuments(StorageService.getRecentDocuments());
   };
 
   const handleOpenLocalFile = async () => {
     if (!editor) return;
     try {
+      if (isDirty && !window.confirm('Discard unsaved changes and open another document?')) return;
       const fileData = await PlatformService.openFileDialog('.docx,.txt,.html');
       if (!fileData) return;
 
@@ -399,32 +426,69 @@ export const App: React.FC = () => {
 
       const cleanTitle = fileData.name.replace(/\.[^/.]+$/, '');
       setDocumentTitle(cleanTitle);
+      // Imported files are kept intact on disk; Save creates a Wordo DOCX copy.
+      setCurrentFilePath(null);
+      setCurrentFileFormat('docx');
       setIsDirty(false);
 
-      StorageService.addRecentDocument(cleanTitle, editor.getText());
+      StorageService.addRecentDocument(cleanTitle, editor.getText(), fileData.path, editor.getHTML(), pageSettings);
       setRecentDocuments(StorageService.getRecentDocuments());
     } catch (err: any) {
       alert(`Could not open document: ${err.message}`);
     }
   };
 
-  const handleOpenRecent = (recent: RecentDocument) => {
+  const handleOpenRecent = async (recent: RecentDocument) => {
     if (!editor) return;
     if (isDirty) {
       const confirm = window.confirm('Discard unsaved changes and open recent document?');
       if (!confirm) return;
     }
-    setDocumentTitle(recent.title);
-    setIsDirty(false);
+    try {
+      if (recent.filePath && PlatformService.isDesktop()) {
+        const fileData = await PlatformService.readDocument(recent.filePath);
+        const html = fileData.isBinary
+          ? (await DocxService.importDocx(fileData.content as ArrayBuffer)).html
+          : fileData.name.toLowerCase().endsWith('.html')
+            ? fileData.content as string
+            : (fileData.content as string).split('\n').map((line) => `<p>${line || '<br/>'}</p>`).join('');
+        editor.commands.setContent(html);
+        if (recent.pageSettings) setPageSettings(recent.pageSettings);
+        setCurrentFilePath(null);
+        setCurrentFileFormat('docx');
+      } else if (recent.contentHtml) {
+        editor.commands.setContent(recent.contentHtml);
+        if (recent.pageSettings) setPageSettings(recent.pageSettings);
+        setCurrentFilePath(null);
+        setCurrentFileFormat('docx');
+      } else {
+        alert('This recent entry has no saved content. Open the document from its original location.');
+        return;
+      }
+      setDocumentTitle(recent.title);
+      setIsDirty(false);
+    } catch (err: any) {
+      alert(`Could not reopen document: ${err.message || err}`);
+    }
   };
 
   const handleSave = async () => {
     if (!editor) return;
     try {
-      await DocxService.exportDocx(editor.getJSON(), editor.getHTML(), `${documentTitle}.docx`, pageSettings);
+      const saved = currentFilePath && currentFileFormat !== 'docx'
+        ? await PlatformService.saveFile(
+            `${documentTitle}.${currentFileFormat}`,
+            currentFileFormat === 'html' ? editor.getHTML() : editor.getText(),
+            currentFileFormat === 'html' ? 'text/html' : 'text/plain',
+            currentFilePath,
+          )
+        : await DocxService.exportDocx(editor.getJSON(), editor.getHTML(), `${documentTitle}.docx`, pageSettings, currentFilePath || undefined);
+      if (!saved) return;
+      const savedPath = typeof saved === 'string' && PlatformService.isDesktop() ? saved : currentFilePath;
+      if (savedPath !== currentFilePath) setCurrentFilePath(savedPath);
       setIsDirty(false);
       StorageService.discardRecoverableDraft();
-      StorageService.addRecentDocument(documentTitle, editor.getText());
+      StorageService.addRecentDocument(documentTitle, editor.getText(), savedPath || undefined, editor.getHTML(), pageSettings);
       setRecentDocuments(StorageService.getRecentDocuments());
     } catch (err: any) {
       alert(`Save error: ${err.message}`);
@@ -435,12 +499,15 @@ export const App: React.FC = () => {
     const newName = window.prompt('Enter file name for Save As:', documentTitle);
     if (!newName || !newName.trim()) return;
     const cleanName = newName.trim().replace(/\.docx$/i, '');
-    setDocumentTitle(cleanName);
     if (!editor) return;
     try {
-      await DocxService.exportDocx(editor.getJSON(), editor.getHTML(), `${cleanName}.docx`, pageSettings);
+      const saved = await DocxService.exportDocx(editor.getJSON(), editor.getHTML(), `${cleanName}.docx`, pageSettings);
+      if (!saved) return;
+      setDocumentTitle(cleanName);
+      setCurrentFilePath(typeof saved === 'string' && PlatformService.isDesktop() ? saved : null);
+      setCurrentFileFormat('docx');
       setIsDirty(false);
-      StorageService.addRecentDocument(cleanName, editor.getText());
+      StorageService.addRecentDocument(cleanName, editor.getText(), typeof saved === 'string' && PlatformService.isDesktop() ? saved : undefined, editor.getHTML(), pageSettings);
       setRecentDocuments(StorageService.getRecentDocuments());
     } catch (err: any) {
       alert(`Save error: ${err.message}`);
@@ -453,12 +520,7 @@ export const App: React.FC = () => {
   };
 
   const handleExportPdf = async () => {
-    const pageElement = document.getElementById('word-client-page-canvas');
-    if (pageElement) {
-      await PdfService.exportPdf(pageElement, `${documentTitle}.pdf`);
-    } else {
-      PdfService.printDocument();
-    }
+    PdfService.printDocument();
   };
 
   const handleExportHtml = () => {
@@ -481,14 +543,22 @@ export const App: React.FC = () => {
     if (isDirty) {
       const confirm = window.confirm('Close document? Any unsaved changes will be saved to recovery.');
       if (!confirm) return;
+      if (editor) StorageService.saveDraft(documentTitle, editor.getHTML(), editor.getJSON(), pageSettings);
     }
-    handleNewDocument();
+    if (!editor) return;
+    editor.commands.setContent('<p></p>');
+    setDocumentTitle('Document 1');
+    setCurrentFilePath(null);
+    setCurrentFileFormat('docx');
+    setIsDirty(false);
   };
 
   const handleRestoreDraft = () => {
     if (!editor || !activeRecoveryDraft) return;
     editor.commands.setContent(activeRecoveryDraft.contentHtml);
+    if (activeRecoveryDraft.pageSettings) setPageSettings(activeRecoveryDraft.pageSettings);
     setDocumentTitle(activeRecoveryDraft.title);
+    setCurrentFilePath(null);
     setIsDirty(true);
     setActiveRecoveryDraft(null);
   };
@@ -499,8 +569,9 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#f5f5f5] dark:bg-[#1f1f1f] text-[#242424] dark:text-[#cccccc] select-none">
+    <div className="wordo-app-shell flex flex-col h-screen w-screen overflow-hidden bg-[#f5f5f5] dark:bg-[#1f1f1f] text-[#242424] dark:text-[#cccccc] select-none">
       {/* 1. Desktop Window Title Bar */}
+      <div className="no-print">
       <TitleBar
         documentTitle={documentTitle}
         isDirty={isDirty}
@@ -516,8 +587,10 @@ export const App: React.FC = () => {
         canUndo={editor?.can().undo() ?? false}
         canRedo={editor?.can().redo() ?? false}
       />
+      </div>
 
       {/* 2. Main Menu Bar */}
+      <div className="no-print">
       <MenuBar
         onNew={handleNewDocument}
         onNewFromTemplate={() => setShowTemplateModal(true)}
@@ -552,7 +625,7 @@ export const App: React.FC = () => {
           const url = window.prompt('Enter Link URL:');
           if (url) editor?.chain().focus().setLink({ href: url }).run();
         }}
-        onInsertPageBreak={() => editor?.chain().focus().setHorizontalRule().run()}
+        onInsertPageBreak={() => editor?.chain().focus().insertContent({ type: 'pageBreak' }).run()}
         onInsertHorizontalRule={() => editor?.chain().focus().setHorizontalRule().run()}
         onInsertBlockquote={() => editor?.chain().focus().toggleBlockquote().run()}
         onInsertTaskList={() => editor?.chain().focus().toggleTaskList().run()}
@@ -577,8 +650,10 @@ export const App: React.FC = () => {
         onOpenAbout={() => setShowAboutModal(true)}
         onOpenShortcuts={() => setShowShortcutsModal(true)}
       />
+      </div>
 
       {/* 3. Office-Style Ribbon Toolbar */}
+      <div className="no-print">
       <RibbonToolbar
         editor={editor}
         onOpenSearch={() => {
@@ -603,20 +678,23 @@ export const App: React.FC = () => {
         pageSettings={pageSettings}
         onUpdatePageSettings={setPageSettings}
       />
+      </div>
 
       {/* 4. Document Recovery Alert Banner */}
       {activeRecoveryDraft && (
-        <RecoveryBanner
+        <div className="no-print"><RecoveryBanner
           draft={activeRecoveryDraft}
           onRestore={handleRestoreDraft}
           onDiscard={handleDiscardDraft}
-        />
+        /></div>
       )}
 
       {/* 5. Horizontal Ruler */}
       {showRuler && (
-        <Ruler
-          pageWidth={(pageSettings.orientation === 'landscape' ? 1056 : 816) * (zoom / 100)}
+        <div className="no-print"><Ruler
+          pageWidth={((pageSettings.orientation === 'landscape'
+            ? (pageSettings.size === 'a4' ? 1123 : pageSettings.size === 'legal' ? 1344 : 1056)
+            : (pageSettings.size === 'a4' ? 794 : 816)) * (zoom / 100))}
           marginLeft={pageSettings.margins.left * (zoom / 100)}
           marginRight={pageSettings.margins.right * (zoom / 100)}
           onMarginChange={(newLeft, newRight) => {
@@ -630,18 +708,18 @@ export const App: React.FC = () => {
               },
             });
           }}
-        />
+        /></div>
       )}
 
       {/* 6. Workspace Body (Navigation Sidebar + Editor Canvas + Proofing Panel) */}
-      <div className="flex-1 flex overflow-hidden relative">
+      <div className="wordo-workspace flex-1 flex overflow-hidden relative">
         {/* Navigation Sidebar */}
         {showNavSidebar && (
-          <NavigationSidebar
+          <div className="no-print"><NavigationSidebar
             editor={editor}
             defaultTab={navDefaultTab}
             onClose={() => setShowNavSidebar(false)}
-          />
+          /></div>
         )}
 
         {/* Multi-Page Document Canvas */}
@@ -649,26 +727,23 @@ export const App: React.FC = () => {
           editor={editor}
           zoom={zoom}
           documentTitle={documentTitle}
-          totalPages={Math.max(1, Math.ceil(stats.words / 450))}
           pageSettings={pageSettings}
           onUpdatePageSettings={setPageSettings}
         />
 
         {/* Proofing / Spell Check Assistant */}
         {showSpellCheck && (
-          <SpellCheckPanel
+          <div className="no-print"><SpellCheckPanel
             editor={editor}
             issues={spellIssues}
             onRefresh={() => updateDocumentStats(editor)}
             onClose={() => setShowSpellCheck(false)}
-          />
+          /></div>
         )}
       </div>
 
       {/* 7. Bottom Status Bar */}
-      <StatusBar
-        currentPage={1}
-        totalPages={Math.max(1, Math.ceil(stats.words / 450))}
+      <div className="no-print"><StatusBar
         wordCount={stats.words}
         charCount={stats.characters}
         issueCount={spellIssues.length}
@@ -677,7 +752,7 @@ export const App: React.FC = () => {
         onOpenWordCount={() => setShowWordCount(true)}
         onOpenSpellCheck={() => setShowSpellCheck(true)}
         isDirty={isDirty}
-      />
+      /></div>
 
       {/* Dialog Modals */}
       {showWordCount && (

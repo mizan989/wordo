@@ -64,7 +64,7 @@ export const TemplateModal: React.FC<TemplateModalProps> = ({
             </div>
             <div>
               <h3 className="font-bold text-base text-gray-900 dark:text-white">
-                New Document — Word-Client
+                New Document — Wordo
               </h3>
               <p className="text-xs text-gray-500">
                 Choose a template or open an existing file on your computer

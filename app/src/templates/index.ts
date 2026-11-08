@@ -88,7 +88,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
         </thead>
         <tbody>
           <tr>
-            <td>Desktop Productivity Suite (Word-Client)</td>
+            <td>Desktop Productivity Suite (Wordo)</td>
             <td>$42,300,000</td>
             <td>$61,800,000</td>
             <td>+46.1%</td>
@@ -180,7 +180,7 @@ export const DOCUMENT_TEMPLATES: DocumentTemplate[] = [
     icon: 'BookOpen',
     contentHtml: `
       <h1>RFC 042: High-Performance OpenXML Document Processing Engine</h1>
-      <p><strong>Status:</strong> Approved | <strong>Author:</strong> Lead Architect | <strong>Target:</strong> Word-Client v1.0</p>
+      <p><strong>Status:</strong> Approved | <strong>Author:</strong> Lead Architect | <strong>Target:</strong> Wordo v1.0</p>
       <hr />
 
       <h2>1. Problem Statement</h2>

@@ -1,20 +1,20 @@
 {
   "$schema": "https://raw.githubusercontent.com/tauri-apps/tauri/v2/tooling/cli/schema.json",
-  "productName": "Word-Client",
+  "productName": "Wordo",
   "version": "1.0.0",
   "identifier": "com.wordclient.desktop",
   "build": {
     "beforeDevCommand": "npm run dev",
     "devUrl": "http://localhost:5173",
     "beforeBuildCommand": "npm run build",
-    "frontendDist": "../dist"
+    "frontendDist": "../dist/editor"
   },
   "app": {
     "withGlobalTauri": true,
     "windows": [
       {
         "label": "main",
-        "title": "Word-Client",
+        "title": "Wordo",
         "width": 1280,
         "height": 860,
         "minWidth": 800,
@@ -25,7 +25,7 @@
       }
     ],
     "security": {
-      "csp": "default-src 'self' 'unsafe-inline' 'unsafe-eval' blob: data: https:; img-src 'self' blob: data: https:;"
+      "csp": "default-src 'self' blob: data:; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' asset: http://asset.localhost blob: data: https:; font-src 'self' data:; connect-src ipc: http://ipc.localhost;"
     }
   },
   "bundle": {
@@ -39,8 +39,8 @@
       "icons/icon.ico"
     ],
     "category": "Productivity",
-    "shortDescription": "Word-Client — Premium Cross-Platform Desktop Word Processor",
-    "longDescription": "Professional desktop word processor engineered for Linux, Windows, and macOS, featuring native OpenXML DOCX compatibility, structured ProseMirror editing, and resilient offline document recovery.",
+    "shortDescription": "Wordo — Desktop Word Processor",
+    "longDescription": "Independent desktop word processor for Linux, Windows, and macOS with structured rich text editing and local recovery. DOCX import and export are best-effort.",
     "linux": {
       "deb": {
         "depends": ["libwebkit2gtk-4.1-0 | libwebkit2gtk-4.0-37", "libgtk-3-0"],

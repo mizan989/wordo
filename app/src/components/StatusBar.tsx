@@ -12,8 +12,6 @@ import {
 } from 'lucide-react';
 
 interface StatusBarProps {
-  currentPage: number;
-  totalPages: number;
   wordCount: number;
   charCount: number;
   issueCount: number;
@@ -25,8 +23,6 @@ interface StatusBarProps {
 }
 
 export const StatusBar: React.FC<StatusBarProps> = ({
-  currentPage,
-  totalPages,
   wordCount,
   charCount,
   issueCount,
@@ -43,7 +39,7 @@ export const StatusBar: React.FC<StatusBarProps> = ({
         {/* Page status */}
         <span className="flex items-center space-x-1 hover:bg-white/20 px-1.5 py-0.5 rounded cursor-pointer transition-colors">
           <FileText className="w-3 h-3 mr-1" />
-          <span>Page {currentPage} of {totalPages}</span>
+          <span>Document</span>
         </span>
 
         {/* Word count button */}
@@ -83,7 +79,7 @@ export const StatusBar: React.FC<StatusBarProps> = ({
         {/* Offline & Autosave state */}
         <span className="flex items-center opacity-85">
           <HardDrive className="w-3 h-3 mr-1" />
-          {isDirty ? 'Draft modified' : 'Local storage synced'}
+          {isDirty ? 'Draft modified' : 'No unsaved changes'}
         </span>
       </div>
 
@@ -91,13 +87,13 @@ export const StatusBar: React.FC<StatusBarProps> = ({
       <div className="flex items-center space-x-3">
         {/* Layout Mode Icons */}
         <div className="flex items-center space-x-1 opacity-90">
-          <button title="Page Layout View" className="p-0.5 hover:bg-white/20 rounded">
+          <button title="Page Layout View unavailable" disabled className="p-0.5 opacity-40 cursor-not-allowed">
             <Layout className="w-3.5 h-3.5" />
           </button>
-          <button title="Web Layout View" className="p-0.5 hover:bg-white/20 rounded">
+          <button title="Web Layout View unavailable" disabled className="p-0.5 opacity-40 cursor-not-allowed">
             <Globe className="w-3.5 h-3.5" />
           </button>
-          <button title="Reading View" className="p-0.5 hover:bg-white/20 rounded">
+          <button title="Reading View unavailable" disabled className="p-0.5 opacity-40 cursor-not-allowed">
             <BookOpen className="w-3.5 h-3.5" />
           </button>
         </div>

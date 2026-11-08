@@ -56,8 +56,9 @@ export class DocxService {
     editorJson: any,
     _editorHtml: string,
     filename: string = 'Document.docx',
-    pageSettings?: any
-  ): Promise<boolean> {
+    pageSettings?: any,
+    destinationPath?: string
+  ): Promise<string | false> {
     try {
       const docChildren: (Paragraph | Table)[] = [];
 
@@ -86,22 +87,21 @@ export class DocxService {
       const rightMargin = Math.round((pageSettings?.margins?.right ?? 96) * 15);
       const isLandscape = pageSettings?.orientation === 'landscape';
 
+      const dimensions = pageSettings?.size === 'a4'
+        ? { width: 11906, height: 16838 }
+        : pageSettings?.size === 'legal'
+          ? { width: 12240, height: 20160 }
+          : { width: 12240, height: 15840 };
       const sectionProps: any = {
         page: {
-          margin: {
-            top: topMargin,
-            bottom: bottomMargin,
-            left: leftMargin,
-            right: rightMargin,
+          margin: { top: topMargin, bottom: bottomMargin, left: leftMargin, right: rightMargin },
+          size: {
+            width: isLandscape ? dimensions.height : dimensions.width,
+            height: isLandscape ? dimensions.width : dimensions.height,
+            orientation: isLandscape ? PageOrientation.LANDSCAPE : PageOrientation.PORTRAIT,
           },
         },
       };
-
-      if (isLandscape) {
-        sectionProps.page.size = {
-          orientation: PageOrientation.LANDSCAPE,
-        };
-      }
 
       // Build Header
       const headerLeftText = (pageSettings?.headerLeft || pageSettings?.headerText || '').replace('{title}', filename.replace(/\.docx$/i, ''));
@@ -154,7 +154,7 @@ export class DocxService {
 
       const doc = new Document({
         title: filename.replace(/\.docx$/i, ''),
-        description: 'Created with Word-Client',
+        description: 'Created with Wordo',
         sections: [
           {
             properties: sectionProps,
@@ -170,7 +170,8 @@ export class DocxService {
       return await PlatformService.saveFile(
         safeFilename,
         blob,
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        destinationPath
       );
     } catch (err: any) {
       console.error('Error exporting DOCX:', err);
@@ -311,8 +312,12 @@ export class DocxService {
 
       case 'horizontalRule': {
         return new Paragraph({
-          children: [new PageBreak()],
+          border: { bottom: { style: BorderStyle.SINGLE, size: 4, color: '666666' } },
         });
+      }
+
+      case 'pageBreak': {
+        return new Paragraph({ children: [new PageBreak()] });
       }
 
       case 'image': {

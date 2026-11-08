@@ -9,13 +9,10 @@ import {
   FolderOpen,
   Sun,
   Moon,
-  Minus,
-  Square,
-  X,
   CheckCircle2,
   AlertCircle,
 } from 'lucide-react';
-import { PlatformService } from '../services/platform';
+import wordoLogo from '../assets/wordo-logo.png';
 
 interface TitleBarProps {
   documentTitle: string;
@@ -61,15 +58,13 @@ export const TitleBar: React.FC<TitleBarProps> = ({
   };
 
   return (
-    <header className="h-10 select-none bg-[#185abd] text-white flex items-center justify-between px-3 text-xs border-b border-[#1651aa] shadow-sm z-30">
+    <header className="h-10 select-none bg-[#185abd] text-white flex items-center justify-between px-3 text-xs border-b border-[#1651aa] shadow-sm z-30" aria-label="Wordo document toolbar">
       {/* Left: App Identity & Quick Access Toolbar */}
       <div className="flex items-center space-x-2">
         {/* Brand Icon & Name */}
         <div className="flex items-center space-x-1.5 mr-2 font-semibold tracking-wide">
-          <div className="w-6 h-6 bg-white text-[#185abd] rounded flex items-center justify-center shadow-xs">
-            <span className="font-bold text-sm leading-none">W</span>
-          </div>
-          <span className="text-sm font-bold tracking-tight">Word-Client</span>
+          <img src={wordoLogo} alt="" className="w-6 h-6 object-contain rounded" />
+          <span className="text-sm font-bold tracking-tight">Wordo</span>
         </div>
 
         {/* Quick Access Toolbar */}
@@ -168,7 +163,7 @@ export const TitleBar: React.FC<TitleBarProps> = ({
           ) : (
             <span className="flex items-center text-blue-100">
               <CheckCircle2 className="w-3 h-3 mr-1" />
-              Saved to device
+              No unsaved changes
             </span>
           )}
         </div>
@@ -184,30 +179,6 @@ export const TitleBar: React.FC<TitleBarProps> = ({
           {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-amber-300" /> : <Moon className="w-3.5 h-3.5" />}
         </button>
 
-        {/* Window controls */}
-        <div className="flex items-center space-x-0.5 ml-1">
-          <button
-            onClick={() => PlatformService.minimizeWindow()}
-            title="Minimize"
-            className="p-1.5 rounded hover:bg-white/20 active:bg-white/30 transition-colors"
-          >
-            <Minus className="w-3.5 h-3.5" />
-          </button>
-          <button
-            onClick={() => PlatformService.toggleMaximizeWindow()}
-            title="Maximize / Fullscreen"
-            className="p-1.5 rounded hover:bg-white/20 active:bg-white/30 transition-colors"
-          >
-            <Square className="w-3 h-3" />
-          </button>
-          <button
-            onClick={() => PlatformService.closeWindow()}
-            title="Close Application"
-            className="p-1.5 rounded hover:bg-red-600 active:bg-red-700 transition-colors"
-          >
-            <X className="w-3.5 h-3.5" />
-          </button>
-        </div>
       </div>
     </header>
   );

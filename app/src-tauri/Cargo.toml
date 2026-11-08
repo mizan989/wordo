@@ -1,8 +1,8 @@
 [package]
-name = "word-client"
+name = "wordo"
 version = "1.0.0"
 description = "Premium Cross-Platform Desktop Word Processor"
-authors = ["Word-Client Systems"]
+authors = ["Wordo"]
 edition = "2021"
 
 [build-dependencies]

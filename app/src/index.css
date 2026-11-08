@@ -58,14 +58,12 @@
     margin: 0 !important;
     page-break-after: always;
   }
+  .wordo-page-break { break-before: page; page-break-before: always; border: 0 !important; height: 0 !important; margin: 0 !important; }
   .tiptap-content hr {
-    page-break-after: always;
     border: none !important;
+    border-top: 1px solid #666 !important;
     height: 0 !important;
-    margin: 0 !important;
-  }
-  .tiptap-content hr::after {
-    display: none !important;
+    margin: 1em 0 !important;
   }
 }
 
@@ -285,4 +283,17 @@
   color: #185abd;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.wordo-page-break { border-top: 1px dashed #9ca3af; margin: 1rem 0; height: 1px; }
+
+@media print {
+  html, body, #root { width: 100% !important; height: auto !important; min-height: 0 !important; margin: 0 !important; overflow: visible !important; background: #fff !important; }
+  .wordo-app-shell { display: block !important; width: 100% !important; height: auto !important; min-height: 0 !important; overflow: visible !important; }
+  .wordo-workspace { display: block !important; height: auto !important; min-height: 0 !important; overflow: visible !important; }
+  .wordo-canvas-scroll { display: block !important; height: auto !important; min-height: 0 !important; overflow: visible !important; padding: 0 !important; background: #fff !important; }
+  .wordo-print-scale { display: block !important; width: 100% !important; transform: none !important; transition: none !important; padding: 0 !important; }
+  .no-print, .fixed { display: none !important; }
+  .print-page { box-shadow: none !important; border: 0 !important; margin: 0 auto !important; page-break-after: always; break-after: page; }
+  .print-page:last-child { page-break-after: auto; break-after: auto; }
 }

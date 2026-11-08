@@ -42,6 +42,7 @@ export interface RecoveryDraft {
   timestamp: number;
   contentHtml: string;
   contentJson?: any;
+  pageSettings?: PageSettings;
 }
 
 export interface RecentDocument {
@@ -50,6 +51,8 @@ export interface RecentDocument {
   filePath?: string;
   lastOpened: number;
   previewSnippet: string;
+  contentHtml?: string;
+  pageSettings?: PageSettings;
 }
 
 export interface SpellIssue {

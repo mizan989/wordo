@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, ShieldCheck, CheckCircle2, Cpu, Globe, FolderGit2 } from 'lucide-react';
+import wordoLogo from '../assets/wordo-logo.png';
 
 interface AboutModalProps {
   isOpen: boolean;
@@ -15,12 +16,10 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
         {/* Header */}
         <div className="px-5 py-4 bg-[#f5f5f5] dark:bg-[#1e1e1e] border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
           <div className="flex items-center space-x-2.5">
-            <div className="w-8 h-8 bg-[#185abd] text-white rounded flex items-center justify-center font-bold text-base shadow-xs">
-              W
-            </div>
+            <img src={wordoLogo} alt="Wordo" className="w-8 h-8 object-contain rounded" />
             <div>
-              <h3 className="font-bold text-sm text-gray-900 dark:text-white">Word-Client</h3>
-              <p className="text-[11px] text-gray-500">Premium Cross-Platform Desktop Word Processor</p>
+              <h3 className="font-bold text-sm text-gray-900 dark:text-white">Wordo</h3>
+              <p className="text-[11px] text-gray-500">Independent Desktop Word Processor</p>
             </div>
           </div>
           <button
@@ -44,7 +43,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
             </div>
             <div className="flex items-center justify-between text-gray-700 dark:text-gray-300">
               <span className="text-gray-500">Document Engine</span>
-              <span>Structured OpenXML & Tiptap Core</span>
+              <span>Tiptap / ProseMirror</span>
             </div>
           </div>
 
@@ -59,7 +58,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
           </div>
 
           <div className="text-[11px] text-gray-400 space-y-1 pt-1">
-            <p>© 2026 Word-Client Systems. All rights reserved.</p>
+            <p>© 2026 Wordo Systems. All rights reserved.</p>
             <p>Inspired by modern productivity experiences. Independent software product.</p>
           </div>
         </div>

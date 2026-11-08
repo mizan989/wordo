@@ -20,8 +20,8 @@ export const DocumentSettingsModal: React.FC<DocumentSettingsModalProps> = ({
   const [orientation, setOrientation] = useState<PaperOrientation>(settings.orientation);
   const [showNumbers, setShowNumbers] = useState(settings.showPageNumbers);
   const [headerLeft, setHeaderLeft] = useState(settings.headerLeft || '{title}');
-  const [headerRight, setHeaderRight] = useState(settings.headerRight || 'Corporate Office');
-  const [footerLeft, setFooterLeft] = useState(settings.footerLeft || 'Confidential & Proprietary');
+  const [headerRight, setHeaderRight] = useState(settings.headerRight || '');
+  const [footerLeft, setFooterLeft] = useState(settings.footerLeft || '');
   const [footerRight, setFooterRight] = useState(settings.footerRight || 'Page {page} of {totalPages}');
   const [selectedPreset, setSelectedPreset] = useState<string>(settings.presetId || 'corporate-default');
 
@@ -132,7 +132,7 @@ export const DocumentSettingsModal: React.FC<DocumentSettingsModalProps> = ({
                 type="text"
                 value={footerLeft}
                 onChange={(e) => setFooterLeft(e.target.value)}
-                placeholder="Confidential"
+                placeholder="Optional footer text"
                 className="w-full px-2.5 py-1.5 bg-white dark:bg-[#1f1f1f] border border-gray-300 dark:border-gray-600 rounded text-xs outline-hidden"
               />
             </div>

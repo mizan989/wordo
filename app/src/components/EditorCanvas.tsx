@@ -7,7 +7,6 @@ interface EditorCanvasProps {
   editor: Editor | null;
   zoom: number;
   documentTitle: string;
-  totalPages?: number;
   pageSettings?: PageSettings;
   onUpdatePageSettings?: (settings: PageSettings) => void;
 }
@@ -16,7 +15,6 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
   editor,
   zoom,
   documentTitle,
-  totalPages = 1,
   pageSettings,
   onUpdatePageSettings,
 }) => {
@@ -35,13 +33,14 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
   }
 
   // Standard Letter / A4 page dimension at 96 DPI: ~816px width, ~1056px height
-  const pageWidthPx = pageSettings?.orientation === 'landscape' ? 1056 : 816;
-  const pageMinHeightPx = pageSettings?.orientation === 'landscape' ? 816 : 1056;
+  const paperDimensions = pageSettings?.size === 'a4' ? [794, 1123] : pageSettings?.size === 'legal' ? [816, 1344] : [816, 1056];
+  const pageWidthPx = pageSettings?.orientation === 'landscape' ? paperDimensions[1] : paperDimensions[0];
+  const pageMinHeightPx = pageSettings?.orientation === 'landscape' ? paperDimensions[0] : paperDimensions[1];
 
-  const headerLeftText = (pageSettings?.headerLeft || pageSettings?.headerText || documentTitle).replace('{title}', documentTitle);
-  const headerRightText = pageSettings?.headerRight !== undefined ? pageSettings.headerRight : 'Corporate Office';
-  const footerLeftText = (pageSettings?.footerLeft || (pageSettings?.footerText !== undefined ? pageSettings.footerText : 'Confidential & Proprietary')) || '';
-  const footerRightText = pageSettings?.showPageNumbers !== false ? `Page 1 of ${totalPages}` : (pageSettings?.footerRight || '');
+  const headerLeftText = (pageSettings?.headerLeft ?? pageSettings?.headerText ?? '').replace('{title}', documentTitle);
+  const headerRightText = pageSettings?.headerRight ?? '';
+  const footerLeftText = pageSettings?.footerLeft ?? pageSettings?.footerText ?? '';
+  const footerRightText = pageSettings?.footerRight ?? '';
 
   // Page background color styling
   const pageBgColor = pageSettings?.pageColor || '#ffffff';
@@ -71,11 +70,15 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
     );
   };
 
+  const paperName = pageSettings?.size === 'a4' ? 'A4' : pageSettings?.size === 'legal' ? 'Legal' : 'Letter';
+  const printOrientation = pageSettings?.orientation === 'landscape' ? 'landscape' : 'portrait';
+
   return (
     <div
       ref={containerRef}
-      className="flex-1 overflow-auto bg-[#eaeaea] dark:bg-[#181818] p-8 flex flex-col items-center transition-colors print:p-0 print:bg-white relative"
+      className="wordo-canvas-scroll flex-1 overflow-auto bg-[#eaeaea] dark:bg-[#181818] p-8 flex flex-col items-center transition-colors print:p-0 print:bg-white relative"
     >
+      <style>{`@media print { @page { size: ${paperName} ${printOrientation}; margin: 0; } }`}</style>
       {/* Floating Selection Mini Toolbar */}
       <FloatingMiniToolbar editor={editor} />
 
@@ -86,12 +89,12 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
           transformOrigin: 'top center',
           transition: 'transform 0.1s ease-out',
         }}
-        className="flex flex-col items-center space-y-8 pb-16 print:space-y-0 print:pb-0"
+        className="wordo-print-scale flex flex-col items-center space-y-8 pb-16 print:space-y-0 print:pb-0"
       >
         {/* Document Page Canvas */}
         <div
-          id="word-client-page-canvas"
-          className={`shadow-xl border border-gray-300 dark:border-gray-800 print:border-none print:shadow-none print-page relative flex flex-col transition-colors overflow-hidden ${
+          id="wordo-page-canvas"
+          className={`shadow-xl border border-gray-300 dark:border-gray-800 print:border-none print:shadow-none print-page relative flex flex-col transition-colors overflow-visible ${
             isDarkPage ? 'text-[#f1f5f9] dark-page-mode' : 'text-[#242424]'
           }`}
           style={{

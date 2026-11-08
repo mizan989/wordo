@@ -1,4 +1,4 @@
-// Native Tauri 2 command implementations for Word-Client
+// Native Tauri 2 command implementations for Wordo
 use std::fs;
 use std::path::PathBuf;
 use serde::{Serialize, Deserialize};

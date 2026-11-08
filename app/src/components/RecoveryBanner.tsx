@@ -19,7 +19,7 @@ export const RecoveryBanner: React.FC<RecoveryBannerProps> = ({ draft, onRestore
       <div className="flex items-center space-x-2 text-amber-900 dark:text-amber-200">
         <AlertCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0" />
         <span>
-          <strong>Document Recovery:</strong> Word-Client found unsaved work for "
+          <strong>Document Recovery:</strong> Wordo found unsaved work for "
           <span className="font-semibold">{draft.title}</span>" from {formattedTime}. Would you like to restore it?
         </span>
       </div>

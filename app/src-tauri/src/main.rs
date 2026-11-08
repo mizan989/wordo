@@ -16,5 +16,5 @@ fn main() {
             get_system_info
         ])
         .run(tauri::generate_context!())
-        .expect("error while running Word-Client application");
+        .expect("error while running Wordo application");
 }

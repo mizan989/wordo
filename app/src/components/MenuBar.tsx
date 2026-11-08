@@ -809,7 +809,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
               }}
               className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
             >
-              <HelpCircle className="w-3.5 h-3.5 mr-2 text-[#185abd]" /> About Word-Client
+              <HelpCircle className="w-3.5 h-3.5 mr-2 text-[#185abd]" /> About Wordo
             </button>
             <button
               onClick={() => {

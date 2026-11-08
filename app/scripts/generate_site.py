@@ -1131,7 +1131,7 @@ img.___161xmqp, footer img[alt="Microsoft logo"], img.fui-Image[alt="Microsoft l
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // Navigation to Word-Client desktop editor
+  // Navigation to Wordo desktop editor
   const createBlankBtn = document.querySelector('button[data-testid="0300"]') || Array.from(document.querySelectorAll('button')).find(b => b.textContent && b.textContent.includes('Create blank document'));
   if (createBlankBtn) {
     createBlankBtn.addEventListener('click', () => { window.location.href = '/editor/'; });
@@ -2921,16 +2921,21 @@ def main():
     create_favicon(os.path.join(DIST_DIR, 'favicon.ico'), os.path.join(BASE_DIR, 'public', 'favicon.ico'))
     print('Generated favicon.ico')
 
-    # 2. Save Desktop Word-Client editor entry to /editor/
+    # 2. Save Wordo Desktop editor entry to /editor/
     editor_dir = os.path.join(DIST_DIR, 'editor')
     os.makedirs(editor_dir, exist_ok=True)
     if os.path.exists(os.path.join(DIST_DIR, 'index.html')):
         with open(os.path.join(DIST_DIR, 'index.html'), 'r', encoding='utf-8') as f:
             editor_html = f.read()
-        editor_html_adjusted = editor_html.replace('href="./assets/', 'href="../assets/').replace('src="./assets/', 'src="../assets/')
+        # Keep an editor-root copy for Tauri's frontendDist and the /editor/ web route.
+        # Its assets must live under that root so relative URLs also work in packaged builds.
+        assets_src = os.path.join(DIST_DIR, 'assets')
+        assets_dst = os.path.join(editor_dir, 'assets')
+        if os.path.isdir(assets_src):
+            shutil.copytree(assets_src, assets_dst, dirs_exist_ok=True)
         with open(os.path.join(editor_dir, 'index.html'), 'w', encoding='utf-8') as f:
-            f.write(editor_html_adjusted)
-        print('Saved Word-Client Desktop Editor to /editor/index.html')
+            f.write(editor_html)
+        print('Saved Wordo Desktop Editor and assets to /editor/')
 
     # 3. Generate start page
     start_page_html = generate_start_page()

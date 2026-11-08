@@ -1138,9 +1138,9 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   <div className="text-[11px] font-medium mb-1.5">
                     Select Grid ({tableGrid.rows} × {tableGrid.cols})
                   </div>
-                  <div className="grid grid-cols-6 gap-1">
-                    {Array.from({ length: 6 }).map((_, r) =>
-                      Array.from({ length: 6 }).map((_, c) => (
+                  <div className="grid grid-cols-10 gap-1">
+                    {Array.from({ length: 10 }).map((_, r) =>
+                      Array.from({ length: 10 }).map((_, c) => (
                         <div
                           key={`${r}-${c}`}
                           onMouseEnter={() => setTableGrid({ rows: r + 1, cols: c + 1 })}

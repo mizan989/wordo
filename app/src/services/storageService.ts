@@ -9,7 +9,7 @@ export class StorageService {
   /**
    * Save an autosave recovery draft
    */
-  public static saveDraft(title: string, contentHtml: string, contentJson?: any): void {
+  public static saveDraft(title: string, contentHtml: string, contentJson?: any, pageSettings?: any): void {
     try {
       const draft: RecoveryDraft = {
         id: 'current_session',
@@ -17,6 +17,7 @@ export class StorageService {
         timestamp: Date.now(),
         contentHtml,
         contentJson,
+        pageSettings,
       };
       localStorage.setItem(RECOVERY_KEY, JSON.stringify(draft));
     } catch (e) {
@@ -56,7 +57,7 @@ export class StorageService {
   /**
    * Add a document to recent list
    */
-  public static addRecentDocument(title: string, snippet: string, filePath?: string): void {
+  public static addRecentDocument(title: string, snippet: string, filePath?: string, contentHtml?: string, pageSettings?: any): void {
     try {
       const recents = this.getRecentDocuments();
       const existingIndex = recents.findIndex((r) => r.title === title || (filePath && r.filePath === filePath));
@@ -67,6 +68,8 @@ export class StorageService {
         filePath,
         lastOpened: Date.now(),
         previewSnippet: snippet.slice(0, 120),
+        contentHtml,
+        pageSettings,
       };
 
       if (existingIndex >= 0) {
