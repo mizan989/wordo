@@ -1,0 +1,22 @@
+[
+  {
+    "path": "/create/en/document-editor/",
+    "slug": "create-en-document-editor",
+    "url": "https://word.cloud.microsoft/create/en/document-editor/"
+  },
+  {
+    "path": "/create/en/spell-checker/",
+    "slug": "create-en-spell-checker",
+    "url": "https://word.cloud.microsoft/create/en/spell-checker/"
+  },
+  {
+    "path": "/create/en/grammar-checker/",
+    "slug": "create-en-grammar-checker",
+    "url": "https://word.cloud.microsoft/create/en/grammar-checker/"
+  },
+  {
+    "path": "/create/en/word-counter/",
+    "slug": "create-en-word-counter",
+    "url": "https://word.cloud.microsoft/create/en/word-counter/"
+  }
+]

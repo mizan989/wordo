@@ -1,0 +1,360 @@
+{
+  "id": "ev_2927ef88a3014c2040a49cb7a461a4076091492819c22d96226a12c0f5b3977a",
+  "subject": {
+    "kind": "website",
+    "name": "http://127.0.0.1:42149/"
+  },
+  "operation": "web_site_capture",
+  "params": {
+    "include_html": false,
+    "max_height": 12000,
+    "noise_pass": false,
+    "visitor_view": false,
+    "widths": [
+      1440,
+      768,
+      390
+    ]
+  },
+  "result": {
+    "counts": {
+      "forms": 0,
+      "headings": 7,
+      "images": 39,
+      "links": 35,
+      "outline": 125
+    },
+    "design": {
+      "backgrounds": [
+        {
+          "count": 38,
+          "value": "#efefef"
+        },
+        {
+          "count": 34,
+          "value": "#f5f5f5"
+        },
+        {
+          "count": 3,
+          "value": "#ffffff"
+        },
+        {
+          "count": 2,
+          "value": "#d2e0f4"
+        },
+        {
+          "count": 2,
+          "value": "#fafafa"
+        },
+        {
+          "count": 2,
+          "value": "#185abd"
+        }
+      ],
+      "css_variables": {},
+      "font_faces": [
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "100"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "200"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "loaded",
+          "style": "normal",
+          "weight": "400"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "loaded",
+          "style": "normal",
+          "weight": "600"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "700"
+        },
+        {
+          "family": "FluentRegular",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "normal"
+        }
+      ],
+      "font_sizes": [
+        {
+          "count": 15,
+          "value": "14px"
+        },
+        {
+          "count": 9,
+          "value": "16px"
+        },
+        {
+          "count": 5,
+          "value": "32px"
+        },
+        {
+          "count": 5,
+          "value": "12px"
+        },
+        {
+          "count": 2,
+          "value": "20px"
+        },
+        {
+          "count": 1,
+          "value": "36px"
+        },
+        {
+          "count": 1,
+          "value": "13px"
+        }
+      ],
+      "font_weights": [
+        {
+          "count": 30,
+          "value": "400"
+        },
+        {
+          "count": 8,
+          "value": "600"
+        }
+      ],
+      "fonts": [
+        {
+          "count": 37,
+          "value": "\"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Segoe UI Variable\", Roboto, sans-serif"
+        },
+        {
+          "count": 1,
+          "value": "\"Segoe UI\", sans-serif"
+        }
+      ],
+      "max_widths": [
+        {
+          "count": 64,
+          "value": "204px"
+        },
+        {
+          "count": 12,
+          "value": "477px"
+        },
+        {
+          "count": 4,
+          "value": "1024px"
+        },
+        {
+          "count": 2,
+          "value": "1440px"
+        },
+        {
+          "count": 1,
+          "value": "1329px"
+        }
+      ],
+      "radii": [
+        {
+          "count": 32,
+          "value": "4px"
+        },
+        {
+          "count": 1,
+          "value": "9999px"
+        }
+      ],
+      "shadows": [
+        {
+          "count": 1,
+          "value": "rgba(0, 0, 0, 0.25) 0px 4px 14px 0px"
+        }
+      ],
+      "spacing": [
+        {
+          "count": 90,
+          "value": "6px"
+        },
+        {
+          "count": 60,
+          "value": "1px"
+        },
+        {
+          "count": 28,
+          "value": "264.688px"
+        },
+        {
+          "count": 10,
+          "value": "16px"
+        },
+        {
+          "count": 9,
+          "value": "32px"
+        },
+        {
+          "count": 9,
+          "value": "26.56px"
+        },
+        {
+          "count": 8,
+          "value": "70px"
+        },
+        {
+          "count": 4,
+          "value": "13.28px"
+        },
+        {
+          "count": 4,
+          "value": "157.578px"
+        },
+        {
+          "count": 3,
+          "value": "2px"
+        },
+        {
+          "count": 3,
+          "value": "48px"
+        },
+        {
+          "count": 3,
+          "value": "8px"
+        },
+        {
+          "count": 3,
+          "value": "10px"
+        },
+        {
+          "count": 2,
+          "value": "24.12px"
+        },
+        {
+          "count": 2,
+          "value": "4px"
+        },
+        {
+          "count": 2,
+          "value": "18px"
+        },
+        {
+          "count": 1,
+          "value": "12px"
+        },
+        {
+          "count": 1,
+          "value": "264.031px"
+        },
+        {
+          "count": 1,
+          "value": "5px"
+        },
+        {
+          "count": 1,
+          "value": "7px"
+        }
+      ],
+      "text_colors": [
+        {
+          "count": 18,
+          "value": "#242424"
+        },
+        {
+          "count": 11,
+          "value": "#424242"
+        },
+        {
+          "count": 5,
+          "value": "#000000"
+        },
+        {
+          "count": 2,
+          "value": "#00000000"
+        },
+        {
+          "count": 1,
+          "value": "#1651aa"
+        },
+        {
+          "count": 1,
+          "value": "#ffffff"
+        }
+      ]
+    },
+    "files": [
+      "README.md",
+      "capture.json"
+    ],
+    "html_bytes": 0,
+    "output_directory": "/home/mizan/Projects/word -client/checks/round-0",
+    "screenshots": [
+      {
+        "css_width": 1440,
+        "cut": false,
+        "file": "screenshot-1440.png",
+        "height": 4089,
+        "sha256": "58476e02a6b1997c080183d82f9d5cf4e0133e6bc3db3ece51d47965f415293a",
+        "width": 1440
+      },
+      {
+        "css_width": 768,
+        "cut": false,
+        "file": "screenshot-768.png",
+        "height": 6284,
+        "sha256": "aef9ce6b571caaffe2a32cb83d59df9334927c1213817aea9ae3f202f1971305",
+        "width": 768
+      },
+      {
+        "css_width": 390,
+        "cut": false,
+        "file": "screenshot-390.png",
+        "height": 7035,
+        "sha256": "6ff7183ac0ea3f2347e33818765d7db5b27ee4a70272f379ff9522de73129aad",
+        "width": 390
+      }
+    ],
+    "title": "Create and edit documents for free | Microsoft Word for the Web",
+    "url": "http://127.0.0.1:42149/"
+  },
+  "summary": "Captured http://127.0.0.1:42149/: 3 screenshot(s), 125 outline items, 7 headings, 39 images, 35 links, 0 forms → /home/mizan/Projects/word -client/checks/round-0.",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "one_state",
+      "message": "One state of the page: menus, dialogs and content behind interactions are not opened."
+    },
+    {
+      "code": "cross_origin_css",
+      "message": "CSS custom properties and breakpoints from cross-origin stylesheets can't be read."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 3,
+    "total": 3
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "http://127.0.0.1:42149/"
+    },
+    {
+      "kind": "path",
+      "value": "/home/mizan/Projects/word -client/checks/round-0"
+    }
+  ],
+  "links": []
+}

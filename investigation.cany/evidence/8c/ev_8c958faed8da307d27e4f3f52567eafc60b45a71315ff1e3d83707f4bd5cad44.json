@@ -1,0 +1,61 @@
+{
+  "id": "ev_8c958faed8da307d27e4f3f52567eafc60b45a71315ff1e3d83707f4bd5cad44",
+  "subject": {
+    "kind": "website",
+    "name": "http://127.0.0.1:40317/create/en/grammar-checker/"
+  },
+  "operation": "web_site_open",
+  "params": {
+    "height": 900,
+    "url": "http://127.0.0.1:40317/create/en/grammar-checker/",
+    "width": 1440
+  },
+  "result": {
+    "browser": "Chrome/150.0.7871.181",
+    "facts": {
+      "elements": 175,
+      "forms": 0,
+      "height": 10389,
+      "images": 19,
+      "lang": "en-us",
+      "links": 44,
+      "ready": "complete",
+      "title": "Free online grammar checker | Microsoft Word",
+      "url": "http://127.0.0.1:40317/create/en/grammar-checker/",
+      "width": 1425
+    },
+    "health": {
+      "errors": [],
+      "failed_requests": []
+    },
+    "title": "Free online grammar checker | Microsoft Word",
+    "url": "http://127.0.0.1:40317/create/en/grammar-checker/"
+  },
+  "summary": "Opened http://127.0.0.1:40317/create/en/grammar-checker/: \"Free online grammar checker | Microsoft Word\".",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "private_profile",
+      "message": "A fresh private browser: pages behind a login show their signed-out state."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 1,
+    "total": 1
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "http://127.0.0.1:40317/create/en/grammar-checker/"
+    }
+  ],
+  "links": []
+}

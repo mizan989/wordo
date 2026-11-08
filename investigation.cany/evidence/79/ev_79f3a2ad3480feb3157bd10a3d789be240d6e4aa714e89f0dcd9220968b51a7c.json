@@ -1,0 +1,388 @@
+{
+  "id": "ev_79f3a2ad3480feb3157bd10a3d789be240d6e4aa714e89f0dcd9220968b51a7c",
+  "subject": {
+    "kind": "website",
+    "name": "http://127.0.0.1:33243/"
+  },
+  "operation": "web_site_capture",
+  "params": {
+    "include_html": false,
+    "max_height": 12000,
+    "noise_pass": false,
+    "visitor_view": false,
+    "widths": [
+      1440,
+      768,
+      390
+    ]
+  },
+  "result": {
+    "counts": {
+      "forms": 0,
+      "headings": 7,
+      "images": 39,
+      "links": 35,
+      "outline": 124
+    },
+    "design": {
+      "backgrounds": [
+        {
+          "count": 35,
+          "value": "#efefef"
+        },
+        {
+          "count": 33,
+          "value": "#f5f5f5"
+        },
+        {
+          "count": 7,
+          "value": "#ffffff"
+        },
+        {
+          "count": 4,
+          "value": "#185abd"
+        },
+        {
+          "count": 2,
+          "value": "#d2e0f4"
+        },
+        {
+          "count": 2,
+          "value": "#fafafa"
+        }
+      ],
+      "css_variables": {},
+      "font_faces": [
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "100"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "200"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "loaded",
+          "style": "normal",
+          "weight": "400"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "loaded",
+          "style": "normal",
+          "weight": "600"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "700"
+        },
+        {
+          "family": "FluentRegular",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "normal"
+        }
+      ],
+      "font_sizes": [
+        {
+          "count": 13,
+          "value": "14px"
+        },
+        {
+          "count": 12,
+          "value": "16px"
+        },
+        {
+          "count": 5,
+          "value": "32px"
+        },
+        {
+          "count": 5,
+          "value": "12px"
+        },
+        {
+          "count": 2,
+          "value": "20px"
+        },
+        {
+          "count": 1,
+          "value": "36px"
+        },
+        {
+          "count": 1,
+          "value": "13px"
+        }
+      ],
+      "font_weights": [
+        {
+          "count": 21,
+          "value": "400"
+        },
+        {
+          "count": 18,
+          "value": "600"
+        }
+      ],
+      "fonts": [
+        {
+          "count": 38,
+          "value": "\"Segoe UI\", -apple-system, BlinkMacSystemFont, \"Segoe UI Variable\", Roboto, sans-serif"
+        },
+        {
+          "count": 1,
+          "value": "\"Segoe UI\", sans-serif"
+        }
+      ],
+      "max_widths": [
+        {
+          "count": 64,
+          "value": "204px"
+        },
+        {
+          "count": 12,
+          "value": "477px"
+        },
+        {
+          "count": 6,
+          "value": "1440px"
+        },
+        {
+          "count": 4,
+          "value": "1024px"
+        },
+        {
+          "count": 2,
+          "value": "836px"
+        },
+        {
+          "count": 2,
+          "value": "597px"
+        },
+        {
+          "count": 1,
+          "value": "32px"
+        },
+        {
+          "count": 1,
+          "value": "365px"
+        }
+      ],
+      "radii": [
+        {
+          "count": 39,
+          "value": "4px"
+        },
+        {
+          "count": 8,
+          "value": "9999px"
+        }
+      ],
+      "shadows": [
+        {
+          "count": 1,
+          "value": "rgba(0, 0, 0, 0.25) 0px 4px 14px 0px"
+        }
+      ],
+      "spacing": [
+        {
+          "count": 30,
+          "value": "16px"
+        },
+        {
+          "count": 15,
+          "value": "8px"
+        },
+        {
+          "count": 12,
+          "value": "1px"
+        },
+        {
+          "count": 10,
+          "value": "6px"
+        },
+        {
+          "count": 9,
+          "value": "26.56px"
+        },
+        {
+          "count": 8,
+          "value": "70px"
+        },
+        {
+          "count": 7,
+          "value": "48px"
+        },
+        {
+          "count": 5,
+          "value": "12px"
+        },
+        {
+          "count": 4,
+          "value": "4px"
+        },
+        {
+          "count": 4,
+          "value": "13.28px"
+        },
+        {
+          "count": 3,
+          "value": "2px"
+        },
+        {
+          "count": 3,
+          "value": "84px"
+        },
+        {
+          "count": 3,
+          "value": "10px"
+        },
+        {
+          "count": 2,
+          "value": "32px"
+        },
+        {
+          "count": 2,
+          "value": "264.031px"
+        },
+        {
+          "count": 2,
+          "value": "5px"
+        },
+        {
+          "count": 2,
+          "value": "18px"
+        },
+        {
+          "count": 1,
+          "value": "64px"
+        },
+        {
+          "count": 1,
+          "value": "14px"
+        },
+        {
+          "count": 1,
+          "value": "15.6px"
+        },
+        {
+          "count": 1,
+          "value": "33px"
+        },
+        {
+          "count": 1,
+          "value": "132px"
+        },
+        {
+          "count": 1,
+          "value": "149px"
+        },
+        {
+          "count": 1,
+          "value": "24px"
+        }
+      ],
+      "text_colors": [
+        {
+          "count": 20,
+          "value": "#242424"
+        },
+        {
+          "count": 11,
+          "value": "#424242"
+        },
+        {
+          "count": 3,
+          "value": "#ffffff"
+        },
+        {
+          "count": 2,
+          "value": "#00000000"
+        },
+        {
+          "count": 2,
+          "value": "#000000"
+        },
+        {
+          "count": 1,
+          "value": "#1651aa"
+        }
+      ]
+    },
+    "files": [
+      "README.md",
+      "capture.json"
+    ],
+    "html_bytes": 0,
+    "output_directory": "/home/mizan/Projects/word -client/checks/round-0",
+    "screenshots": [
+      {
+        "css_width": 1440,
+        "cut": false,
+        "file": "screenshot-1440.png",
+        "height": 3998,
+        "sha256": "c4e90c3518c0cd5db696d5e37b2e16987ea1acd8d78864e0e4db77ea42ed9310",
+        "width": 1440
+      },
+      {
+        "css_width": 768,
+        "cut": false,
+        "file": "screenshot-768.png",
+        "height": 6033,
+        "sha256": "cdd303e9e5ca9bae373bd5c58d50bc298e0d6ce53734b5810166631b6ad39686",
+        "width": 768
+      },
+      {
+        "css_width": 390,
+        "cut": false,
+        "file": "screenshot-390.png",
+        "height": 7049,
+        "sha256": "5fa7ee1ea49e98af321a36192a9652adc872bad61b736d0a656e3a3ab2488623",
+        "width": 390
+      }
+    ],
+    "title": "Create and edit documents for free | Microsoft Word for the Web",
+    "url": "http://127.0.0.1:33243/"
+  },
+  "summary": "Captured http://127.0.0.1:33243/: 3 screenshot(s), 124 outline items, 7 headings, 39 images, 35 links, 0 forms → /home/mizan/Projects/word -client/checks/round-0.",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "one_state",
+      "message": "One state of the page: menus, dialogs and content behind interactions are not opened."
+    },
+    {
+      "code": "cross_origin_css",
+      "message": "CSS custom properties and breakpoints from cross-origin stylesheets can't be read."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 3,
+    "total": 3
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "http://127.0.0.1:33243/"
+    },
+    {
+      "kind": "path",
+      "value": "/home/mizan/Projects/word -client/checks/round-0"
+    }
+  ],
+  "links": []
+}

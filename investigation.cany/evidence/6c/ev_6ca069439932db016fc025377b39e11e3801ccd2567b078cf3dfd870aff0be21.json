@@ -1,0 +1,221 @@
+{
+  "id": "ev_6ca069439932db016fc025377b39e11e3801ccd2567b078cf3dfd870aff0be21",
+  "subject": {
+    "kind": "website",
+    "name": "http://127.0.0.1:35455/"
+  },
+  "operation": "web_site_capture",
+  "params": {
+    "include_html": false,
+    "max_height": 12000,
+    "noise_pass": false,
+    "visitor_view": false,
+    "widths": [
+      1440,
+      768,
+      390
+    ]
+  },
+  "result": {
+    "counts": {
+      "forms": 0,
+      "headings": 7,
+      "images": 39,
+      "links": 34,
+      "outline": 146
+    },
+    "design": {
+      "backgrounds": [
+        {
+          "count": 46,
+          "value": "#efefef"
+        },
+        {
+          "count": 1,
+          "value": "#ffffff"
+        }
+      ],
+      "css_variables": {},
+      "font_faces": [
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "100"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "200"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "400"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "600"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "700"
+        },
+        {
+          "family": "FluentRegular",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "normal"
+        }
+      ],
+      "font_sizes": [
+        {
+          "count": 79,
+          "value": "16px"
+        },
+        {
+          "count": 6,
+          "value": "24px"
+        },
+        {
+          "count": 1,
+          "value": "32px"
+        }
+      ],
+      "font_weights": [
+        {
+          "count": 79,
+          "value": "400"
+        },
+        {
+          "count": 7,
+          "value": "700"
+        }
+      ],
+      "fonts": [
+        {
+          "count": 86,
+          "value": "\"Times New Roman\""
+        }
+      ],
+      "max_widths": [],
+      "radii": [],
+      "shadows": [],
+      "spacing": [
+        {
+          "count": 92,
+          "value": "6px"
+        },
+        {
+          "count": 62,
+          "value": "1px"
+        },
+        {
+          "count": 28,
+          "value": "1848.94px"
+        },
+        {
+          "count": 12,
+          "value": "19.92px"
+        },
+        {
+          "count": 8,
+          "value": "16px"
+        },
+        {
+          "count": 4,
+          "value": "1100.81px"
+        },
+        {
+          "count": 2,
+          "value": "21.44px"
+        },
+        {
+          "count": 2,
+          "value": "2px"
+        }
+      ],
+      "text_colors": [
+        {
+          "count": 86,
+          "value": "#000000"
+        }
+      ]
+    },
+    "files": [
+      "README.md",
+      "capture.json"
+    ],
+    "html_bytes": 0,
+    "output_directory": "/home/mizan/Projects/word -client/checks/round-3",
+    "screenshots": [
+      {
+        "css_width": 1440,
+        "cut": true,
+        "file": "screenshot-1440.png",
+        "height": 12000,
+        "sha256": "14c152f75aea64bda90e4b9dd394f66ce33e770698a39a02b6f3ba7c71721a02",
+        "width": 1440
+      },
+      {
+        "css_width": 768,
+        "cut": true,
+        "file": "screenshot-768.png",
+        "height": 12000,
+        "sha256": "23f8c197f32d30e4af82405c6def8f4b3f41a2582e4caae5c17630bad0ad2a39",
+        "width": 768
+      },
+      {
+        "css_width": 390,
+        "cut": true,
+        "file": "screenshot-390.png",
+        "height": 12000,
+        "sha256": "ba40e1a2676a7fbaf68d7ae6290008f056cd8d8164e78d679073c197179def7b",
+        "width": 390
+      }
+    ],
+    "title": "Create and edit documents for free | Microsoft Word for the Web",
+    "url": "http://127.0.0.1:35455/"
+  },
+  "summary": "Captured http://127.0.0.1:35455/: 3 screenshot(s), 146 outline items, 7 headings, 39 images, 34 links, 0 forms → /home/mizan/Projects/word -client/checks/round-3.",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "one_state",
+      "message": "One state of the page: menus, dialogs and content behind interactions are not opened."
+    },
+    {
+      "code": "cross_origin_css",
+      "message": "CSS custom properties and breakpoints from cross-origin stylesheets can't be read."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 3,
+    "total": 3
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "http://127.0.0.1:35455/"
+    },
+    {
+      "kind": "path",
+      "value": "/home/mizan/Projects/word -client/checks/round-3"
+    }
+  ],
+  "links": []
+}

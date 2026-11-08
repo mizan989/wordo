@@ -1,0 +1,87 @@
+{
+  "id": "ev_381c94d1f355d4fed771fc8994937545b0d57ee47bb0b1ddb3fc6609067f0f05",
+  "subject": {
+    "kind": "website",
+    "name": "http://127.0.0.1:44671/"
+  },
+  "operation": "web_page_states_capture",
+  "params": {
+    "max_states": 8,
+    "width": 390
+  },
+  "result": {
+    "folder": "/home/mizan/Projects/word -client/checks/round-0/states-390",
+    "found": 4,
+    "states": [
+      {
+        "changed": [
+          "expanded"
+        ],
+        "file": "state-1.png",
+        "index": 0,
+        "kind": "menu",
+        "label": "Word",
+        "sha256": "39b88f52eb01b5b6033c7d3ee0961e491215454c0289e636b3fa1760d5d989ec"
+      },
+      {
+        "changed": [
+          "expanded"
+        ],
+        "file": "state-2.png",
+        "index": 1,
+        "kind": "menu",
+        "label": "Features",
+        "sha256": "ad198d1dd16f8f5cafaba849dce17f8a34b029f315a1a40c461a88b96018c1ef"
+      },
+      {
+        "changed": [
+          "tab selected"
+        ],
+        "file": "state-3.png",
+        "index": 2,
+        "kind": "tab",
+        "label": "Recommended",
+        "sha256": "87ef0e56f99468a74a7871cde1610e128f495e5cd0e4676ea19977e94c0c9316"
+      },
+      {
+        "changed": [
+          "expanded",
+          "tab selected"
+        ],
+        "file": "state-4.png",
+        "index": 3,
+        "kind": "menu",
+        "label": "+ 5",
+        "sha256": "b13a23ea6f21af381b8c3f1b82b04d85635e963a0209a8a64b7450d2f1388602"
+      }
+    ],
+    "url": "http://127.0.0.1:44671/"
+  },
+  "summary": "Opened 4 of 4 control(s) on http://127.0.0.1:44671/; 4 pictured in /home/mizan/Projects/word -client/checks/round-0/states-390.",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "first_controls",
+      "message": "Only the first controls found are opened, one at a time; menus inside menus and hover-only menus are not."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 4,
+    "total": 4
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "http://127.0.0.1:44671/"
+    }
+  ],
+  "links": []
+}

@@ -1,0 +1,169 @@
+{
+  "id": "ev_4f2f10aa6de051ae7a2068b8be95100e875dd9b65b412582776cfd959c1c3d07",
+  "subject": {
+    "kind": "website",
+    "name": "http://127.0.0.1:45475/"
+  },
+  "operation": "web_site_capture",
+  "params": {
+    "include_html": false,
+    "max_height": 12000,
+    "noise_pass": false,
+    "visitor_view": false,
+    "widths": [
+      1440,
+      768,
+      390
+    ]
+  },
+  "result": {
+    "counts": {
+      "forms": 0,
+      "headings": 0,
+      "images": 0,
+      "links": 5,
+      "outline": 6
+    },
+    "design": {
+      "backgrounds": [],
+      "css_variables": {
+        "--word-speed": "1"
+      },
+      "font_faces": [
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "100"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "200"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "400"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "600"
+        },
+        {
+          "family": "Segoe UI",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "700"
+        },
+        {
+          "family": "FluentRegular",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "normal"
+        }
+      ],
+      "font_sizes": [
+        {
+          "count": 5,
+          "value": "16px"
+        }
+      ],
+      "font_weights": [
+        {
+          "count": 5,
+          "value": "400"
+        }
+      ],
+      "fonts": [
+        {
+          "count": 5,
+          "value": "\"Times New Roman\""
+        }
+      ],
+      "max_widths": [],
+      "radii": [],
+      "shadows": [],
+      "spacing": [],
+      "text_colors": [
+        {
+          "count": 5,
+          "value": "#000000"
+        }
+      ]
+    },
+    "files": [
+      "README.md",
+      "capture.json"
+    ],
+    "html_bytes": 0,
+    "output_directory": "/home/mizan/Projects/word -client/checks/round-2",
+    "screenshots": [
+      {
+        "css_width": 1440,
+        "cut": false,
+        "file": "screenshot-1440.png",
+        "height": 900,
+        "sha256": "88c92df92976f821cb66eb52f7f91d7c688eee78d2bc32a756e9ef02ecb44528",
+        "width": 1440
+      },
+      {
+        "css_width": 768,
+        "cut": false,
+        "file": "screenshot-768.png",
+        "height": 900,
+        "sha256": "730a134052443c29a4ed7e50716c47faf929a0c53b72e27e708979e34ad3f7b4",
+        "width": 768
+      },
+      {
+        "css_width": 390,
+        "cut": false,
+        "file": "screenshot-390.png",
+        "height": 900,
+        "sha256": "2f477c62001ce8dd94e464fbbee83ac180bf071a6d70728507b590fecd4c6134",
+        "width": 390
+      }
+    ],
+    "title": "Create and edit documents for free | Microsoft Word for the Web",
+    "url": "http://127.0.0.1:45475/"
+  },
+  "summary": "Captured http://127.0.0.1:45475/: 3 screenshot(s), 6 outline items, 0 headings, 0 images, 5 links, 0 forms → /home/mizan/Projects/word -client/checks/round-2.",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "one_state",
+      "message": "One state of the page: menus, dialogs and content behind interactions are not opened."
+    },
+    {
+      "code": "cross_origin_css",
+      "message": "CSS custom properties and breakpoints from cross-origin stylesheets can't be read."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 3,
+    "total": 3
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "http://127.0.0.1:45475/"
+    },
+    {
+      "kind": "path",
+      "value": "/home/mizan/Projects/word -client/checks/round-2"
+    }
+  ],
+  "links": []
+}

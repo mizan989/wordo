@@ -1,0 +1,349 @@
+{
+  "id": "ev_744c9f4911f6ed00c2c08dbbb6b5cf27a5c0a77088185eff8ac1a86ed62db14e",
+  "subject": {
+    "kind": "website",
+    "name": "http://127.0.0.1:43601/create/en/word-counter/"
+  },
+  "operation": "web_site_capture",
+  "params": {
+    "include_html": false,
+    "max_height": 12000,
+    "noise_pass": false,
+    "visitor_view": false,
+    "widths": [
+      1440,
+      768,
+      390
+    ]
+  },
+  "result": {
+    "counts": {
+      "forms": 0,
+      "headings": 25,
+      "images": 21,
+      "links": 40,
+      "outline": 126
+    },
+    "design": {
+      "backgrounds": [
+        {
+          "count": 11,
+          "value": "#185abd"
+        },
+        {
+          "count": 7,
+          "value": "#ffffff"
+        },
+        {
+          "count": 2,
+          "value": "#efefef"
+        },
+        {
+          "count": 1,
+          "value": "#fafafa"
+        },
+        {
+          "count": 1,
+          "value": "#d2e0f4"
+        }
+      ],
+      "css_variables": {
+        "--color-bg-light": "#fafafa",
+        "--color-brand": "#185abd",
+        "--color-brand-bg": "#d2e0f4",
+        "--color-brand-hover": "#1651aa",
+        "--color-brand-light": "#2461ca",
+        "--color-text-primary": "#242424",
+        "--color-text-secondary": "#424242"
+      },
+      "font_faces": [
+        {
+          "family": "segoeVariableFont",
+          "status": "error",
+          "style": "normal",
+          "weight": "normal"
+        }
+      ],
+      "font_sizes": [
+        {
+          "count": 23,
+          "value": "18px"
+        },
+        {
+          "count": 17,
+          "value": "16px"
+        },
+        {
+          "count": 11,
+          "value": "32px"
+        },
+        {
+          "count": 9,
+          "value": "14px"
+        },
+        {
+          "count": 7,
+          "value": "20px"
+        },
+        {
+          "count": 5,
+          "value": "12px"
+        },
+        {
+          "count": 2,
+          "value": "13.3333px"
+        },
+        {
+          "count": 1,
+          "value": "40px"
+        }
+      ],
+      "font_weights": [
+        {
+          "count": 47,
+          "value": "400"
+        },
+        {
+          "count": 28,
+          "value": "600"
+        }
+      ],
+      "fonts": [
+        {
+          "count": 73,
+          "value": "segoeVariableFont, \"Segoe UI\", -apple-system, BlinkMacSystemFont, Roboto, sans-serif"
+        },
+        {
+          "count": 2,
+          "value": "Arial"
+        }
+      ],
+      "max_widths": [
+        {
+          "count": 27,
+          "value": "508px"
+        },
+        {
+          "count": 8,
+          "value": "1200px"
+        },
+        {
+          "count": 7,
+          "value": "24px"
+        },
+        {
+          "count": 5,
+          "value": "468px"
+        },
+        {
+          "count": 3,
+          "value": "363px"
+        },
+        {
+          "count": 2,
+          "value": "1440px"
+        },
+        {
+          "count": 2,
+          "value": "1280px"
+        },
+        {
+          "count": 2,
+          "value": "608px"
+        }
+      ],
+      "radii": [
+        {
+          "count": 16,
+          "value": "4px"
+        }
+      ],
+      "shadows": [],
+      "spacing": [
+        {
+          "count": 37,
+          "value": "24px"
+        },
+        {
+          "count": 36,
+          "value": "8px"
+        },
+        {
+          "count": 28,
+          "value": "16px"
+        },
+        {
+          "count": 24,
+          "value": "10px"
+        },
+        {
+          "count": 16,
+          "value": "48px"
+        },
+        {
+          "count": 12,
+          "value": "12px"
+        },
+        {
+          "count": 10,
+          "value": "32px"
+        },
+        {
+          "count": 8,
+          "value": "6px"
+        },
+        {
+          "count": 7,
+          "value": "-40px"
+        },
+        {
+          "count": 4,
+          "value": "1px"
+        },
+        {
+          "count": 3,
+          "value": "18px"
+        },
+        {
+          "count": 3,
+          "value": "4px"
+        },
+        {
+          "count": 2,
+          "value": "63px"
+        },
+        {
+          "count": 1,
+          "value": "114px"
+        },
+        {
+          "count": 1,
+          "value": "40px"
+        },
+        {
+          "count": 1,
+          "value": "64px"
+        },
+        {
+          "count": 1,
+          "value": "26px"
+        },
+        {
+          "count": 1,
+          "value": "82px"
+        },
+        {
+          "count": 1,
+          "value": "20px"
+        },
+        {
+          "count": 1,
+          "value": "-69px"
+        }
+      ],
+      "text_colors": [
+        {
+          "count": 28,
+          "value": "#242424"
+        },
+        {
+          "count": 12,
+          "value": "#2461ca"
+        },
+        {
+          "count": 10,
+          "value": "#ffffff"
+        },
+        {
+          "count": 10,
+          "value": "#424242"
+        },
+        {
+          "count": 7,
+          "value": "#185abd"
+        },
+        {
+          "count": 3,
+          "value": "#1651aa"
+        },
+        {
+          "count": 3,
+          "value": "#151435"
+        },
+        {
+          "count": 2,
+          "value": "#000000"
+        }
+      ]
+    },
+    "files": [
+      "README.md",
+      "capture.json"
+    ],
+    "html_bytes": 0,
+    "output_directory": "/home/mizan/Projects/word -client/checks/round-0/routes/create-en-word-counter",
+    "screenshots": [
+      {
+        "css_width": 1440,
+        "cut": false,
+        "file": "screenshot-1440.png",
+        "height": 5565,
+        "sha256": "fd4d850521fab31dc262c9fa1af2cfe86855d1f4d28b8e6e691235d9f207d57c",
+        "width": 1440
+      },
+      {
+        "css_width": 768,
+        "cut": false,
+        "file": "screenshot-768.png",
+        "height": 7270,
+        "sha256": "e15212797f408fd3a3fcd6504a050a572baa9aa02f6b9198767f59a00c03fc07",
+        "width": 768
+      },
+      {
+        "css_width": 390,
+        "cut": false,
+        "file": "screenshot-390.png",
+        "height": 7087,
+        "sha256": "93c29f62caf0f66764ebd661255f7bfdc43bccee6c42113eb2b0caeb847ae1ee",
+        "width": 390
+      }
+    ],
+    "title": "Free online word counter | Check and adjust document length | Microsoft Word",
+    "url": "http://127.0.0.1:43601/create/en/word-counter/"
+  },
+  "summary": "Captured http://127.0.0.1:43601/create/en/word-counter/: 3 screenshot(s), 126 outline items, 25 headings, 21 images, 40 links, 0 forms → /home/mizan/Projects/word -client/checks/round-0/routes/create-en-word-counter.",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "one_state",
+      "message": "One state of the page: menus, dialogs and content behind interactions are not opened."
+    },
+    {
+      "code": "cross_origin_css",
+      "message": "CSS custom properties and breakpoints from cross-origin stylesheets can't be read."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 3,
+    "total": 3
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "http://127.0.0.1:43601/create/en/word-counter/"
+    },
+    {
+      "kind": "path",
+      "value": "/home/mizan/Projects/word -client/checks/round-0/routes/create-en-word-counter"
+    }
+  ],
+  "links": []
+}

@@ -1,0 +1,257 @@
+{
+  "id": "ev_8e9e6946edfc53e8aa4f63dfec60622ea22020c7857708abdd36ece95646aabb",
+  "subject": {
+    "kind": "website",
+    "name": "http://127.0.0.1:45475/create/en/grammar-checker/"
+  },
+  "operation": "web_site_capture",
+  "params": {
+    "include_html": false,
+    "max_height": 12000,
+    "noise_pass": false,
+    "visitor_view": false,
+    "widths": [
+      1440,
+      768,
+      390
+    ]
+  },
+  "result": {
+    "counts": {
+      "forms": 0,
+      "headings": 22,
+      "images": 19,
+      "links": 40,
+      "outline": 125
+    },
+    "design": {
+      "backgrounds": [
+        {
+          "count": 9,
+          "value": "#185abd"
+        },
+        {
+          "count": 2,
+          "value": "#ffffff"
+        },
+        {
+          "count": 2,
+          "value": "#efefef"
+        },
+        {
+          "count": 1,
+          "value": "#fafafa"
+        }
+      ],
+      "css_variables": {
+        "--color-accent": "#1651aa",
+        "--color-brand": "#185abd",
+        "--color-brand-hover": "#1651aa",
+        "--color-brand-light": "#d2e0f4",
+        "--color-link": "#2461ca",
+        "--color-text-primary": "#242424",
+        "--color-text-secondary": "#424242"
+      },
+      "font_faces": [
+        {
+          "family": "segoeVariableFont",
+          "status": "error",
+          "style": "normal",
+          "weight": "normal"
+        }
+      ],
+      "font_sizes": [
+        {
+          "count": 44,
+          "value": "18px"
+        },
+        {
+          "count": 13,
+          "value": "16px"
+        },
+        {
+          "count": 13,
+          "value": "32px"
+        },
+        {
+          "count": 2,
+          "value": "13.3333px"
+        },
+        {
+          "count": 1,
+          "value": "40px"
+        }
+      ],
+      "font_weights": [
+        {
+          "count": 45,
+          "value": "600"
+        },
+        {
+          "count": 17,
+          "value": "400"
+        },
+        {
+          "count": 11,
+          "value": "500"
+        }
+      ],
+      "fonts": [
+        {
+          "count": 71,
+          "value": "segoeVariableFont, \"Segoe UI\", -apple-system, BlinkMacSystemFont, Roboto, sans-serif"
+        },
+        {
+          "count": 2,
+          "value": "Arial"
+        }
+      ],
+      "max_widths": [
+        {
+          "count": 10,
+          "value": "1340px"
+        }
+      ],
+      "radii": [
+        {
+          "count": 14,
+          "value": "4px"
+        }
+      ],
+      "shadows": [],
+      "spacing": [
+        {
+          "count": 36,
+          "value": "8px"
+        },
+        {
+          "count": 34,
+          "value": "16px"
+        },
+        {
+          "count": 28,
+          "value": "24px"
+        },
+        {
+          "count": 22,
+          "value": "32px"
+        },
+        {
+          "count": 21,
+          "value": "12px"
+        },
+        {
+          "count": 18,
+          "value": "10px"
+        },
+        {
+          "count": 15,
+          "value": "6px"
+        },
+        {
+          "count": 4,
+          "value": "1px"
+        },
+        {
+          "count": 3,
+          "value": "40px"
+        },
+        {
+          "count": 2,
+          "value": "48px"
+        }
+      ],
+      "text_colors": [
+        {
+          "count": 28,
+          "value": "#242424"
+        },
+        {
+          "count": 23,
+          "value": "#2461ca"
+        },
+        {
+          "count": 11,
+          "value": "#1651aa"
+        },
+        {
+          "count": 9,
+          "value": "#ffffff"
+        },
+        {
+          "count": 2,
+          "value": "#000000"
+        }
+      ]
+    },
+    "files": [
+      "README.md",
+      "capture.json"
+    ],
+    "html_bytes": 0,
+    "output_directory": "/home/mizan/Projects/word -client/checks/round-2/routes/create-en-grammar-checker",
+    "screenshots": [
+      {
+        "css_width": 1440,
+        "cut": true,
+        "file": "screenshot-1440.png",
+        "height": 12000,
+        "sha256": "214a7cb5a48303181c28c3c6ba8a455a628fdfd2fa17d051ac45d3c923471c94",
+        "width": 1440
+      },
+      {
+        "css_width": 768,
+        "cut": false,
+        "file": "screenshot-768.png",
+        "height": 11045,
+        "sha256": "0620b9fbf3f722fcc1d70a3335451a38ba98a3b8973e634b630202236e8ec401",
+        "width": 768
+      },
+      {
+        "css_width": 390,
+        "cut": false,
+        "file": "screenshot-390.png",
+        "height": 10523,
+        "sha256": "739adba335605c56cdb177822d8270567286e5e3b32cee3b338964e14f9bc356",
+        "width": 390
+      }
+    ],
+    "title": "Free online grammar checker | Microsoft Word",
+    "url": "http://127.0.0.1:45475/create/en/grammar-checker/"
+  },
+  "summary": "Captured http://127.0.0.1:45475/create/en/grammar-checker/: 3 screenshot(s), 125 outline items, 22 headings, 19 images, 40 links, 0 forms → /home/mizan/Projects/word -client/checks/round-2/routes/create-en-grammar-checker.",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "one_state",
+      "message": "One state of the page: menus, dialogs and content behind interactions are not opened."
+    },
+    {
+      "code": "cross_origin_css",
+      "message": "CSS custom properties and breakpoints from cross-origin stylesheets can't be read."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 3,
+    "total": 3
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "http://127.0.0.1:45475/create/en/grammar-checker/"
+    },
+    {
+      "kind": "path",
+      "value": "/home/mizan/Projects/word -client/checks/round-2/routes/create-en-grammar-checker"
+    }
+  ],
+  "links": []
+}

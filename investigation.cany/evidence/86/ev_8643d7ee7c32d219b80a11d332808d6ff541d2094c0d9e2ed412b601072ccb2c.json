@@ -1,0 +1,277 @@
+{
+  "id": "ev_8643d7ee7c32d219b80a11d332808d6ff541d2094c0d9e2ed412b601072ccb2c",
+  "subject": {
+    "kind": "website",
+    "name": "http://127.0.0.1:35455/create/en/document-editor/"
+  },
+  "operation": "web_site_capture",
+  "params": {
+    "include_html": false,
+    "max_height": 12000,
+    "noise_pass": false,
+    "visitor_view": false,
+    "widths": [
+      1440,
+      768,
+      390
+    ]
+  },
+  "result": {
+    "counts": {
+      "forms": 0,
+      "headings": 25,
+      "images": 23,
+      "links": 57,
+      "outline": 155
+    },
+    "design": {
+      "backgrounds": [
+        {
+          "count": 12,
+          "value": "#185abd"
+        },
+        {
+          "count": 3,
+          "value": "#ffffff"
+        },
+        {
+          "count": 2,
+          "value": "#efefef"
+        },
+        {
+          "count": 1,
+          "value": "#fafafa"
+        }
+      ],
+      "css_variables": {
+        "--color-bg-light": "#fafafa",
+        "--color-brand": "#185abd",
+        "--color-brand-bg": "#d2e0f4",
+        "--color-brand-hover": "#1651aa",
+        "--color-brand-light": "#2461ca",
+        "--color-text-primary": "#242424",
+        "--color-text-secondary": "#424242"
+      },
+      "font_faces": [
+        {
+          "family": "segoeVariableFont",
+          "status": "error",
+          "style": "normal",
+          "weight": "normal"
+        }
+      ],
+      "font_sizes": [
+        {
+          "count": 63,
+          "value": "18px"
+        },
+        {
+          "count": 18,
+          "value": "16px"
+        },
+        {
+          "count": 13,
+          "value": "32px"
+        },
+        {
+          "count": 2,
+          "value": "13.3333px"
+        },
+        {
+          "count": 1,
+          "value": "40px"
+        }
+      ],
+      "font_weights": [
+        {
+          "count": 60,
+          "value": "400"
+        },
+        {
+          "count": 26,
+          "value": "600"
+        },
+        {
+          "count": 11,
+          "value": "500"
+        }
+      ],
+      "fonts": [
+        {
+          "count": 95,
+          "value": "segoeVariableFont, \"Segoe UI\", -apple-system, BlinkMacSystemFont, Roboto, sans-serif"
+        },
+        {
+          "count": 2,
+          "value": "Arial"
+        }
+      ],
+      "max_widths": [
+        {
+          "count": 10,
+          "value": "1200px"
+        },
+        {
+          "count": 2,
+          "value": "1440px"
+        },
+        {
+          "count": 2,
+          "value": "1280px"
+        },
+        {
+          "count": 1,
+          "value": "32px"
+        },
+        {
+          "count": 1,
+          "value": "1340px"
+        },
+        {
+          "count": 1,
+          "value": "728px"
+        }
+      ],
+      "radii": [
+        {
+          "count": 16,
+          "value": "4px"
+        }
+      ],
+      "shadows": [],
+      "spacing": [
+        {
+          "count": 42,
+          "value": "8px"
+        },
+        {
+          "count": 41,
+          "value": "24px"
+        },
+        {
+          "count": 32,
+          "value": "48px"
+        },
+        {
+          "count": 24,
+          "value": "10px"
+        },
+        {
+          "count": 24,
+          "value": "12px"
+        },
+        {
+          "count": 15,
+          "value": "6px"
+        },
+        {
+          "count": 12,
+          "value": "32px"
+        },
+        {
+          "count": 10,
+          "value": "16px"
+        },
+        {
+          "count": 4,
+          "value": "1px"
+        },
+        {
+          "count": 3,
+          "value": "40px"
+        }
+      ],
+      "text_colors": [
+        {
+          "count": 38,
+          "value": "#2461ca"
+        },
+        {
+          "count": 34,
+          "value": "#242424"
+        },
+        {
+          "count": 12,
+          "value": "#ffffff"
+        },
+        {
+          "count": 11,
+          "value": "#1651aa"
+        },
+        {
+          "count": 2,
+          "value": "#000000"
+        }
+      ]
+    },
+    "files": [
+      "README.md",
+      "capture.json"
+    ],
+    "html_bytes": 0,
+    "output_directory": "/home/mizan/Projects/word -client/checks/round-3/routes/create-en-document-editor",
+    "screenshots": [
+      {
+        "css_width": 1440,
+        "cut": false,
+        "file": "screenshot-1440.png",
+        "height": 11996,
+        "sha256": "c8d4d83d3a73d891cebb17951359367ca6f4e419e33eda954ef8ee27937430f2",
+        "width": 1440
+      },
+      {
+        "css_width": 768,
+        "cut": false,
+        "file": "screenshot-768.png",
+        "height": 11982,
+        "sha256": "26c05e82878beb09d3a981b722b9de6f3b68ee64b741e0dc382f5476e0388f24",
+        "width": 768
+      },
+      {
+        "css_width": 390,
+        "cut": false,
+        "file": "screenshot-390.png",
+        "height": 9573,
+        "sha256": "8e13d692cf3c9c64bd4fc1cffd581a2a77573f2ed146c7f1b662c2b13809254a",
+        "width": 390
+      }
+    ],
+    "title": "Free online document editor | Microsoft Word",
+    "url": "http://127.0.0.1:35455/create/en/document-editor/"
+  },
+  "summary": "Captured http://127.0.0.1:35455/create/en/document-editor/: 3 screenshot(s), 155 outline items, 25 headings, 23 images, 57 links, 0 forms → /home/mizan/Projects/word -client/checks/round-3/routes/create-en-document-editor.",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "one_state",
+      "message": "One state of the page: menus, dialogs and content behind interactions are not opened."
+    },
+    {
+      "code": "cross_origin_css",
+      "message": "CSS custom properties and breakpoints from cross-origin stylesheets can't be read."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 3,
+    "total": 3
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "http://127.0.0.1:35455/create/en/document-editor/"
+    },
+    {
+      "kind": "path",
+      "value": "/home/mizan/Projects/word -client/checks/round-3/routes/create-en-document-editor"
+    }
+  ],
+  "links": []
+}

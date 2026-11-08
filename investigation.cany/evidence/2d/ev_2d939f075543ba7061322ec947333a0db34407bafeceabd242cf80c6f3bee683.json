@@ -1,0 +1,309 @@
+{
+  "id": "ev_2d939f075543ba7061322ec947333a0db34407bafeceabd242cf80c6f3bee683",
+  "subject": {
+    "kind": "website",
+    "name": "http://127.0.0.1:38927/create/en/document-editor/"
+  },
+  "operation": "web_site_capture",
+  "params": {
+    "include_html": false,
+    "max_height": 12000,
+    "noise_pass": false,
+    "visitor_view": false,
+    "widths": [
+      1440,
+      768,
+      390
+    ]
+  },
+  "result": {
+    "counts": {
+      "forms": 0,
+      "headings": 25,
+      "images": 23,
+      "links": 61,
+      "outline": 160
+    },
+    "design": {
+      "backgrounds": [
+        {
+          "count": 14,
+          "value": "#185abd"
+        },
+        {
+          "count": 6,
+          "value": "#ffffff"
+        },
+        {
+          "count": 2,
+          "value": "#efefef"
+        },
+        {
+          "count": 1,
+          "value": "#fafafa"
+        },
+        {
+          "count": 1,
+          "value": "#d2e0f4"
+        }
+      ],
+      "css_variables": {
+        "--color-bg-light": "#fafafa",
+        "--color-brand": "#185abd",
+        "--color-brand-bg": "#d2e0f4",
+        "--color-brand-hover": "#1651aa",
+        "--color-brand-light": "#2461ca",
+        "--color-text-primary": "#242424",
+        "--color-text-secondary": "#424242"
+      },
+      "font_faces": [
+        {
+          "family": "segoeVariableFont",
+          "status": "error",
+          "style": "normal",
+          "weight": "normal"
+        }
+      ],
+      "font_sizes": [
+        {
+          "count": 51,
+          "value": "18px"
+        },
+        {
+          "count": 20,
+          "value": "16px"
+        },
+        {
+          "count": 14,
+          "value": "32px"
+        },
+        {
+          "count": 9,
+          "value": "20px"
+        },
+        {
+          "count": 9,
+          "value": "12px"
+        },
+        {
+          "count": 2,
+          "value": "13.3333px"
+        },
+        {
+          "count": 1,
+          "value": "40px"
+        },
+        {
+          "count": 1,
+          "value": "14px"
+        }
+      ],
+      "font_weights": [
+        {
+          "count": 72,
+          "value": "400"
+        },
+        {
+          "count": 35,
+          "value": "600"
+        }
+      ],
+      "fonts": [
+        {
+          "count": 105,
+          "value": "segoeVariableFont, \"Segoe UI\", -apple-system, BlinkMacSystemFont, Roboto, sans-serif"
+        },
+        {
+          "count": 2,
+          "value": "Arial"
+        }
+      ],
+      "max_widths": [
+        {
+          "count": 10,
+          "value": "1200px"
+        },
+        {
+          "count": 2,
+          "value": "1440px"
+        },
+        {
+          "count": 2,
+          "value": "1340px"
+        },
+        {
+          "count": 1,
+          "value": "1280px"
+        },
+        {
+          "count": 1,
+          "value": "728px"
+        }
+      ],
+      "radii": [
+        {
+          "count": 17,
+          "value": "4px"
+        }
+      ],
+      "shadows": [],
+      "spacing": [
+        {
+          "count": 59,
+          "value": "4px"
+        },
+        {
+          "count": 49,
+          "value": "24px"
+        },
+        {
+          "count": 42,
+          "value": "8px"
+        },
+        {
+          "count": 28,
+          "value": "10px"
+        },
+        {
+          "count": 22,
+          "value": "12px"
+        },
+        {
+          "count": 14,
+          "value": "16px"
+        },
+        {
+          "count": 13,
+          "value": "6px"
+        },
+        {
+          "count": 13,
+          "value": "32px"
+        },
+        {
+          "count": 12,
+          "value": "48px"
+        },
+        {
+          "count": 4,
+          "value": "1px"
+        },
+        {
+          "count": 3,
+          "value": "40px"
+        },
+        {
+          "count": 3,
+          "value": "18px"
+        },
+        {
+          "count": 2,
+          "value": "-1px"
+        }
+      ],
+      "text_colors": [
+        {
+          "count": 36,
+          "value": "#242424"
+        },
+        {
+          "count": 31,
+          "value": "#2461ca"
+        },
+        {
+          "count": 14,
+          "value": "#ffffff"
+        },
+        {
+          "count": 11,
+          "value": "#424242"
+        },
+        {
+          "count": 9,
+          "value": "#1651aa"
+        },
+        {
+          "count": 3,
+          "value": "#151435"
+        },
+        {
+          "count": 2,
+          "value": "#000000"
+        },
+        {
+          "count": 1,
+          "value": "#185abd"
+        }
+      ]
+    },
+    "files": [
+      "README.md",
+      "capture.json"
+    ],
+    "html_bytes": 0,
+    "output_directory": "/home/mizan/Projects/word -client/checks/round-0/routes/create-en-document-editor",
+    "screenshots": [
+      {
+        "css_width": 1440,
+        "cut": true,
+        "file": "screenshot-1440.png",
+        "height": 12000,
+        "sha256": "9a4aad125045af39b943e8c74bb0b4659cd829999ffbe129b57c6d126a11eb1c",
+        "width": 1440
+      },
+      {
+        "css_width": 768,
+        "cut": true,
+        "file": "screenshot-768.png",
+        "height": 12000,
+        "sha256": "6886bd198a892228614dc0535b2dda6b42707b341a82178f7fe15991d6cd3089",
+        "width": 768
+      },
+      {
+        "css_width": 390,
+        "cut": false,
+        "file": "screenshot-390.png",
+        "height": 8973,
+        "sha256": "c0caea7ae4b42419efa4349fbf68a932813d0661f248bd278f4eeb4896e9a6e2",
+        "width": 390
+      }
+    ],
+    "title": "Free online document editor | Microsoft Word",
+    "url": "http://127.0.0.1:38927/create/en/document-editor/"
+  },
+  "summary": "Captured http://127.0.0.1:38927/create/en/document-editor/: 3 screenshot(s), 160 outline items, 25 headings, 23 images, 61 links, 0 forms → /home/mizan/Projects/word -client/checks/round-0/routes/create-en-document-editor.",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "one_state",
+      "message": "One state of the page: menus, dialogs and content behind interactions are not opened."
+    },
+    {
+      "code": "cross_origin_css",
+      "message": "CSS custom properties and breakpoints from cross-origin stylesheets can't be read."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 3,
+    "total": 3
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "http://127.0.0.1:38927/create/en/document-editor/"
+    },
+    {
+      "kind": "path",
+      "value": "/home/mizan/Projects/word -client/checks/round-0/routes/create-en-document-editor"
+    }
+  ],
+  "links": []
+}

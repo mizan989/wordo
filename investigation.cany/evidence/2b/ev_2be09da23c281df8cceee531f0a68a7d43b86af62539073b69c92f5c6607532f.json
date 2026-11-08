@@ -1,0 +1,77 @@
+{
+  "id": "ev_2be09da23c281df8cceee531f0a68a7d43b86af62539073b69c92f5c6607532f",
+  "subject": {
+    "kind": "website",
+    "name": "http://127.0.0.1:34357/"
+  },
+  "operation": "web_page_states_capture",
+  "params": {
+    "max_states": 8,
+    "width": 390
+  },
+  "result": {
+    "folder": "/home/mizan/Projects/word -client/checks/round-5/states-390",
+    "found": 3,
+    "states": [
+      {
+        "changed": [
+          "expanded"
+        ],
+        "file": "state-1.png",
+        "index": 0,
+        "kind": "menu",
+        "label": "Word",
+        "sha256": "8f120136d288205fddb6af168d2c60e85fac022ffbf3c9630aab367ff9f75fed"
+      },
+      {
+        "changed": [
+          "expanded"
+        ],
+        "file": "state-2.png",
+        "index": 1,
+        "kind": "menu",
+        "label": "Features",
+        "sha256": "716d63315276a69af94ae876db419af5d40cd6ad0e1f3ff7bd49b77ba86bda44"
+      },
+      {
+        "changed": [
+          "expanded",
+          "tab selected"
+        ],
+        "file": "state-3.png",
+        "index": 2,
+        "kind": "menu",
+        "label": "+ 5",
+        "sha256": "1f55e9469751a3f286313d38d2fdc8342b5e6e1985d1d4c1ef2d4fe2a5b54d66"
+      }
+    ],
+    "url": "http://127.0.0.1:34357/"
+  },
+  "summary": "Opened 3 of 3 control(s) on http://127.0.0.1:34357/; 3 pictured in /home/mizan/Projects/word -client/checks/round-5/states-390.",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "first_controls",
+      "message": "Only the first controls found are opened, one at a time; menus inside menus and hover-only menus are not."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 3,
+    "total": 3
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "http://127.0.0.1:34357/"
+    }
+  ],
+  "links": []
+}

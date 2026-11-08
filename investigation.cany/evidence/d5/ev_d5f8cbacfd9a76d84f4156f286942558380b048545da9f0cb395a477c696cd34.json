@@ -1,0 +1,126 @@
+{
+  "id": "ev_d5f8cbacfd9a76d84f4156f286942558380b048545da9f0cb395a477c696cd34",
+  "subject": {
+    "kind": "website",
+    "name": "http://127.0.0.1:44915/"
+  },
+  "operation": "web_page_states_capture",
+  "params": {
+    "max_states": 8,
+    "width": 1440
+  },
+  "result": {
+    "folder": "/home/mizan/Projects/word -client/checks/round-0/states",
+    "found": 8,
+    "states": [
+      {
+        "changed": [
+          "expanded"
+        ],
+        "file": "state-1.png",
+        "index": 0,
+        "kind": "menu",
+        "label": "Word",
+        "sha256": "1e5e6d1eda6507552839d83f5530c97f2255ef39f6d93f8f41112aa31f388637"
+      },
+      {
+        "changed": [
+          "expanded"
+        ],
+        "file": "state-2.png",
+        "index": 1,
+        "kind": "menu",
+        "label": "Features",
+        "sha256": "66c70c44ba21760b63218cdf620fe90854c688176c11afee0e9289db3343ef69"
+      },
+      {
+        "changed": [
+          "tab selected"
+        ],
+        "file": "state-3.png",
+        "index": 2,
+        "kind": "tab",
+        "label": "Resumes",
+        "sha256": "7f04ca143c3319b4c7e755064ddfd4abde8e68cca36d3ce14f19a76bffdb45eb"
+      },
+      {
+        "changed": [
+          "tab selected"
+        ],
+        "file": "state-4.png",
+        "index": 3,
+        "kind": "tab",
+        "label": "Invoices",
+        "sha256": "91432222387105bd8b86af5c8e262034b753bc8b79857468d10a0d995c6ddf42"
+      },
+      {
+        "changed": [
+          "tab selected"
+        ],
+        "file": "state-5.png",
+        "index": 4,
+        "kind": "tab",
+        "label": "Papers and Reports",
+        "sha256": "77ccb621df71c588b47323e7a18f4d6ee06a468ce3a0a07457c970ddc83d96d9"
+      },
+      {
+        "changed": [
+          "tab selected"
+        ],
+        "file": "state-6.png",
+        "index": 5,
+        "kind": "tab",
+        "label": "Flyers",
+        "sha256": "d20a8a079bb39d2a81618ffac88376489fbcb12450b186d6be466cc9f54117a7"
+      },
+      {
+        "changed": [
+          "tab selected"
+        ],
+        "file": "state-7.png",
+        "index": 6,
+        "kind": "tab",
+        "label": "Meeting Notes",
+        "sha256": "8268fa604c869669c7e8fda75ebf037a9d83d555a296f751c03396936408ab1b"
+      },
+      {
+        "changed": [
+          "tab selected"
+        ],
+        "file": "state-8.png",
+        "index": 7,
+        "kind": "tab",
+        "label": "Letters",
+        "sha256": "8c894d65309937b7cd0086376bb541e089d1c4795919e289b71de7c0c4be90fd"
+      }
+    ],
+    "url": "http://127.0.0.1:44915/"
+  },
+  "summary": "Opened 8 of 8 control(s) on http://127.0.0.1:44915/; 8 pictured in /home/mizan/Projects/word -client/checks/round-0/states.",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "first_controls",
+      "message": "Only the first controls found are opened, one at a time; menus inside menus and hover-only menus are not."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 8,
+    "total": 8
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "http://127.0.0.1:44915/"
+    }
+  ],
+  "links": []
+}

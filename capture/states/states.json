@@ -1,0 +1,46 @@
+{
+  "states": [
+    {
+      "changed": [
+        "expanded"
+      ],
+      "file": "state-1.png",
+      "index": 0,
+      "kind": "menu",
+      "label": "Word",
+      "sha256": "fe73deeadf1df15d3fccdbfdc751450a09a977cdeff3bfae439ebe30064e229d"
+    },
+    {
+      "changed": [
+        "expanded"
+      ],
+      "file": "state-2.png",
+      "index": 1,
+      "kind": "menu",
+      "label": "Features",
+      "sha256": "ca6ed2ece4c73a4f753e5d0d3c3fe7fc982c13d14d5fe5f551b85adf9a7a7e83"
+    },
+    {
+      "changed": [
+        "tab selected"
+      ],
+      "file": "state-3.png",
+      "index": 2,
+      "kind": "tab",
+      "label": "Resumes",
+      "sha256": "0b4501c93ba085182bdfbbf20c058f3d7c4188162d4c06de7356021c6a1a6366"
+    },
+    {
+      "changed": [
+        "tab selected"
+      ],
+      "file": "state-4.png",
+      "index": 3,
+      "kind": "tab",
+      "label": "Invoices",
+      "sha256": "812eb3a2b96481916749fcaf95a139b53f7a07bdc1623166b2945e3882f21f76"
+    }
+  ],
+  "url": "https://word.cloud.microsoft/en-us/",
+  "width": 1440
+}

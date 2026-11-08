@@ -1,0 +1,526 @@
+{
+  "id": "ev_2b1197119bcf7344ccab4cbf3476db12e4d2944d48191c3eb1c91161808546d5",
+  "subject": {
+    "kind": "website",
+    "name": "https://word.cloud.microsoft/create/en/document-editor/"
+  },
+  "operation": "web_site_capture",
+  "params": {
+    "include_html": false,
+    "max_height": 12000,
+    "noise_pass": true,
+    "visitor_view": false,
+    "widths": [
+      1440,
+      768,
+      390
+    ]
+  },
+  "result": {
+    "counts": {
+      "forms": 0,
+      "headings": 25,
+      "images": 23,
+      "links": 56,
+      "outline": 166
+    },
+    "design": {
+      "backgrounds": [
+        {
+          "count": 12,
+          "value": "#185abd"
+        },
+        {
+          "count": 10,
+          "value": "#ffffff"
+        },
+        {
+          "count": 3,
+          "value": "#d2e0f4"
+        },
+        {
+          "count": 1,
+          "value": "#fafafa"
+        }
+      ],
+      "css_variables": {
+        "--color-accent-1-background": "#f8cdf6",
+        "--color-accent-1-dark": "#9f3bd4",
+        "--color-accent-1-light": "#c874d9",
+        "--color-accent-1-standard": "#ad58db",
+        "--color-accent-2-background": "#cde1f8",
+        "--color-accent-2-dark": "#2574de",
+        "--color-accent-2-light": "#64a5f5",
+        "--color-accent-2-standard": "#468be8",
+        "--color-background-off-white": "#fbfbfc",
+        "--color-brand-background": "#d2e0f4",
+        "--color-brand-dark": "#1651aa",
+        "--color-brand-light": "#2461ca",
+        "--color-brand-standard": "#185abd",
+        "--color-collapsible-content": "var(--color-text-dark)",
+        "--color-collapsible-header": "var(--color-brand-standard)",
+        "--color-hover-links": "var(--color-brand-dark)",
+        "--color-links": "var(--color-brand-light)",
+        "--color-text-dark": "#242424",
+        "--color-text-light": "#424242",
+        "--height-audio-item": "160px",
+        "--height-banner": "3rem",
+        "--height-mobile-nav": "4.5rem",
+        "--height-nav": "3.875rem",
+        "--hover-duration": ".2s"
+      },
+      "font_faces": [
+        {
+          "family": "segoeVariableFont",
+          "status": "loaded",
+          "style": "normal",
+          "weight": "normal"
+        },
+        {
+          "family": "segoeVariableFont Fallback",
+          "status": "error",
+          "style": "normal",
+          "weight": "normal"
+        },
+        {
+          "family": "segoeFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "normal"
+        },
+        {
+          "family": "segoeFont Fallback",
+          "status": "error",
+          "style": "normal",
+          "weight": "normal"
+        },
+        {
+          "family": "kintoSansFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "400"
+        },
+        {
+          "family": "kintoSansFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "500"
+        },
+        {
+          "family": "kintoSansFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "700"
+        },
+        {
+          "family": "kintoSansFont Fallback",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "normal"
+        },
+        {
+          "family": "openSansCyFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "400"
+        },
+        {
+          "family": "openSansCyFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "500"
+        },
+        {
+          "family": "openSansCyFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "700"
+        },
+        {
+          "family": "openSansCyFont Fallback",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "normal"
+        },
+        {
+          "family": "notoSansKoFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "400"
+        },
+        {
+          "family": "notoSansKoFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "500"
+        },
+        {
+          "family": "notoSansKoFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "700"
+        },
+        {
+          "family": "notoSansKoFont Fallback",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "normal"
+        },
+        {
+          "family": "notoSansThFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "400"
+        },
+        {
+          "family": "notoSansThFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "500"
+        },
+        {
+          "family": "notoSansThFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "700"
+        },
+        {
+          "family": "notoSansThFont Fallback",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "normal"
+        },
+        {
+          "family": "notoSansZhFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "400"
+        },
+        {
+          "family": "notoSansZhFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "500"
+        },
+        {
+          "family": "notoSansZhFont",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "700"
+        },
+        {
+          "family": "notoSansZhFont Fallback",
+          "status": "unloaded",
+          "style": "normal",
+          "weight": "normal"
+        }
+      ],
+      "font_sizes": [
+        {
+          "count": 46,
+          "value": "18px"
+        },
+        {
+          "count": 32,
+          "value": "16px"
+        },
+        {
+          "count": 13,
+          "value": "32px"
+        },
+        {
+          "count": 8,
+          "value": "14px"
+        },
+        {
+          "count": 5,
+          "value": "20px"
+        },
+        {
+          "count": 4,
+          "value": "12px"
+        },
+        {
+          "count": 1,
+          "value": "40px"
+        }
+      ],
+      "font_weights": [
+        {
+          "count": 69,
+          "value": "400"
+        },
+        {
+          "count": 31,
+          "value": "600"
+        },
+        {
+          "count": 9,
+          "value": "500"
+        }
+      ],
+      "fonts": [
+        {
+          "count": 93,
+          "value": "segoeVariableFont, \"segoeVariableFont Fallback\", segoeFont, \"segoeFont Fallback\", sans-serif"
+        },
+        {
+          "count": 16,
+          "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, BlinkMacSystemFont, Roboto, \"Helvetica Neue\", sans-serif"
+        }
+      ],
+      "max_widths": [
+        {
+          "count": 10,
+          "value": "1200px"
+        },
+        {
+          "count": 2,
+          "value": "1440px"
+        },
+        {
+          "count": 2,
+          "value": "1280px"
+        },
+        {
+          "count": 2,
+          "value": "672px"
+        },
+        {
+          "count": 2,
+          "value": "1340px"
+        },
+        {
+          "count": 1,
+          "value": "728px"
+        }
+      ],
+      "radii": [
+        {
+          "count": 11,
+          "value": "9999px"
+        },
+        {
+          "count": 11,
+          "value": "8px"
+        },
+        {
+          "count": 5,
+          "value": "4px"
+        },
+        {
+          "count": 3,
+          "value": "28px 4px 24px 24px"
+        },
+        {
+          "count": 3,
+          "value": "24px 0px 24px 24px"
+        },
+        {
+          "count": 1,
+          "value": "6px"
+        }
+      ],
+      "shadows": [
+        {
+          "count": 3,
+          "value": "rgba(28, 28, 43, 0.125) 0px 12px 20px -8px"
+        },
+        {
+          "count": 3,
+          "value": "rgba(28, 28, 40, 0.1) 0px 4px 8px 0px, rgba(28, 28, 40, 0.1) 0px 0px 2px 0px"
+        },
+        {
+          "count": 1,
+          "value": "rgba(0, 0, 0, 0.12) 0px 0px 2px 0px, rgba(0, 0, 0, 0.14) 0px 2px 4px 0px"
+        }
+      ],
+      "spacing": [
+        {
+          "count": 109,
+          "value": "16px"
+        },
+        {
+          "count": 29,
+          "value": "8px"
+        },
+        {
+          "count": 27,
+          "value": "32px"
+        },
+        {
+          "count": 22,
+          "value": "4px"
+        },
+        {
+          "count": 22,
+          "value": "24px"
+        },
+        {
+          "count": 18,
+          "value": "12px"
+        },
+        {
+          "count": 16,
+          "value": "48px"
+        },
+        {
+          "count": 13,
+          "value": "18px"
+        },
+        {
+          "count": 12,
+          "value": "26.56px"
+        },
+        {
+          "count": 9,
+          "value": "20px"
+        },
+        {
+          "count": 7,
+          "value": "64px"
+        },
+        {
+          "count": 6,
+          "value": "5px"
+        },
+        {
+          "count": 5,
+          "value": "-12px"
+        },
+        {
+          "count": 4,
+          "value": "6px"
+        },
+        {
+          "count": 2,
+          "value": "7px"
+        },
+        {
+          "count": 2,
+          "value": "60px"
+        },
+        {
+          "count": 2,
+          "value": "14px"
+        },
+        {
+          "count": 1,
+          "value": "285.75px"
+        },
+        {
+          "count": 1,
+          "value": "40px"
+        },
+        {
+          "count": 1,
+          "value": "80px"
+        }
+      ],
+      "text_colors": [
+        {
+          "count": 40,
+          "value": "#242424"
+        },
+        {
+          "count": 37,
+          "value": "#2461ca"
+        },
+        {
+          "count": 12,
+          "value": "#ffffff"
+        },
+        {
+          "count": 9,
+          "value": "#424242"
+        },
+        {
+          "count": 5,
+          "value": "#185abd"
+        },
+        {
+          "count": 3,
+          "value": "#1651aa"
+        },
+        {
+          "count": 3,
+          "value": "#151435"
+        }
+      ]
+    },
+    "files": [
+      "README.md",
+      "capture.json"
+    ],
+    "html_bytes": 0,
+    "output_directory": "/home/mizan/Projects/word -client/capture/routes/create-en-document-editor",
+    "screenshots": [
+      {
+        "css_width": 1440,
+        "cut": false,
+        "file": "screenshot-1440.png",
+        "height": 6622,
+        "noise_file": "noise-1440.png",
+        "noise_tiles": 203,
+        "sha256": "753de3e0e02769bf2a38389935a5a4aa9a2151612af12b4f51d6e7496dc9b142",
+        "width": 1440
+      },
+      {
+        "css_width": 768,
+        "cut": false,
+        "file": "screenshot-768.png",
+        "height": 8925,
+        "noise_file": "noise-768.png",
+        "noise_tiles": 350,
+        "sha256": "280f966c7f3f91e3da84252403a48972d0aa8b4591a4c68ec2c8d7110b2e43be",
+        "width": 768
+      },
+      {
+        "css_width": 390,
+        "cut": false,
+        "file": "screenshot-390.png",
+        "height": 8631,
+        "noise_tiles": 0,
+        "sha256": "f8a7b4740bc292e692bf829a80e8770a25389daef50ed64164af52095cf11351",
+        "width": 390
+      }
+    ],
+    "title": "Free online document editor | Microsoft Word",
+    "url": "https://word.cloud.microsoft/create/en/document-editor/"
+  },
+  "summary": "Captured https://word.cloud.microsoft/create/en/document-editor/: 3 screenshot(s), 166 outline items, 25 headings, 23 images, 56 links, 0 forms → /home/mizan/Projects/word -client/capture/routes/create-en-document-editor.",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "one_state",
+      "message": "One state of the page: menus, dialogs and content behind interactions are not opened."
+    },
+    {
+      "code": "cross_origin_css",
+      "message": "CSS custom properties and breakpoints from cross-origin stylesheets can't be read."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 3,
+    "total": 3
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "https://word.cloud.microsoft/create/en/document-editor/"
+    },
+    {
+      "kind": "path",
+      "value": "/home/mizan/Projects/word -client/capture/routes/create-en-document-editor"
+    }
+  ],
+  "links": []
+}

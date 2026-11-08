@@ -1,0 +1,86 @@
+{
+  "id": "ev_660683c43bf5f577426872c161d296b80bd4c46ffd8f8b5bd4b9c48952dc5fa7",
+  "subject": {
+    "kind": "website",
+    "name": "https://word.cloud.microsoft/en-us/"
+  },
+  "operation": "web_page_states_capture",
+  "params": {
+    "max_states": 4,
+    "width": 390
+  },
+  "result": {
+    "folder": "/home/mizan/Projects/word -client/capture/states-390",
+    "found": 4,
+    "states": [
+      {
+        "changed": [
+          "expanded"
+        ],
+        "file": "state-1.png",
+        "index": 0,
+        "kind": "menu",
+        "label": "Word",
+        "sha256": "89f3b4ae891e1e9ce6617f1381e90545b5baaac47106a40a2cab67e8a9bdb558"
+      },
+      {
+        "changed": [
+          "expanded"
+        ],
+        "file": "state-2.png",
+        "index": 1,
+        "kind": "menu",
+        "label": "Features",
+        "sha256": "9e8cc7fc105420f4a9783c9a6bd5eab9819db15d808ac56439a603c6cb495465"
+      },
+      {
+        "changed": [
+          "tab selected"
+        ],
+        "file": "state-3.png",
+        "index": 2,
+        "kind": "tab",
+        "label": "Recommended",
+        "sha256": "00d1708e60c5c6eb3bc73bfedb251e689cc6d7e643a80ef039dd6ef5a8603ef2"
+      },
+      {
+        "changed": [
+          "tab selected"
+        ],
+        "file": "state-4.png",
+        "index": 3,
+        "kind": "menu",
+        "label": "+ 5",
+        "sha256": "88382891da67a9b5c53a4ca32f24e8710ea57da09bc3f88eb498e1edd6aee895"
+      }
+    ],
+    "url": "https://word.cloud.microsoft/en-us/"
+  },
+  "summary": "Opened 4 of 4 control(s) on https://word.cloud.microsoft/en-us/; 4 pictured in /home/mizan/Projects/word -client/capture/states-390.",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "first_controls",
+      "message": "Only the first controls found are opened, one at a time; menus inside menus and hover-only menus are not."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 4,
+    "total": 4
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "https://word.cloud.microsoft/en-us/"
+    }
+  ],
+  "links": []
+}

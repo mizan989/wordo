@@ -1,0 +1,61 @@
+{
+  "id": "ev_a5068f75418618c87a76c32ee4ab0d1afe64b971ad163296a77d1082b51bd288",
+  "subject": {
+    "kind": "website",
+    "name": "http://127.0.0.1:42149/"
+  },
+  "operation": "web_site_open",
+  "params": {
+    "height": 900,
+    "url": "http://127.0.0.1:42149/",
+    "width": 1440
+  },
+  "result": {
+    "browser": "Chrome/156.0.8078.47",
+    "facts": {
+      "elements": 656,
+      "forms": 0,
+      "height": 4089,
+      "images": 39,
+      "lang": "en-us",
+      "links": 35,
+      "ready": "complete",
+      "title": "Create and edit documents for free | Microsoft Word for the Web",
+      "url": "http://127.0.0.1:42149/",
+      "width": 1425
+    },
+    "health": {
+      "errors": [],
+      "failed_requests": []
+    },
+    "title": "Create and edit documents for free | Microsoft Word for the Web",
+    "url": "http://127.0.0.1:42149/"
+  },
+  "summary": "Opened http://127.0.0.1:42149/: \"Create and edit documents for free | Microsoft Word for the Web\".",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "private_profile",
+      "message": "A fresh private browser: pages behind a login show their signed-out state."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 1,
+    "total": 1
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "http://127.0.0.1:42149/"
+    }
+  ],
+  "links": []
+}

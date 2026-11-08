@@ -1,0 +1,4948 @@
+{
+  "a11y": {
+    "images_without_alt": 0,
+    "landmarks": {
+      "banner": 1,
+      "contentinfo": 1,
+      "main": 1,
+      "navigation": 1
+    },
+    "lang": "en",
+    "unnamed_controls": 6,
+    "unnamed_examples": [
+      "a.hQWgwW_InlineEntryLink",
+      "a.hQWgwW_InlineEntryLink",
+      "a.CrbE3a_InternalLink",
+      "a.CrbE3a_InternalLink",
+      "a.CrbE3a_InternalLink"
+    ]
+  },
+  "assets": {
+    "background_images": [],
+    "fonts": [
+      "https://word.cloud.microsoft/create/_next/static/media/segoe_ui_vf-s.3lcojexweltyk.woff2"
+    ],
+    "images": [
+      {
+        "alt": "",
+        "h": 16,
+        "src": "https://res.cdn.office.net/files/fabric-cdn-prod_20251010.003/assets/brand-icons/product/svg/word_16x1.svg",
+        "w": 16
+      },
+      {
+        "alt": "",
+        "h": 771,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/61V5pTkIlkjSpj4GQ6upwr/fce2dbdc13666507ab18639bb647a0d3/4000",
+        "w": 2049
+      },
+      {
+        "alt": "",
+        "h": 1080,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+        "w": 1980
+      },
+      {
+        "alt": "",
+        "h": 24,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/3CYjvepETT4sgKML93e7NV/8e6fc9b1ef27efcebc67ebb136c788da/128",
+        "w": 24
+      },
+      {
+        "alt": "",
+        "h": 24,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/37yALi2F5pHnE8q2Sl8Plc/66b894d7eecd08d80264cd2fc9fcdc62/128",
+        "w": 24
+      },
+      {
+        "alt": "",
+        "h": 24,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/4hV5aUMdQ4kf3wyFfvAll4/f040da39d47be7c1b1e3c3b96a8dab35/128",
+        "w": 24
+      },
+      {
+        "alt": "",
+        "h": 577,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/2VYYzl0MY4ec9sQ7j1PXke/2de7ab3bb6eebb99fc3157423e73798c/1024",
+        "w": 1024
+      },
+      {
+        "alt": "",
+        "h": 1080,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+        "w": 1980
+      },
+      {
+        "alt": "",
+        "h": 507,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/3tVimcb8suYSP5I2ksSvLK/c763a6d9ee8d291643e3ec778ab85622/1024",
+        "w": 901
+      },
+      {
+        "alt": "",
+        "h": 507,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/5XIsExVFKu0a3YhqhnXLqV/4a9f140ce94608956afabe1947688502/1024",
+        "w": 901
+      },
+      {
+        "alt": "",
+        "h": 1080,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+        "w": 1980
+      },
+      {
+        "alt": "",
+        "h": 576,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/4GFNXmA9UdZ3Uzrs0LRISA/dc6af8c97caab6cc85f1a464476691f3/1024",
+        "w": 1024
+      },
+      {
+        "alt": "",
+        "h": 1080,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+        "w": 1980
+      },
+      {
+        "alt": "",
+        "h": 555,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/6JZnhpBE1IK3Xu27XcgYCI/0433cf4ae4c6982714d6781097ef7fae/1024",
+        "w": 893
+      },
+      {
+        "alt": "",
+        "h": 577,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/rr8K8ZhGoc45ger8hanhw/7c2eef865c3724050a4128c55b8280c6/1024",
+        "w": 1024
+      },
+      {
+        "alt": "",
+        "h": 1080,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+        "w": 1980
+      },
+      {
+        "alt": "",
+        "h": 507,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/yqREGBzTGfumIvD4BkGNE/2416343089467d2f91b03e43e24723a4/1024",
+        "w": 901
+      },
+      {
+        "alt": "",
+        "h": 507,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/7d3tToM72IJKALhlzq9cie/4648000ef015e6e0529f315e70e17b97/1024",
+        "w": 900
+      },
+      {
+        "alt": "",
+        "h": 507,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/4G6CHKkojG6wuO0wLaHxpc/6d92e647ccfaf3144bfab7feb7947e9b/1024",
+        "w": 901
+      },
+      {
+        "alt": "",
+        "h": 507,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/5XIsExVFKu0a3YhqhnXLqV/4a9f140ce94608956afabe1947688502/1024",
+        "w": 901
+      },
+      {
+        "alt": "",
+        "h": 502,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/7HkuQIK4OYKVMBSt9CUK84/e40253c1f74091135d4dde821b5d3aee/1024",
+        "w": 1024
+      },
+      {
+        "alt": "",
+        "h": 1080,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/APAhSSuTRa172zBxPcLCR/536375265ffb801b902a3e5a08cee341/2048",
+        "w": 1920
+      },
+      {
+        "alt": "Microsoft",
+        "h": 65,
+        "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_f5c28989efa400e5e1f2568dd1faf8dd.svg",
+        "w": 300
+      }
+    ],
+    "inline_scripts": 11,
+    "requests": [
+      {
+        "bytes": 1364,
+        "type": "link",
+        "url": "https://res.cdn.office.net/files/fabric-cdn-prod_20251010.003/assets/brand-icons/product/svg/word_16x1.svg"
+      },
+      {
+        "bytes": 0,
+        "type": "link",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_f5c28989efa400e5e1f2568dd1faf8dd.svg"
+      },
+      {
+        "bytes": 22236,
+        "type": "link",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/61V5pTkIlkjSpj4GQ6upwr/fce2dbdc13666507ab18639bb647a0d3/4000"
+      },
+      {
+        "bytes": 2808,
+        "type": "link",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/35q_05juoy1rv.css"
+      },
+      {
+        "bytes": 19224,
+        "type": "link",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/20yxu3v2ue45h.css"
+      },
+      {
+        "bytes": 1150,
+        "type": "link",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/04ns10wfa-1qe.css"
+      },
+      {
+        "bytes": 2453,
+        "type": "link",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/3xmy633i4xo_b.js"
+      },
+      {
+        "bytes": 8456,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/1hrmm9snmv38r.js"
+      },
+      {
+        "bytes": 44674,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/25hs_zgz-9t19.js"
+      },
+      {
+        "bytes": 65731,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/3iqnzim1azk13.js"
+      },
+      {
+        "bytes": 8848,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/137kyoifvxo3i.js"
+      },
+      {
+        "bytes": 4699,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/turbopack-30o6dx76tka1k.js"
+      },
+      {
+        "bytes": 3852,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/0goz9l34jbhme.js"
+      },
+      {
+        "bytes": 1361,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/37aqmcwwnap5q.js"
+      },
+      {
+        "bytes": 111483,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/1za9739vvjmuz.js"
+      },
+      {
+        "bytes": 89158,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/2y_nkptnn0p7v.js"
+      },
+      {
+        "bytes": 201214,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/27egryp3q008i.js"
+      },
+      {
+        "bytes": 8270,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/0foq1ozfnk9i7.js"
+      },
+      {
+        "bytes": 496,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/2ymjz0h_86pfv.js"
+      },
+      {
+        "bytes": 44426,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/2ibcdfxb5npbo.js"
+      },
+      {
+        "bytes": 0,
+        "type": "iframe",
+        "url": "https://www.youtube.com/embed/IdG-YlA1p3M"
+      },
+      {
+        "bytes": 826412,
+        "type": "css",
+        "url": "https://word.cloud.microsoft/create/_next/static/media/segoe_ui_vf-s.3lcojexweltyk.woff2"
+      },
+      {
+        "bytes": 4506,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048"
+      },
+      {
+        "bytes": 624,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/37yALi2F5pHnE8q2Sl8Plc/66b894d7eecd08d80264cd2fc9fcdc62/128"
+      },
+      {
+        "bytes": 604,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/3CYjvepETT4sgKML93e7NV/8e6fc9b1ef27efcebc67ebb136c788da/128"
+      },
+      {
+        "bytes": 24540,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/2VYYzl0MY4ec9sQ7j1PXke/2de7ab3bb6eebb99fc3157423e73798c/1024"
+      },
+      {
+        "bytes": 606,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/4hV5aUMdQ4kf3wyFfvAll4/f040da39d47be7c1b1e3c3b96a8dab35/128"
+      },
+      {
+        "bytes": 13520,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/3tVimcb8suYSP5I2ksSvLK/c763a6d9ee8d291643e3ec778ab85622/1024"
+      },
+      {
+        "bytes": 8394,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/5XIsExVFKu0a3YhqhnXLqV/4a9f140ce94608956afabe1947688502/1024"
+      },
+      {
+        "bytes": 838,
+        "type": "fetch",
+        "url": "https://config.edge.skype.com/config/v1/WAC/1.0.0.0"
+      },
+      {
+        "bytes": 0,
+        "type": "other",
+        "url": "https://res.cdn.office.net/files/fabric-cdn-prod_20251010.003/assets/brand-icons/product/svg/word_16x1.svg"
+      },
+      {
+        "bytes": 0,
+        "type": "xmlhttprequest",
+        "url": "https://browser.events.data.microsoft.com/OneCollector/1.0/"
+      },
+      {
+        "bytes": 0,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048"
+      },
+      {
+        "bytes": 26712,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/4GFNXmA9UdZ3Uzrs0LRISA/dc6af8c97caab6cc85f1a464476691f3/1024"
+      },
+      {
+        "bytes": 38348,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/6JZnhpBE1IK3Xu27XcgYCI/0433cf4ae4c6982714d6781097ef7fae/1024"
+      },
+      {
+        "bytes": 16654,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/rr8K8ZhGoc45ger8hanhw/7c2eef865c3724050a4128c55b8280c6/1024"
+      },
+      {
+        "bytes": 27182,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/yqREGBzTGfumIvD4BkGNE/2416343089467d2f91b03e43e24723a4/1024"
+      },
+      {
+        "bytes": 12038,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/7d3tToM72IJKALhlzq9cie/4648000ef015e6e0529f315e70e17b97/1024"
+      },
+      {
+        "bytes": 13226,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/4G6CHKkojG6wuO0wLaHxpc/6d92e647ccfaf3144bfab7feb7947e9b/1024"
+      },
+      {
+        "bytes": 0,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/5XIsExVFKu0a3YhqhnXLqV/4a9f140ce94608956afabe1947688502/1024"
+      },
+      {
+        "bytes": 5458,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/APAhSSuTRa172zBxPcLCR/536375265ffb801b902a3e5a08cee341/2048"
+      },
+      {
+        "bytes": 7778,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/7HkuQIK4OYKVMBSt9CUK84/e40253c1f74091135d4dde821b5d3aee/1024"
+      }
+    ],
+    "scripts": [
+      "https://word.cloud.microsoft/create/_next/static/chunks/1hrmm9snmv38r.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/25hs_zgz-9t19.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/3iqnzim1azk13.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/137kyoifvxo3i.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/turbopack-30o6dx76tka1k.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/0goz9l34jbhme.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/37aqmcwwnap5q.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/1za9739vvjmuz.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/2y_nkptnn0p7v.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/27egryp3q008i.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/0foq1ozfnk9i7.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/2ymjz0h_86pfv.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/2ibcdfxb5npbo.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/0cz1d0mv5g_q7.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/3xmy633i4xo_b.js"
+    ],
+    "stylesheets": [
+      "https://word.cloud.microsoft/create/_next/static/chunks/35q_05juoy1rv.css",
+      "https://word.cloud.microsoft/create/_next/static/chunks/20yxu3v2ue45h.css",
+      "https://word.cloud.microsoft/create/_next/static/chunks/04ns10wfa-1qe.css"
+    ]
+  },
+  "breakpoints": [
+    {
+      "count": 1,
+      "px": 480,
+      "query": "max-width 480px"
+    },
+    {
+      "count": 7,
+      "px": 512,
+      "query": "max-width 512px"
+    },
+    {
+      "count": 81,
+      "px": 576,
+      "query": "max-width 576px"
+    },
+    {
+      "count": 4,
+      "px": 576,
+      "query": "min-width 576px"
+    },
+    {
+      "count": 2,
+      "px": 640,
+      "query": "min-width 640px"
+    },
+    {
+      "count": 9,
+      "px": 698,
+      "query": "max-width 698px"
+    },
+    {
+      "count": 3,
+      "px": 768,
+      "query": "min-width 768px"
+    },
+    {
+      "count": 27,
+      "px": 768,
+      "query": "max-width 768px"
+    },
+    {
+      "count": 5,
+      "px": 800,
+      "query": "max-width 800px"
+    },
+    {
+      "count": 2,
+      "px": 922,
+      "query": "min-width 922px"
+    },
+    {
+      "count": 16,
+      "px": 992,
+      "query": "max-width 992px"
+    },
+    {
+      "count": 1,
+      "px": 1280,
+      "query": "min-width 1280px"
+    },
+    {
+      "count": 2,
+      "px": 1280,
+      "query": "max-width 1280px"
+    },
+    {
+      "count": 2,
+      "px": 1344,
+      "query": "max-width 1344px"
+    },
+    {
+      "count": 2,
+      "px": 1365,
+      "query": "max-width 1365px"
+    },
+    {
+      "count": 3,
+      "px": 1400,
+      "query": "max-width 1400px"
+    },
+    {
+      "count": 2,
+      "px": 1400,
+      "query": "min-width 1400px"
+    },
+    {
+      "count": 1,
+      "px": 1696,
+      "query": "max-width 1696px"
+    }
+  ],
+  "design": {
+    "backgrounds": [
+      {
+        "count": 12,
+        "value": "#185abd"
+      },
+      {
+        "count": 10,
+        "value": "#ffffff"
+      },
+      {
+        "count": 3,
+        "value": "#d2e0f4"
+      },
+      {
+        "count": 1,
+        "value": "#fafafa"
+      }
+    ],
+    "css_variables": {
+      "--color-accent-1-background": "#f8cdf6",
+      "--color-accent-1-dark": "#9f3bd4",
+      "--color-accent-1-light": "#c874d9",
+      "--color-accent-1-standard": "#ad58db",
+      "--color-accent-2-background": "#cde1f8",
+      "--color-accent-2-dark": "#2574de",
+      "--color-accent-2-light": "#64a5f5",
+      "--color-accent-2-standard": "#468be8",
+      "--color-background-off-white": "#fbfbfc",
+      "--color-brand-background": "#d2e0f4",
+      "--color-brand-dark": "#1651aa",
+      "--color-brand-light": "#2461ca",
+      "--color-brand-standard": "#185abd",
+      "--color-collapsible-content": "var(--color-text-dark)",
+      "--color-collapsible-header": "var(--color-brand-standard)",
+      "--color-hover-links": "var(--color-brand-dark)",
+      "--color-links": "var(--color-brand-light)",
+      "--color-text-dark": "#242424",
+      "--color-text-light": "#424242",
+      "--height-audio-item": "160px",
+      "--height-banner": "3rem",
+      "--height-mobile-nav": "4.5rem",
+      "--height-nav": "3.875rem",
+      "--hover-duration": ".2s"
+    },
+    "font_faces": [
+      {
+        "family": "segoeVariableFont",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "segoeVariableFont Fallback",
+        "status": "error",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "segoeFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "segoeFont Fallback",
+        "status": "error",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "kintoSansFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "kintoSansFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "family": "kintoSansFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "kintoSansFont Fallback",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "openSansCyFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "openSansCyFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "family": "openSansCyFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "openSansCyFont Fallback",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "notoSansKoFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "notoSansKoFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "family": "notoSansKoFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "notoSansKoFont Fallback",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "notoSansThFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "notoSansThFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "family": "notoSansThFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "notoSansThFont Fallback",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "notoSansZhFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "notoSansZhFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "family": "notoSansZhFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "notoSansZhFont Fallback",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "normal"
+      }
+    ],
+    "font_sizes": [
+      {
+        "count": 46,
+        "value": "18px"
+      },
+      {
+        "count": 32,
+        "value": "16px"
+      },
+      {
+        "count": 13,
+        "value": "32px"
+      },
+      {
+        "count": 8,
+        "value": "14px"
+      },
+      {
+        "count": 5,
+        "value": "20px"
+      },
+      {
+        "count": 4,
+        "value": "12px"
+      },
+      {
+        "count": 1,
+        "value": "40px"
+      }
+    ],
+    "font_weights": [
+      {
+        "count": 69,
+        "value": "400"
+      },
+      {
+        "count": 31,
+        "value": "600"
+      },
+      {
+        "count": 9,
+        "value": "500"
+      }
+    ],
+    "fonts": [
+      {
+        "count": 93,
+        "value": "segoeVariableFont, \"segoeVariableFont Fallback\", segoeFont, \"segoeFont Fallback\", sans-serif"
+      },
+      {
+        "count": 16,
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, BlinkMacSystemFont, Roboto, \"Helvetica Neue\", sans-serif"
+      }
+    ],
+    "max_widths": [
+      {
+        "count": 10,
+        "value": "1200px"
+      },
+      {
+        "count": 2,
+        "value": "1440px"
+      },
+      {
+        "count": 2,
+        "value": "1280px"
+      },
+      {
+        "count": 2,
+        "value": "672px"
+      },
+      {
+        "count": 2,
+        "value": "1340px"
+      },
+      {
+        "count": 1,
+        "value": "728px"
+      }
+    ],
+    "radii": [
+      {
+        "count": 11,
+        "value": "9999px"
+      },
+      {
+        "count": 11,
+        "value": "8px"
+      },
+      {
+        "count": 5,
+        "value": "4px"
+      },
+      {
+        "count": 3,
+        "value": "28px 4px 24px 24px"
+      },
+      {
+        "count": 3,
+        "value": "24px 0px 24px 24px"
+      },
+      {
+        "count": 1,
+        "value": "6px"
+      }
+    ],
+    "shadows": [
+      {
+        "count": 3,
+        "value": "rgba(28, 28, 43, 0.125) 0px 12px 20px -8px"
+      },
+      {
+        "count": 3,
+        "value": "rgba(28, 28, 40, 0.1) 0px 4px 8px 0px, rgba(28, 28, 40, 0.1) 0px 0px 2px 0px"
+      },
+      {
+        "count": 1,
+        "value": "rgba(0, 0, 0, 0.12) 0px 0px 2px 0px, rgba(0, 0, 0, 0.14) 0px 2px 4px 0px"
+      }
+    ],
+    "spacing": [
+      {
+        "count": 109,
+        "value": "16px"
+      },
+      {
+        "count": 29,
+        "value": "8px"
+      },
+      {
+        "count": 27,
+        "value": "32px"
+      },
+      {
+        "count": 22,
+        "value": "4px"
+      },
+      {
+        "count": 22,
+        "value": "24px"
+      },
+      {
+        "count": 18,
+        "value": "12px"
+      },
+      {
+        "count": 16,
+        "value": "48px"
+      },
+      {
+        "count": 13,
+        "value": "18px"
+      },
+      {
+        "count": 12,
+        "value": "26.56px"
+      },
+      {
+        "count": 9,
+        "value": "20px"
+      },
+      {
+        "count": 7,
+        "value": "64px"
+      },
+      {
+        "count": 6,
+        "value": "5px"
+      },
+      {
+        "count": 5,
+        "value": "-12px"
+      },
+      {
+        "count": 4,
+        "value": "6px"
+      },
+      {
+        "count": 2,
+        "value": "7px"
+      },
+      {
+        "count": 2,
+        "value": "60px"
+      },
+      {
+        "count": 2,
+        "value": "14px"
+      },
+      {
+        "count": 1,
+        "value": "285.75px"
+      },
+      {
+        "count": 1,
+        "value": "40px"
+      },
+      {
+        "count": 1,
+        "value": "80px"
+      }
+    ],
+    "text_colors": [
+      {
+        "count": 40,
+        "value": "#242424"
+      },
+      {
+        "count": 37,
+        "value": "#2461ca"
+      },
+      {
+        "count": 12,
+        "value": "#ffffff"
+      },
+      {
+        "count": 9,
+        "value": "#424242"
+      },
+      {
+        "count": 5,
+        "value": "#185abd"
+      },
+      {
+        "count": 3,
+        "value": "#1651aa"
+      },
+      {
+        "count": 3,
+        "value": "#151435"
+      }
+    ]
+  },
+  "forms": [],
+  "headings": [
+    {
+      "level": 1,
+      "text": "Online document editor"
+    },
+    {
+      "level": 2,
+      "text": "Advanced document editing tools"
+    },
+    {
+      "level": 3,
+      "text": "Format with a wide range of editing features"
+    },
+    {
+      "level": 3,
+      "text": "Proofread and strengthen copy online"
+    },
+    {
+      "level": 3,
+      "text": "Rewrite and edit documents with AI"
+    },
+    {
+      "level": 2,
+      "text": "Edit files online with Word"
+    },
+    {
+      "level": 2,
+      "text": "See document word count at a glance"
+    },
+    {
+      "level": 2,
+      "text": "Ensure accurate spelling in over 20 languages"
+    },
+    {
+      "level": 2,
+      "text": "Refine writing with correct grammar"
+    },
+    {
+      "level": 2,
+      "text": "Leverage AI-powered assistance in Word"
+    },
+    {
+      "level": 2,
+      "text": "Build clear, organized drafts with templates"
+    },
+    {
+      "level": 2,
+      "text": "Work across PDFs, text files, and more"
+    },
+    {
+      "level": 2,
+      "text": "Collaborate online and share with OneDrive"
+    },
+    {
+      "level": 2,
+      "text": "How to edit and share documents online with Word"
+    },
+    {
+      "level": 2,
+      "text": "Read more"
+    },
+    {
+      "level": 3,
+      "text": "Word counter"
+    },
+    {
+      "level": 3,
+      "text": "Free online spell checker"
+    },
+    {
+      "level": 3,
+      "text": "Grammar checker"
+    },
+    {
+      "level": 2,
+      "text": "Frequently asked questions"
+    },
+    {
+      "level": 3,
+      "text": "How to edit a document in Microsoft Word online?"
+    },
+    {
+      "level": 3,
+      "text": "How to open PDFs in Word online?"
+    },
+    {
+      "level": 3,
+      "text": "Can scanned documents be edited in Word?"
+    },
+    {
+      "level": 3,
+      "text": "Is the desktop version of Word required to edit a document?"
+    },
+    {
+      "level": 3,
+      "text": "How does co-editing work in Word"
+    },
+    {
+      "level": 2,
+      "text": "Create, edit, and store documents online in Microsoft Word"
+    }
+  ],
+  "health": {
+    "errors": [],
+    "failed_requests": []
+  },
+  "lang": "en",
+  "layouts": [
+    {
+      "blocks": [
+        {
+          "background": "#ffffff",
+          "h": 64,
+          "pad": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "per_row": 1,
+          "tag": "header",
+          "w": 1425,
+          "y": 4095
+        },
+        {
+          "column": {
+            "max_w": 1280,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1280,
+            "x": 73
+          },
+          "h": 6458,
+          "heading": "Online document editor",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 3,
+          "tag": "main",
+          "w": 1425,
+          "y": 64
+        },
+        {
+          "h": 32,
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "nav",
+          "w": 614,
+          "y": 178
+        },
+        {
+          "column": {
+            "max_w": 1280,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1280,
+            "x": 73
+          },
+          "h": 438,
+          "heading": "Advanced document editing tools",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 3,
+          "tag": "section",
+          "w": 1425,
+          "y": 536
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 403,
+          "heading": "Edit files online with Word",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 974
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 461,
+          "heading": "See document word count at a glance",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 1377
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 481,
+          "heading": "Ensure accurate spelling in over 20 languages",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 1838
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 487,
+          "heading": "Refine writing with correct grammar",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 2318
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 481,
+          "heading": "Leverage AI-powered assistance in Word",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 2805
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 465,
+          "heading": "Build clear, organized drafts with templates",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 3285
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 481,
+          "heading": "Work across PDFs, text files, and more",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 3750
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 487,
+          "heading": "Collaborate online and share with OneDrive",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 4231
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 595,
+          "heading": "How to edit and share documents online with Word",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 4717
+        },
+        {
+          "column": {
+            "max_w": 1340,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1340,
+            "x": 43
+          },
+          "h": 427,
+          "heading": "Read more",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 3,
+          "tag": "section",
+          "w": 1340,
+          "y": 5312
+        },
+        {
+          "background": "#ffffff",
+          "h": 259,
+          "heading": "Word counter",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "article",
+          "w": 431,
+          "y": 5416
+        },
+        {
+          "background": "#ffffff",
+          "h": 259,
+          "heading": "Free online spell checker",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "article",
+          "w": 431,
+          "y": 5416
+        },
+        {
+          "background": "#ffffff",
+          "h": 259,
+          "heading": "Grammar checker",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "article",
+          "w": 431,
+          "y": 5416
+        },
+        {
+          "column": {
+            "max_w": 728,
+            "pad": [
+              16,
+              16
+            ],
+            "w": 728,
+            "x": 349
+          },
+          "h": 351,
+          "heading": "Frequently asked questions",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 5787
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 304,
+          "heading": "Create, edit, and store documents online in Microsoft Word",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 6218
+        },
+        {
+          "background": "#fafafa",
+          "column": {
+            "max_w": 1340,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 519,
+            "x": 48
+          },
+          "h": 100,
+          "pad": [
+            0,
+            48,
+            0,
+            48
+          ],
+          "per_row": 1,
+          "tag": "footer",
+          "w": 1425,
+          "y": 6522
+        }
+      ],
+      "page_h": 6622,
+      "page_w": 1425,
+      "type": {
+        "body": 18,
+        "h1": 40,
+        "h2": 32,
+        "h3": 18
+      },
+      "width": 1440
+    },
+    {
+      "blocks": [
+        {
+          "background": "#ffffff",
+          "h": 64,
+          "pad": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "per_row": 1,
+          "tag": "header",
+          "w": 753,
+          "y": 1924
+        },
+        {
+          "column": {
+            "max_w": 1280,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 753,
+            "x": 0
+          },
+          "h": 8682,
+          "heading": "Online document editor",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 2,
+          "tag": "main",
+          "w": 753,
+          "y": 64
+        },
+        {
+          "h": 32,
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "nav",
+          "w": 697,
+          "y": 64
+        },
+        {
+          "column": {
+            "max_w": 1280,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 902,
+          "heading": "Advanced document editing tools",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 352
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 559,
+          "heading": "Edit files online with Word",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 1254
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 605,
+          "heading": "See document word count at a glance",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 1813
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 677,
+          "heading": "Ensure accurate spelling in over 20 languages",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 2417
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 617,
+          "heading": "Refine writing with correct grammar",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 3094
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 651,
+          "heading": "Leverage AI-powered assistance in Word",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 3710
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 605,
+          "heading": "Build clear, organized drafts with templates",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 4361
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 703,
+          "heading": "Work across PDFs, text files, and more",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 4965
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 683,
+          "heading": "Collaborate online and share with OneDrive",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 5668
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 895,
+          "heading": "How to edit and share documents online with Word",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 6350
+        },
+        {
+          "h": 718,
+          "heading": "Read more",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 2,
+          "tag": "section",
+          "w": 723,
+          "y": 7245
+        },
+        {
+          "background": "#ffffff",
+          "h": 259,
+          "heading": "Word counter",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "article",
+          "w": 349,
+          "y": 7349
+        },
+        {
+          "background": "#ffffff",
+          "h": 259,
+          "heading": "Free online spell checker",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "article",
+          "w": 349,
+          "y": 7349
+        },
+        {
+          "background": "#ffffff",
+          "h": 259,
+          "heading": "Grammar checker",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "article",
+          "w": 349,
+          "y": 7640
+        },
+        {
+          "column": {
+            "max_w": 728,
+            "pad": [
+              16,
+              16
+            ],
+            "w": 728,
+            "x": 13
+          },
+          "h": 351,
+          "heading": "Frequently asked questions",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 8011
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 304,
+          "heading": "Create, edit, and store documents online in Microsoft Word",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 8442
+        },
+        {
+          "background": "#fafafa",
+          "h": 179,
+          "pad": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "per_row": 1,
+          "tag": "footer",
+          "w": 753,
+          "y": 8746
+        }
+      ],
+      "page_h": 8925,
+      "page_w": 753,
+      "type": {
+        "body": 19,
+        "h1": 40,
+        "h2": 32,
+        "h3": 18
+      },
+      "width": 768
+    },
+    {
+      "blocks": [
+        {
+          "background": "#ffffff",
+          "column": {
+            "max_w": 32,
+            "pad": [
+              5,
+              5
+            ],
+            "w": 32,
+            "x": 342
+          },
+          "h": 64,
+          "pad": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "per_row": 1,
+          "tag": "header",
+          "w": 390,
+          "y": 1575
+        },
+        {
+          "column": {
+            "max_w": 1280,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 390,
+            "x": 0
+          },
+          "h": 8318,
+          "heading": "Online document editor",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 2,
+          "tag": "main",
+          "w": 390,
+          "y": 64
+        },
+        {
+          "h": 32,
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "nav",
+          "w": 357,
+          "y": 80
+        },
+        {
+          "column": {
+            "max_w": 1280,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 979,
+          "heading": "Advanced document editing tools",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 363
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 580,
+          "heading": "Edit files online with Word",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 1342
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 611,
+          "heading": "See document word count at a glance",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 1922
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 659,
+          "heading": "Ensure accurate spelling in over 20 languages",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 2,
+          "tag": "section",
+          "w": 390,
+          "y": 2532
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 635,
+          "heading": "Refine writing with correct grammar",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 3191
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 694,
+          "heading": "Leverage AI-powered assistance in Word",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 3826
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 630,
+          "heading": "Build clear, organized drafts with templates",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 4520
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 683,
+          "heading": "Work across PDFs, text files, and more",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 5149
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 635,
+          "heading": "Collaborate online and share with OneDrive",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 5832
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 779,
+          "heading": "How to edit and share documents online with Word",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 6467
+        },
+        {
+          "h": 343,
+          "heading": "Read more",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 2,
+          "tag": "section",
+          "w": 390,
+          "y": 7246
+        },
+        {
+          "background": "#ffffff",
+          "h": 60,
+          "heading": "Word counter",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 2,
+          "tag": "article",
+          "w": 358,
+          "y": 7329
+        },
+        {
+          "background": "#ffffff",
+          "h": 60,
+          "heading": "Free online spell checker",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 2,
+          "tag": "article",
+          "w": 358,
+          "y": 7405
+        },
+        {
+          "background": "#ffffff",
+          "h": 60,
+          "heading": "Grammar checker",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 2,
+          "tag": "article",
+          "w": 358,
+          "y": 7481
+        },
+        {
+          "column": {
+            "max_w": 728,
+            "pad": [
+              16,
+              16
+            ],
+            "w": 390,
+            "x": 0
+          },
+          "h": 475,
+          "heading": "Frequently asked questions",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 7605
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 270,
+          "heading": "Create, edit, and store documents online in Microsoft Word",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 8112
+        },
+        {
+          "background": "#fafafa",
+          "h": 249,
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "footer",
+          "w": 390,
+          "y": 8382
+        }
+      ],
+      "page_h": 8631,
+      "page_w": 390,
+      "type": {
+        "body": 16,
+        "h1": 28,
+        "h2": 24,
+        "h3": 18
+      },
+      "width": 390
+    }
+  ],
+  "links": [
+    {
+      "href": "https://word.cloud.microsoft/create/en/document-editor/#main-content",
+      "text": "Skip to main content"
+    },
+    {
+      "href": "https://go.microsoft.com/fwlink/?linkid=2309620",
+      "text": "See plans and pricing"
+    },
+    {
+      "href": "https://word.cloud.microsoft/signin?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.LOGIN",
+      "text": "Sign in"
+    },
+    {
+      "href": "https://word.cloud.microsoft/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.REFER",
+      "text": "Home"
+    },
+    {
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.CREATE",
+      "text": "Try document editor"
+    },
+    {
+      "href": "https://word.cloud.microsoft/upload/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.UPLOAD",
+      "text": "Edit a document"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/templates/",
+      "text": "formatting tools"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/grammar-checker/",
+      "text": "grammar corrections"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/copilot-in-word/",
+      "text": "Copilot in Word"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/convert-pdf-to-word-online/",
+      "text": "documents"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/resume-builder/",
+      "text": "resumes"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/business-letters/",
+      "text": "business letters"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/papers-and-reports/",
+      "text": "reports"
+    },
+    {
+      "href": "https://word.cloud.microsoft/upload/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.UPLOAD",
+      "text": "Edit a document online"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/word-counter/",
+      "text": "word count"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/word-counter/",
+      "text": "Try Word counter online"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/blog-post-template-AI/",
+      "text": "blogs"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/training-manual-template-AI/",
+      "text": "training manuals"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/spell-checker/",
+      "text": "spell checker"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/spell-checker/",
+      "text": "Discover spell checker"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/standard-operating-procedure-templates-ai/",
+      "text": "SOP manuals"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/write-memo/",
+      "text": "memos"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/how-to-write-a-resignation-letter/",
+      "text": "resignation letters"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/grammar-checker/",
+      "text": "Use grammar checker"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/copilot-in-word/",
+      "text": "Copilot in Word"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/ai-writer/",
+      "text": "AI text generation"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/review-contracts-agreements-copilot/",
+      "text": "detailed legal contracts"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/ai-summarizer/",
+      "text": "AI summarizer"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/copilot-in-word/",
+      "text": "Explore Copilot in Word"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/templates/",
+      "text": "Word template"
+    },
+    {
+      "href": "https://word.cloud.microsoft/search/templates/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.SEARCHTEMPLATES",
+      "text": "Browse all Word templates"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/convert-pdf-to-word-online/",
+      "text": ".docx files"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/technical-documentation/",
+      "text": "technical document"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/write-a-business-plan/",
+      "text": "business plan"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/save-word-document-as-pdf/",
+      "text": "Edit PDF in Word"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/collaborate-in-word/",
+      "text": "collaborators"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/improve-legal-document-accuracy-compliance/",
+      "text": "contracts"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/collaborate-in-word/",
+      "text": "Collaborate on drafts"
+    },
+    {
+      "href": "https://word.cloud.microsoft/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.REFER",
+      "text": "Microsoft Word"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/templates/",
+      "text": "Word template"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/copilot-in-word/",
+      "text": "Copilot in Word"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/document-collaboration-in-word/",
+      "text": "collaboration tools"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/save-word-document-as-pdf/",
+      "text": "export as a PDF"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/word-counter/",
+      "text": "Word counter Count words, characters, and review document statistics for free in Microsoft Word..."
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/spell-checker/",
+      "text": "Free online spell checker Check spelling while typing and improve writing clarity with real-time cor"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/grammar-checker/",
+      "text": "Grammar checker Discover grammar errors in documents easily with Microsoft Word. Open a document..."
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/papers-and-reports/",
+      "text": ""
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/training-materials/",
+      "text": ""
+    },
+    {
+      "href": "https://word.cloud.microsoft/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.REFER",
+      "text": ""
+    },
+    {
+      "href": "https://word.cloud.microsoft/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.REFER",
+      "text": ""
+    },
+    {
+      "href": "https://word.cloud.microsoft/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.REFER",
+      "text": ""
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/collaborate-in-word/",
+      "text": ""
+    },
+    {
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.CREATE",
+      "text": "Spell check a document"
+    },
+    {
+      "href": "https://go.microsoft.com/fwlink/?linkid=521839",
+      "text": "Privacy"
+    },
+    {
+      "href": "https://go.microsoft.com/fwlink/?linkid=2259814",
+      "text": "Consumer Health Policy"
+    },
+    {
+      "href": "https://go.microsoft.com/fwlink/?linkid=206977",
+      "text": "Terms of use"
+    }
+  ],
+  "meta": {
+    "description": "Create and edit web-based documents with Microsoft Word. Store documents online and access them from any computer.",
+    "icons": [
+      "https://res.cdn.office.net/files/fabric-cdn-prod_20251010.003/assets/brand-icons/product/svg/word_16x1.svg"
+    ],
+    "og_image": "https://res.cdn.office.net/s01-sp-word/assets/2VYYzl0MY4ec9sQ7j1PXke/2de7ab3bb6eebb99fc3157423e73798c",
+    "og_title": "Free online document editor | Microsoft Word",
+    "theme_color": ""
+  },
+  "outline": [
+    {
+      "box": {
+        "h": 1,
+        "w": 1,
+        "x": 0,
+        "y": 4353
+      },
+      "color": "#151435",
+      "depth": 2,
+      "font": "14px 400",
+      "role": "none",
+      "tag": "i"
+    },
+    {
+      "box": {
+        "h": 1,
+        "w": 1,
+        "x": 0,
+        "y": -40
+      },
+      "class": "nCqafa_SkipToMainLink",
+      "color": "#2461ca",
+      "depth": 4,
+      "font": "14px 400",
+      "href": "https://word.cloud.microsoft/create/en/document-editor/#main-content",
+      "tag": "a",
+      "text": "Skip to main content"
+    },
+    {
+      "background": "#ffffff",
+      "box": {
+        "h": 64,
+        "w": 1425,
+        "x": 0,
+        "y": 4353
+      },
+      "class": "EmJd8q_unAuthHeader",
+      "color": "#242424",
+      "depth": 5,
+      "display": "flex",
+      "flex": "row",
+      "font": "14px 400",
+      "role": "banner",
+      "tag": "header"
+    },
+    {
+      "box": {
+        "h": 40,
+        "w": 141,
+        "x": 16,
+        "y": 4365
+      },
+      "class": "fui-Button r1f29ykk fui-MenuButton ___1koe2d1 fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t94bn6 f1s2uweq fr80",
+      "color": "#424242",
+      "depth": 6,
+      "font": "16px 600",
+      "id": "wordmenu_R_aivlivb_",
+      "tag": "button",
+      "text": "Word"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 32,
+        "w": 32,
+        "x": 29,
+        "y": 4369
+      },
+      "class": "fui-Image G9d_hG_menuButton ___1erkwlp fj3muxo f1akhkt f1aperda f1lxtadh f1fabniw f1ewtqcl f14t3ns0",
+      "color": "#424242",
+      "depth": 9,
+      "font": "24px 600",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/files/fabric-cdn-prod_20251010.003/assets/brand-icons/product/svg/word_16x1.svg",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 16,
+        "w": 16,
+        "x": 124,
+        "y": 4378
+      },
+      "color": "#424242",
+      "depth": 8,
+      "font": "16px 600",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 97,
+        "x": 157,
+        "y": 4369
+      },
+      "class": "fui-Button r1f29ykk fui-MenuButton pQvzIW_menuButton ___1bjt1as fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t9",
+      "color": "#424242",
+      "depth": 8,
+      "font": "14px 400",
+      "id": "wordmenu_R_5iivlivb_",
+      "tag": "button",
+      "text": "Features"
+    },
+    {
+      "box": {
+        "h": 12,
+        "w": 12,
+        "x": 229,
+        "y": 4380
+      },
+      "color": "#424242",
+      "depth": 10,
+      "font": "12px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 161,
+        "x": 254,
+        "y": 4369
+      },
+      "class": "fui-Button r1f29ykk pQvzIW_menuButton ___1bjt1as fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t94bn6 f1s2uweq f",
+      "color": "#424242",
+      "depth": 8,
+      "font": "14px 400",
+      "href": "https://go.microsoft.com/fwlink/?linkid=2309620",
+      "id": "top-level-menu-2p3uWGiZlK3RxCfaneM88E",
+      "tag": "a",
+      "text": "See plans and pricing"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 32,
+        "w": 96,
+        "x": 1313,
+        "y": 4369
+      },
+      "class": "fui-Button r1f29ykk H4IGca_signInButton ___dhqv000 ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uwe",
+      "color": "#ffffff",
+      "depth": 7,
+      "font": "14px 600",
+      "href": "https://word.cloud.microsoft/signin?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.LOGIN",
+      "tag": "a",
+      "text": "Sign in"
+    },
+    {
+      "box": {
+        "h": 6458,
+        "w": 1425,
+        "x": 0,
+        "y": 64
+      },
+      "class": "nCqafa_DefaultMain",
+      "color": "#242424",
+      "depth": 4,
+      "display": "block",
+      "font": "14px 400",
+      "id": "main-content",
+      "tag": "main"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 472,
+        "w": 1425,
+        "x": 0,
+        "y": 64
+      },
+      "class": "e_uaPq_ImageStyle",
+      "color": "#00000000",
+      "depth": 6,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/61V5pTkIlkjSpj4GQ6upwr/fce2dbdc13666507ab18639bb647a0d3/4000",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 614,
+        "x": 67,
+        "y": 178
+      },
+      "class": "fui-Breadcrumb ___t3o9z00 f1kaxks1",
+      "color": "#242424",
+      "depth": 8,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "nav"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 614,
+        "x": 67,
+        "y": 178
+      },
+      "class": "rc5rb6b fui-Breadcrumb__list",
+      "color": "#242424",
+      "depth": 9,
+      "display": "flex",
+      "flex": "row",
+      "font": "14px 400",
+      "role": "list",
+      "tag": "ol"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 51,
+        "x": 67,
+        "y": 178
+      },
+      "class": "fui-Button r1f29ykk fui-BreadcrumbButton ___nz13rg0 fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fyind8e f1t94bn6 f1s2uwe",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "14px 400",
+      "href": "https://word.cloud.microsoft/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.REFER",
+      "id": "breadcrumbButton-0",
+      "tag": "a",
+      "text": "Home"
+    },
+    {
+      "box": {
+        "h": 52,
+        "w": 608,
+        "x": 73,
+        "y": 210
+      },
+      "class": "d4ZYma_HeroTitle",
+      "color": "#242424",
+      "depth": 8,
+      "font": "40px 600",
+      "tag": "h1",
+      "text": "Online document editor"
+    },
+    {
+      "box": {
+        "h": 52,
+        "w": 608,
+        "x": 73,
+        "y": 278
+      },
+      "class": "d4ZYma_HeroSubtitle",
+      "color": "#242424",
+      "depth": 8,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Create and edit documents on the web in Microsoft Word and store them online to access anywhere."
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 188,
+        "x": 73,
+        "y": 378
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.CREATE",
+      "id": "heroBannerButton-0",
+      "tag": "a",
+      "text": "Try document editor"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 158,
+        "x": 276,
+        "y": 378
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/upload/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.UPLOAD",
+      "id": "heroBannerButton-1",
+      "tag": "a",
+      "text": "Edit a document"
+    },
+    {
+      "box": {
+        "h": 438,
+        "w": 1425,
+        "x": 0,
+        "y": 536
+      },
+      "class": "_4Z-sCG_InfoBannerWrapperStyle",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 438,
+        "w": 1425,
+        "x": 0,
+        "y": 536
+      },
+      "class": "e_uaPq_BackgroundStyle",
+      "color": "#00000000",
+      "depth": 6,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 40,
+        "w": 672,
+        "x": 377,
+        "y": 600
+      },
+      "class": "_4Z-sCG_TopTitleContainer dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 7,
+      "font": "32px 600",
+      "id": "info-banner-title-33axf3p57ubOcZR9oCXzFj",
+      "tag": "h2",
+      "text": "Advanced document editing tools"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 97,
+        "y": 690
+      },
+      "class": "e_uaPq_ImageStyle",
+      "color": "#00000000",
+      "depth": 11,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/3CYjvepETT4sgKML93e7NV/8e6fc9b1ef27efcebc67ebb136c788da/128",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 20,
+        "w": 20,
+        "x": 133,
+        "y": 680
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "14px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 54,
+        "w": 315,
+        "x": 153,
+        "y": 688
+      },
+      "class": "FoWwEG_AccentTitle",
+      "color": "#1651aa",
+      "depth": 11,
+      "font": "18px 500",
+      "tag": "h3",
+      "text": "Format with a wide range of editing features"
+    },
+    {
+      "box": {
+        "h": 120,
+        "w": 363,
+        "x": 105,
+        "y": 758
+      },
+      "color": "#424242",
+      "depth": 11,
+      "font": "16px 400",
+      "tag": "p",
+      "text": "Create polished drafts fast and enhance readability with integrated formatting tools. Heading styles, fonts, colors, and themes keep files consistent, while paragraph settings and margins give precise"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 114,
+        "x": 216,
+        "y": 782
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/create/en/templates/",
+      "tag": "a",
+      "text": "formatting tools"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 523,
+        "y": 690
+      },
+      "class": "e_uaPq_ImageStyle",
+      "color": "#00000000",
+      "depth": 11,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/37yALi2F5pHnE8q2Sl8Plc/66b894d7eecd08d80264cd2fc9fcdc62/128",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 20,
+        "w": 20,
+        "x": 559,
+        "y": 680
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "14px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 27,
+        "w": 305,
+        "x": 579,
+        "y": 688
+      },
+      "class": "FoWwEG_AccentTitle",
+      "color": "#1651aa",
+      "depth": 11,
+      "font": "18px 500",
+      "tag": "h3",
+      "text": "Proofread and strengthen copy online"
+    },
+    {
+      "box": {
+        "h": 120,
+        "w": 363,
+        "x": 531,
+        "y": 744
+      },
+      "color": "#424242",
+      "depth": 11,
+      "font": "16px 400",
+      "tag": "p",
+      "text": "Use real-time spelling and grammar corrections to write with confidence. Editor in Word can improve conciseness, formality, and readability, while similarity checks highlight text closely matching onl"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 147,
+        "x": 719,
+        "y": 744
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/create/en/grammar-checker/",
+      "tag": "a",
+      "text": "grammar corrections"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 950,
+        "y": 690
+      },
+      "class": "e_uaPq_ImageStyle",
+      "color": "#00000000",
+      "depth": 11,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/4hV5aUMdQ4kf3wyFfvAll4/f040da39d47be7c1b1e3c3b96a8dab35/128",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 20,
+        "w": 20,
+        "x": 986,
+        "y": 680
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "14px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 27,
+        "w": 286,
+        "x": 1006,
+        "y": 688
+      },
+      "class": "FoWwEG_AccentTitle",
+      "color": "#1651aa",
+      "depth": 11,
+      "font": "18px 500",
+      "tag": "h3",
+      "text": "Rewrite and edit documents with AI"
+    },
+    {
+      "box": {
+        "h": 120,
+        "w": 363,
+        "x": 958,
+        "y": 744
+      },
+      "color": "#424242",
+      "depth": 11,
+      "font": "16px 400",
+      "tag": "p",
+      "text": "Produce high-quality content and increase productivity with Copilot in Word. Draft new documents quickly, improve tone and clarity on existing pages, or summarize long projects into concise key points"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 112,
+        "x": 1081,
+        "y": 768
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/create/en/copilot-in-word/",
+      "tag": "a",
+      "text": "Copilot in Word"
+    },
+    {
+      "box": {
+        "h": 403,
+        "w": 1425,
+        "x": 0,
+        "y": 974
+      },
+      "class": "A55hlG_AlignedContentWrapper",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 286,
+        "w": 508,
+        "x": 169,
+        "y": 1030
+      },
+      "class": "e_uaPq_ImageStyle A55hlG_Image",
+      "color": "#00000000",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/2VYYzl0MY4ec9sQ7j1PXke/2de7ab3bb6eebb99fc3157423e73798c/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 40,
+        "w": 508,
+        "x": 749,
+        "y": 1037
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-2vuPJkdiHhcIse2icUSj3K",
+      "tag": "h2",
+      "text": "Edit files online with Word"
+    },
+    {
+      "box": {
+        "h": 130,
+        "w": 508,
+        "x": 749,
+        "y": 1104
+      },
+      "color": "#242424",
+      "depth": 9,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Create versatile documents from cover letters and resumes to business letters and reports with Word. Write faster using ready-to-use templates, or format files with customizable tables, headings, and "
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 89,
+        "x": 875,
+        "y": 1104
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/convert-pdf-to-word-online/",
+      "tag": "a",
+      "text": "documents"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 66,
+        "x": 1149,
+        "y": 1104
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/resume-builder/",
+      "tag": "a",
+      "text": "resumes"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 122,
+        "x": 749,
+        "y": 1130
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/business-letters/",
+      "tag": "a",
+      "text": "business letters"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 57,
+        "x": 910,
+        "y": 1130
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/papers-and-reports/",
+      "tag": "a",
+      "text": "reports"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 210,
+        "x": 753,
+        "y": 1270
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/upload/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.UPLOAD",
+      "tag": "a",
+      "text": "Edit a document online"
+    },
+    {
+      "box": {
+        "h": 461,
+        "w": 1425,
+        "x": 0,
+        "y": 1377
+      },
+      "class": "A55hlG_AlignedContentWrapper A55hlG_AlignedContentWrapperLonger",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 461,
+        "w": 1425,
+        "x": 0,
+        "y": 1377
+      },
+      "class": "e_uaPq_BackgroundStyle",
+      "color": "#00000000",
+      "depth": 6,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 80,
+        "w": 508,
+        "x": 169,
+        "y": 1449
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-2ngESugQEGupCMqyRo3urg",
+      "tag": "h2",
+      "text": "See document word count at a glance"
+    },
+    {
+      "box": {
+        "h": 130,
+        "w": 508,
+        "x": 169,
+        "y": 1556
+      },
+      "color": "#242424",
+      "depth": 9,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Meet editorial guidelines and write clear and concise copy with automatic on screen word count. Easily check page word count in a glance on the bottom left corner of the screen. Find more valuable ins"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 91,
+        "x": 577,
+        "y": 1582
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/word-counter/",
+      "tag": "a",
+      "text": "word count"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 218,
+        "x": 173,
+        "y": 1722
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/create/en/word-counter/",
+      "tag": "a",
+      "text": "Try Word counter online"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 286,
+        "w": 508,
+        "x": 749,
+        "y": 1462
+      },
+      "class": "e_uaPq_ImageStyle A55hlG_Image",
+      "color": "#00000000",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/3tVimcb8suYSP5I2ksSvLK/c763a6d9ee8d291643e3ec778ab85622/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 481,
+        "w": 1425,
+        "x": 0,
+        "y": 1838
+      },
+      "class": "A55hlG_AlignedContentWrapper",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 286,
+        "w": 508,
+        "x": 169,
+        "y": 1933
+      },
+      "class": "e_uaPq_ImageStyle A55hlG_Image",
+      "color": "#00000000",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/5XIsExVFKu0a3YhqhnXLqV/4a9f140ce94608956afabe1947688502/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 80,
+        "w": 508,
+        "x": 749,
+        "y": 1894
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-1NOIvr3ramjgf20lAjUoDY",
+      "tag": "h2",
+      "text": "Ensure accurate spelling in over 20 languages"
+    },
+    {
+      "box": {
+        "h": 182,
+        "w": 508,
+        "x": 749,
+        "y": 2000
+      },
+      "color": "#242424",
+      "depth": 9,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Polish multilingual documents like blogs and training manuals with the Word spell checker. Automatic spell check runs while typing to make proofreading faster. Click a red underlined word to view sugg"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 44,
+        "x": 1023,
+        "y": 2000
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/blog-post-template-AI/",
+      "tag": "a",
+      "text": "blogs"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 132,
+        "x": 1106,
+        "y": 2000
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/training-manual-template-AI/",
+      "tag": "a",
+      "text": "training manuals"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 103,
+        "x": 865,
+        "y": 2026
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/spell-checker/",
+      "tag": "a",
+      "text": "spell checker"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 207,
+        "x": 753,
+        "y": 2218
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/create/en/spell-checker/",
+      "tag": "a",
+      "text": "Discover spell checker"
+    },
+    {
+      "box": {
+        "h": 487,
+        "w": 1425,
+        "x": 0,
+        "y": 2318
+      },
+      "class": "A55hlG_AlignedContentWrapper A55hlG_AlignedContentWrapperLonger",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 487,
+        "w": 1425,
+        "x": 0,
+        "y": 2318
+      },
+      "class": "e_uaPq_BackgroundStyle",
+      "color": "#00000000",
+      "depth": 6,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 80,
+        "w": 508,
+        "x": 169,
+        "y": 2390
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-4VP6pBE1xHYCJtm282jNOL",
+      "tag": "h2",
+      "text": "Refine writing with correct grammar"
+    },
+    {
+      "box": {
+        "h": 156,
+        "w": 508,
+        "x": 169,
+        "y": 2497
+      },
+      "color": "#242424",
+      "depth": 9,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Make communication clear and easy to follow with Editor. From SOP manuals to memos and resignation letters, seamlessly apply grammar improvements and recommendations that are underlined in blue. Choos"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 104,
+        "x": 169,
+        "y": 2523
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/standard-operating-procedure-templates-ai/",
+      "tag": "a",
+      "text": "SOP manuals"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 59,
+        "x": 299,
+        "y": 2523
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/write-memo/",
+      "tag": "a",
+      "text": "memos"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 143,
+        "x": 397,
+        "y": 2523
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/how-to-write-a-resignation-letter/",
+      "tag": "a",
+      "text": "resignation letters"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 201,
+        "x": 173,
+        "y": 2689
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/create/en/grammar-checker/",
+      "tag": "a",
+      "text": "Use grammar checker"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 286,
+        "w": 508,
+        "x": 749,
+        "y": 2416
+      },
+      "class": "e_uaPq_ImageStyle A55hlG_Image",
+      "color": "#00000000",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/4GFNXmA9UdZ3Uzrs0LRISA/dc6af8c97caab6cc85f1a464476691f3/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 481,
+        "w": 1425,
+        "x": 0,
+        "y": 2805
+      },
+      "class": "A55hlG_AlignedContentWrapper",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "box": {
+        "h": 80,
+        "w": 508,
+        "x": 749,
+        "y": 2861
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-4WFxkCewjQml9tkEEPqYW9",
+      "tag": "h2",
+      "text": "Leverage AI-powered assistance in Word"
+    },
+    {
+      "box": {
+        "h": 182,
+        "w": 508,
+        "x": 749,
+        "y": 2967
+      },
+      "color": "#242424",
+      "depth": 9,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Generate content ideas or proofread existing documents with AI using Copilot in Word. Explore AI text generation, editing suggestions, and coaching tools without downloading external software. Condens"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 125,
+        "x": 817,
+        "y": 2993
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/copilot-in-word/",
+      "tag": "a",
+      "text": "Copilot in Word"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 142,
+        "x": 1014,
+        "y": 2993
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/ai-writer/",
+      "tag": "a",
+      "text": "AI text generation"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 185,
+        "x": 749,
+        "y": 3071
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/review-contracts-agreements-copilot/",
+      "tag": "a",
+      "text": "detailed legal contracts"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 113,
+        "x": 905,
+        "y": 3097
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/ai-summarizer/",
+      "tag": "a",
+      "text": "AI summarizer"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 216,
+        "x": 753,
+        "y": 3185
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/create/en/copilot-in-word/",
+      "tag": "a",
+      "text": "Explore Copilot in Word"
+    },
+    {
+      "box": {
+        "h": 465,
+        "w": 1425,
+        "x": 0,
+        "y": 3285
+      },
+      "class": "A55hlG_AlignedContentWrapper A55hlG_AlignedContentWrapperLonger",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 465,
+        "w": 1425,
+        "x": 0,
+        "y": 3285
+      },
+      "class": "e_uaPq_BackgroundStyle",
+      "color": "#00000000",
+      "depth": 6,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 80,
+        "w": 508,
+        "x": 169,
+        "y": 3360
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-4zvzbCV5OQ2nbgcK8KUx0P",
+      "tag": "h2",
+      "text": "Build clear, organized drafts with templates"
+    },
+    {
+      "box": {
+        "h": 130,
+        "w": 508,
+        "x": 169,
+        "y": 3466
+      },
+      "color": "#242424",
+      "depth": 9,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Start with a free Word template in the perfect format and structure to personalize online. There's no need to generate an outline from scratch. All templates include professionally designed layouts, s"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 119,
+        "x": 298,
+        "y": 3466
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/templates/",
+      "tag": "a",
+      "text": "Word template"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 238,
+        "x": 173,
+        "y": 3632
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/search/templates/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.SEARCHTEMPLATES",
+      "tag": "a",
+      "text": "Browse all Word templates"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 316,
+        "w": 508,
+        "x": 749,
+        "y": 3357
+      },
+      "class": "e_uaPq_ImageStyle A55hlG_Image",
+      "color": "#00000000",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/6JZnhpBE1IK3Xu27XcgYCI/0433cf4ae4c6982714d6781097ef7fae/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 481,
+        "w": 1425,
+        "x": 0,
+        "y": 3750
+      },
+      "class": "A55hlG_AlignedContentWrapper",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 286,
+        "w": 508,
+        "x": 169,
+        "y": 3845
+      },
+      "class": "e_uaPq_ImageStyle A55hlG_Image",
+      "color": "#00000000",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/rr8K8ZhGoc45ger8hanhw/7c2eef865c3724050a4128c55b8280c6/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 80,
+        "w": 508,
+        "x": 749,
+        "y": 3806
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-1vDjkSbl4mGwU1vsbKzHb1",
+      "tag": "h2",
+      "text": "Work across PDFs, text files, and more"
+    },
+    {
+      "box": {
+        "h": 182,
+        "w": 508,
+        "x": 749,
+        "y": 3913
+      },
+      "color": "#242424",
+      "depth": 9,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Word makes it easy to work across a wide range of document types, from fully editable .docx files to text‑only .txt. Built‑in support for formats like .rtf and .odt, plus the ability to convert PDFs f"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 78,
+        "x": 949,
+        "y": 3939
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/convert-pdf-to-word-online/",
+      "tag": "a",
+      "text": ".docx files"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 157,
+        "x": 839,
+        "y": 4017
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/technical-documentation/",
+      "tag": "a",
+      "text": "technical document"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 107,
+        "x": 1022,
+        "y": 4017
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/write-a-business-plan/",
+      "tag": "a",
+      "text": "business plan"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 164,
+        "x": 753,
+        "y": 4131
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/create/en/blog/save-word-document-as-pdf/",
+      "tag": "a",
+      "text": "Edit PDF in Word"
+    },
+    {
+      "box": {
+        "h": 487,
+        "w": 1425,
+        "x": 0,
+        "y": 4231
+      },
+      "class": "A55hlG_AlignedContentWrapper A55hlG_AlignedContentWrapperLonger",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 487,
+        "w": 1425,
+        "x": 0,
+        "y": 4231
+      },
+      "class": "e_uaPq_BackgroundStyle",
+      "color": "#00000000",
+      "depth": 6,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 80,
+        "w": 508,
+        "x": 169,
+        "y": 4303
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-5O0F5D7GDXiFZzg5700K03",
+      "tag": "h2",
+      "text": "Collaborate online and share with OneDrive"
+    },
+    {
+      "box": {
+        "h": 156,
+        "w": 508,
+        "x": 169,
+        "y": 4409
+      },
+      "color": "#242424",
+      "depth": 9,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Save documents to OneDrive and invite collaborators to view or edit with a shareable link. Multiple editors can work online in the same document from any browser, with changes and comments appearing i"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 104,
+        "x": 486,
+        "y": 4409
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/collaborate-in-word/",
+      "tag": "a",
+      "text": "collaborators"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 73,
+        "x": 169,
+        "y": 4513
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/improve-legal-document-accuracy-compliance/",
+      "tag": "a",
+      "text": "contracts"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 195,
+        "x": 173,
+        "y": 4601
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/create/en/collaborate-in-word/",
+      "tag": "a",
+      "text": "Collaborate on drafts"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 286,
+        "w": 508,
+        "x": 749,
+        "y": 4329
+      },
+      "class": "e_uaPq_ImageStyle A55hlG_Image",
+      "color": "#00000000",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/yqREGBzTGfumIvD4BkGNE/2416343089467d2f91b03e43e24723a4/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 595,
+        "w": 1425,
+        "x": 0,
+        "y": 4717
+      },
+      "class": "A55hlG_AlignedContentWrapper",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 286,
+        "w": 508,
+        "x": 169,
+        "y": 4869
+      },
+      "class": "e_uaPq_ImageStyle A55hlG_Image",
+      "color": "#00000000",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/7d3tToM72IJKALhlzq9cie/4648000ef015e6e0529f315e70e17b97/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 80,
+        "w": 508,
+        "x": 749,
+        "y": 4773
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-50gVtrwBfbYpi0n5O8F0bK",
+      "tag": "h2",
+      "text": "How to edit and share documents online with Word"
+    },
+    {
+      "box": {
+        "h": 358,
+        "w": 508,
+        "x": 749,
+        "y": 4880
+      },
+      "color": "#242424",
+      "depth": 9,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "ol"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 468,
+        "x": 789,
+        "y": 4880
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Visit Microsoft Word online for free."
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 124,
+        "x": 827,
+        "y": 4880
+      },
+      "class": "CrbE3a_InternalLink",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.REFER",
+      "tag": "a",
+      "text": "Microsoft Word"
+    },
+    {
+      "box": {
+        "h": 52,
+        "w": 468,
+        "x": 789,
+        "y": 4924
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Start with a new blank document, upload an existing document to edit, or select a Word template to customize."
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 119,
+        "x": 1021,
+        "y": 4950
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/templates/",
+      "tag": "a",
+      "text": "Word template"
+    },
+    {
+      "box": {
+        "h": 52,
+        "w": 468,
+        "x": 789,
+        "y": 4994
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Rewrite, summarize, or generate new copy with Copilot in Word."
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 125,
+        "x": 789,
+        "y": 5020
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/copilot-in-word/",
+      "tag": "a",
+      "text": "Copilot in Word"
+    },
+    {
+      "box": {
+        "h": 52,
+        "w": 468,
+        "x": 789,
+        "y": 5064
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Use collaboration tools like comments and track changes to work efficiently together online."
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 149,
+        "x": 823,
+        "y": 5064
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/document-collaboration-in-word/",
+      "tag": "a",
+      "text": "collaboration tools"
+    },
+    {
+      "box": {
+        "h": 104,
+        "w": 468,
+        "x": 789,
+        "y": 5134
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Access secure online saving options via OneDrive and SharePoint. Share documents with shareable links, export as a PDF, or email as attachments directly from Word to Outlook."
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 123,
+        "x": 789,
+        "y": 5186
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/save-word-document-as-pdf/",
+      "tag": "a",
+      "text": "export as a PDF"
+    },
+    {
+      "box": {
+        "h": 427,
+        "w": 1340,
+        "x": 43,
+        "y": 5312
+      },
+      "class": "UtQzxG_Container Bzn4Gq_Container",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "box": {
+        "h": 40,
+        "w": 1340,
+        "x": 43,
+        "y": 5344
+      },
+      "class": "UtQzxG_MainTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 6,
+      "font": "32px 600",
+      "id": "preview-grid-title-Rip8btuW177x3ybVpeYIk",
+      "tag": "h2",
+      "text": "Read more"
+    },
+    {
+      "background": "#ffffff",
+      "box": {
+        "h": 259,
+        "w": 431,
+        "x": 43,
+        "y": 5416
+      },
+      "class": "HZgNha_Container",
+      "color": "#242424",
+      "depth": 8,
+      "display": "flex",
+      "flex": "column",
+      "font": "14px 400",
+      "tag": "article"
+    },
+    {
+      "box": {
+        "h": 259,
+        "w": 431,
+        "x": 43,
+        "y": 5416
+      },
+      "color": "#2461ca",
+      "depth": 9,
+      "font": "14px 400",
+      "href": "https://word.cloud.microsoft/create/en/word-counter/",
+      "tag": "a",
+      "text": "Word counter Count words, characters, and review document statistics for free in Microsoft Word..."
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 184,
+        "w": 431,
+        "x": 43,
+        "y": 5416
+      },
+      "class": "e_uaPq_ImageStyle",
+      "color": "#00000000",
+      "depth": 11,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/4G6CHKkojG6wuO0wLaHxpc/6d92e647ccfaf3144bfab7feb7947e9b/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 399,
+        "x": 59,
+        "y": 5592
+      },
+      "class": "HZgNha_Title",
+      "color": "#151435",
+      "depth": 11,
+      "font": "18px 500",
+      "tag": "h3",
+      "text": "Word counter"
+    },
+    {
+      "background": "#ffffff",
+      "box": {
+        "h": 259,
+        "w": 431,
+        "x": 497,
+        "y": 5416
+      },
+      "class": "HZgNha_Container",
+      "color": "#242424",
+      "depth": 8,
+      "display": "flex",
+      "flex": "column",
+      "font": "14px 400",
+      "tag": "article"
+    },
+    {
+      "box": {
+        "h": 259,
+        "w": 431,
+        "x": 497,
+        "y": 5416
+      },
+      "color": "#2461ca",
+      "depth": 9,
+      "font": "14px 400",
+      "href": "https://word.cloud.microsoft/create/en/spell-checker/",
+      "tag": "a",
+      "text": "Free online spell checker Check spelling while typing and improve writing clarity with real-time corrections..."
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 184,
+        "w": 431,
+        "x": 497,
+        "y": 5416
+      },
+      "class": "e_uaPq_ImageStyle",
+      "color": "#00000000",
+      "depth": 11,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/5XIsExVFKu0a3YhqhnXLqV/4a9f140ce94608956afabe1947688502/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 399,
+        "x": 513,
+        "y": 5592
+      },
+      "class": "HZgNha_Title",
+      "color": "#151435",
+      "depth": 11,
+      "font": "18px 500",
+      "tag": "h3",
+      "text": "Free online spell checker"
+    },
+    {
+      "background": "#ffffff",
+      "box": {
+        "h": 259,
+        "w": 431,
+        "x": 952,
+        "y": 5416
+      },
+      "class": "HZgNha_Container",
+      "color": "#242424",
+      "depth": 8,
+      "display": "flex",
+      "flex": "column",
+      "font": "14px 400",
+      "tag": "article"
+    },
+    {
+      "box": {
+        "h": 259,
+        "w": 431,
+        "x": 952,
+        "y": 5416
+      },
+      "color": "#2461ca",
+      "depth": 9,
+      "font": "14px 400",
+      "href": "https://word.cloud.microsoft/create/en/grammar-checker/",
+      "tag": "a",
+      "text": "Grammar checker Discover grammar errors in documents easily with Microsoft Word. Open a document..."
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 184,
+        "w": 431,
+        "x": 952,
+        "y": 5416
+      },
+      "class": "e_uaPq_ImageStyle",
+      "color": "#00000000",
+      "depth": 11,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/7HkuQIK4OYKVMBSt9CUK84/e40253c1f74091135d4dde821b5d3aee/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 399,
+        "x": 968,
+        "y": 5592
+      },
+      "class": "HZgNha_Title",
+      "color": "#151435",
+      "depth": 11,
+      "font": "18px 500",
+      "tag": "h3",
+      "text": "Grammar checker"
+    },
+    {
+      "box": {
+        "h": 351,
+        "w": 1425,
+        "x": 0,
+        "y": 5787
+      },
+      "class": "jo1PEa_SliceWrapper",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "box": {
+        "h": 40,
+        "w": 1425,
+        "x": 0,
+        "y": 5787
+      },
+      "class": "jo1PEa_MainTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 6,
+      "font": "32px 600",
+      "id": "collapsible-info-title-4wphXB1Kj8rbXK4jcFkKwc",
+      "tag": "h2",
+      "text": "Frequently asked questions"
+    },
+    {
+      "box": {
+        "h": 284,
+        "w": 728,
+        "x": 349,
+        "y": 5854
+      },
+      "class": "F2T8kW_UnorderedListElement",
+      "color": "#242424",
+      "depth": 6,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "ul"
+    },
+    {
+      "box": {
+        "h": 56,
+        "w": 696,
+        "x": 365,
+        "y": 5854
+      },
+      "class": "F2T8kW_ItemHeader",
+      "color": "#185abd",
+      "depth": 10,
+      "font": "20px 400",
+      "tag": "h3",
+      "text": "How to edit a document in Microsoft Word online?"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 1007,
+        "y": 5870
+      },
+      "color": "#185abd",
+      "depth": 11,
+      "font": "20px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 78,
+        "w": 696,
+        "x": 365,
+        "y": 5910
+      },
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 44,
+        "x": 628,
+        "y": 5910
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/create/en/papers-and-reports/",
+      "tag": "a"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 116,
+        "x": 808,
+        "y": 5910
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/create/en/training-materials/",
+      "tag": "a"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 110,
+        "x": 947,
+        "y": 5910
+      },
+      "class": "CrbE3a_InternalLink",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.REFER",
+      "tag": "a"
+    },
+    {
+      "box": {
+        "h": 56,
+        "w": 696,
+        "x": 365,
+        "y": 5911
+      },
+      "class": "F2T8kW_ItemHeader",
+      "color": "#185abd",
+      "depth": 10,
+      "font": "20px 400",
+      "tag": "h3",
+      "text": "How to open PDFs in Word online?"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 1007,
+        "y": 5927
+      },
+      "color": "#185abd",
+      "depth": 11,
+      "font": "20px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 156,
+        "w": 696,
+        "x": 365,
+        "y": 5967
+      },
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p"
+    },
+    {
+      "box": {
+        "h": 56,
+        "w": 696,
+        "x": 365,
+        "y": 5968
+      },
+      "class": "F2T8kW_ItemHeader",
+      "color": "#185abd",
+      "depth": 10,
+      "font": "20px 400",
+      "tag": "h3",
+      "text": "Can scanned documents be edited in Word?"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 1007,
+        "y": 5984
+      },
+      "color": "#185abd",
+      "depth": 11,
+      "font": "20px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 52,
+        "w": 696,
+        "x": 365,
+        "y": 6024
+      },
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p"
+    },
+    {
+      "box": {
+        "h": 56,
+        "w": 696,
+        "x": 365,
+        "y": 6025
+      },
+      "class": "F2T8kW_ItemHeader",
+      "color": "#185abd",
+      "depth": 10,
+      "font": "20px 400",
+      "tag": "h3",
+      "text": "Is the desktop version of Word required to edit a document?"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 1007,
+        "y": 6041
+      },
+      "color": "#185abd",
+      "depth": 11,
+      "font": "20px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 78,
+        "w": 696,
+        "x": 365,
+        "y": 6081
+      },
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 110,
+        "x": 612,
+        "y": 6081
+      },
+      "class": "CrbE3a_InternalLink",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.REFER",
+      "tag": "a"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 110,
+        "x": 596,
+        "y": 6107
+      },
+      "class": "CrbE3a_InternalLink",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.REFER",
+      "tag": "a"
+    },
+    {
+      "box": {
+        "h": 56,
+        "w": 696,
+        "x": 365,
+        "y": 6082
+      },
+      "class": "F2T8kW_ItemHeader",
+      "color": "#185abd",
+      "depth": 10,
+      "font": "20px 400",
+      "tag": "h3",
+      "text": "How does co-editing work in Word"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 1007,
+        "y": 6098
+      },
+      "color": "#185abd",
+      "depth": 11,
+      "font": "20px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 104,
+        "w": 696,
+        "x": 365,
+        "y": 6138
+      },
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 93,
+        "x": 787,
+        "y": 6164
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/create/en/collaborate-in-word/",
+      "tag": "a"
+    },
+    {
+      "box": {
+        "h": 304,
+        "w": 1425,
+        "x": 0,
+        "y": 6218
+      },
+      "class": "A55hlG_AlignedContentWrapper A55hlG_AlignedContentWrapperLonger",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 304,
+        "w": 1425,
+        "x": 0,
+        "y": 6218
+      },
+      "class": "e_uaPq_BackgroundStyle",
+      "color": "#00000000",
+      "depth": 6,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/APAhSSuTRa172zBxPcLCR/536375265ffb801b902a3e5a08cee341/2048",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 80,
+        "w": 640,
+        "x": 393,
+        "y": 6290
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-1OTreJhzIESBAN11iEsbew",
+      "tag": "h2",
+      "text": "Create, edit, and store documents online in Microsoft Word"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 216,
+        "x": 604,
+        "y": 6406
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L6-4-L6-4.CREATE",
+      "tag": "a",
+      "text": "Spell check a document"
+    },
+    {
+      "background": "#fafafa",
+      "box": {
+        "h": 100,
+        "w": 1425,
+        "x": 0,
+        "y": 6522
+      },
+      "class": "vn0wuW_FooterWrapper",
+      "color": "#242424",
+      "depth": 4,
+      "display": "flex",
+      "flex": "row",
+      "font": "14px 400",
+      "tag": "footer"
+    },
+    {
+      "alt": "Microsoft",
+      "box": {
+        "h": 50,
+        "w": 80,
+        "x": 48,
+        "y": 6547
+      },
+      "class": "vn0wuW_MicrosoftLogo",
+      "color": "#242424",
+      "depth": 6,
+      "font": "12px 600",
+      "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_f5c28989efa400e5e1f2568dd1faf8dd.svg",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 20,
+        "w": 39,
+        "x": 156,
+        "y": 6562
+      },
+      "color": "#242424",
+      "depth": 7,
+      "font": "12px 600",
+      "tag": "p",
+      "text": "Privacy"
+    },
+    {
+      "box": {
+        "h": 16,
+        "w": 39,
+        "x": 156,
+        "y": 6564
+      },
+      "class": "CrbE3a_InternalLink",
+      "color": "#242424",
+      "depth": 8,
+      "font": "12px 600",
+      "href": "https://go.microsoft.com/fwlink/?linkid=521839",
+      "tag": "a",
+      "text": "Privacy"
+    },
+    {
+      "box": {
+        "h": 20,
+        "w": 130,
+        "x": 223,
+        "y": 6562
+      },
+      "color": "#242424",
+      "depth": 7,
+      "font": "12px 600",
+      "tag": "p",
+      "text": "Consumer Health Policy"
+    },
+    {
+      "box": {
+        "h": 16,
+        "w": 130,
+        "x": 223,
+        "y": 6564
+      },
+      "class": "CrbE3a_InternalLink",
+      "color": "#242424",
+      "depth": 8,
+      "font": "12px 600",
+      "href": "https://go.microsoft.com/fwlink/?linkid=2259814",
+      "tag": "a",
+      "text": "Consumer Health Policy"
+    },
+    {
+      "box": {
+        "h": 20,
+        "w": 68,
+        "x": 380,
+        "y": 6562
+      },
+      "color": "#242424",
+      "depth": 7,
+      "font": "12px 600",
+      "tag": "p",
+      "text": "Terms of use"
+    },
+    {
+      "box": {
+        "h": 16,
+        "w": 68,
+        "x": 380,
+        "y": 6564
+      },
+      "class": "CrbE3a_InternalLink",
+      "color": "#242424",
+      "depth": 8,
+      "font": "12px 600",
+      "href": "https://go.microsoft.com/fwlink/?linkid=206977",
+      "tag": "a",
+      "text": "Terms of use"
+    },
+    {
+      "box": {
+        "h": 1,
+        "w": 1,
+        "x": 0,
+        "y": 4353
+      },
+      "color": "#151435",
+      "depth": 2,
+      "font": "14px 400",
+      "role": "none",
+      "tag": "i"
+    }
+  ],
+  "page": {
+    "h": 6622,
+    "w": 1425
+  },
+  "text": "Skip to main content Word Features See plans and pricing Sign in Home Online document editor Create and edit documents on the web in Microsoft Word and store them online to access anywhere. Try document editor Edit a document Advanced document editing tools Format with a wide range of editing features Create polished drafts fast and enhance readability with integrated formatting tools. Heading styles, fonts, colors, and themes keep files consistent, while paragraph settings and margins give precise control over spacing and layout. Proofread and strengthen copy online Use real-time spelling and grammar corrections to write with confidence. Editor in Word can improve conciseness, formality, and readability, while similarity checks highlight text closely matching online sources. Rewrite and edit documents with AI Produce high-quality content and increase productivity with Copilot in Word. Draft new documents quickly, improve tone and clarity on existing pages, or summarize long projects into concise key points using AI. Edit files online with Word Create versatile documents from cover letters and resumes to business letters and reports with Word. Write faster using ready-to-use templates, or format files with customizable tables, headings, and a variety of layout options. Open, edit, and save projects directly in a browser, no downloads required. Edit a document online See document word count at a glance Meet editorial guidelines and write clear and concise copy with automatic on screen word count. Easily check page word count in a glance on the bottom left corner of the screen. Find more valuable insights, like readability score, character count, and estimated reading time with Editor in Word. Try Word counter online Ensure accurate spelling in over 20 languages Polish multilingual documents like blogs and training manuals with the Word spell checker. Automatic spell check runs while typing to make proofreading faster. Click a red underlined word to view suggestions or synonyms, and skip names or colloquial terms. Also run manual checks during editing stages, turn spell check off for selected text, or add custom words, so they're never flagged again. Discover spell checker Refine writing with correct grammar Make communication clear and easy to follow with Editor. From SOP manuals to memos and resignation letters, seamlessly apply grammar improvements and recommendations that are underlined in blue. Choose from formal, professional, or casual writing styles to get customized suggestions matching the intended tone. Use grammar checker Leverage AI-powered assistance in Word Generate content ideas or proofread existing documents with AI using Copilot in Word. Explore AI text generation, editing suggestions, and coaching tools without downloading external software. Condense lengthy meeting notes or detailed legal contracts into key takeaways or table visualizations using AI summarizer to save time on reading and review. Explore Copilot in Word Build clear, organized drafts with templates Start with a free Word template in the perfect format and structure to personalize online. There's no need to generate an outline from scratch. All templates include professionally designed layouts, so all you need to do is adjust color palettes, swap fonts, and edit text to match any purpose. Browse all Word templates Work across PDFs, text files, and more Word makes it easy to work across a wide range of document types, from fully editable .docx files to text‑only .txt. Built‑in support for formats like .rtf and .odt, plus the ability to convert PDFs for editing, helps streamline everyday tasks. Whether it’s updating a technical document or business plan received as a PDF, or refining a shared draft before review, turn incoming files into polished, editable documents more efficiently. Edit PDF in Word Collaborate online and share with OneDrive Save documents to OneDrive and invite collaborators to view or edit with a shareable link. Multiple editors can work online in the same document from any browser, with changes and comments appearing in real time. Securely send projects or contracts to external reviewers in guest mode to enable cross-platform access, while maintaining version control. Collaborate on drafts How to edit and share documents online with Word Visit Microsoft Word online for free. Start with a new blank document, upload an existing document to edit, or select a Word template to customize. Rewrite, summarize, or generate new copy with Copilot in Word. Use collaboration tools like comments and track changes to work efficiently together online. Access secure online saving options via OneDrive and SharePoint. Share documents with shareable links, export as a PDF, or email as attachments directly from Word to Outlook. Read more Word counter Count words, characters, and review document statistics for free in Microsoft Word... Free online spell checker Check spelling while typing and improve writing clarity with real-time corrections... Grammar checker Discover grammar errors in documents easily with Microsoft Word. Open a document... Frequently asked questions How to edit a document in Microsoft Word online? How to open PDFs in Word online? Can scanned documents be edited in Word? Is the desktop version of Word required to edit a document? How does co-editing work in Word Create, edit, and store documents online in Microsoft Word Spell check a document Privacy Consumer Health Policy Terms of use ©Microsoft 2026",
+  "title": "Free online document editor | Microsoft Word",
+  "unreadable_stylesheets": 0,
+  "url": "https://word.cloud.microsoft/create/en/document-editor/",
+  "viewport": {
+    "h": 900,
+    "w": 1440
+  }
+}

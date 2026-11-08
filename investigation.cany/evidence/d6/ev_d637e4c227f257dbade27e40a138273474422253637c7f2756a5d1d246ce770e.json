@@ -1,0 +1,325 @@
+{
+  "id": "ev_d637e4c227f257dbade27e40a138273474422253637c7f2756a5d1d246ce770e",
+  "subject": {
+    "kind": "website",
+    "name": "http://127.0.0.1:42321/create/en/spell-checker/"
+  },
+  "operation": "web_site_capture",
+  "params": {
+    "include_html": false,
+    "max_height": 12000,
+    "noise_pass": false,
+    "visitor_view": false,
+    "widths": [
+      1440,
+      768,
+      390
+    ]
+  },
+  "result": {
+    "counts": {
+      "forms": 0,
+      "headings": 23,
+      "images": 21,
+      "links": 49,
+      "outline": 137
+    },
+    "design": {
+      "backgrounds": [
+        {
+          "count": 12,
+          "value": "#185abd"
+        },
+        {
+          "count": 6,
+          "value": "#ffffff"
+        },
+        {
+          "count": 2,
+          "value": "#efefef"
+        },
+        {
+          "count": 1,
+          "value": "#fafafa"
+        },
+        {
+          "count": 1,
+          "value": "#d2e0f4"
+        }
+      ],
+      "css_variables": {
+        "--color-bg-light": "#fafafa",
+        "--color-brand": "#185abd",
+        "--color-brand-bg": "#d2e0f4",
+        "--color-brand-hover": "#1651aa",
+        "--color-brand-light": "#2461ca",
+        "--color-text-primary": "#242424",
+        "--color-text-secondary": "#424242"
+      },
+      "font_faces": [
+        {
+          "family": "segoeVariableFont",
+          "status": "error",
+          "style": "normal",
+          "weight": "normal"
+        }
+      ],
+      "font_sizes": [
+        {
+          "count": 25,
+          "value": "18px"
+        },
+        {
+          "count": 17,
+          "value": "16px"
+        },
+        {
+          "count": 11,
+          "value": "32px"
+        },
+        {
+          "count": 10,
+          "value": "14px"
+        },
+        {
+          "count": 8,
+          "value": "20px"
+        },
+        {
+          "count": 8,
+          "value": "12px"
+        },
+        {
+          "count": 2,
+          "value": "13.3333px"
+        },
+        {
+          "count": 1,
+          "value": "40px"
+        }
+      ],
+      "font_weights": [
+        {
+          "count": 51,
+          "value": "400"
+        },
+        {
+          "count": 31,
+          "value": "600"
+        }
+      ],
+      "fonts": [
+        {
+          "count": 80,
+          "value": "segoeVariableFont, \"Segoe UI\", -apple-system, BlinkMacSystemFont, Roboto, sans-serif"
+        },
+        {
+          "count": 2,
+          "value": "Arial"
+        }
+      ],
+      "max_widths": [
+        {
+          "count": 23,
+          "value": "508px"
+        },
+        {
+          "count": 9,
+          "value": "1200px"
+        },
+        {
+          "count": 6,
+          "value": "468px"
+        },
+        {
+          "count": 5,
+          "value": "24px"
+        },
+        {
+          "count": 3,
+          "value": "1280px"
+        },
+        {
+          "count": 3,
+          "value": "608px"
+        },
+        {
+          "count": 3,
+          "value": "363px"
+        },
+        {
+          "count": 2,
+          "value": "1440px"
+        }
+      ],
+      "radii": [
+        {
+          "count": 16,
+          "value": "4px"
+        }
+      ],
+      "shadows": [],
+      "spacing": [
+        {
+          "count": 46,
+          "value": "8px"
+        },
+        {
+          "count": 39,
+          "value": "24px"
+        },
+        {
+          "count": 28,
+          "value": "16px"
+        },
+        {
+          "count": 24,
+          "value": "10px"
+        },
+        {
+          "count": 16,
+          "value": "48px"
+        },
+        {
+          "count": 12,
+          "value": "32px"
+        },
+        {
+          "count": 12,
+          "value": "12px"
+        },
+        {
+          "count": 8,
+          "value": "6px"
+        },
+        {
+          "count": 5,
+          "value": "-40px"
+        },
+        {
+          "count": 4,
+          "value": "1px"
+        },
+        {
+          "count": 3,
+          "value": "18px"
+        },
+        {
+          "count": 3,
+          "value": "4px"
+        },
+        {
+          "count": 2,
+          "value": "40px"
+        },
+        {
+          "count": 1,
+          "value": "114px"
+        },
+        {
+          "count": 1,
+          "value": "20px"
+        }
+      ],
+      "text_colors": [
+        {
+          "count": 28,
+          "value": "#242424"
+        },
+        {
+          "count": 17,
+          "value": "#2461ca"
+        },
+        {
+          "count": 13,
+          "value": "#424242"
+        },
+        {
+          "count": 11,
+          "value": "#ffffff"
+        },
+        {
+          "count": 8,
+          "value": "#1651aa"
+        },
+        {
+          "count": 3,
+          "value": "#151435"
+        },
+        {
+          "count": 2,
+          "value": "#000000"
+        }
+      ]
+    },
+    "files": [
+      "README.md",
+      "capture.json"
+    ],
+    "html_bytes": 0,
+    "output_directory": "/home/mizan/Projects/word -client/checks/round-0/routes/create-en-spell-checker",
+    "screenshots": [
+      {
+        "css_width": 1440,
+        "cut": false,
+        "file": "screenshot-1440.png",
+        "height": 5815,
+        "sha256": "2eb9ebd1f397191d61e70a13cbd16a449ed05e93479fd96da1398cc9e1e53c3c",
+        "width": 1440
+      },
+      {
+        "css_width": 768,
+        "cut": false,
+        "file": "screenshot-768.png",
+        "height": 8355,
+        "sha256": "93828885a35a36cda3603408450bf9cd299d7c58aff4d1b40b6445f8f5e95115",
+        "width": 768
+      },
+      {
+        "css_width": 390,
+        "cut": false,
+        "file": "screenshot-390.png",
+        "height": 7431,
+        "sha256": "5d09a5b43212f727eede1aa640d4b1700296362d1ce93fb84fe30c41d4051cbe",
+        "width": 390
+      }
+    ],
+    "title": "Free online spell checker: fix spelling instantly on any document | Microsoft Word",
+    "url": "http://127.0.0.1:42321/create/en/spell-checker/"
+  },
+  "summary": "Captured http://127.0.0.1:42321/create/en/spell-checker/: 3 screenshot(s), 137 outline items, 23 headings, 21 images, 49 links, 0 forms → /home/mizan/Projects/word -client/checks/round-0/routes/create-en-spell-checker.",
+  "confidence": "observed",
+  "authority": "our-run",
+  "environment": {
+    "clean_room": false,
+    "engine": "cdp",
+    "engine_version": "1.3",
+    "host": "linux-x86_64"
+  },
+  "limitations": [
+    {
+      "code": "one_state",
+      "message": "One state of the page: menus, dialogs and content behind interactions are not opened."
+    },
+    {
+      "code": "cross_origin_css",
+      "message": "CSS custom properties and breakpoints from cross-origin stylesheets can't be read."
+    }
+  ],
+  "coverage": {
+    "status": "complete",
+    "examined": 3,
+    "total": 3
+  },
+  "locations": [
+    {
+      "kind": "url",
+      "value": "http://127.0.0.1:42321/create/en/spell-checker/"
+    },
+    {
+      "kind": "path",
+      "value": "/home/mizan/Projects/word -client/checks/round-0/routes/create-en-spell-checker"
+    }
+  ],
+  "links": []
+}

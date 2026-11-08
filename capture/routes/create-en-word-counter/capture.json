@@ -1,0 +1,4391 @@
+{
+  "a11y": {
+    "images_without_alt": 0,
+    "landmarks": {
+      "banner": 1,
+      "contentinfo": 1,
+      "main": 1,
+      "navigation": 1
+    },
+    "lang": "en",
+    "unnamed_controls": 9,
+    "unnamed_examples": [
+      "a.hQWgwW_InlineEntryLink",
+      "a.CrbE3a_InternalLink",
+      "a.hQWgwW_InlineEntryLink",
+      "a.CrbE3a_InternalLink",
+      "a.hQWgwW_InlineEntryLink"
+    ]
+  },
+  "assets": {
+    "background_images": [],
+    "fonts": [
+      "https://word.cloud.microsoft/create/_next/static/media/segoe_ui_vf-s.3lcojexweltyk.woff2"
+    ],
+    "images": [
+      {
+        "alt": "",
+        "h": 16,
+        "src": "https://res.cdn.office.net/files/fabric-cdn-prod_20251010.003/assets/brand-icons/product/svg/word_16x1.svg",
+        "w": 16
+      },
+      {
+        "alt": "",
+        "h": 1620,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/7vikqSmeWrmfUTVp9IFgiC/497521ab605ca54313b9b7d6c14243fc/4000",
+        "w": 3600
+      },
+      {
+        "alt": "",
+        "h": 24,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/37yALi2F5pHnE8q2Sl8Plc/66b894d7eecd08d80264cd2fc9fcdc62/128",
+        "w": 24
+      },
+      {
+        "alt": "",
+        "h": 24,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/590fWAnuZPOkbk8GHVrSKK/137e68f945e5f2afe378bec33652028a/128",
+        "w": 24
+      },
+      {
+        "alt": "",
+        "h": 24,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/3CYjvepETT4sgKML93e7NV/8e6fc9b1ef27efcebc67ebb136c788da/128",
+        "w": 24
+      },
+      {
+        "alt": "",
+        "h": 1080,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+        "w": 1980
+      },
+      {
+        "alt": "",
+        "h": 507,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/4G6CHKkojG6wuO0wLaHxpc/6d92e647ccfaf3144bfab7feb7947e9b/1024",
+        "w": 901
+      },
+      {
+        "alt": "",
+        "h": 507,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/3tVimcb8suYSP5I2ksSvLK/c763a6d9ee8d291643e3ec778ab85622/1024",
+        "w": 901
+      },
+      {
+        "alt": "",
+        "h": 1080,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+        "w": 1980
+      },
+      {
+        "alt": "",
+        "h": 507,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/6LbpfYKkenFZ66OWUgBjG6/c1a326b8b18d2bb821b7ddf954376c15/1024",
+        "w": 901
+      },
+      {
+        "alt": "",
+        "h": 507,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/7d3tToM72IJKALhlzq9cie/4648000ef015e6e0529f315e70e17b97/1024",
+        "w": 900
+      },
+      {
+        "alt": "",
+        "h": 1080,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+        "w": 1980
+      },
+      {
+        "alt": "",
+        "h": 338,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/4svVFTkCyRLUhUU8YcarRo/64f9fe512e1809485db92ade98970294/1024",
+        "w": 601
+      },
+      {
+        "alt": "",
+        "h": 574,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/6SLeZ0Zh9Zrb1GHQanxTpm/8647594f02fd82a1083b393a952338c6/1024",
+        "w": 1024
+      },
+      {
+        "alt": "",
+        "h": 1080,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+        "w": 1980
+      },
+      {
+        "alt": "",
+        "h": 507,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/5mYDubxNjzQyu1WcjaI9nS/c9d820e8d762622c02572571e0cee8b9/1024",
+        "w": 900
+      },
+      {
+        "alt": "",
+        "h": 577,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/2VYYzl0MY4ec9sQ7j1PXke/2de7ab3bb6eebb99fc3157423e73798c/1024",
+        "w": 1024
+      },
+      {
+        "alt": "",
+        "h": 502,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/7HkuQIK4OYKVMBSt9CUK84/e40253c1f74091135d4dde821b5d3aee/1024",
+        "w": 1024
+      },
+      {
+        "alt": "",
+        "h": 507,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/5XIsExVFKu0a3YhqhnXLqV/4a9f140ce94608956afabe1947688502/1024",
+        "w": 901
+      },
+      {
+        "alt": "",
+        "h": 1080,
+        "src": "https://res.cdn.office.net/s01-sp-word/assets/APAhSSuTRa172zBxPcLCR/536375265ffb801b902a3e5a08cee341/2048",
+        "w": 1920
+      },
+      {
+        "alt": "Microsoft",
+        "h": 65,
+        "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_f5c28989efa400e5e1f2568dd1faf8dd.svg",
+        "w": 300
+      }
+    ],
+    "inline_scripts": 11,
+    "requests": [
+      {
+        "bytes": 0,
+        "type": "link",
+        "url": "https://res.cdn.office.net/files/fabric-cdn-prod_20251010.003/assets/brand-icons/product/svg/word_16x1.svg"
+      },
+      {
+        "bytes": 0,
+        "type": "link",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_f5c28989efa400e5e1f2568dd1faf8dd.svg"
+      },
+      {
+        "bytes": 0,
+        "type": "link",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/35q_05juoy1rv.css"
+      },
+      {
+        "bytes": 40280,
+        "type": "link",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/7vikqSmeWrmfUTVp9IFgiC/497521ab605ca54313b9b7d6c14243fc/4000"
+      },
+      {
+        "bytes": 0,
+        "type": "link",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/20yxu3v2ue45h.css"
+      },
+      {
+        "bytes": 0,
+        "type": "link",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/04ns10wfa-1qe.css"
+      },
+      {
+        "bytes": 0,
+        "type": "link",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/3xmy633i4xo_b.js"
+      },
+      {
+        "bytes": 0,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/1hrmm9snmv38r.js"
+      },
+      {
+        "bytes": 0,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/25hs_zgz-9t19.js"
+      },
+      {
+        "bytes": 0,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/3iqnzim1azk13.js"
+      },
+      {
+        "bytes": 0,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/137kyoifvxo3i.js"
+      },
+      {
+        "bytes": 0,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/turbopack-30o6dx76tka1k.js"
+      },
+      {
+        "bytes": 0,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/0goz9l34jbhme.js"
+      },
+      {
+        "bytes": 0,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/37aqmcwwnap5q.js"
+      },
+      {
+        "bytes": 0,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/1za9739vvjmuz.js"
+      },
+      {
+        "bytes": 0,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/0foq1ozfnk9i7.js"
+      },
+      {
+        "bytes": 0,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/2y_nkptnn0p7v.js"
+      },
+      {
+        "bytes": 0,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/27egryp3q008i.js"
+      },
+      {
+        "bytes": 0,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/2ymjz0h_86pfv.js"
+      },
+      {
+        "bytes": 0,
+        "type": "script",
+        "url": "https://word.cloud.microsoft/create/_next/static/chunks/2ibcdfxb5npbo.js"
+      },
+      {
+        "bytes": 0,
+        "type": "css",
+        "url": "https://word.cloud.microsoft/create/_next/static/media/segoe_ui_vf-s.3lcojexweltyk.woff2"
+      },
+      {
+        "bytes": 0,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/37yALi2F5pHnE8q2Sl8Plc/66b894d7eecd08d80264cd2fc9fcdc62/128"
+      },
+      {
+        "bytes": 592,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/590fWAnuZPOkbk8GHVrSKK/137e68f945e5f2afe378bec33652028a/128"
+      },
+      {
+        "bytes": 0,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/3CYjvepETT4sgKML93e7NV/8e6fc9b1ef27efcebc67ebb136c788da/128"
+      },
+      {
+        "bytes": 0,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048"
+      },
+      {
+        "bytes": 0,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/4G6CHKkojG6wuO0wLaHxpc/6d92e647ccfaf3144bfab7feb7947e9b/1024"
+      },
+      {
+        "bytes": 0,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/3tVimcb8suYSP5I2ksSvLK/c763a6d9ee8d291643e3ec778ab85622/1024"
+      },
+      {
+        "bytes": 0,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/6LbpfYKkenFZ66OWUgBjG6/c1a326b8b18d2bb821b7ddf954376c15/1024"
+      },
+      {
+        "bytes": 0,
+        "type": "xmlhttprequest",
+        "url": "https://browser.events.data.microsoft.com/OneCollector/1.0/"
+      },
+      {
+        "bytes": 0,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/7d3tToM72IJKALhlzq9cie/4648000ef015e6e0529f315e70e17b97/1024"
+      },
+      {
+        "bytes": 13848,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/4svVFTkCyRLUhUU8YcarRo/64f9fe512e1809485db92ade98970294/1024"
+      },
+      {
+        "bytes": 36126,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/6SLeZ0Zh9Zrb1GHQanxTpm/8647594f02fd82a1083b393a952338c6/1024"
+      },
+      {
+        "bytes": 9208,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/5mYDubxNjzQyu1WcjaI9nS/c9d820e8d762622c02572571e0cee8b9/1024"
+      },
+      {
+        "bytes": 0,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/2VYYzl0MY4ec9sQ7j1PXke/2de7ab3bb6eebb99fc3157423e73798c/1024"
+      },
+      {
+        "bytes": 0,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/7HkuQIK4OYKVMBSt9CUK84/e40253c1f74091135d4dde821b5d3aee/1024"
+      },
+      {
+        "bytes": 0,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/5XIsExVFKu0a3YhqhnXLqV/4a9f140ce94608956afabe1947688502/1024"
+      },
+      {
+        "bytes": 0,
+        "type": "img",
+        "url": "https://res.cdn.office.net/s01-sp-word/assets/APAhSSuTRa172zBxPcLCR/536375265ffb801b902a3e5a08cee341/2048"
+      }
+    ],
+    "scripts": [
+      "https://word.cloud.microsoft/create/_next/static/chunks/1hrmm9snmv38r.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/25hs_zgz-9t19.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/3iqnzim1azk13.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/137kyoifvxo3i.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/turbopack-30o6dx76tka1k.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/0goz9l34jbhme.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/37aqmcwwnap5q.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/1za9739vvjmuz.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/2y_nkptnn0p7v.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/27egryp3q008i.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/0foq1ozfnk9i7.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/2ymjz0h_86pfv.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/2ibcdfxb5npbo.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/0cz1d0mv5g_q7.js",
+      "https://word.cloud.microsoft/create/_next/static/chunks/3xmy633i4xo_b.js"
+    ],
+    "stylesheets": [
+      "https://word.cloud.microsoft/create/_next/static/chunks/35q_05juoy1rv.css",
+      "https://word.cloud.microsoft/create/_next/static/chunks/20yxu3v2ue45h.css",
+      "https://word.cloud.microsoft/create/_next/static/chunks/04ns10wfa-1qe.css"
+    ]
+  },
+  "breakpoints": [
+    {
+      "count": 1,
+      "px": 480,
+      "query": "max-width 480px"
+    },
+    {
+      "count": 7,
+      "px": 512,
+      "query": "max-width 512px"
+    },
+    {
+      "count": 81,
+      "px": 576,
+      "query": "max-width 576px"
+    },
+    {
+      "count": 4,
+      "px": 576,
+      "query": "min-width 576px"
+    },
+    {
+      "count": 2,
+      "px": 640,
+      "query": "min-width 640px"
+    },
+    {
+      "count": 9,
+      "px": 698,
+      "query": "max-width 698px"
+    },
+    {
+      "count": 3,
+      "px": 768,
+      "query": "min-width 768px"
+    },
+    {
+      "count": 27,
+      "px": 768,
+      "query": "max-width 768px"
+    },
+    {
+      "count": 5,
+      "px": 800,
+      "query": "max-width 800px"
+    },
+    {
+      "count": 2,
+      "px": 922,
+      "query": "min-width 922px"
+    },
+    {
+      "count": 16,
+      "px": 992,
+      "query": "max-width 992px"
+    },
+    {
+      "count": 1,
+      "px": 1280,
+      "query": "min-width 1280px"
+    },
+    {
+      "count": 2,
+      "px": 1280,
+      "query": "max-width 1280px"
+    },
+    {
+      "count": 2,
+      "px": 1344,
+      "query": "max-width 1344px"
+    },
+    {
+      "count": 2,
+      "px": 1365,
+      "query": "max-width 1365px"
+    },
+    {
+      "count": 3,
+      "px": 1400,
+      "query": "max-width 1400px"
+    },
+    {
+      "count": 2,
+      "px": 1400,
+      "query": "min-width 1400px"
+    },
+    {
+      "count": 1,
+      "px": 1696,
+      "query": "max-width 1696px"
+    }
+  ],
+  "design": {
+    "backgrounds": [
+      {
+        "count": 10,
+        "value": "#ffffff"
+      },
+      {
+        "count": 10,
+        "value": "#185abd"
+      },
+      {
+        "count": 3,
+        "value": "#d2e0f4"
+      },
+      {
+        "count": 1,
+        "value": "#fafafa"
+      }
+    ],
+    "css_variables": {
+      "--color-accent-1-background": "#f8cdf6",
+      "--color-accent-1-dark": "#9f3bd4",
+      "--color-accent-1-light": "#c874d9",
+      "--color-accent-1-standard": "#ad58db",
+      "--color-accent-2-background": "#cde1f8",
+      "--color-accent-2-dark": "#2574de",
+      "--color-accent-2-light": "#64a5f5",
+      "--color-accent-2-standard": "#468be8",
+      "--color-background-off-white": "#fbfbfc",
+      "--color-brand-background": "#d2e0f4",
+      "--color-brand-dark": "#1651aa",
+      "--color-brand-light": "#2461ca",
+      "--color-brand-standard": "#185abd",
+      "--color-collapsible-content": "var(--color-text-dark)",
+      "--color-collapsible-header": "var(--color-brand-standard)",
+      "--color-hover-links": "var(--color-brand-dark)",
+      "--color-links": "var(--color-brand-light)",
+      "--color-text-dark": "#242424",
+      "--color-text-light": "#424242",
+      "--height-audio-item": "160px",
+      "--height-banner": "3rem",
+      "--height-mobile-nav": "4.5rem",
+      "--height-nav": "3.875rem",
+      "--hover-duration": ".2s"
+    },
+    "font_faces": [
+      {
+        "family": "segoeVariableFont",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "segoeVariableFont Fallback",
+        "status": "error",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "segoeFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "segoeFont Fallback",
+        "status": "error",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "kintoSansFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "kintoSansFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "family": "kintoSansFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "kintoSansFont Fallback",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "openSansCyFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "openSansCyFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "family": "openSansCyFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "openSansCyFont Fallback",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "notoSansKoFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "notoSansKoFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "family": "notoSansKoFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "notoSansKoFont Fallback",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "notoSansThFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "notoSansThFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "family": "notoSansThFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "notoSansThFont Fallback",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "normal"
+      },
+      {
+        "family": "notoSansZhFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "notoSansZhFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "500"
+      },
+      {
+        "family": "notoSansZhFont",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "notoSansZhFont Fallback",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "normal"
+      }
+    ],
+    "font_sizes": [
+      {
+        "count": 32,
+        "value": "16px"
+      },
+      {
+        "count": 26,
+        "value": "18px"
+      },
+      {
+        "count": 11,
+        "value": "32px"
+      },
+      {
+        "count": 9,
+        "value": "14px"
+      },
+      {
+        "count": 7,
+        "value": "20px"
+      },
+      {
+        "count": 4,
+        "value": "12px"
+      },
+      {
+        "count": 1,
+        "value": "40px"
+      }
+    ],
+    "font_weights": [
+      {
+        "count": 55,
+        "value": "400"
+      },
+      {
+        "count": 27,
+        "value": "600"
+      },
+      {
+        "count": 8,
+        "value": "500"
+      }
+    ],
+    "fonts": [
+      {
+        "count": 75,
+        "value": "segoeVariableFont, \"segoeVariableFont Fallback\", segoeFont, \"segoeFont Fallback\", sans-serif"
+      },
+      {
+        "count": 15,
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, BlinkMacSystemFont, Roboto, \"Helvetica Neue\", sans-serif"
+      }
+    ],
+    "max_widths": [
+      {
+        "count": 8,
+        "value": "1200px"
+      },
+      {
+        "count": 2,
+        "value": "1440px"
+      },
+      {
+        "count": 2,
+        "value": "1280px"
+      },
+      {
+        "count": 2,
+        "value": "672px"
+      },
+      {
+        "count": 2,
+        "value": "1340px"
+      },
+      {
+        "count": 1,
+        "value": "728px"
+      }
+    ],
+    "radii": [
+      {
+        "count": 10,
+        "value": "8px"
+      },
+      {
+        "count": 9,
+        "value": "9999px"
+      },
+      {
+        "count": 6,
+        "value": "4px"
+      },
+      {
+        "count": 3,
+        "value": "28px 4px 24px 24px"
+      },
+      {
+        "count": 3,
+        "value": "24px 0px 24px 24px"
+      }
+    ],
+    "shadows": [
+      {
+        "count": 3,
+        "value": "rgba(28, 28, 43, 0.125) 0px 12px 20px -8px"
+      },
+      {
+        "count": 3,
+        "value": "rgba(28, 28, 40, 0.1) 0px 4px 8px 0px, rgba(28, 28, 40, 0.1) 0px 0px 2px 0px"
+      },
+      {
+        "count": 1,
+        "value": "rgba(0, 0, 0, 0.12) 0px 0px 2px 0px, rgba(0, 0, 0, 0.14) 0px 2px 4px 0px"
+      }
+    ],
+    "spacing": [
+      {
+        "count": 105,
+        "value": "16px"
+      },
+      {
+        "count": 25,
+        "value": "8px"
+      },
+      {
+        "count": 19,
+        "value": "32px"
+      },
+      {
+        "count": 18,
+        "value": "12px"
+      },
+      {
+        "count": 18,
+        "value": "4px"
+      },
+      {
+        "count": 18,
+        "value": "24px"
+      },
+      {
+        "count": 16,
+        "value": "48px"
+      },
+      {
+        "count": 11,
+        "value": "18px"
+      },
+      {
+        "count": 10,
+        "value": "26.56px"
+      },
+      {
+        "count": 9,
+        "value": "64px"
+      },
+      {
+        "count": 9,
+        "value": "20px"
+      },
+      {
+        "count": 8,
+        "value": "6px"
+      },
+      {
+        "count": 7,
+        "value": "-12px"
+      },
+      {
+        "count": 6,
+        "value": "5px"
+      },
+      {
+        "count": 2,
+        "value": "7px"
+      },
+      {
+        "count": 2,
+        "value": "60px"
+      },
+      {
+        "count": 2,
+        "value": "14px"
+      },
+      {
+        "count": 1,
+        "value": "40px"
+      },
+      {
+        "count": 1,
+        "value": "80px"
+      }
+    ],
+    "text_colors": [
+      {
+        "count": 37,
+        "value": "#242424"
+      },
+      {
+        "count": 21,
+        "value": "#2461ca"
+      },
+      {
+        "count": 10,
+        "value": "#ffffff"
+      },
+      {
+        "count": 9,
+        "value": "#424242"
+      },
+      {
+        "count": 7,
+        "value": "#185abd"
+      },
+      {
+        "count": 3,
+        "value": "#1651aa"
+      },
+      {
+        "count": 3,
+        "value": "#151435"
+      }
+    ]
+  },
+  "forms": [],
+  "headings": [
+    {
+      "level": 1,
+      "text": "Word counter"
+    },
+    {
+      "level": 2,
+      "text": "Smart word counter tool for precise documents"
+    },
+    {
+      "level": 3,
+      "text": "Check word count for documents and sections"
+    },
+    {
+      "level": 3,
+      "text": "Edit documents to an exact word count"
+    },
+    {
+      "level": 3,
+      "text": "Review detailed document insights"
+    },
+    {
+      "level": 2,
+      "text": "See live word count while writing"
+    },
+    {
+      "level": 2,
+      "text": "Analyze detailed word count insights"
+    },
+    {
+      "level": 2,
+      "text": "Refine sections to the right length"
+    },
+    {
+      "level": 2,
+      "text": "Stay within submission requirements"
+    },
+    {
+      "level": 2,
+      "text": "Adapt text for social and platform limits"
+    },
+    {
+      "level": 2,
+      "text": "Track progress and reading time"
+    },
+    {
+      "level": 2,
+      "text": "How to check word count in Microsoft Word"
+    },
+    {
+      "level": 2,
+      "text": "Read more"
+    },
+    {
+      "level": 3,
+      "text": "Document editor"
+    },
+    {
+      "level": 3,
+      "text": "Grammar checker"
+    },
+    {
+      "level": 3,
+      "text": "Free online spell checker"
+    },
+    {
+      "level": 2,
+      "text": "Frequently asked questions"
+    },
+    {
+      "level": 3,
+      "text": "Does word count in Microsoft Word include references or citations?"
+    },
+    {
+      "level": 3,
+      "text": "How many words equals one page?"
+    },
+    {
+      "level": 3,
+      "text": "How to count word frequency in Microsoft Word?"
+    },
+    {
+      "level": 3,
+      "text": "How to get a character count in Word online?"
+    },
+    {
+      "level": 3,
+      "text": "What are the character limits on social media platforms?"
+    },
+    {
+      "level": 3,
+      "text": "How can the word count of an essay be checked?"
+    },
+    {
+      "level": 3,
+      "text": "How can the word count of a PDF be checked?"
+    },
+    {
+      "level": 2,
+      "text": "Write with precision in Microsoft Word"
+    }
+  ],
+  "health": {
+    "errors": [],
+    "failed_requests": []
+  },
+  "lang": "en",
+  "layouts": [
+    {
+      "blocks": [
+        {
+          "background": "#ffffff",
+          "h": 64,
+          "pad": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "per_row": 1,
+          "tag": "header",
+          "w": 1425,
+          "y": 1033
+        },
+        {
+          "column": {
+            "max_w": 1280,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1280,
+            "x": 73
+          },
+          "h": 5401,
+          "heading": "Word counter",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 3,
+          "tag": "main",
+          "w": 1425,
+          "y": 64
+        },
+        {
+          "h": 32,
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "nav",
+          "w": 614,
+          "y": 178
+        },
+        {
+          "column": {
+            "max_w": 1280,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1280,
+            "x": 73
+          },
+          "h": 430,
+          "heading": "Smart word counter tool for precise documents",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 3,
+          "tag": "section",
+          "w": 1425,
+          "y": 536
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 435,
+          "heading": "See live word count while writing",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 966
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 429,
+          "heading": "Analyze detailed word count insights",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 1401
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 435,
+          "heading": "Refine sections to the right length",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 1829
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 429,
+          "heading": "Stay within submission requirements",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 2264
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 461,
+          "heading": "Adapt text for social and platform limits",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 2693
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 402,
+          "heading": "Track progress and reading time",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 3153
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 627,
+          "heading": "How to check word count in Microsoft Word",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 3555
+        },
+        {
+          "column": {
+            "max_w": 1340,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1340,
+            "x": 43
+          },
+          "h": 427,
+          "heading": "Read more",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 3,
+          "tag": "section",
+          "w": 1340,
+          "y": 4182
+        },
+        {
+          "background": "#ffffff",
+          "h": 259,
+          "heading": "Document editor",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "article",
+          "w": 431,
+          "y": 4286
+        },
+        {
+          "background": "#ffffff",
+          "h": 259,
+          "heading": "Grammar checker",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "article",
+          "w": 431,
+          "y": 4286
+        },
+        {
+          "background": "#ffffff",
+          "h": 259,
+          "heading": "Free online spell checker",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "article",
+          "w": 431,
+          "y": 4286
+        },
+        {
+          "column": {
+            "max_w": 728,
+            "pad": [
+              16,
+              16
+            ],
+            "w": 728,
+            "x": 349
+          },
+          "h": 465,
+          "heading": "Frequently asked questions",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 4657
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 1200,
+            "x": 113
+          },
+          "h": 264,
+          "heading": "Write with precision in Microsoft Word",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 1425,
+          "y": 5201
+        },
+        {
+          "background": "#fafafa",
+          "column": {
+            "max_w": 1340,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 519,
+            "x": 48
+          },
+          "h": 100,
+          "pad": [
+            0,
+            48,
+            0,
+            48
+          ],
+          "per_row": 1,
+          "tag": "footer",
+          "w": 1425,
+          "y": 5465
+        }
+      ],
+      "page_h": 5565,
+      "page_w": 1425,
+      "type": {
+        "body": 18,
+        "h1": 40,
+        "h2": 32,
+        "h3": 18
+      },
+      "width": 1440
+    },
+    {
+      "blocks": [
+        {
+          "background": "#ffffff",
+          "h": 64,
+          "pad": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "per_row": 1,
+          "tag": "header",
+          "w": 753,
+          "y": 1365
+        },
+        {
+          "column": {
+            "max_w": 1280,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 753,
+            "x": 0
+          },
+          "h": 7027,
+          "heading": "Word counter",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 2,
+          "tag": "main",
+          "w": 753,
+          "y": 64
+        },
+        {
+          "h": 32,
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "nav",
+          "w": 697,
+          "y": 64
+        },
+        {
+          "column": {
+            "max_w": 1280,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 812,
+          "heading": "Smart word counter tool for precise documents",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 352
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 631,
+          "heading": "See live word count while writing",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 1164
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 547,
+          "heading": "Analyze detailed word count insights",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 1795
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 591,
+          "heading": "Refine sections to the right length",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 2341
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 573,
+          "heading": "Stay within submission requirements",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 2932
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 605,
+          "heading": "Adapt text for social and platform limits",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 3504
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 533,
+          "heading": "Track progress and reading time",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 4109
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 875,
+          "heading": "How to check word count in Microsoft Word",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 4641
+        },
+        {
+          "h": 718,
+          "heading": "Read more",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 2,
+          "tag": "section",
+          "w": 723,
+          "y": 5516
+        },
+        {
+          "background": "#ffffff",
+          "h": 259,
+          "heading": "Document editor",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "article",
+          "w": 349,
+          "y": 5620
+        },
+        {
+          "background": "#ffffff",
+          "h": 259,
+          "heading": "Grammar checker",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "article",
+          "w": 349,
+          "y": 5620
+        },
+        {
+          "background": "#ffffff",
+          "h": 259,
+          "heading": "Free online spell checker",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "article",
+          "w": 349,
+          "y": 5911
+        },
+        {
+          "column": {
+            "max_w": 728,
+            "pad": [
+              16,
+              16
+            ],
+            "w": 728,
+            "x": 13
+          },
+          "h": 465,
+          "heading": "Frequently asked questions",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 6282
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 678,
+            "x": 38
+          },
+          "h": 264,
+          "heading": "Write with precision in Microsoft Word",
+          "pad": [
+            48,
+            0,
+            48,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 753,
+          "y": 6827
+        },
+        {
+          "background": "#fafafa",
+          "h": 179,
+          "pad": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "per_row": 1,
+          "tag": "footer",
+          "w": 753,
+          "y": 7091
+        }
+      ],
+      "page_h": 7270,
+      "page_w": 753,
+      "type": {
+        "body": 19,
+        "h1": 40,
+        "h2": 32,
+        "h3": 18
+      },
+      "width": 768
+    },
+    {
+      "blocks": [
+        {
+          "background": "#ffffff",
+          "column": {
+            "max_w": 32,
+            "pad": [
+              5,
+              5
+            ],
+            "w": 32,
+            "x": 342
+          },
+          "h": 64,
+          "pad": [
+            8,
+            16,
+            8,
+            16
+          ],
+          "per_row": 1,
+          "tag": "header",
+          "w": 390,
+          "y": 1285
+        },
+        {
+          "column": {
+            "max_w": 1280,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 390,
+            "x": 0
+          },
+          "h": 6774,
+          "heading": "Word counter",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 2,
+          "tag": "main",
+          "w": 390,
+          "y": 64
+        },
+        {
+          "h": 32,
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "nav",
+          "w": 357,
+          "y": 80
+        },
+        {
+          "column": {
+            "max_w": 1280,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 835,
+          "heading": "Smart word counter tool for precise documents",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 339
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 611,
+          "heading": "See live word count while writing",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 1174
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 587,
+          "heading": "Analyze detailed word count insights",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 2,
+          "tag": "section",
+          "w": 390,
+          "y": 1785
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 611,
+          "heading": "Refine sections to the right length",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 2371
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 611,
+          "heading": "Stay within submission requirements",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 2982
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 611,
+          "heading": "Adapt text for social and platform limits",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 3593
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 579,
+          "heading": "Track progress and reading time",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 4204
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 755,
+          "heading": "How to check word count in Microsoft Word",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 4783
+        },
+        {
+          "h": 343,
+          "heading": "Read more",
+          "pad": [
+            32,
+            0,
+            32,
+            0
+          ],
+          "per_row": 2,
+          "tag": "section",
+          "w": 390,
+          "y": 5538
+        },
+        {
+          "background": "#ffffff",
+          "h": 60,
+          "heading": "Document editor",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 2,
+          "tag": "article",
+          "w": 358,
+          "y": 5621
+        },
+        {
+          "background": "#ffffff",
+          "h": 60,
+          "heading": "Grammar checker",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 2,
+          "tag": "article",
+          "w": 358,
+          "y": 5697
+        },
+        {
+          "background": "#ffffff",
+          "h": 60,
+          "heading": "Free online spell checker",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 2,
+          "tag": "article",
+          "w": 358,
+          "y": 5773
+        },
+        {
+          "column": {
+            "max_w": 728,
+            "pad": [
+              16,
+              16
+            ],
+            "w": 390,
+            "x": 0
+          },
+          "h": 671,
+          "heading": "Frequently asked questions",
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 2,
+          "tag": "section",
+          "w": 390,
+          "y": 5897
+        },
+        {
+          "column": {
+            "max_w": 1200,
+            "pad": [
+              0,
+              0
+            ],
+            "w": 351,
+            "x": 20
+          },
+          "h": 238,
+          "heading": "Write with precision in Microsoft Word",
+          "pad": [
+            16,
+            0,
+            16,
+            0
+          ],
+          "per_row": 1,
+          "tag": "section",
+          "w": 390,
+          "y": 6600
+        },
+        {
+          "background": "#fafafa",
+          "h": 249,
+          "pad": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "per_row": 1,
+          "tag": "footer",
+          "w": 390,
+          "y": 6838
+        }
+      ],
+      "page_h": 7087,
+      "page_w": 390,
+      "type": {
+        "body": 16,
+        "h1": 28,
+        "h2": 24,
+        "h3": 18
+      },
+      "width": 390
+    }
+  ],
+  "links": [
+    {
+      "href": "https://word.cloud.microsoft/create/en/word-counter/#main-content",
+      "text": "Skip to main content"
+    },
+    {
+      "href": "https://go.microsoft.com/fwlink/?linkid=2309620",
+      "text": "See plans and pricing"
+    },
+    {
+      "href": "https://word.cloud.microsoft/signin?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.LOGIN",
+      "text": "Sign in"
+    },
+    {
+      "href": "https://word.cloud.microsoft/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.REFER",
+      "text": "Home"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/document-editor/",
+      "text": "Document editor"
+    },
+    {
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "text": "Try word counter"
+    },
+    {
+      "href": "https://word.cloud.microsoft/upload/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.UPLOAD",
+      "text": "See document word count"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/copilot-in-word/",
+      "text": "Copilot in Word"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/business-documents/",
+      "text": "business writing"
+    },
+    {
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "text": "Track real-time word count"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/how-to-write-a-press-release/",
+      "text": "press releases"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/newsletter-maker/",
+      "text": "newsletters"
+    },
+    {
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "text": "Review word count insights"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/ai-rewriter/",
+      "text": "rewrite sentences"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/grammar-checker/",
+      "text": "grammar"
+    },
+    {
+      "href": "https://word.cloud.microsoft/upload/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.UPLOAD",
+      "text": "View paragraph word count"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/blog-post-template-AI/",
+      "text": "blog post"
+    },
+    {
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "text": "Adjust document length"
+    },
+    {
+      "href": "https://word.cloud.microsoft/new?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "text": "Check character count"
+    },
+    {
+      "href": "https://word.cloud.microsoft/new?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "text": "Track word count"
+    },
+    {
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "text": "Word for the web"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/save-word-document-as-pdf/",
+      "text": "share as a PDF"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/document-editor/",
+      "text": "Document editor Create and edit web-based documents with Microsoft Word. Store documents online and."
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/grammar-checker/",
+      "text": "Grammar checker Discover grammar errors in documents easily with Microsoft Word. Open a document..."
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/spell-checker/",
+      "text": "Free online spell checker Check spelling while typing and improve writing clarity with real-time cor"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/ai-summarizer/",
+      "text": ""
+    },
+    {
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "text": ""
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/copilot-in-word/",
+      "text": ""
+    },
+    {
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "text": ""
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/blog-post-template-AI/",
+      "text": ""
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/newsletter-maker/",
+      "text": ""
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/ai-rewriter/",
+      "text": ""
+    },
+    {
+      "href": "https://word.cloud.microsoft/new?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "text": ""
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/blog/convert-pdf-to-word-online/",
+      "text": ""
+    },
+    {
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "text": "Try word counter"
+    },
+    {
+      "href": "https://go.microsoft.com/fwlink/?linkid=521839",
+      "text": "Privacy"
+    },
+    {
+      "href": "https://go.microsoft.com/fwlink/?linkid=2259814",
+      "text": "Consumer Health Policy"
+    },
+    {
+      "href": "https://go.microsoft.com/fwlink/?linkid=206977",
+      "text": "Terms of use"
+    }
+  ],
+  "meta": {
+    "description": "Count words, characters, and review document statistics for free in Microsoft Word. Check document length, rewrite sections, and adjust a draft before submission.",
+    "icons": [
+      "https://res.cdn.office.net/files/fabric-cdn-prod_20251010.003/assets/brand-icons/product/svg/word_16x1.svg"
+    ],
+    "og_image": "https://res.cdn.office.net/s01-sp-word/assets/4G6CHKkojG6wuO0wLaHxpc/6d92e647ccfaf3144bfab7feb7947e9b",
+    "og_title": "Free online word counter | Check and adjust document length | Microsoft Word",
+    "theme_color": ""
+  },
+  "outline": [
+    {
+      "box": {
+        "h": 1,
+        "w": 1,
+        "x": 0,
+        "y": 1728
+      },
+      "color": "#151435",
+      "depth": 2,
+      "font": "14px 400",
+      "role": "none",
+      "tag": "i"
+    },
+    {
+      "box": {
+        "h": 1,
+        "w": 1,
+        "x": 0,
+        "y": -40
+      },
+      "class": "nCqafa_SkipToMainLink",
+      "color": "#2461ca",
+      "depth": 4,
+      "font": "14px 400",
+      "href": "https://word.cloud.microsoft/create/en/word-counter/#main-content",
+      "tag": "a",
+      "text": "Skip to main content"
+    },
+    {
+      "background": "#ffffff",
+      "box": {
+        "h": 64,
+        "w": 1425,
+        "x": 0,
+        "y": 1728
+      },
+      "class": "EmJd8q_unAuthHeader",
+      "color": "#242424",
+      "depth": 5,
+      "display": "flex",
+      "flex": "row",
+      "font": "14px 400",
+      "role": "banner",
+      "tag": "header"
+    },
+    {
+      "box": {
+        "h": 40,
+        "w": 141,
+        "x": 16,
+        "y": 1740
+      },
+      "class": "fui-Button r1f29ykk fui-MenuButton ___1koe2d1 fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t94bn6 f1s2uweq fr80",
+      "color": "#424242",
+      "depth": 6,
+      "font": "16px 600",
+      "id": "wordmenu_R_aivlivb_",
+      "tag": "button",
+      "text": "Word"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 32,
+        "w": 32,
+        "x": 29,
+        "y": 1744
+      },
+      "class": "fui-Image G9d_hG_menuButton ___1erkwlp fj3muxo f1akhkt f1aperda f1lxtadh f1fabniw f1ewtqcl f14t3ns0",
+      "color": "#424242",
+      "depth": 9,
+      "font": "24px 600",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/files/fabric-cdn-prod_20251010.003/assets/brand-icons/product/svg/word_16x1.svg",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 16,
+        "w": 16,
+        "x": 124,
+        "y": 1753
+      },
+      "color": "#424242",
+      "depth": 8,
+      "font": "16px 600",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 97,
+        "x": 157,
+        "y": 1744
+      },
+      "class": "fui-Button r1f29ykk fui-MenuButton pQvzIW_menuButton ___1bjt1as fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t9",
+      "color": "#424242",
+      "depth": 8,
+      "font": "14px 400",
+      "id": "wordmenu_R_5iivlivb_",
+      "tag": "button",
+      "text": "Features"
+    },
+    {
+      "box": {
+        "h": 12,
+        "w": 12,
+        "x": 229,
+        "y": 1755
+      },
+      "color": "#424242",
+      "depth": 10,
+      "font": "12px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 161,
+        "x": 254,
+        "y": 1744
+      },
+      "class": "fui-Button r1f29ykk pQvzIW_menuButton ___1bjt1as fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t94bn6 f1s2uweq f",
+      "color": "#424242",
+      "depth": 8,
+      "font": "14px 400",
+      "href": "https://go.microsoft.com/fwlink/?linkid=2309620",
+      "id": "top-level-menu-2p3uWGiZlK3RxCfaneM88E",
+      "tag": "a",
+      "text": "See plans and pricing"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 32,
+        "w": 96,
+        "x": 1313,
+        "y": 1744
+      },
+      "class": "fui-Button r1f29ykk H4IGca_signInButton ___dhqv000 ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uwe",
+      "color": "#ffffff",
+      "depth": 7,
+      "font": "14px 600",
+      "href": "https://word.cloud.microsoft/signin?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.LOGIN",
+      "tag": "a",
+      "text": "Sign in"
+    },
+    {
+      "box": {
+        "h": 5401,
+        "w": 1425,
+        "x": 0,
+        "y": 64
+      },
+      "class": "nCqafa_DefaultMain",
+      "color": "#242424",
+      "depth": 4,
+      "display": "block",
+      "font": "14px 400",
+      "id": "main-content",
+      "tag": "main"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 472,
+        "w": 1425,
+        "x": 0,
+        "y": 64
+      },
+      "class": "e_uaPq_ImageStyle",
+      "color": "#00000000",
+      "depth": 6,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/7vikqSmeWrmfUTVp9IFgiC/497521ab605ca54313b9b7d6c14243fc/4000",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 614,
+        "x": 67,
+        "y": 178
+      },
+      "class": "fui-Breadcrumb ___t3o9z00 f1kaxks1",
+      "color": "#242424",
+      "depth": 8,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "nav"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 614,
+        "x": 67,
+        "y": 178
+      },
+      "class": "rc5rb6b fui-Breadcrumb__list",
+      "color": "#242424",
+      "depth": 9,
+      "display": "flex",
+      "flex": "row",
+      "font": "14px 400",
+      "role": "list",
+      "tag": "ol"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 51,
+        "x": 67,
+        "y": 178
+      },
+      "class": "fui-Button r1f29ykk fui-BreadcrumbButton ___nz13rg0 fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fyind8e f1t94bn6 f1s2uwe",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "14px 400",
+      "href": "https://word.cloud.microsoft/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.REFER",
+      "id": "breadcrumbButton-0",
+      "tag": "a",
+      "text": "Home"
+    },
+    {
+      "box": {
+        "h": 16,
+        "w": 16,
+        "x": 118,
+        "y": 186
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "16px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 117,
+        "x": 134,
+        "y": 178
+      },
+      "class": "fui-Button r1f29ykk fui-BreadcrumbButton ___nz13rg0 fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fyind8e f1t94bn6 f1s2uwe",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "14px 400",
+      "href": "https://word.cloud.microsoft/create/en/document-editor/",
+      "id": "breadcrumbButton-1",
+      "tag": "a",
+      "text": "Document editor"
+    },
+    {
+      "box": {
+        "h": 52,
+        "w": 608,
+        "x": 73,
+        "y": 210
+      },
+      "class": "d4ZYma_HeroTitle",
+      "color": "#242424",
+      "depth": 8,
+      "font": "40px 600",
+      "tag": "h1",
+      "text": "Word counter"
+    },
+    {
+      "box": {
+        "h": 52,
+        "w": 608,
+        "x": 73,
+        "y": 278
+      },
+      "class": "d4ZYma_HeroSubtitle",
+      "color": "#242424",
+      "depth": 8,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Check word count in real time and adjust a document to the right length in Microsoft Word."
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 164,
+        "x": 73,
+        "y": 378
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "id": "heroBannerButton-0",
+      "tag": "a",
+      "text": "Try word counter"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 234,
+        "x": 252,
+        "y": 378
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/upload/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.UPLOAD",
+      "id": "heroBannerButton-1",
+      "tag": "a",
+      "text": "See document word count"
+    },
+    {
+      "box": {
+        "h": 430,
+        "w": 1425,
+        "x": 0,
+        "y": 536
+      },
+      "class": "_4Z-sCG_InfoBannerWrapperStyle",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "box": {
+        "h": 80,
+        "w": 672,
+        "x": 377,
+        "y": 600
+      },
+      "class": "_4Z-sCG_TopTitleContainer dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 7,
+      "font": "32px 600",
+      "id": "info-banner-title-5r1qjXcdSgw6XHYn2JmHV2",
+      "tag": "h2",
+      "text": "Smart word counter tool for precise documents"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 97,
+        "y": 730
+      },
+      "class": "e_uaPq_ImageStyle",
+      "color": "#00000000",
+      "depth": 11,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/37yALi2F5pHnE8q2Sl8Plc/66b894d7eecd08d80264cd2fc9fcdc62/128",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 20,
+        "w": 20,
+        "x": 133,
+        "y": 720
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "14px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 54,
+        "w": 315,
+        "x": 153,
+        "y": 728
+      },
+      "class": "FoWwEG_AccentTitle",
+      "color": "#1651aa",
+      "depth": 11,
+      "font": "18px 500",
+      "tag": "h3",
+      "text": "Check word count for documents and sections"
+    },
+    {
+      "box": {
+        "h": 72,
+        "w": 363,
+        "x": 105,
+        "y": 798
+      },
+      "color": "#424242",
+      "depth": 11,
+      "font": "16px 400",
+      "tag": "p",
+      "text": "View the word count for a full document, or select a sentence, paragraph, or section to check the length."
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 523,
+        "y": 730
+      },
+      "class": "e_uaPq_ImageStyle",
+      "color": "#00000000",
+      "depth": 11,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/590fWAnuZPOkbk8GHVrSKK/137e68f945e5f2afe378bec33652028a/128",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 20,
+        "w": 20,
+        "x": 559,
+        "y": 720
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "14px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 54,
+        "w": 315,
+        "x": 579,
+        "y": 728
+      },
+      "class": "FoWwEG_AccentTitle",
+      "color": "#1651aa",
+      "depth": 11,
+      "font": "18px 500",
+      "tag": "h3",
+      "text": "Edit documents to an exact word count"
+    },
+    {
+      "box": {
+        "h": 72,
+        "w": 363,
+        "x": 531,
+        "y": 798
+      },
+      "color": "#424242",
+      "depth": 11,
+      "font": "16px 400",
+      "tag": "p",
+      "text": "Shorten, expand, or rephrase writing manually or using Copilot in Word to reach a specific word count while keeping the intended meaning."
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 112,
+        "x": 574,
+        "y": 822
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/create/en/copilot-in-word/",
+      "tag": "a",
+      "text": "Copilot in Word"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 950,
+        "y": 730
+      },
+      "class": "e_uaPq_ImageStyle",
+      "color": "#00000000",
+      "depth": 11,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/3CYjvepETT4sgKML93e7NV/8e6fc9b1ef27efcebc67ebb136c788da/128",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 20,
+        "w": 20,
+        "x": 986,
+        "y": 720
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "14px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 27,
+        "w": 280,
+        "x": 1006,
+        "y": 728
+      },
+      "class": "FoWwEG_AccentTitle",
+      "color": "#1651aa",
+      "depth": 11,
+      "font": "18px 500",
+      "tag": "h3",
+      "text": "Review detailed document insights"
+    },
+    {
+      "box": {
+        "h": 72,
+        "w": 363,
+        "x": 958,
+        "y": 784
+      },
+      "color": "#424242",
+      "depth": 11,
+      "font": "16px 400",
+      "tag": "p",
+      "text": "Review character count, readability, reading time, and other document statistics to understand length and improve writing quality."
+    },
+    {
+      "box": {
+        "h": 435,
+        "w": 1425,
+        "x": 0,
+        "y": 966
+      },
+      "class": "A55hlG_AlignedContentWrapper A55hlG_AlignedContentWrapperLonger",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 435,
+        "w": 1425,
+        "x": 0,
+        "y": 966
+      },
+      "class": "e_uaPq_BackgroundStyle",
+      "color": "#00000000",
+      "depth": 6,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+      "tag": "img"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 286,
+        "w": 508,
+        "x": 169,
+        "y": 1038
+      },
+      "class": "e_uaPq_ImageStyle A55hlG_Image",
+      "color": "#00000000",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/4G6CHKkojG6wuO0wLaHxpc/6d92e647ccfaf3144bfab7feb7947e9b/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 40,
+        "w": 508,
+        "x": 749,
+        "y": 1045
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-2RvylWKsY9F9ICVW15HxwG",
+      "tag": "h2",
+      "text": "See live word count while writing"
+    },
+    {
+      "box": {
+        "h": 130,
+        "w": 508,
+        "x": 749,
+        "y": 1112
+      },
+      "color": "#242424",
+      "depth": 9,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Check and adjust document length while writing with live word count in the bottom-left corner of the page. The Word counter tool updates automatically, keeping progress visible across academic and bus"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 127,
+        "x": 863,
+        "y": 1190
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/business-documents/",
+      "tag": "a",
+      "text": "business writing"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 238,
+        "x": 753,
+        "y": 1278
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "tag": "a",
+      "text": "Track real-time word count"
+    },
+    {
+      "box": {
+        "h": 429,
+        "w": 1425,
+        "x": 0,
+        "y": 1401
+      },
+      "class": "A55hlG_AlignedContentWrapper",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "box": {
+        "h": 80,
+        "w": 508,
+        "x": 169,
+        "y": 1457
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-2edNXgIZbnLl46EPvKMzMy",
+      "tag": "h2",
+      "text": "Analyze detailed word count insights"
+    },
+    {
+      "box": {
+        "h": 130,
+        "w": 508,
+        "x": 169,
+        "y": 1563
+      },
+      "color": "#242424",
+      "depth": 9,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Identify complex writing with document insights such as readability scores and repeated words. Review difficult sentences or paragraphs and simplify the language to make professional documents like pr"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 110,
+        "x": 395,
+        "y": 1641
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/how-to-write-a-press-release/",
+      "tag": "a",
+      "text": "press releases"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 90,
+        "x": 531,
+        "y": 1641
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/newsletter-maker/",
+      "tag": "a",
+      "text": "newsletters"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 246,
+        "x": 173,
+        "y": 1729
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "tag": "a",
+      "text": "Review word count insights"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 286,
+        "w": 508,
+        "x": 749,
+        "y": 1470
+      },
+      "class": "e_uaPq_ImageStyle A55hlG_Image",
+      "color": "#00000000",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/3tVimcb8suYSP5I2ksSvLK/c763a6d9ee8d291643e3ec778ab85622/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 435,
+        "w": 1425,
+        "x": 0,
+        "y": 1829
+      },
+      "class": "A55hlG_AlignedContentWrapper A55hlG_AlignedContentWrapperLonger",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 435,
+        "w": 1425,
+        "x": 0,
+        "y": 1829
+      },
+      "class": "e_uaPq_BackgroundStyle",
+      "color": "#00000000",
+      "depth": 6,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+      "tag": "img"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 286,
+        "w": 508,
+        "x": 169,
+        "y": 1901
+      },
+      "class": "e_uaPq_ImageStyle A55hlG_Image",
+      "color": "#00000000",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/6LbpfYKkenFZ66OWUgBjG6/c1a326b8b18d2bb821b7ddf954376c15/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 40,
+        "w": 508,
+        "x": 749,
+        "y": 1909
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-2hTH9b3r2N4glpGH27C2Dr",
+      "tag": "h2",
+      "text": "Refine sections to the right length"
+    },
+    {
+      "box": {
+        "h": 130,
+        "w": 508,
+        "x": 749,
+        "y": 1975
+      },
+      "color": "#242424",
+      "depth": 9,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Highlight a sentence, phrase, or paragraph to see its exact word count. Shorten or expand the selected section while keeping the rest of the document unchanged. Copilot can help rewrite sentences in s"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 139,
+        "x": 749,
+        "y": 2053
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/ai-rewriter/",
+      "tag": "a",
+      "text": "rewrite sentences"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 72,
+        "x": 895,
+        "y": 2079
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/grammar-checker/",
+      "tag": "a",
+      "text": "grammar"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 244,
+        "x": 753,
+        "y": 2141
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/upload/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.UPLOAD",
+      "tag": "a",
+      "text": "View paragraph word count"
+    },
+    {
+      "box": {
+        "h": 429,
+        "w": 1425,
+        "x": 0,
+        "y": 2264
+      },
+      "class": "A55hlG_AlignedContentWrapper",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "box": {
+        "h": 80,
+        "w": 508,
+        "x": 169,
+        "y": 2320
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-2U8f6bcJzsiQnByOiu3HW4",
+      "tag": "h2",
+      "text": "Stay within submission requirements"
+    },
+    {
+      "box": {
+        "h": 130,
+        "w": 508,
+        "x": 169,
+        "y": 2427
+      },
+      "color": "#242424",
+      "depth": 9,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Keep essays and assignments on target as writing develops, or match a blog post to a publisher's word count before submitting it for review. Check word count against length requirements and identify s"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 76,
+        "x": 237,
+        "y": 2453
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 10,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/blog-post-template-AI/",
+      "tag": "a",
+      "text": "blog post"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 217,
+        "x": 173,
+        "y": 2593
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "tag": "a",
+      "text": "Adjust document length"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 286,
+        "w": 508,
+        "x": 749,
+        "y": 2333
+      },
+      "class": "e_uaPq_ImageStyle A55hlG_Image",
+      "color": "#00000000",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/7d3tToM72IJKALhlzq9cie/4648000ef015e6e0529f315e70e17b97/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 461,
+        "w": 1425,
+        "x": 0,
+        "y": 2693
+      },
+      "class": "A55hlG_AlignedContentWrapper A55hlG_AlignedContentWrapperLonger",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 461,
+        "w": 1425,
+        "x": 0,
+        "y": 2693
+      },
+      "class": "e_uaPq_BackgroundStyle",
+      "color": "#00000000",
+      "depth": 6,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+      "tag": "img"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 286,
+        "w": 508,
+        "x": 169,
+        "y": 2778
+      },
+      "class": "e_uaPq_ImageStyle A55hlG_Image",
+      "color": "#00000000",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/4svVFTkCyRLUhUU8YcarRo/64f9fe512e1809485db92ade98970294/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 80,
+        "w": 508,
+        "x": 749,
+        "y": 2765
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-1JjNIbH763O9YMe4RKbdU6",
+      "tag": "h2",
+      "text": "Adapt text for social and platform limits"
+    },
+    {
+      "box": {
+        "h": 130,
+        "w": 508,
+        "x": 749,
+        "y": 2871
+      },
+      "color": "#242424",
+      "depth": 9,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Check word and character counts before publishing social captions or meta descriptions. Review the count with and without spaces to meet a platform's limit. Trim or expand the wording to fit the space"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 207,
+        "x": 753,
+        "y": 3037
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/new?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "tag": "a",
+      "text": "Check character count"
+    },
+    {
+      "box": {
+        "h": 402,
+        "w": 1425,
+        "x": 0,
+        "y": 3153
+      },
+      "class": "A55hlG_AlignedContentWrapper",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "box": {
+        "h": 40,
+        "w": 508,
+        "x": 169,
+        "y": 3216
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-6pF32C4plxGATSGv6FnoxE",
+      "tag": "h2",
+      "text": "Track progress and reading time"
+    },
+    {
+      "box": {
+        "h": 130,
+        "w": 508,
+        "x": 169,
+        "y": 3282
+      },
+      "color": "#242424",
+      "depth": 9,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Break longer writing into smaller word count milestones to make progress easier to track. Use the reading time estimate to understand how long a newsletter or speech may take to read, adjust length fo"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 166,
+        "x": 173,
+        "y": 3448
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/new?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "tag": "a",
+      "text": "Track word count"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 285,
+        "w": 508,
+        "x": 749,
+        "y": 3209
+      },
+      "class": "e_uaPq_ImageStyle A55hlG_Image",
+      "color": "#00000000",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/6SLeZ0Zh9Zrb1GHQanxTpm/8647594f02fd82a1083b393a952338c6/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 627,
+        "w": 1425,
+        "x": 0,
+        "y": 3555
+      },
+      "class": "A55hlG_AlignedContentWrapper A55hlG_AlignedContentWrapperLonger",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 627,
+        "w": 1425,
+        "x": 0,
+        "y": 3555
+      },
+      "class": "e_uaPq_BackgroundStyle",
+      "color": "#00000000",
+      "depth": 6,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/5Hx8chmSjeeMErDwyXc7kD/9a1077842ee805efd78208e10cbbb2d9/2048",
+      "tag": "img"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 286,
+        "w": 508,
+        "x": 169,
+        "y": 3723
+      },
+      "class": "e_uaPq_ImageStyle A55hlG_Image",
+      "color": "#00000000",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/5mYDubxNjzQyu1WcjaI9nS/c9d820e8d762622c02572571e0cee8b9/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 80,
+        "w": 508,
+        "x": 749,
+        "y": 3627
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-3b9qN2YNIBiDIjVCGECFo7",
+      "tag": "h2",
+      "text": "How to check word count in Microsoft Word"
+    },
+    {
+      "box": {
+        "h": 358,
+        "w": 508,
+        "x": 749,
+        "y": 3734
+      },
+      "color": "#242424",
+      "depth": 9,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "ol"
+    },
+    {
+      "box": {
+        "h": 52,
+        "w": 468,
+        "x": 789,
+        "y": 3734
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Open an existing document or create a blank document in Word for the web."
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 139,
+        "x": 789,
+        "y": 3760
+      },
+      "class": "CrbE3a_InternalLink",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "tag": "a",
+      "text": "Word for the web"
+    },
+    {
+      "box": {
+        "h": 52,
+        "w": 468,
+        "x": 789,
+        "y": 3804
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Enter text or copy and paste existing text to edit pre-written copy."
+    },
+    {
+      "box": {
+        "h": 52,
+        "w": 468,
+        "x": 789,
+        "y": 3874
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "View total word count at the bottom left corner or select text to view specific word count for a section."
+    },
+    {
+      "box": {
+        "h": 78,
+        "w": 468,
+        "x": 789,
+        "y": 3944
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "For detailed word count statistics, click the word count button in the bottom left corner to view reading time, paragraph count, and editor score."
+    },
+    {
+      "box": {
+        "h": 52,
+        "w": 468,
+        "x": 789,
+        "y": 4040
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "18px 400",
+      "tag": "p",
+      "text": "Save and share as a PDF, Word document, or OneDrive link."
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 114,
+        "x": 865,
+        "y": 4040
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "18px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/save-word-document-as-pdf/",
+      "tag": "a",
+      "text": "share as a PDF"
+    },
+    {
+      "box": {
+        "h": 427,
+        "w": 1340,
+        "x": 43,
+        "y": 4182
+      },
+      "class": "UtQzxG_Container Bzn4Gq_Container",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "box": {
+        "h": 40,
+        "w": 1340,
+        "x": 43,
+        "y": 4214
+      },
+      "class": "UtQzxG_MainTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 6,
+      "font": "32px 600",
+      "id": "preview-grid-title-hWUXvKSW7gK1PPGlgngWR",
+      "tag": "h2",
+      "text": "Read more"
+    },
+    {
+      "background": "#ffffff",
+      "box": {
+        "h": 259,
+        "w": 431,
+        "x": 43,
+        "y": 4286
+      },
+      "class": "HZgNha_Container",
+      "color": "#242424",
+      "depth": 8,
+      "display": "flex",
+      "flex": "column",
+      "font": "14px 400",
+      "tag": "article"
+    },
+    {
+      "box": {
+        "h": 259,
+        "w": 431,
+        "x": 43,
+        "y": 4286
+      },
+      "color": "#2461ca",
+      "depth": 9,
+      "font": "14px 400",
+      "href": "https://word.cloud.microsoft/create/en/document-editor/",
+      "tag": "a",
+      "text": "Document editor Create and edit web-based documents with Microsoft Word. Store documents online and..."
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 184,
+        "w": 431,
+        "x": 43,
+        "y": 4286
+      },
+      "class": "e_uaPq_ImageStyle",
+      "color": "#00000000",
+      "depth": 11,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/2VYYzl0MY4ec9sQ7j1PXke/2de7ab3bb6eebb99fc3157423e73798c/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 399,
+        "x": 59,
+        "y": 4462
+      },
+      "class": "HZgNha_Title",
+      "color": "#151435",
+      "depth": 11,
+      "font": "18px 500",
+      "tag": "h3",
+      "text": "Document editor"
+    },
+    {
+      "background": "#ffffff",
+      "box": {
+        "h": 259,
+        "w": 431,
+        "x": 497,
+        "y": 4286
+      },
+      "class": "HZgNha_Container",
+      "color": "#242424",
+      "depth": 8,
+      "display": "flex",
+      "flex": "column",
+      "font": "14px 400",
+      "tag": "article"
+    },
+    {
+      "box": {
+        "h": 259,
+        "w": 431,
+        "x": 497,
+        "y": 4286
+      },
+      "color": "#2461ca",
+      "depth": 9,
+      "font": "14px 400",
+      "href": "https://word.cloud.microsoft/create/en/grammar-checker/",
+      "tag": "a",
+      "text": "Grammar checker Discover grammar errors in documents easily with Microsoft Word. Open a document..."
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 184,
+        "w": 431,
+        "x": 497,
+        "y": 4286
+      },
+      "class": "e_uaPq_ImageStyle",
+      "color": "#00000000",
+      "depth": 11,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/7HkuQIK4OYKVMBSt9CUK84/e40253c1f74091135d4dde821b5d3aee/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 399,
+        "x": 513,
+        "y": 4462
+      },
+      "class": "HZgNha_Title",
+      "color": "#151435",
+      "depth": 11,
+      "font": "18px 500",
+      "tag": "h3",
+      "text": "Grammar checker"
+    },
+    {
+      "background": "#ffffff",
+      "box": {
+        "h": 259,
+        "w": 431,
+        "x": 952,
+        "y": 4286
+      },
+      "class": "HZgNha_Container",
+      "color": "#242424",
+      "depth": 8,
+      "display": "flex",
+      "flex": "column",
+      "font": "14px 400",
+      "tag": "article"
+    },
+    {
+      "box": {
+        "h": 259,
+        "w": 431,
+        "x": 952,
+        "y": 4286
+      },
+      "color": "#2461ca",
+      "depth": 9,
+      "font": "14px 400",
+      "href": "https://word.cloud.microsoft/create/en/spell-checker/",
+      "tag": "a",
+      "text": "Free online spell checker Check spelling while typing and improve writing clarity with real-time corrections..."
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 184,
+        "w": 431,
+        "x": 952,
+        "y": 4286
+      },
+      "class": "e_uaPq_ImageStyle",
+      "color": "#00000000",
+      "depth": 11,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/5XIsExVFKu0a3YhqhnXLqV/4a9f140ce94608956afabe1947688502/1024",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 399,
+        "x": 968,
+        "y": 4462
+      },
+      "class": "HZgNha_Title",
+      "color": "#151435",
+      "depth": 11,
+      "font": "18px 500",
+      "tag": "h3",
+      "text": "Free online spell checker"
+    },
+    {
+      "box": {
+        "h": 465,
+        "w": 1425,
+        "x": 0,
+        "y": 4657
+      },
+      "class": "jo1PEa_SliceWrapper",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "box": {
+        "h": 40,
+        "w": 1425,
+        "x": 0,
+        "y": 4657
+      },
+      "class": "jo1PEa_MainTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 6,
+      "font": "32px 600",
+      "id": "collapsible-info-title-2F5P1D9xZGKdHg9oV2WdRS",
+      "tag": "h2",
+      "text": "Frequently asked questions"
+    },
+    {
+      "box": {
+        "h": 398,
+        "w": 728,
+        "x": 349,
+        "y": 4723
+      },
+      "class": "F2T8kW_UnorderedListElement",
+      "color": "#242424",
+      "depth": 6,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "ul"
+    },
+    {
+      "box": {
+        "h": 56,
+        "w": 696,
+        "x": 365,
+        "y": 4723
+      },
+      "class": "F2T8kW_ItemHeader",
+      "color": "#185abd",
+      "depth": 10,
+      "font": "20px 400",
+      "tag": "h3",
+      "text": "Does word count in Microsoft Word include references or citations?"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 1007,
+        "y": 4739
+      },
+      "color": "#185abd",
+      "depth": 11,
+      "font": "20px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 78,
+        "w": 696,
+        "x": 365,
+        "y": 4779
+      },
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 101,
+        "x": 954,
+        "y": 4805
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/create/en/ai-summarizer/",
+      "tag": "a"
+    },
+    {
+      "box": {
+        "h": 56,
+        "w": 696,
+        "x": 365,
+        "y": 4780
+      },
+      "class": "F2T8kW_ItemHeader",
+      "color": "#185abd",
+      "depth": 10,
+      "font": "20px 400",
+      "tag": "h3",
+      "text": "How many words equals one page?"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 1007,
+        "y": 4796
+      },
+      "color": "#185abd",
+      "depth": 11,
+      "font": "20px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 78,
+        "w": 696,
+        "x": 365,
+        "y": 4836
+      },
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 110,
+        "x": 898,
+        "y": 4862
+      },
+      "class": "CrbE3a_InternalLink",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "tag": "a"
+    },
+    {
+      "box": {
+        "h": 56,
+        "w": 696,
+        "x": 365,
+        "y": 4837
+      },
+      "class": "F2T8kW_ItemHeader",
+      "color": "#185abd",
+      "depth": 10,
+      "font": "20px 400",
+      "tag": "h3",
+      "text": "How to count word frequency in Microsoft Word?"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 1007,
+        "y": 4853
+      },
+      "color": "#185abd",
+      "depth": 11,
+      "font": "20px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 104,
+        "w": 696,
+        "x": 365,
+        "y": 4893
+      },
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 112,
+        "x": 716,
+        "y": 4945
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/create/en/copilot-in-word/",
+      "tag": "a"
+    },
+    {
+      "box": {
+        "h": 56,
+        "w": 696,
+        "x": 365,
+        "y": 4894
+      },
+      "class": "F2T8kW_ItemHeader",
+      "color": "#185abd",
+      "depth": 10,
+      "font": "20px 400",
+      "tag": "h3",
+      "text": "How to get a character count in Word online?"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 1007,
+        "y": 4910
+      },
+      "color": "#185abd",
+      "depth": 11,
+      "font": "20px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 104,
+        "w": 696,
+        "x": 365,
+        "y": 4950
+      },
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 124,
+        "x": 382,
+        "y": 4950
+      },
+      "class": "CrbE3a_InternalLink",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "tag": "a"
+    },
+    {
+      "box": {
+        "h": 56,
+        "w": 696,
+        "x": 365,
+        "y": 4951
+      },
+      "class": "F2T8kW_ItemHeader",
+      "color": "#185abd",
+      "depth": 10,
+      "font": "20px 400",
+      "tag": "h3",
+      "text": "What are the character limits on social media platforms?"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 1007,
+        "y": 4967
+      },
+      "color": "#185abd",
+      "depth": 11,
+      "font": "20px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 104,
+        "w": 696,
+        "x": 365,
+        "y": 5007
+      },
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 74,
+        "x": 980,
+        "y": 5033
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/blog-post-template-AI/",
+      "tag": "a"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 80,
+        "x": 384,
+        "y": 5059
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/create/en/newsletter-maker/",
+      "tag": "a"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 73,
+        "x": 814,
+        "y": 5059
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/create/en/ai-rewriter/",
+      "tag": "a"
+    },
+    {
+      "box": {
+        "h": 56,
+        "w": 696,
+        "x": 365,
+        "y": 5008
+      },
+      "class": "F2T8kW_ItemHeader",
+      "color": "#185abd",
+      "depth": 10,
+      "font": "20px 400",
+      "tag": "h3",
+      "text": "How can the word count of an essay be checked?"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 1007,
+        "y": 5024
+      },
+      "color": "#185abd",
+      "depth": 11,
+      "font": "20px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 78,
+        "w": 696,
+        "x": 365,
+        "y": 5064
+      },
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 110,
+        "x": 494,
+        "y": 5064
+      },
+      "class": "CrbE3a_InternalLink",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/new?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "tag": "a"
+    },
+    {
+      "box": {
+        "h": 56,
+        "w": 696,
+        "x": 365,
+        "y": 5065
+      },
+      "class": "F2T8kW_ItemHeader",
+      "color": "#185abd",
+      "depth": 10,
+      "font": "20px 400",
+      "tag": "h3",
+      "text": "How can the word count of a PDF be checked?"
+    },
+    {
+      "box": {
+        "h": 24,
+        "w": 24,
+        "x": 1007,
+        "y": 5081
+      },
+      "color": "#185abd",
+      "depth": 11,
+      "font": "20px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 78,
+        "w": 696,
+        "x": 365,
+        "y": 5121
+      },
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p"
+    },
+    {
+      "box": {
+        "h": 26,
+        "w": 178,
+        "x": 452,
+        "y": 5121
+      },
+      "class": "hQWgwW_InlineEntryLink",
+      "color": "#2461ca",
+      "depth": 11,
+      "font": "16px 400",
+      "href": "https://word.cloud.microsoft/create/en/blog/convert-pdf-to-word-online/",
+      "tag": "a"
+    },
+    {
+      "box": {
+        "h": 264,
+        "w": 1425,
+        "x": 0,
+        "y": 5201
+      },
+      "class": "A55hlG_AlignedContentWrapper A55hlG_AlignedContentWrapperLonger",
+      "color": "#242424",
+      "depth": 5,
+      "display": "block",
+      "font": "14px 400",
+      "tag": "section"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 264,
+        "w": 1425,
+        "x": 0,
+        "y": 5201
+      },
+      "class": "e_uaPq_BackgroundStyle",
+      "color": "#00000000",
+      "depth": 6,
+      "font": "14px 400",
+      "role": "presentation",
+      "src": "https://res.cdn.office.net/s01-sp-word/assets/APAhSSuTRa172zBxPcLCR/536375265ffb801b902a3e5a08cee341/2048",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 40,
+        "w": 640,
+        "x": 393,
+        "y": 5273
+      },
+      "class": "A55hlG_ContentTitle dAcj1q_StyledHeading",
+      "color": "#242424",
+      "depth": 8,
+      "font": "32px 600",
+      "id": "aligned-content-title-61NF1zELHcJqcAEp5MgImv",
+      "tag": "h2",
+      "text": "Write with precision in Microsoft Word"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 164,
+        "x": 631,
+        "y": 5349
+      },
+      "class": "fui-Button r1f29ykk ___1hpximu ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 9,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/new/?wdOrigin=SEO-INTENT.WD-DI-L2-4-L2-4.CREATE",
+      "tag": "a",
+      "text": "Try word counter"
+    },
+    {
+      "background": "#fafafa",
+      "box": {
+        "h": 100,
+        "w": 1425,
+        "x": 0,
+        "y": 5465
+      },
+      "class": "vn0wuW_FooterWrapper",
+      "color": "#242424",
+      "depth": 4,
+      "display": "flex",
+      "flex": "row",
+      "font": "14px 400",
+      "tag": "footer"
+    },
+    {
+      "alt": "Microsoft",
+      "box": {
+        "h": 50,
+        "w": 80,
+        "x": 48,
+        "y": 5491
+      },
+      "class": "vn0wuW_MicrosoftLogo",
+      "color": "#242424",
+      "depth": 6,
+      "font": "12px 600",
+      "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_f5c28989efa400e5e1f2568dd1faf8dd.svg",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 20,
+        "w": 39,
+        "x": 156,
+        "y": 5506
+      },
+      "color": "#242424",
+      "depth": 7,
+      "font": "12px 600",
+      "tag": "p",
+      "text": "Privacy"
+    },
+    {
+      "box": {
+        "h": 16,
+        "w": 39,
+        "x": 156,
+        "y": 5508
+      },
+      "class": "CrbE3a_InternalLink",
+      "color": "#242424",
+      "depth": 8,
+      "font": "12px 600",
+      "href": "https://go.microsoft.com/fwlink/?linkid=521839",
+      "tag": "a",
+      "text": "Privacy"
+    },
+    {
+      "box": {
+        "h": 20,
+        "w": 130,
+        "x": 223,
+        "y": 5506
+      },
+      "color": "#242424",
+      "depth": 7,
+      "font": "12px 600",
+      "tag": "p",
+      "text": "Consumer Health Policy"
+    },
+    {
+      "box": {
+        "h": 16,
+        "w": 130,
+        "x": 223,
+        "y": 5508
+      },
+      "class": "CrbE3a_InternalLink",
+      "color": "#242424",
+      "depth": 8,
+      "font": "12px 600",
+      "href": "https://go.microsoft.com/fwlink/?linkid=2259814",
+      "tag": "a",
+      "text": "Consumer Health Policy"
+    },
+    {
+      "box": {
+        "h": 20,
+        "w": 68,
+        "x": 380,
+        "y": 5506
+      },
+      "color": "#242424",
+      "depth": 7,
+      "font": "12px 600",
+      "tag": "p",
+      "text": "Terms of use"
+    },
+    {
+      "box": {
+        "h": 16,
+        "w": 68,
+        "x": 380,
+        "y": 5508
+      },
+      "class": "CrbE3a_InternalLink",
+      "color": "#242424",
+      "depth": 8,
+      "font": "12px 600",
+      "href": "https://go.microsoft.com/fwlink/?linkid=206977",
+      "tag": "a",
+      "text": "Terms of use"
+    },
+    {
+      "box": {
+        "h": 1,
+        "w": 1,
+        "x": 0,
+        "y": 1728
+      },
+      "color": "#151435",
+      "depth": 2,
+      "font": "14px 400",
+      "role": "none",
+      "tag": "i"
+    }
+  ],
+  "page": {
+    "h": 5565,
+    "w": 1425
+  },
+  "text": "Skip to main content Word Features See plans and pricing Sign in Home Document editor Word counter Check word count in real time and adjust a document to the right length in Microsoft Word. Try word counter See document word count Smart word counter tool for precise documents Check word count for documents and sections View the word count for a full document, or select a sentence, paragraph, or section to check the length. Edit documents to an exact word count Shorten, expand, or rephrase writing manually or using Copilot in Word to reach a specific word count while keeping the intended meaning. Review detailed document insights Review character count, readability, reading time, and other document statistics to understand length and improve writing quality. See live word count while writing Check and adjust document length while writing with live word count in the bottom-left corner of the page. The Word counter tool updates automatically, keeping progress visible across academic and business writing. Shorten or expand sections to keep documents within length requirements. Track real-time word count Analyze detailed word count insights Identify complex writing with document insights such as readability scores and repeated words. Review difficult sentences or paragraphs and simplify the language to make professional documents like press releases or newsletters easier to understand. Review word count insights Refine sections to the right length Highlight a sentence, phrase, or paragraph to see its exact word count. Shorten or expand the selected section while keeping the rest of the document unchanged. Copilot can help rewrite sentences in structured documents like business plans, while spelling and grammar tools support final checks. View paragraph word count Stay within submission requirements Keep essays and assignments on target as writing develops, or match a blog post to a publisher's word count before submitting it for review. Check word count against length requirements and identify sections that need further work. Make final adjustments to meet the specified guidelines. Adjust document length Adapt text for social and platform limits Check word and character counts before publishing social captions or meta descriptions. Review the count with and without spaces to meet a platform's limit. Trim or expand the wording to fit the space while keeping the message clear. Reuse the same copy across channels, each sized to fit. Check character count Track progress and reading time Break longer writing into smaller word count milestones to make progress easier to track. Use the reading time estimate to understand how long a newsletter or speech may take to read, adjust length for the intended audience, and set a clear expectation before it is published or presented. Track word count How to check word count in Microsoft Word Open an existing document or create a blank document in Word for the web. Enter text or copy and paste existing text to edit pre-written copy. View total word count at the bottom left corner or select text to view specific word count for a section. For detailed word count statistics, click the word count button in the bottom left corner to view reading time, paragraph count, and editor score. Save and share as a PDF, Word document, or OneDrive link. Read more Document editor Create and edit web-based documents with Microsoft Word. Store documents online and... Grammar checker Discover grammar errors in documents easily with Microsoft Word. Open a document... Free online spell checker Check spelling while typing and improve writing clarity with real-time corrections... Frequently asked questions Does word count in Microsoft Word include references or citations? How many words equals one page? How to count word frequency in Microsoft Word? How to get a character count in Word online? What are the character limits on social media platforms? How can the word count of an essay be checked? How can the word count of a PDF be checked? Write with precision in Microsoft Word Try word counter Privacy Consumer Health Policy Terms of use ©Microsoft 2026",
+  "title": "Free online word counter | Check and adjust document length | Microsoft Word",
+  "unreadable_stylesheets": 0,
+  "url": "https://word.cloud.microsoft/create/en/word-counter/",
+  "viewport": {
+    "h": 900,
+    "w": 1440
+  }
+}

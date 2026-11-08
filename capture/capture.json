@@ -1,0 +1,3625 @@
+{
+  "a11y": {
+    "images_without_alt": 0,
+    "landmarks": {
+      "banner": 1,
+      "contentinfo": 1
+    },
+    "lang": "en-us",
+    "unnamed_controls": 0,
+    "unnamed_examples": []
+  },
+  "assets": {
+    "background_images": [],
+    "fonts": [
+      "https://c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.woff2",
+      "https://c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2"
+    ],
+    "images": [
+      {
+        "alt": "",
+        "h": 16,
+        "src": "https://res.cdn.office.net/files/fabric-cdn-prod_20251117.001/assets/brand-icons/product/svg/word_16x1.svg",
+        "w": 16
+      },
+      {
+        "alt": "Abstract artwork representing Word for the web",
+        "h": 272,
+        "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_651f0421917fdf2c0df9433167fdb4f0.webp",
+        "w": 682
+      },
+      {
+        "alt": "Live music concert event brochure blue modern bold",
+        "h": 309,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/uploadedfiles/uploads/0fd11e9c-509a-443d-8a20-ae44a010fd57-live-music-concert-event-brochure-blue-modern-bold-0-1.webp",
+        "w": 400
+      },
+      {
+        "alt": "MLA style paper 9th edition modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/1776bb69-cfc5-4cb1-90e4-db776e130050/thumbnails/400/mla-style-paper-9th-edition-modern-simple-0-1-a63aecb27977.webp",
+        "w": 400
+      },
+      {
+        "alt": "Modern accounting resume white modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/78fbf859-85f4-4560-96e6-2ac1bac69b89/thumbnails/400/modern-accounting-resume-white-modern-simple-0-1-824cf37e0cab.webp",
+        "w": 400
+      },
+      {
+        "alt": "Skills focus graphic professional resume orange modern bold",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/2c627d15-1699-495f-8c10-9f567aa21751/thumbnails/400/skills-focus-graphic-professional-resume-orange-modern-bold-0-1-894678d242a8.webp",
+        "w": 400
+      },
+      {
+        "alt": "Employee recommendation letter blue modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/aa0261c5-ea5f-44f5-820e-f69b5820c21a/thumbnails/400/employee-recommendation-letter-blue-modern-simple-0-1-08f4a04d3ed5.webp",
+        "w": 400
+      },
+      {
+        "alt": "Simple SaaS business proposal green modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/uploadedfiles/uploads/f3e96c26-c817-47d2-a053-831c8407a7c3-simple-saas-business-proposal-green-modern-simple-0-1.webp",
+        "w": 400
+      },
+      {
+        "alt": "Bold border professional cover letter modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/368c07a1-6af6-44f1-8c94-82280cb6067d/thumbnails/400/bold-border-professional-cover-letter-modern-simple-0-1-0991253dbbbe.webp",
+        "w": 400
+      },
+      {
+        "alt": "Money saving tips for retirement checklist green modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/e083b34d-94bc-4182-b6d5-1b74d75645d1/thumbnails/400/money-saving-tips-for-retirement-checklist-green-modern-simple-0-1-6b67489c11ea.webp",
+        "w": 400
+      },
+      {
+        "alt": "Services invoice with hours and rate green modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/e9a368db-067e-446a-a618-e40d248b2b03/thumbnails/400/services-invoice-with-hours-and-rate-green-modern-simple-0-1-3834dcb2684d.webp",
+        "w": 400
+      },
+      {
+        "alt": "Classic UI/UX designer resume modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/ed7e3ebf-e287-46a8-a21a-188cb70ce224/thumbnails/400/classic-ui%252Fux-designer-resume-modern-simple-0-1-88ea13166a85.webp",
+        "w": 400
+      },
+      {
+        "alt": "Mergers & acquisitions report blue modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/39a7caa3-5fa6-435c-9d27-8374d0b22363/thumbnails/400/mergers-%2526-acquisitions-report-blue-modern-simple-0-1-a6f44f678850.webp",
+        "w": 400
+      },
+      {
+        "alt": "Modern classic professional resume <null> modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/e809680f-ff89-46ad-aadf-daa1ded6b20a/thumbnails/400/modern-classic-professional-resume-%253Cnull%253E-modern-simple-0-1-e03ef4cb5763.webp",
+        "w": 400
+      },
+      {
+        "alt": "Simple resume modern bold",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/14df29dd-0635-4310-8ddb-4db2c173b072/thumbnails/400/simple-resume-modern-bold-0-1-c36c0edb51da.webp",
+        "w": 400
+      },
+      {
+        "alt": "Retro vibes professional resume blue vintage retro",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/0e94e49d-9369-4954-bef1-c1d20601a45d/thumbnails/400/retro-vibes-professional-resume-blue-vintage-retro-0-1-8255064f30c6.webp",
+        "w": 400
+      },
+      {
+        "alt": "Bold minimalist professional cover letter modern bold",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/4c7b2ac9-91c8-45db-bd7a-d74fed2c5be2/thumbnails/400/bold-minimalist-professional-cover-letter-modern-bold-0-1-cb03a6a20c06.webp",
+        "w": 400
+      },
+      {
+        "alt": "ATS bold classic resume modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/a6ce606f-4d1b-45e4-9923-de33195f45da/thumbnails/400/ats-bold-classic-resume-modern-simple-0-1-c58960d85ab9.webp",
+        "w": 400
+      },
+      {
+        "alt": "Resume references modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/3f503c8f-c5ea-48d0-a538-b55affcf6e84/thumbnails/400/resume-references-modern-simple-0-1-64dfde76f582.webp",
+        "w": 400
+      },
+      {
+        "alt": "Booklet yellow modern bold",
+        "h": 309,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/6aa5002e-71ac-43cc-9433-ce182d56372a/thumbnails/400/booklet-yellow-modern-bold-0-1-2995c75fbb63.webp",
+        "w": 400
+      },
+      {
+        "alt": "Stylish teaching cover letter red modern-simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/e41daea3-53c8-4ab5-9e9c-c7837b7c95cd/thumbnails/400/stylish-teaching-cover-letter-red-modern-simple-0-1-190240a4e68e.webp",
+        "w": 400
+      },
+      {
+        "alt": "Bold border professional resume <null> modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/c867643a-68bc-4284-803f-0f31cbefb875/thumbnails/400/bold-border-professional-resume-%253Cnull%253E-modern-simple-0-1-879c8389c3c6.webp",
+        "w": 400
+      },
+      {
+        "alt": "Kwanzaa checklist red whimsical color block",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/12d49431-63b9-4f2d-9222-4188360d2cf3/thumbnails/400/kwanzaa-checklist-red-whimsical-color-block-0-1-c9540718b04e.webp",
+        "w": 400
+      },
+      {
+        "alt": "Thanksgiving sign-up brown whimsical line",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/8182aed0-4cc8-4637-9fff-89908d12628c/thumbnails/400/thanksgiving-sign-up-brown-whimsical-line-0-1-4510e287bad7.webp",
+        "w": 400
+      },
+      {
+        "alt": "Stylish sales resume white modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/b457acaa-4c50-4abf-99ab-2f193c8430a6/thumbnails/400/stylish-sales-resume-white-modern-simple-0-1-facdf357103c.webp",
+        "w": 400
+      },
+      {
+        "alt": "Builder brochure blue modern-simple",
+        "h": 309,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/297974e9-b9f1-4be1-86f8-e553dfc63e31/thumbnails/400/builder-brochure-blue-modern-simple-0-1-836c70b1099d.webp",
+        "w": 400
+      },
+      {
+        "alt": "Professional APA Style paper 7th edition modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/795a8be7-09f1-4a99-b0d5-9ceb1acfb335/thumbnails/400/professional-apa-style-paper-7th-edition-modern-simple-0-1-ceadb68742c7.webp",
+        "w": 400
+      },
+      {
+        "alt": "Blue curve meeting agenda blue modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/ff4d1e90-0d63-47f2-80ee-cf5551472de2/thumbnails/400/blue-curve-meeting-agenda-blue-modern-simple-0-1-dd611bebcb93.webp",
+        "w": 400
+      },
+      {
+        "alt": "Modern flyer brown organic boho",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/edbab6fd-1ebf-4d31-af91-b8e1d763a77c/thumbnails/400/modern-flyer-brown-organic-boho-0-1-b4ae266d0665.webp",
+        "w": 400
+      },
+      {
+        "alt": "ATS classic HR resume white modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/a8bd8a14-9ea2-40cf-af65-bf5e5b2944b5/thumbnails/400/ats-classic-hr-resume-white-modern-simple-0-1-e06bb3f06311.webp",
+        "w": 400
+      },
+      {
+        "alt": "Bold profile professional resume blue modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/0fe9e2ab-9b8e-4e77-b8ef-657336aa2c4d/thumbnails/400/bold-profile-professional-resume-blue-modern-simple-0-1-fc37cf3720d8.webp",
+        "w": 400
+      },
+      {
+        "alt": "Bubbles brochure blue modern-simple",
+        "h": 309,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/13cc2c74-80fd-4846-b848-d77c6e6eb176/thumbnails/400/bubbles-brochure-blue-modern-simple-0-1-92f6b843dd9a.webp",
+        "w": 400
+      },
+      {
+        "alt": "Basic professional resume null modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/48add7a7-4073-4dc8-ae9a-08c835b8dabe/thumbnails/400/basic-professional-resume-null-modern-simple-0-1-440838dbeeb1.webp",
+        "w": 400
+      },
+      {
+        "alt": "ATS simple classic resume white modern simple",
+        "h": 519,
+        "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/b49dc991-f914-4c8c-aaa1-db6ae4992047/thumbnails/400/ats-simple-classic-resume-white-modern-simple-0-1-c0795d3d358c.webp",
+        "w": 400
+      },
+      {
+        "alt": "Write from anywhere",
+        "h": 684,
+        "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_d85f1a49056278bf73f5d0a888ab6b8d.webp",
+        "w": 1321
+      },
+      {
+        "alt": "Create your perfect resume with our resume builder",
+        "h": 684,
+        "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_6e7beb392f8f3a04932284feb16380bf.webp",
+        "w": 1321
+      },
+      {
+        "alt": "Collaborate in real-time",
+        "h": 684,
+        "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_d06310a14da290413d0876801f111536.webp",
+        "w": 1321
+      },
+      {
+        "alt": "Write faster with Copilot",
+        "h": 684,
+        "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_3582dd2b54328ec4cbe7a1e7fc554a25.webp",
+        "w": 1321
+      },
+      {
+        "alt": "Microsoft logo",
+        "h": 65,
+        "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_f5c28989efa400e5e1f2568dd1faf8dd.svg",
+        "w": 300
+      }
+    ],
+    "inline_scripts": 5,
+    "requests": [
+      {
+        "bytes": 25954,
+        "type": "link",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_651f0421917fdf2c0df9433167fdb4f0.webp"
+      },
+      {
+        "bytes": 112937,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_reactdom_ddd528f85ada9ab3.bundle.js"
+      },
+      {
+        "bytes": 39280,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_azurebrowser_ec45bd23af8744ce.bundle.js"
+      },
+      {
+        "bytes": 28988,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_azurecommon_1a9d53b93312413a.bundle.js"
+      },
+      {
+        "bytes": 21011,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_router_f659bd21d003c42b.bundle.js"
+      },
+      {
+        "bytes": 3414,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_react_c2f5c7d19a1c0c6f.bundle.js"
+      },
+      {
+        "bytes": 156833,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_96636_97e5357ea3735305.bundle.js"
+      },
+      {
+        "bytes": 1802,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_33112_05ac5a2de443bc6e.bundle.js"
+      },
+      {
+        "bytes": 2993,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_24106_e4b51aee4ec56dc9.bundle.js"
+      },
+      {
+        "bytes": 2026,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_37925_128a1f3fa8c1f79f.bundle.js"
+      },
+      {
+        "bytes": 80856,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_79814_0673f8772053db34.bundle.js"
+      },
+      {
+        "bytes": 2839,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_64379_0024dac67d6c1f9b.bundle.js"
+      },
+      {
+        "bytes": 3030,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_77073_6c1e2f1893a4c757.bundle.js"
+      },
+      {
+        "bytes": 5498,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_85769_72fac45c8a2c8121.bundle.js"
+      },
+      {
+        "bytes": 14405,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_word_4ea4dba181260557.bundle.js"
+      },
+      {
+        "bytes": 34346,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_apphome_en-us_257c12b3166cf38d.bundle.js"
+      },
+      {
+        "bytes": 41403,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_81491_1fac16a976a7b25d.bundle.js"
+      },
+      {
+        "bytes": 0,
+        "type": "iframe",
+        "url": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+      },
+      {
+        "bytes": 61140,
+        "type": "other",
+        "url": "https://res.cdn.office.net/files/fabric-cdn-prod_20251117.001/assets/brand-icons/product/favicon/word.ico"
+      },
+      {
+        "bytes": 4286,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_47955_1c6660955668dcba.bundle.js"
+      },
+      {
+        "bytes": 1687,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_5286_dafffc2536a7a8bc.bundle.js"
+      },
+      {
+        "bytes": 2438,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_97902_19d32684ef949995.bundle.js"
+      },
+      {
+        "bytes": 2457,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_24411_1db1cfc3ca982128.bundle.js"
+      },
+      {
+        "bytes": 2751,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_60975_8c2affda66bb6e98.bundle.js"
+      },
+      {
+        "bytes": 6719,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_30946_220fa9d08b6def84.bundle.js"
+      },
+      {
+        "bytes": 3946,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_85109_09ac1e7f3833419e.bundle.js"
+      },
+      {
+        "bytes": 3143,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_38176_a34018fe89f0d52a.bundle.js"
+      },
+      {
+        "bytes": 4922,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_71856_21ebaa34a7f2d832.bundle.js"
+      },
+      {
+        "bytes": 4657,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_45999_3df749369533e72a.bundle.js"
+      },
+      {
+        "bytes": 3315,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_74824_825a8676342778f8.bundle.js"
+      },
+      {
+        "bytes": 3172,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_87985_c7d1988360bcccdc.bundle.js"
+      },
+      {
+        "bytes": 3506,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_43939_03b26d9bf66f2f64.bundle.js"
+      },
+      {
+        "bytes": 3941,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_76708_dfa466ab2903e332.bundle.js"
+      },
+      {
+        "bytes": 2004,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_18773_3d293c54f141ffea.bundle.js"
+      },
+      {
+        "bytes": 40530,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_1218_722dbf8375582183.bundle.js"
+      },
+      {
+        "bytes": 14488,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_44362_7f8a8d372b3c6577.bundle.js"
+      },
+      {
+        "bytes": 6609,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_91831_1f55c2af11bb99b6.bundle.js"
+      },
+      {
+        "bytes": 5493,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_3497_a0603522524d9b6e.bundle.js"
+      },
+      {
+        "bytes": 879,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_9101_97cdf27f9dc81756.bundle.js"
+      },
+      {
+        "bytes": 4899,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_62180_98ff329c0c1bf636.bundle.js"
+      },
+      {
+        "bytes": 8800,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_69048_50e9de256b3d6f22.bundle.js"
+      },
+      {
+        "bytes": 4456,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_95318_7b6fafd8b1c57471.bundle.js"
+      },
+      {
+        "bytes": 2533,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_79003_4803677626a1cfa6.bundle.js"
+      },
+      {
+        "bytes": 1508,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_75538_0af895d0efda5ab3.bundle.js"
+      },
+      {
+        "bytes": 3141,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_77435_95b3d28630cb6d6d.bundle.js"
+      },
+      {
+        "bytes": 14196,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_60529_eec949016dceed2b.bundle.js"
+      },
+      {
+        "bytes": 1449,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_66292_7c8459b8a68cbc94.bundle.js"
+      },
+      {
+        "bytes": 1027,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_90718_9b512e001d532779.bundle.js"
+      },
+      {
+        "bytes": 5232,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_80835_13201aec50f0f0d1.bundle.js"
+      },
+      {
+        "bytes": 10997,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_74543_23eb39701585a8c9.bundle.js"
+      },
+      {
+        "bytes": 4226,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_63882_c145f96779f12ebd.bundle.js"
+      },
+      {
+        "bytes": 6584,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_88512_583cfc331043943d.bundle.js"
+      },
+      {
+        "bytes": 4427,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_31309_32c214e7db0e71b1.bundle.js"
+      },
+      {
+        "bytes": 3814,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_9029_a5bb3002fc6faedf.bundle.js"
+      },
+      {
+        "bytes": 3415,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_78476_7ab3008d71eaa44b.bundle.js"
+      },
+      {
+        "bytes": 2472,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_48320_ca50b7847d863c7e.bundle.js"
+      },
+      {
+        "bytes": 6643,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_90521_738549581ac8d5a0.bundle.js"
+      },
+      {
+        "bytes": 3631,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_10561_606838862b729918.bundle.js"
+      },
+      {
+        "bytes": 3228,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_60597_82846c5492ee2c3b.bundle.js"
+      },
+      {
+        "bytes": 3165,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_63315_c05588fa7f46f2d8.bundle.js"
+      },
+      {
+        "bytes": 5835,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_82647_abe3b4b963b70c9d.bundle.js"
+      },
+      {
+        "bytes": 5535,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_34168_9b66f52072aa5c4e.bundle.js"
+      },
+      {
+        "bytes": 15636,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_7608_68aec129901f27b6.bundle.js"
+      },
+      {
+        "bytes": 8899,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_67312_59cf4bca69adc17e.bundle.js"
+      },
+      {
+        "bytes": 5783,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_55097_bac6aa10e68c5e0e.bundle.js"
+      },
+      {
+        "bytes": 3748,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_8361_5f0ade1d04cfc757.bundle.js"
+      },
+      {
+        "bytes": 14287,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_17335_19ada3f2801df7da.bundle.js"
+      },
+      {
+        "bytes": 5299,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_8352_c4676f4da7f77c61.bundle.js"
+      },
+      {
+        "bytes": 0,
+        "type": "css",
+        "url": "https://c.s-microsoft.com/static/fonts/segoe-ui/west-european/semibold/latest.woff2"
+      },
+      {
+        "bytes": 0,
+        "type": "css",
+        "url": "https://c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2"
+      },
+      {
+        "bytes": 2645,
+        "type": "fetch",
+        "url": "https://ecs.office.com/config/v1/WAC/1.0.0.0"
+      },
+      {
+        "bytes": 0,
+        "type": "xmlhttprequest",
+        "url": "https://browser.events.data.microsoft.com/OneCollector/1.0/"
+      },
+      {
+        "bytes": 0,
+        "type": "xmlhttprequest",
+        "url": "https://browser.events.data.microsoft.com/OneCollector/1.0/"
+      },
+      {
+        "bytes": 17593,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_94155_407dba63e532e0c4.bundle.js"
+      },
+      {
+        "bytes": 18138,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_54350_433fc34096817297.bundle.js"
+      },
+      {
+        "bytes": 3179,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_99149_f1bff3575a9d32ec.bundle.js"
+      },
+      {
+        "bytes": 3003,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_97877_8e3bd380f54c2042.bundle.js"
+      },
+      {
+        "bytes": 27857,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_47804_dc8d2d779704159c.bundle.js"
+      },
+      {
+        "bytes": 30749,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_54625_2bf5b0c91e19cd0c.bundle.js"
+      },
+      {
+        "bytes": 4200,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_5197_b0e97eb5677142ab.bundle.js"
+      },
+      {
+        "bytes": 3825,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_17178_48e87531de7cc7f1.bundle.js"
+      },
+      {
+        "bytes": 3692,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_21821_073ea6276accea3d.bundle.js"
+      },
+      {
+        "bytes": 2717,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_48671_f6c81dfe672fc3a6.bundle.js"
+      },
+      {
+        "bytes": 2723,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_97641_8448ce0a6716667a.bundle.js"
+      },
+      {
+        "bytes": 2177,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_68972_97bdb6d73119f624.bundle.js"
+      },
+      {
+        "bytes": 6794,
+        "type": "script",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_5454_b8989a0f6fa00fb0.bundle.js"
+      },
+      {
+        "bytes": 1364,
+        "type": "img",
+        "url": "https://res.cdn.office.net/files/fabric-cdn-prod_20251117.001/assets/brand-icons/product/svg/word_16x1.svg"
+      },
+      {
+        "bytes": 0,
+        "type": "iframe",
+        "url": "https://login.microsoftonline.com/savedusers"
+      },
+      {
+        "bytes": 0,
+        "type": "xmlhttprequest",
+        "url": "https://common.online.office.com/suite/TemplateFromContentGatewayServices.ashx/"
+      },
+      {
+        "bytes": 11392,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/uploadedfiles/uploads/0fd11e9c-509a-443d-8a20-ae44a010fd57-live-music-concert-event-brochure-blue-modern-bold-0-1.webp"
+      },
+      {
+        "bytes": 15718,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/1776bb69-cfc5-4cb1-90e4-db776e130050/thumbnails/400/mla-style-paper-9th-edition-modern-simple-0-1-a63aecb27977.webp"
+      },
+      {
+        "bytes": 13326,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/78fbf859-85f4-4560-96e6-2ac1bac69b89/thumbnails/400/modern-accounting-resume-white-modern-simple-0-1-824cf37e0cab.webp"
+      },
+      {
+        "bytes": 19934,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/2c627d15-1699-495f-8c10-9f567aa21751/thumbnails/400/skills-focus-graphic-professional-resume-orange-modern-bold-0-1-894678d242a8.webp"
+      },
+      {
+        "bytes": 8574,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/uploadedfiles/uploads/f3e96c26-c817-47d2-a053-831c8407a7c3-simple-saas-business-proposal-green-modern-simple-0-1.webp"
+      },
+      {
+        "bytes": 13794,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/aa0261c5-ea5f-44f5-820e-f69b5820c21a/thumbnails/400/employee-recommendation-letter-blue-modern-simple-0-1-08f4a04d3ed5.webp"
+      },
+      {
+        "bytes": 16998,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/368c07a1-6af6-44f1-8c94-82280cb6067d/thumbnails/400/bold-border-professional-cover-letter-modern-simple-0-1-0991253dbbbe.webp"
+      },
+      {
+        "bytes": 19354,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/e083b34d-94bc-4182-b6d5-1b74d75645d1/thumbnails/400/money-saving-tips-for-retirement-checklist-green-modern-simple-0-1-6b67489c11ea.webp"
+      },
+      {
+        "bytes": 9548,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/e9a368db-067e-446a-a618-e40d248b2b03/thumbnails/400/services-invoice-with-hours-and-rate-green-modern-simple-0-1-3834dcb2684d.webp"
+      },
+      {
+        "bytes": 17536,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/ed7e3ebf-e287-46a8-a21a-188cb70ce224/thumbnails/400/classic-ui%252Fux-designer-resume-modern-simple-0-1-88ea13166a85.webp"
+      },
+      {
+        "bytes": 15306,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/39a7caa3-5fa6-435c-9d27-8374d0b22363/thumbnails/400/mergers-%2526-acquisitions-report-blue-modern-simple-0-1-a6f44f678850.webp"
+      },
+      {
+        "bytes": 14248,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/14df29dd-0635-4310-8ddb-4db2c173b072/thumbnails/400/simple-resume-modern-bold-0-1-c36c0edb51da.webp"
+      },
+      {
+        "bytes": 15628,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/e809680f-ff89-46ad-aadf-daa1ded6b20a/thumbnails/400/modern-classic-professional-resume-%253Cnull%253E-modern-simple-0-1-e03ef4cb5763.webp"
+      },
+      {
+        "bytes": 20378,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/0e94e49d-9369-4954-bef1-c1d20601a45d/thumbnails/400/retro-vibes-professional-resume-blue-vintage-retro-0-1-8255064f30c6.webp"
+      },
+      {
+        "bytes": 18408,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/4c7b2ac9-91c8-45db-bd7a-d74fed2c5be2/thumbnails/400/bold-minimalist-professional-cover-letter-modern-bold-0-1-cb03a6a20c06.webp"
+      },
+      {
+        "bytes": 11594,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/a6ce606f-4d1b-45e4-9923-de33195f45da/thumbnails/400/ats-bold-classic-resume-modern-simple-0-1-c58960d85ab9.webp"
+      },
+      {
+        "bytes": 12306,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/3f503c8f-c5ea-48d0-a538-b55affcf6e84/thumbnails/400/resume-references-modern-simple-0-1-64dfde76f582.webp"
+      },
+      {
+        "bytes": 14354,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/6aa5002e-71ac-43cc-9433-ce182d56372a/thumbnails/400/booklet-yellow-modern-bold-0-1-2995c75fbb63.webp"
+      },
+      {
+        "bytes": 10330,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/e41daea3-53c8-4ab5-9e9c-c7837b7c95cd/thumbnails/400/stylish-teaching-cover-letter-red-modern-simple-0-1-190240a4e68e.webp"
+      },
+      {
+        "bytes": 17530,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/c867643a-68bc-4284-803f-0f31cbefb875/thumbnails/400/bold-border-professional-resume-%253Cnull%253E-modern-simple-0-1-879c8389c3c6.webp"
+      },
+      {
+        "bytes": 21170,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/12d49431-63b9-4f2d-9222-4188360d2cf3/thumbnails/400/kwanzaa-checklist-red-whimsical-color-block-0-1-c9540718b04e.webp"
+      },
+      {
+        "bytes": 10404,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/8182aed0-4cc8-4637-9fff-89908d12628c/thumbnails/400/thanksgiving-sign-up-brown-whimsical-line-0-1-4510e287bad7.webp"
+      },
+      {
+        "bytes": 16466,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/b457acaa-4c50-4abf-99ab-2f193c8430a6/thumbnails/400/stylish-sales-resume-white-modern-simple-0-1-facdf357103c.webp"
+      },
+      {
+        "bytes": 17318,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/297974e9-b9f1-4be1-86f8-e553dfc63e31/thumbnails/400/builder-brochure-blue-modern-simple-0-1-836c70b1099d.webp"
+      },
+      {
+        "bytes": 3340,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/795a8be7-09f1-4a99-b0d5-9ceb1acfb335/thumbnails/400/professional-apa-style-paper-7th-edition-modern-simple-0-1-ceadb68742c7.webp"
+      },
+      {
+        "bytes": 13682,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/ff4d1e90-0d63-47f2-80ee-cf5551472de2/thumbnails/400/blue-curve-meeting-agenda-blue-modern-simple-0-1-dd611bebcb93.webp"
+      },
+      {
+        "bytes": 17502,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/edbab6fd-1ebf-4d31-af91-b8e1d763a77c/thumbnails/400/modern-flyer-brown-organic-boho-0-1-b4ae266d0665.webp"
+      },
+      {
+        "bytes": 16380,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/a8bd8a14-9ea2-40cf-af65-bf5e5b2944b5/thumbnails/400/ats-classic-hr-resume-white-modern-simple-0-1-e06bb3f06311.webp"
+      },
+      {
+        "bytes": 22332,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/0fe9e2ab-9b8e-4e77-b8ef-657336aa2c4d/thumbnails/400/bold-profile-professional-resume-blue-modern-simple-0-1-fc37cf3720d8.webp"
+      },
+      {
+        "bytes": 14680,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/13cc2c74-80fd-4846-b848-d77c6e6eb176/thumbnails/400/bubbles-brochure-blue-modern-simple-0-1-92f6b843dd9a.webp"
+      },
+      {
+        "bytes": 52650,
+        "type": "img",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_d85f1a49056278bf73f5d0a888ab6b8d.webp"
+      },
+      {
+        "bytes": 69064,
+        "type": "img",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_6e7beb392f8f3a04932284feb16380bf.webp"
+      },
+      {
+        "bytes": 12090,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/48add7a7-4073-4dc8-ae9a-08c835b8dabe/thumbnails/400/basic-professional-resume-null-modern-simple-0-1-440838dbeeb1.webp"
+      },
+      {
+        "bytes": 11734,
+        "type": "img",
+        "url": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/b49dc991-f914-4c8c-aaa1-db6ae4992047/thumbnails/400/ats-simple-classic-resume-white-modern-simple-0-1-c0795d3d358c.webp"
+      },
+      {
+        "bytes": 1268,
+        "type": "img",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_f5c28989efa400e5e1f2568dd1faf8dd.svg"
+      },
+      {
+        "bytes": 105214,
+        "type": "img",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_3582dd2b54328ec4cbe7a1e7fc554a25.webp"
+      },
+      {
+        "bytes": 57044,
+        "type": "img",
+        "url": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_d06310a14da290413d0876801f111536.webp"
+      }
+    ],
+    "scripts": [
+      "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_reactdom_ddd528f85ada9ab3.bundle.js",
+      "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_azurebrowser_ec45bd23af8744ce.bundle.js",
+      "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_azurecommon_1a9d53b93312413a.bundle.js",
+      "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_router_f659bd21d003c42b.bundle.js",
+      "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_react_c2f5c7d19a1c0c6f.bundle.js",
+      "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_96636_97e5357ea3735305.bundle.js",
+      "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_33112_05ac5a2de443bc6e.bundle.js",
+      "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_24106_e4b51aee4ec56dc9.bundle.js",
+      "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_37925_128a1f3fa8c1f79f.bundle.js",
+      "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_79814_0673f8772053db34.bundle.js",
+      "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_64379_0024dac67d6c1f9b.bundle.js",
+      "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_77073_6c1e2f1893a4c757.bundle.js",
+      "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_85769_72fac45c8a2c8121.bundle.js",
+      "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_word_4ea4dba181260557.bundle.js"
+    ],
+    "stylesheets": []
+  },
+  "breakpoints": [
+    {
+      "count": 2,
+      "px": 400,
+      "query": "max-width 400px"
+    },
+    {
+      "count": 2,
+      "px": 400,
+      "query": "min-width 400px"
+    },
+    {
+      "count": 1,
+      "px": 410,
+      "query": "max-width 410px"
+    },
+    {
+      "count": 1,
+      "px": 411,
+      "query": "min-width 411px"
+    },
+    {
+      "count": 2,
+      "px": 500,
+      "query": "max-width 500px"
+    },
+    {
+      "count": 2,
+      "px": 500,
+      "query": "min-width 500px"
+    },
+    {
+      "count": 1,
+      "px": 576,
+      "query": "max-width 576px"
+    },
+    {
+      "count": 1,
+      "px": 599,
+      "query": "max-width 599px"
+    },
+    {
+      "count": 11,
+      "px": 600,
+      "query": "max-width 600px"
+    },
+    {
+      "count": 2,
+      "px": 600,
+      "query": "min-width 600px"
+    },
+    {
+      "count": 12,
+      "px": 660,
+      "query": "max-width 660px"
+    },
+    {
+      "count": 2,
+      "px": 668,
+      "query": "max-width 668px"
+    },
+    {
+      "count": 1,
+      "px": 669,
+      "query": "min-width 669px"
+    },
+    {
+      "count": 3,
+      "px": 680,
+      "query": "max-width 680px"
+    },
+    {
+      "count": 3,
+      "px": 680,
+      "query": "min-width 680px"
+    },
+    {
+      "count": 2,
+      "px": 698,
+      "query": "max-width 698px"
+    },
+    {
+      "count": 2,
+      "px": 700,
+      "query": "max-width 700px"
+    },
+    {
+      "count": 2,
+      "px": 700,
+      "query": "min-width 700px"
+    },
+    {
+      "count": 3,
+      "px": 740,
+      "query": "max-width 740px"
+    },
+    {
+      "count": 1,
+      "px": 741,
+      "query": "min-width 741px"
+    },
+    {
+      "count": 3,
+      "px": 808,
+      "query": "max-width 808px"
+    },
+    {
+      "count": 3,
+      "px": 808,
+      "query": "min-width 808px"
+    },
+    {
+      "count": 2,
+      "px": 900,
+      "query": "max-width 900px"
+    },
+    {
+      "count": 2,
+      "px": 900,
+      "query": "min-width 900px"
+    }
+  ],
+  "design": {
+    "backgrounds": [
+      {
+        "count": 5,
+        "value": "#ffffff"
+      },
+      {
+        "count": 3,
+        "value": "#185abd"
+      },
+      {
+        "count": 1,
+        "value": "#f0f0f0"
+      },
+      {
+        "count": 1,
+        "value": "#d2e0f4"
+      },
+      {
+        "count": 1,
+        "value": "#f5f5f5"
+      },
+      {
+        "count": 1,
+        "value": "#fafafa"
+      },
+      {
+        "count": 1,
+        "value": "#333333"
+      }
+    ],
+    "css_variables": {
+      "--word-speed": "1"
+    },
+    "font_faces": [
+      {
+        "family": "Leelawadee UI Web",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "100"
+      },
+      {
+        "family": "Leelawadee UI Web",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "300"
+      },
+      {
+        "family": "Leelawadee UI Web",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "Leelawadee UI Web",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "family": "Leelawadee UI Web",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "Segoe UI Web (Arabic)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "100"
+      },
+      {
+        "family": "Segoe UI Web (Arabic)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "300"
+      },
+      {
+        "family": "Segoe UI Web (Arabic)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "Segoe UI Web (Arabic)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "family": "Segoe UI Web (Arabic)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "Segoe UI Web (Cyrillic)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "100"
+      },
+      {
+        "family": "Segoe UI Web (Cyrillic)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "300"
+      },
+      {
+        "family": "Segoe UI Web (Cyrillic)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "Segoe UI Web (Cyrillic)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "family": "Segoe UI Web (Cyrillic)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "Segoe UI Web (East European)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "100"
+      },
+      {
+        "family": "Segoe UI Web (East European)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "300"
+      },
+      {
+        "family": "Segoe UI Web (East European)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "Segoe UI Web (East European)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "family": "Segoe UI Web (East European)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "Segoe UI Web (Greek)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "100"
+      },
+      {
+        "family": "Segoe UI Web (Greek)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "300"
+      },
+      {
+        "family": "Segoe UI Web (Greek)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "Segoe UI Web (Greek)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "family": "Segoe UI Web (Greek)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "Segoe UI Web (Hebrew)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "100"
+      },
+      {
+        "family": "Segoe UI Web (Hebrew)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "300"
+      },
+      {
+        "family": "Segoe UI Web (Hebrew)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "Segoe UI Web (Hebrew)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "family": "Segoe UI Web (Hebrew)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "Segoe UI Web (Vietnamese)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "100"
+      },
+      {
+        "family": "Segoe UI Web (Vietnamese)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "300"
+      },
+      {
+        "family": "Segoe UI Web (Vietnamese)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "Segoe UI Web (Vietnamese)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "family": "Segoe UI Web (Vietnamese)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "Segoe UI Web (West European)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "100"
+      },
+      {
+        "family": "Segoe UI Web (West European)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "300"
+      },
+      {
+        "family": "Segoe UI Web (West European)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "Segoe UI Web (West European)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "family": "Segoe UI Web (West European)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "Segoe UI Web (Armenian)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "100"
+      },
+      {
+        "family": "Segoe UI Web (Armenian)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "300"
+      },
+      {
+        "family": "Segoe UI Web (Armenian)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "Segoe UI Web (Armenian)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "family": "Segoe UI Web (Armenian)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "Segoe UI Web (Georgian)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "100"
+      },
+      {
+        "family": "Segoe UI Web (Georgian)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "300"
+      },
+      {
+        "family": "Segoe UI Web (Georgian)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "Segoe UI Web (Georgian)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "family": "Segoe UI Web (Georgian)",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "Leelawadee UI Web",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "100"
+      },
+      {
+        "family": "Leelawadee UI Web",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "family": "Segoe UI",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "100"
+      },
+      {
+        "family": "Segoe UI",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "200"
+      },
+      {
+        "family": "Segoe UI",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "400"
+      },
+      {
+        "family": "Segoe UI",
+        "status": "loaded",
+        "style": "normal",
+        "weight": "600"
+      },
+      {
+        "family": "Segoe UI",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "700"
+      },
+      {
+        "family": "FluentRegular",
+        "status": "unloaded",
+        "style": "normal",
+        "weight": "normal"
+      }
+    ],
+    "font_sizes": [
+      {
+        "count": 15,
+        "value": "14px"
+      },
+      {
+        "count": 8,
+        "value": "16px"
+      },
+      {
+        "count": 4,
+        "value": "32px"
+      },
+      {
+        "count": 4,
+        "value": "12px"
+      },
+      {
+        "count": 1,
+        "value": "36px"
+      },
+      {
+        "count": 1,
+        "value": "20px"
+      }
+    ],
+    "font_weights": [
+      {
+        "count": 24,
+        "value": "600"
+      },
+      {
+        "count": 7,
+        "value": "400"
+      },
+      {
+        "count": 2,
+        "value": "500"
+      }
+    ],
+    "fonts": [
+      {
+        "count": 33,
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, BlinkMacSystemFont, Roboto, \"Helvetica Neue\", sans-serif"
+      }
+    ],
+    "max_widths": [
+      {
+        "count": 4,
+        "value": "1200px"
+      }
+    ],
+    "radii": [
+      {
+        "count": 9,
+        "value": "4px"
+      },
+      {
+        "count": 7,
+        "value": "9999px"
+      },
+      {
+        "count": 4,
+        "value": "8px"
+      },
+      {
+        "count": 1,
+        "value": "12px"
+      },
+      {
+        "count": 1,
+        "value": "32px"
+      },
+      {
+        "count": 1,
+        "value": "50%"
+      }
+    ],
+    "shadows": [
+      {
+        "count": 3,
+        "value": "rgba(0, 0, 0, 0.12) 0px 0px 2px 0px, rgba(0, 0, 0, 0.14) 0px 2px 4px 0px"
+      }
+    ],
+    "spacing": [
+      {
+        "count": 101,
+        "value": "4px"
+      },
+      {
+        "count": 39,
+        "value": "16px"
+      },
+      {
+        "count": 39,
+        "value": "12px"
+      },
+      {
+        "count": 28,
+        "value": "264.031px"
+      },
+      {
+        "count": 24,
+        "value": "5px"
+      },
+      {
+        "count": 18,
+        "value": "32px"
+      },
+      {
+        "count": 13,
+        "value": "8px"
+      },
+      {
+        "count": 8,
+        "value": "26.56px"
+      },
+      {
+        "count": 6,
+        "value": "48px"
+      },
+      {
+        "count": 4,
+        "value": "13.28px"
+      },
+      {
+        "count": 4,
+        "value": "157.203px"
+      },
+      {
+        "count": 4,
+        "value": "10px"
+      },
+      {
+        "count": 2,
+        "value": "7px"
+      },
+      {
+        "count": 2,
+        "value": "2px"
+      },
+      {
+        "count": 2,
+        "value": "27px"
+      },
+      {
+        "count": 2,
+        "value": "20px"
+      },
+      {
+        "count": 1,
+        "value": "64px"
+      },
+      {
+        "count": 1,
+        "value": "24px"
+      },
+      {
+        "count": 1,
+        "value": "80px"
+      }
+    ],
+    "text_colors": [
+      {
+        "count": 20,
+        "value": "#242424"
+      },
+      {
+        "count": 9,
+        "value": "#424242"
+      },
+      {
+        "count": 3,
+        "value": "#ffffff"
+      },
+      {
+        "count": 1,
+        "value": "#00000000"
+      }
+    ]
+  },
+  "forms": [],
+  "headings": [
+    {
+      "level": 1,
+      "text": "Welcome to Word for free on the web"
+    },
+    {
+      "level": 2,
+      "text": "Try Copilot"
+    },
+    {
+      "level": 2,
+      "text": "Create with templates"
+    },
+    {
+      "level": 2,
+      "text": "Write from anywhere"
+    },
+    {
+      "level": 2,
+      "text": "Create your perfect resume with our resume builder"
+    },
+    {
+      "level": 2,
+      "text": "Collaborate in real-time"
+    },
+    {
+      "level": 2,
+      "text": "Write faster with Copilot"
+    }
+  ],
+  "health": {
+    "errors": [],
+    "failed_requests": []
+  },
+  "lang": "en-us",
+  "layouts": [
+    {
+      "blocks": [
+        {
+          "background": "#fafafa",
+          "h": 101,
+          "pad": [
+            0,
+            48,
+            0,
+            48
+          ],
+          "per_row": 1,
+          "tag": "footer",
+          "w": 1425,
+          "y": 3878
+        }
+      ],
+      "page_h": 3979,
+      "page_w": 1425,
+      "type": {
+        "body": 16,
+        "h1": 36,
+        "h2": 16,
+        "h3": 0
+      },
+      "width": 1440
+    },
+    {
+      "blocks": [
+        {
+          "background": "#fafafa",
+          "h": 101,
+          "pad": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "per_row": 1,
+          "tag": "footer",
+          "w": 753,
+          "y": 5844
+        }
+      ],
+      "page_h": 5945,
+      "page_w": 753,
+      "type": {
+        "body": 16,
+        "h1": 36,
+        "h2": 16,
+        "h3": 0
+      },
+      "width": 768
+    },
+    {
+      "blocks": [
+        {
+          "background": "#fafafa",
+          "h": 176,
+          "pad": [
+            0,
+            20,
+            0,
+            20
+          ],
+          "per_row": 2,
+          "tag": "footer",
+          "w": 390,
+          "y": 6791
+        }
+      ],
+      "page_h": 6967,
+      "page_w": 400,
+      "type": {
+        "body": 16,
+        "h1": 36,
+        "h2": 16,
+        "h3": 0
+      },
+      "width": 390
+    }
+  ],
+  "links": [
+    {
+      "href": "https://word.cloud.microsoft/",
+      "text": "Word"
+    },
+    {
+      "href": "https://excel.cloud.microsoft/",
+      "text": "Excel"
+    },
+    {
+      "href": "https://powerpoint.cloud.microsoft/",
+      "text": "PowerPoint"
+    },
+    {
+      "href": "https://onenote.cloud.microsoft/",
+      "text": "OneNote"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/document-editor/",
+      "text": "Document editor"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/spell-checker/",
+      "text": "Spell checker"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/grammar-checker/",
+      "text": "Grammar checker"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/word-counter/",
+      "text": "Word counter"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/translate-documents/",
+      "text": "Translate documents"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/copilot-in-word/",
+      "text": "Copilot in Word"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/ai-writer/",
+      "text": "AI writer"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/ai-rewriter/",
+      "text": "AI rewriter"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/ai-summarizer/",
+      "text": "AI summarizer"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/newsletter-maker/",
+      "text": "Newsletters"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/meeting-agendas/",
+      "text": "Meeting agendas"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/meeting-minutes/",
+      "text": "Meeting minutes"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/training-materials/",
+      "text": "Training materials"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/collaborate-in-word/",
+      "text": "Collaboration"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/resume-builder/",
+      "text": "Resume builder"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/cover-letter/",
+      "text": "Cover letters"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/technical-documentation/",
+      "text": "Technical documents"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/business-letters/",
+      "text": "Business letters"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/business-proposals/",
+      "text": "Business proposals"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/templates/",
+      "text": "Templates"
+    },
+    {
+      "href": "https://go.microsoft.com/fwlink/?linkid=2309620&clcid=0x409",
+      "text": "See plans & pricing"
+    },
+    {
+      "href": "https://word.cloud.microsoft/create/en/resume-builder/",
+      "text": "Build a resume that stands out"
+    },
+    {
+      "href": "https://go.microsoft.com/fwlink/?linkid=521839&clcid=0x409",
+      "text": "Privacy"
+    },
+    {
+      "href": "https://go.microsoft.com/fwlink/?linkid=2259814&clcid=0x409",
+      "text": "Consumer Health Policy"
+    },
+    {
+      "href": "https://go.microsoft.com/fwlink/?linkid=206977&clcid=0x409",
+      "text": "Terms of Use"
+    }
+  ],
+  "meta": {
+    "description": "Write, edit, and collaborate on documents with Microsoft Word online. Free and seamless access from any device.",
+    "icons": [
+      "https://res.cdn.office.net/files/fabric-cdn-prod_20251117.001/assets/brand-icons/product/svg/word_16x1.svg",
+      "https://res.cdn.office.net/files/fabric-cdn-prod_20251117.001/assets/brand-icons/product/png/word_48x3.png",
+      "https://res.cdn.office.net/files/fabric-cdn-prod_20251117.001/assets/brand-icons/product/png/word_48x2.png",
+      "https://res.cdn.office.net/files/fabric-cdn-prod_20251117.001/assets/brand-icons/product/png/word_48x1_5.png",
+      "https://res.cdn.office.net/files/fabric-cdn-prod_20251117.001/assets/brand-icons/product/png/word_32x2.png",
+      "https://res.cdn.office.net/files/fabric-cdn-prod_20251117.001/assets/brand-icons/product/png/word_48x1.png",
+      "https://res.cdn.office.net/files/fabric-cdn-prod_20251117.001/assets/brand-icons/product/png/word_32x1.png",
+      "https://res.cdn.office.net/files/fabric-cdn-prod_20251117.001/assets/brand-icons/product/png/word_16x1_5.png",
+      "https://res.cdn.office.net/files/fabric-cdn-prod_20251117.001/assets/brand-icons/product/png/word_16x1.png",
+      "https://res.cdn.office.net/files/fabric-cdn-prod_20251117.001/assets/brand-icons/product/favicon/word.ico"
+    ],
+    "og_image": "https://res.cdn.office.net/apphome/wordogimage.png",
+    "og_title": "",
+    "theme_color": ""
+  },
+  "outline": [
+    {
+      "background": "#ffffff",
+      "box": {
+        "h": 64,
+        "w": 1425,
+        "x": 0,
+        "y": 0
+      },
+      "class": "___1uvhahd f22iagw f122n59 f1wrn0zl fmqzjuy fxugw4r f1l02sjl",
+      "color": "#242424",
+      "depth": 6,
+      "font": "14px 400",
+      "role": "banner",
+      "tag": "div",
+      "text": "Word Features See plans & pricing Sign in"
+    },
+    {
+      "box": {
+        "h": 38,
+        "w": 139,
+        "x": 16,
+        "y": 13
+      },
+      "class": "fui-Button r1f29ykk fui-MenuButton ___wbbnsi0 fkfq4zb f1t94bn6 f1s2uweq fr80ssc f1ukrpxl fecsdlb fnwyq0v ft1hn21 fuxngvv",
+      "color": "#424242",
+      "depth": 7,
+      "font": "16px 600",
+      "id": "menu_r_5_",
+      "tag": "button",
+      "text": "Word"
+    },
+    {
+      "alt": "",
+      "box": {
+        "h": 32,
+        "w": 32,
+        "x": 28,
+        "y": 16
+      },
+      "class": "fui-Image ___1jl6o6y fj3muxo f1akhkt f1aperda f1lxtadh f1fabniw f1ewtqcl f14t3ns0 f1xpi36y f137enl0",
+      "color": "#424242",
+      "depth": 10,
+      "font": "24px 600",
+      "src": "https://res.cdn.office.net/files/fabric-cdn-prod_20251117.001/assets/brand-icons/product/svg/word_16x1.svg",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 16,
+        "w": 16,
+        "x": 123,
+        "y": 25
+      },
+      "color": "#424242",
+      "depth": 9,
+      "font": "16px 600",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 30,
+        "w": 96,
+        "x": 155,
+        "y": 17
+      },
+      "class": "fui-Button r1f29ykk fui-MenuButton ___ojv9ty0 fkfq4zb f1t94bn6 f1s2uweq fr80ssc f1ukrpxl fecsdlb fnwyq0v ft1hn21 fuxngvv",
+      "color": "#424242",
+      "depth": 7,
+      "font": "14px 500",
+      "id": "menu_r_7_",
+      "tag": "button",
+      "text": "Features"
+    },
+    {
+      "box": {
+        "h": 12,
+        "w": 12,
+        "x": 225,
+        "y": 27
+      },
+      "color": "#424242",
+      "depth": 9,
+      "font": "12px 500",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 30,
+        "w": 144,
+        "x": 251,
+        "y": 17
+      },
+      "class": "fui-Button r1f29ykk ___ojv9ty0 fkfq4zb f1t94bn6 f1s2uweq fr80ssc f1ukrpxl fecsdlb fnwyq0v ft1hn21 fuxngvv fy5bs14 f1q1yq",
+      "color": "#424242",
+      "depth": 7,
+      "font": "14px 500",
+      "href": "https://go.microsoft.com/fwlink/?linkid=2309620&clcid=0x409",
+      "role": "link",
+      "tag": "a",
+      "text": "See plans & pricing"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 32,
+        "w": 96,
+        "x": 1313,
+        "y": 16
+      },
+      "class": "fui-Button r1f29ykk ___dhqv000 ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 7,
+      "font": "14px 600",
+      "role": "link",
+      "tag": "button",
+      "text": "Sign in"
+    },
+    {
+      "box": {
+        "h": 48,
+        "w": 836,
+        "x": 64,
+        "y": 96
+      },
+      "class": "fui-LargeTitle fui-Text ___zj56v90 fk6fouc f117a0bf fytdu2e fl43uef fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649 f69kmt0 f4",
+      "color": "#00000000",
+      "depth": 7,
+      "font": "36px 600",
+      "tag": "h1",
+      "text": "Welcome to Word for free on the web"
+    },
+    {
+      "background": "#ffffff",
+      "box": {
+        "h": 56,
+        "w": 365,
+        "x": 64,
+        "y": 243
+      },
+      "class": "___d6ivpj0 f22iagw f6jr5hl f1czfa6m fxugw4r f1acs6jw f1e53v91 f5ky228 f10pi13n fni485r f1h1ex6p fl8h5h1 f1ruholw fgkzsb ",
+      "color": "#242424",
+      "depth": 7,
+      "font": "14px 400",
+      "role": "region",
+      "tag": "div",
+      "text": "Create blank document Upload a file"
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 32,
+        "w": 200,
+        "x": 76,
+        "y": 255
+      },
+      "class": "fui-Button r1f29ykk ___w9pqoy0 ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 8,
+      "font": "14px 600",
+      "tag": "button",
+      "text": "Create blank document"
+    },
+    {
+      "box": {
+        "h": 20,
+        "w": 20,
+        "x": 89,
+        "y": 261
+      },
+      "color": "#ffffff",
+      "depth": 10,
+      "font": "20px 600",
+      "tag": "svg"
+    },
+    {
+      "background": "#ffffff",
+      "box": {
+        "h": 32,
+        "w": 133,
+        "x": 284,
+        "y": 255
+      },
+      "class": "fui-Button r1f29ykk ___f3qixu0 f182jzk9 f1aapu2g",
+      "color": "#242424",
+      "depth": 8,
+      "font": "14px 600",
+      "tag": "button",
+      "text": "Upload a file"
+    },
+    {
+      "box": {
+        "h": 20,
+        "w": 20,
+        "x": 297,
+        "y": 261
+      },
+      "color": "#242424",
+      "depth": 10,
+      "font": "20px 600",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 238,
+        "w": 597,
+        "x": 908,
+        "y": 64
+      },
+      "color": "#242424",
+      "depth": 7,
+      "font": "14px 400",
+      "tag": "picture"
+    },
+    {
+      "alt": "Abstract artwork representing Word for the web",
+      "box": {
+        "h": 238,
+        "w": 597,
+        "x": 908,
+        "y": 64
+      },
+      "class": "___hmsykz0 f1cqogiz f16jwkhg f4hgty foye16d fhjdt8h fly5x3f f1l02sjl f1kle4es ftgm304 f1aehjj5",
+      "color": "#242424",
+      "depth": 8,
+      "font": "14px 400",
+      "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_651f0421917fdf2c0df9433167fdb4f0.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 146,
+        "w": 1329,
+        "x": 48,
+        "y": 350
+      },
+      "color": "#242424",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "region",
+      "tag": "div",
+      "text": "Try Copilot Draft and edit your document directly with Copilot in Word. Available with a Microsoft 365 account. Get started with Copilot prompts Create and edit with ease"
+    },
+    {
+      "box": {
+        "h": 21,
+        "w": 96,
+        "x": 48,
+        "y": 350
+      },
+      "class": "fui-Subtitle2 fui-Text ___1wfc32i fk6fouc fod5ikn faaz57k fl43uef fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649 f1wrn0zl f19",
+      "color": "#242424",
+      "depth": 9,
+      "font": "16px 600",
+      "tag": "h2",
+      "text": "Try Copilot"
+    },
+    {
+      "box": {
+        "h": 96,
+        "w": 1345,
+        "x": 48,
+        "y": 400
+      },
+      "class": "___ozxeb90 f22iagw f1063pyq fu9asb0 fhusvh2 fly5x3f f1971k58 f1c4ugpj",
+      "color": "#242424",
+      "depth": 9,
+      "font": "14px 400",
+      "role": "list",
+      "tag": "div",
+      "text": "Get started with Copilot prompts Create and edit with ease"
+    },
+    {
+      "box": {
+        "h": 1,
+        "w": 1,
+        "x": 0,
+        "y": 0
+      },
+      "color": "#242424",
+      "depth": 10,
+      "font": "14px 400",
+      "role": "none",
+      "tag": "i"
+    },
+    {
+      "background": "#ffffff",
+      "box": {
+        "h": 64,
+        "w": 320,
+        "x": 56,
+        "y": 416
+      },
+      "class": "fui-Card rfxo2k2 ___1q2jla5 f1vx9l62 f14k419y f1fgo9fz fvqmfsm f3am6yf f1r5wgso frsmuga fuldkky fxugw4r f1whvlc6 f16gxe2",
+      "color": "#242424",
+      "depth": 10,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "div",
+      "text": "Get started with Copilot prompts Create and edit with ease"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 32,
+        "x": 68,
+        "y": 432
+      },
+      "color": "#242424",
+      "depth": 13,
+      "font": "14px 400",
+      "tag": "svg"
+    },
+    {
+      "box": {
+        "h": 1,
+        "w": 1,
+        "x": 0,
+        "y": 0
+      },
+      "color": "#242424",
+      "depth": 10,
+      "font": "14px 400",
+      "role": "none",
+      "tag": "i"
+    },
+    {
+      "box": {
+        "h": 1768,
+        "w": 1329,
+        "x": 48,
+        "y": 512
+      },
+      "color": "#242424",
+      "depth": 8,
+      "font": "14px 400",
+      "role": "region",
+      "tag": "div",
+      "text": "Create with templates Recommended Resumes Invoices Papers and Reports Flyers Meeting Notes Letters"
+    },
+    {
+      "box": {
+        "h": 21,
+        "w": 175,
+        "x": 48,
+        "y": 512
+      },
+      "class": "fui-Subtitle2 fui-Text ___1wfc32i fk6fouc fod5ikn faaz57k fl43uef fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649 f1wrn0zl f19",
+      "color": "#242424",
+      "depth": 9,
+      "font": "16px 600",
+      "tag": "h2",
+      "text": "Create with templates"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 1096,
+        "x": 64,
+        "y": 547
+      },
+      "class": "fui-Overflow ___a84chg0 fyfkpbf f10570jf f22iagw f122n59 f1xpi36y fy77jfu f1vdfbxk f1mnl278 fsnqrgy",
+      "color": "#242424",
+      "depth": 11,
+      "font": "14px 400",
+      "id": "createFilterPills",
+      "role": "tablist",
+      "tag": "div",
+      "text": "Recommended Resumes Invoices Papers and Reports Flyers Meeting Notes Letters"
+    },
+    {
+      "box": {
+        "h": 1,
+        "w": 1,
+        "x": 0,
+        "y": 0
+      },
+      "color": "#242424",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "none",
+      "tag": "i"
+    },
+    {
+      "background": "#d2e0f4",
+      "box": {
+        "h": 32,
+        "w": 122,
+        "x": 64,
+        "y": 547
+      },
+      "class": "fui-Button r1f29ykk ___10q5afo f16xkysk f1rc1h47 ftha4le f5r4ru9 f1gkyqro f19n0e5 f1yj72w4 f1s2uweq fr80ssc f1ukrpxl fec",
+      "color": "#242424",
+      "depth": 12,
+      "font": "14px 600",
+      "role": "tab",
+      "tag": "button",
+      "text": "Recommended"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 96,
+        "x": 194,
+        "y": 547
+      },
+      "class": "fui-Button r1f29ykk ___qvfdeh0 fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t94bn6 f1s2uweq fr80ssc f1ukrpxl fe",
+      "color": "#424242",
+      "depth": 12,
+      "font": "14px 600",
+      "role": "tab",
+      "tag": "button",
+      "text": "Resumes"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 96,
+        "x": 298,
+        "y": 547
+      },
+      "class": "fui-Button r1f29ykk ___qvfdeh0 fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t94bn6 f1s2uweq fr80ssc f1ukrpxl fe",
+      "color": "#424242",
+      "depth": 12,
+      "font": "14px 600",
+      "role": "tab",
+      "tag": "button",
+      "text": "Invoices"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 149,
+        "x": 402,
+        "y": 547
+      },
+      "class": "fui-Button r1f29ykk ___qvfdeh0 fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t94bn6 f1s2uweq fr80ssc f1ukrpxl fe",
+      "color": "#424242",
+      "depth": 12,
+      "font": "14px 600",
+      "role": "tab",
+      "tag": "button",
+      "text": "Papers and Reports"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 96,
+        "x": 559,
+        "y": 547
+      },
+      "class": "fui-Button r1f29ykk ___qvfdeh0 fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t94bn6 f1s2uweq fr80ssc f1ukrpxl fe",
+      "color": "#424242",
+      "depth": 12,
+      "font": "14px 600",
+      "role": "tab",
+      "tag": "button",
+      "text": "Flyers"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 121,
+        "x": 663,
+        "y": 547
+      },
+      "class": "fui-Button r1f29ykk ___qvfdeh0 fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t94bn6 f1s2uweq fr80ssc f1ukrpxl fe",
+      "color": "#424242",
+      "depth": 12,
+      "font": "14px 600",
+      "role": "tab",
+      "tag": "button",
+      "text": "Meeting Notes"
+    },
+    {
+      "box": {
+        "h": 32,
+        "w": 96,
+        "x": 792,
+        "y": 547
+      },
+      "class": "fui-Button r1f29ykk ___qvfdeh0 fhovq9v f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t94bn6 f1s2uweq fr80ssc f1ukrpxl fe",
+      "color": "#424242",
+      "depth": 12,
+      "font": "14px 600",
+      "role": "tab",
+      "tag": "button",
+      "text": "Letters"
+    },
+    {
+      "box": {
+        "h": 1,
+        "w": 1,
+        "x": 0,
+        "y": 0
+      },
+      "color": "#242424",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "none",
+      "tag": "i"
+    },
+    {
+      "box": {
+        "h": 30,
+        "w": 199,
+        "x": 1161,
+        "y": 547
+      },
+      "class": "fui-Input__input r12stul0",
+      "color": "#242424",
+      "depth": 14,
+      "font": "14px 400",
+      "id": "field-_r_3___control",
+      "name": "",
+      "placeholder": "Search templates",
+      "tag": "input",
+      "type": "text"
+    },
+    {
+      "box": {
+        "h": 1,
+        "w": 1,
+        "x": 0,
+        "y": 0
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "14px 400",
+      "role": "none",
+      "tag": "i"
+    },
+    {
+      "box": {
+        "h": 161,
+        "w": 204,
+        "x": 60,
+        "y": 612
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Live music concert event brochure blue modern bold",
+      "box": {
+        "h": 161,
+        "w": 204,
+        "x": 60,
+        "y": 612
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/uploadedfiles/uploads/0fd11e9c-509a-443d-8a20-ae44a010fd57-live-music-concert-event-brochure-blue-modern-bold-0-1.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 280,
+        "y": 612
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "MLA style paper 9th edition modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 280,
+        "y": 612
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/1776bb69-cfc5-4cb1-90e4-db776e130050/thumbnails/400/mla-style-paper-9th-edition-modern-simple-0-1-a63aecb27977.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 499,
+        "y": 612
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Modern accounting resume white modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 499,
+        "y": 612
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/78fbf859-85f4-4560-96e6-2ac1bac69b89/thumbnails/400/modern-accounting-resume-white-modern-simple-0-1-824cf37e0cab.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 719,
+        "y": 612
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Skills focus graphic professional resume orange modern bold",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 719,
+        "y": 612
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/2c627d15-1699-495f-8c10-9f567aa21751/thumbnails/400/skills-focus-graphic-professional-resume-orange-modern-bold-0-1-894678d242a8.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 938,
+        "y": 612
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Employee recommendation letter blue modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 938,
+        "y": 612
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/aa0261c5-ea5f-44f5-820e-f69b5820c21a/thumbnails/400/employee-recommendation-letter-blue-modern-simple-0-1-08f4a04d3ed5.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 1158,
+        "y": 612
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Simple SaaS business proposal green modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 1158,
+        "y": 612
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/uploadedfiles/uploads/f3e96c26-c817-47d2-a053-831c8407a7c3-simple-saas-business-proposal-green-modern-simple-0-1.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 60,
+        "y": 792
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Bold border professional cover letter modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 60,
+        "y": 792
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/368c07a1-6af6-44f1-8c94-82280cb6067d/thumbnails/400/bold-border-professional-cover-letter-modern-simple-0-1-0991253dbbbe.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 280,
+        "y": 912
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Money saving tips for retirement checklist green modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 280,
+        "y": 912
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/e083b34d-94bc-4182-b6d5-1b74d75645d1/thumbnails/400/money-saving-tips-for-retirement-checklist-green-modern-simple-0-1-6b67489c11ea.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 499,
+        "y": 912
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Services invoice with hours and rate green modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 499,
+        "y": 912
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/e9a368db-067e-446a-a618-e40d248b2b03/thumbnails/400/services-invoice-with-hours-and-rate-green-modern-simple-0-1-3834dcb2684d.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 719,
+        "y": 912
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Classic UI/UX designer resume modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 719,
+        "y": 912
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/ed7e3ebf-e287-46a8-a21a-188cb70ce224/thumbnails/400/classic-ui%252Fux-designer-resume-modern-simple-0-1-88ea13166a85.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 938,
+        "y": 912
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Mergers & acquisitions report blue modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 938,
+        "y": 912
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/39a7caa3-5fa6-435c-9d27-8374d0b22363/thumbnails/400/mergers-%2526-acquisitions-report-blue-modern-simple-0-1-a6f44f678850.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 1158,
+        "y": 912
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Modern classic professional resume <null> modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 1158,
+        "y": 912
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/e809680f-ff89-46ad-aadf-daa1ded6b20a/thumbnails/400/modern-classic-professional-resume-%253Cnull%253E-modern-simple-0-1-e03ef4cb5763.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 60,
+        "y": 1092
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Simple resume modern bold",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 60,
+        "y": 1092
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/14df29dd-0635-4310-8ddb-4db2c173b072/thumbnails/400/simple-resume-modern-bold-0-1-c36c0edb51da.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 280,
+        "y": 1212
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Retro vibes professional resume blue vintage retro",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 280,
+        "y": 1212
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/0e94e49d-9369-4954-bef1-c1d20601a45d/thumbnails/400/retro-vibes-professional-resume-blue-vintage-retro-0-1-8255064f30c6.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 499,
+        "y": 1212
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Bold minimalist professional cover letter modern bold",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 499,
+        "y": 1212
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/4c7b2ac9-91c8-45db-bd7a-d74fed2c5be2/thumbnails/400/bold-minimalist-professional-cover-letter-modern-bold-0-1-cb03a6a20c06.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 719,
+        "y": 1212
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "ATS bold classic resume modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 719,
+        "y": 1212
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/a6ce606f-4d1b-45e4-9923-de33195f45da/thumbnails/400/ats-bold-classic-resume-modern-simple-0-1-c58960d85ab9.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 938,
+        "y": 1212
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Resume references modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 938,
+        "y": 1212
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/3f503c8f-c5ea-48d0-a538-b55affcf6e84/thumbnails/400/resume-references-modern-simple-0-1-64dfde76f582.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 161,
+        "w": 204,
+        "x": 1158,
+        "y": 1212
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Booklet yellow modern bold",
+      "box": {
+        "h": 161,
+        "w": 204,
+        "x": 1158,
+        "y": 1212
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/6aa5002e-71ac-43cc-9433-ce182d56372a/thumbnails/400/booklet-yellow-modern-bold-0-1-2995c75fbb63.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 60,
+        "y": 1392
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Stylish teaching cover letter red modern-simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 60,
+        "y": 1392
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/e41daea3-53c8-4ab5-9e9c-c7837b7c95cd/thumbnails/400/stylish-teaching-cover-letter-red-modern-simple-0-1-190240a4e68e.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 1158,
+        "y": 1392
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Bold border professional resume <null> modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 1158,
+        "y": 1392
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/c867643a-68bc-4284-803f-0f31cbefb875/thumbnails/400/bold-border-professional-resume-%253Cnull%253E-modern-simple-0-1-879c8389c3c6.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 280,
+        "y": 1512
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Kwanzaa checklist red whimsical color block",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 280,
+        "y": 1512
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/12d49431-63b9-4f2d-9222-4188360d2cf3/thumbnails/400/kwanzaa-checklist-red-whimsical-color-block-0-1-c9540718b04e.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 499,
+        "y": 1512
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Thanksgiving sign-up brown whimsical line",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 499,
+        "y": 1512
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/8182aed0-4cc8-4637-9fff-89908d12628c/thumbnails/400/thanksgiving-sign-up-brown-whimsical-line-0-1-4510e287bad7.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 719,
+        "y": 1512
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Stylish sales resume white modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 719,
+        "y": 1512
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/b457acaa-4c50-4abf-99ab-2f193c8430a6/thumbnails/400/stylish-sales-resume-white-modern-simple-0-1-facdf357103c.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 161,
+        "w": 204,
+        "x": 938,
+        "y": 1512
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Builder brochure blue modern-simple",
+      "box": {
+        "h": 161,
+        "w": 204,
+        "x": 938,
+        "y": 1512
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/297974e9-b9f1-4be1-86f8-e553dfc63e31/thumbnails/400/builder-brochure-blue-modern-simple-0-1-836c70b1099d.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 60,
+        "y": 1692
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Professional APA Style paper 7th edition modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 60,
+        "y": 1692
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/795a8be7-09f1-4a99-b0d5-9ceb1acfb335/thumbnails/400/professional-apa-style-paper-7th-edition-modern-simple-0-1-ceadb68742c7.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 938,
+        "y": 1692
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Blue curve meeting agenda blue modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 938,
+        "y": 1692
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/ff4d1e90-0d63-47f2-80ee-cf5551472de2/thumbnails/400/blue-curve-meeting-agenda-blue-modern-simple-0-1-dd611bebcb93.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 1158,
+        "y": 1692
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Modern flyer brown organic boho",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 1158,
+        "y": 1692
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/edbab6fd-1ebf-4d31-af91-b8e1d763a77c/thumbnails/400/modern-flyer-brown-organic-boho-0-1-b4ae266d0665.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 280,
+        "y": 1812
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "ATS classic HR resume white modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 280,
+        "y": 1812
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/a8bd8a14-9ea2-40cf-af65-bf5e5b2944b5/thumbnails/400/ats-classic-hr-resume-white-modern-simple-0-1-e06bb3f06311.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 499,
+        "y": 1812
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Bold profile professional resume blue modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 499,
+        "y": 1812
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/0fe9e2ab-9b8e-4e77-b8ef-657336aa2c4d/thumbnails/400/bold-profile-professional-resume-blue-modern-simple-0-1-fc37cf3720d8.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 161,
+        "w": 204,
+        "x": 719,
+        "y": 1812
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Bubbles brochure blue modern-simple",
+      "box": {
+        "h": 161,
+        "w": 204,
+        "x": 719,
+        "y": 1812
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/13cc2c74-80fd-4846-b848-d77c6e6eb176/thumbnails/400/bubbles-brochure-blue-modern-simple-0-1-92f6b843dd9a.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 60,
+        "y": 1992
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "Basic professional resume null modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 60,
+        "y": 1992
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/48add7a7-4073-4dc8-ae9a-08c835b8dabe/thumbnails/400/basic-professional-resume-null-modern-simple-0-1-440838dbeeb1.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 719,
+        "y": 1992
+      },
+      "class": "fui-Link ___1jbivd9 f2hkw1w f3rmtva f1ewtqcl fyind8e f1k6fduh f1w7gpdv fk6fouc fkhj508 figsok6 f1s184ao fr9yryd fsl45g1 ",
+      "color": "#2461ca",
+      "depth": 12,
+      "font": "14px 400",
+      "role": "button",
+      "tag": "button"
+    },
+    {
+      "alt": "ATS simple classic resume white modern simple",
+      "box": {
+        "h": 268,
+        "w": 204,
+        "x": 719,
+        "y": 1992
+      },
+      "class": "___11cr6zz f1euv43f f15twtuk f1vgc2s3 fly5x3f f1l02sjl f1ps3kmd f1xqy1su f1aehjj5",
+      "color": "#2461ca",
+      "depth": 13,
+      "font": "14px 400",
+      "src": "https://createcatalog.public.onecdn.static.microsoft/catalog-assets/en-us/b49dc991-f914-4c8c-aaa1-db6ae4992047/thumbnails/400/ats-simple-classic-resume-white-modern-simple-0-1-c0795d3d358c.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 1,
+        "w": 1,
+        "x": 0,
+        "y": 0
+      },
+      "color": "#242424",
+      "depth": 11,
+      "font": "14px 400",
+      "role": "none",
+      "tag": "i"
+    },
+    {
+      "alt": "Write from anywhere",
+      "box": {
+        "h": 247,
+        "w": 477,
+        "x": 200,
+        "y": 2392
+      },
+      "class": "fui-Image ___o84ild0 fj3muxo f1akhkt f1aperda f1lxtadh fxoo071 f1ewtqcl f14t3ns0 fgczlcj f197vcdf f6dzj5z fegdp58 fndo3i",
+      "color": "#242424",
+      "depth": 10,
+      "font": "14px 400",
+      "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_d85f1a49056278bf73f5d0a888ab6b8d.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 43,
+        "w": 308,
+        "x": 747,
+        "y": 2447
+      },
+      "class": "fui-Title1 fui-Text ___118tge5 fk6fouc fccw675 f1ebx5kk fl43uef fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649",
+      "color": "#242424",
+      "depth": 10,
+      "font": "32px 600",
+      "tag": "h2",
+      "text": "Write from anywhere"
+    },
+    {
+      "box": {
+        "h": 66,
+        "w": 477,
+        "x": 747,
+        "y": 2505
+      },
+      "class": "fui-Text ___127uuwg fk6fouc fod5ikn faaz57k figsok6 fpgzoln ftgm304 f6juhto f1gl81tg f2jf649",
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p",
+      "text": "Create, edit, and share documents from any location with Word online. Work confidently from any device with features like real-time updates, automatic saving, and version history."
+    },
+    {
+      "alt": "Create your perfect resume with our resume builder",
+      "box": {
+        "h": 247,
+        "w": 477,
+        "x": 747,
+        "y": 2723
+      },
+      "class": "fui-Image ___o84ild0 fj3muxo f1akhkt f1aperda f1lxtadh fxoo071 f1ewtqcl f14t3ns0 fgczlcj f197vcdf f6dzj5z fegdp58 fndo3i",
+      "color": "#242424",
+      "depth": 10,
+      "font": "14px 400",
+      "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_6e7beb392f8f3a04932284feb16380bf.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 83,
+        "w": 467,
+        "x": 200,
+        "y": 2706
+      },
+      "class": "fui-Title1 fui-Text ___118tge5 fk6fouc fccw675 f1ebx5kk fl43uef fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649",
+      "color": "#242424",
+      "depth": 10,
+      "font": "32px 600",
+      "tag": "h2",
+      "text": "Create your perfect resume with our resume builder"
+    },
+    {
+      "box": {
+        "h": 110,
+        "w": 477,
+        "x": 200,
+        "y": 2804
+      },
+      "class": "fui-Text ___127uuwg fk6fouc fod5ikn faaz57k figsok6 fpgzoln ftgm304 f6juhto f1gl81tg f2jf649",
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p",
+      "text": "Create a winning resume with our resume builder for Word and open doors to new opportunities. Plus, access hundreds of professionally designed templates to streamline your life, from polished resumes "
+    },
+    {
+      "background": "#185abd",
+      "box": {
+        "h": 40,
+        "w": 255,
+        "x": 200,
+        "y": 2946
+      },
+      "class": "fui-Button r1f29ykk ___qalcxo0 ffp7eso f1p3nwhy f11589ue f1q5o8ev f1pdflbu f1phragk f15wkkf3 f1s2uweq fr80ssc f1ukrpxl f",
+      "color": "#ffffff",
+      "depth": 10,
+      "font": "16px 600",
+      "href": "https://word.cloud.microsoft/create/en/resume-builder/",
+      "role": "link",
+      "tag": "a",
+      "text": "Build a resume that stands out"
+    },
+    {
+      "alt": "Collaborate in real-time",
+      "box": {
+        "h": 247,
+        "w": 477,
+        "x": 200,
+        "y": 3054
+      },
+      "class": "fui-Image ___o84ild0 fj3muxo f1akhkt f1aperda f1lxtadh fxoo071 f1ewtqcl f14t3ns0 fgczlcj f197vcdf f6dzj5z fegdp58 fndo3i",
+      "color": "#242424",
+      "depth": 10,
+      "font": "14px 400",
+      "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_d06310a14da290413d0876801f111536.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 43,
+        "w": 345,
+        "x": 747,
+        "y": 3087
+      },
+      "class": "fui-Title1 fui-Text ___118tge5 fk6fouc fccw675 f1ebx5kk fl43uef fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649",
+      "color": "#242424",
+      "depth": 10,
+      "font": "32px 600",
+      "tag": "h2",
+      "text": "Collaborate in real-time"
+    },
+    {
+      "box": {
+        "h": 110,
+        "w": 477,
+        "x": 747,
+        "y": 3145
+      },
+      "class": "fui-Text ___127uuwg fk6fouc fod5ikn faaz57k figsok6 fpgzoln ftgm304 f6juhto f1gl81tg f2jf649",
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p",
+      "text": "Work together effortlessly with real-time collaboration. Share documents instantly, track changes with precision, and keep everyone aligned with comments and suggestions. Your team can access Word onl"
+    },
+    {
+      "alt": "Write faster with Copilot",
+      "box": {
+        "h": 247,
+        "w": 477,
+        "x": 747,
+        "y": 3371
+      },
+      "class": "fui-Image ___o84ild0 fj3muxo f1akhkt f1aperda f1lxtadh fxoo071 f1ewtqcl f14t3ns0 fgczlcj f197vcdf f6dzj5z fegdp58 fndo3i",
+      "color": "#242424",
+      "depth": 10,
+      "font": "14px 400",
+      "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_3582dd2b54328ec4cbe7a1e7fc554a25.webp",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 43,
+        "w": 356,
+        "x": 200,
+        "y": 3393
+      },
+      "class": "fui-Title1 fui-Text ___118tge5 fk6fouc fccw675 f1ebx5kk fl43uef fpgzoln f1w7gpdv f6juhto f1gl81tg f2jf649",
+      "color": "#242424",
+      "depth": 10,
+      "font": "32px 600",
+      "tag": "h2",
+      "text": "Write faster with Copilot"
+    },
+    {
+      "box": {
+        "h": 132,
+        "w": 477,
+        "x": 200,
+        "y": 3451
+      },
+      "class": "fui-Text ___127uuwg fk6fouc fod5ikn faaz57k figsok6 fpgzoln ftgm304 f6juhto f1gl81tg f2jf649",
+      "color": "#242424",
+      "depth": 10,
+      "font": "16px 400",
+      "tag": "p",
+      "text": "Take your writing further with Copilot in Word online, your AI-powered writing assistant. From polishing phrases to generating content ideas, Copilot helps you create compelling documents in less time"
+    },
+    {
+      "background": "#fafafa",
+      "box": {
+        "h": 101,
+        "w": 1425,
+        "x": 0,
+        "y": 3878
+      },
+      "class": "___edm88c0 fpnw6ap f1lcaay8 f1dmdbja f1wdb8ii f1358rze fqdk4by f1rvrf73 fzkkow9 fcdblym fg706s2 fjik90z fj3muxo f1akhkt ",
+      "color": "#242424",
+      "depth": 5,
+      "display": "flex",
+      "flex": "row",
+      "font": "14px 400",
+      "tag": "footer"
+    },
+    {
+      "alt": "Microsoft logo",
+      "box": {
+        "h": 50,
+        "w": 80,
+        "x": 48,
+        "y": 3904
+      },
+      "class": "fui-Image ___161xmqp fj3muxo f1akhkt f1aperda f1lxtadh f1fabniw f1ewtqcl f22iagw f1rjqk49 f1mjr0m2 f1kle4es f15adeyu faa",
+      "color": "#242424",
+      "depth": 7,
+      "font": "12px 400",
+      "src": "https://res.cdn.office.net/midgard/versionless/apphome/app-home_v1_f5c28989efa400e5e1f2568dd1faf8dd.svg",
+      "tag": "img"
+    },
+    {
+      "box": {
+        "h": 16,
+        "w": 39,
+        "x": 156,
+        "y": 3921
+      },
+      "class": "fui-Link ___9esems0 f2hkw1w f3rmtva f1ewtqcl f19n0e5 f1k6fduh f1w7gpdv fk6fouc fy9rknc fl43uef f15adeyu f1s184ao f1mk8la",
+      "color": "#242424",
+      "depth": 8,
+      "font": "12px 600",
+      "href": "https://go.microsoft.com/fwlink/?linkid=521839&clcid=0x409",
+      "tag": "a",
+      "text": "Privacy"
+    },
+    {
+      "box": {
+        "h": 16,
+        "w": 130,
+        "x": 223,
+        "y": 3921
+      },
+      "class": "fui-Link ___9esems0 f2hkw1w f3rmtva f1ewtqcl f19n0e5 f1k6fduh f1w7gpdv fk6fouc fy9rknc fl43uef f15adeyu f1s184ao f1mk8la",
+      "color": "#242424",
+      "depth": 8,
+      "font": "12px 600",
+      "href": "https://go.microsoft.com/fwlink/?linkid=2259814&clcid=0x409",
+      "tag": "a",
+      "text": "Consumer Health Policy"
+    },
+    {
+      "box": {
+        "h": 16,
+        "w": 71,
+        "x": 381,
+        "y": 3921
+      },
+      "class": "fui-Link ___9esems0 f2hkw1w f3rmtva f1ewtqcl f19n0e5 f1k6fduh f1w7gpdv fk6fouc fy9rknc fl43uef f15adeyu f1s184ao f1mk8la",
+      "color": "#242424",
+      "depth": 8,
+      "font": "12px 600",
+      "href": "https://go.microsoft.com/fwlink/?linkid=206977&clcid=0x409",
+      "tag": "a",
+      "text": "Terms of Use"
+    },
+    {
+      "box": {
+        "h": 88,
+        "w": 96,
+        "x": 1281,
+        "y": 3885
+      },
+      "class": "fui-Button r1f29ykk ___mj4mae0 f3rmtva f1p3nwhy f11589ue f1q5o8ev f1pdflbu fkfq4zb f1t94bn6 f1s2uweq fr80ssc f1ukrpxl fe",
+      "color": "#424242",
+      "depth": 7,
+      "font": "14px 600",
+      "tag": "button"
+    },
+    {
+      "background": "#333333",
+      "box": {
+        "h": 48,
+        "w": 48,
+        "x": 1305,
+        "y": 3905
+      },
+      "color": "#ffffff",
+      "depth": 8,
+      "font": "14px 600",
+      "role": "presentation",
+      "tag": "svg"
+    }
+  ],
+  "page": {
+    "h": 3979,
+    "w": 1425
+  },
+  "text": "Word Features See plans & pricing Sign in Welcome to Word for free on the web Sign in or sign up for free to start using Word for the web right away, no installation or purchase required. Create blank document Upload a file Try Copilot Draft and edit your document directly with Copilot in Word. Available with a Microsoft 365 account. Get started with Copilot prompts Create and edit with ease Create with templates Recommended Resumes Invoices Papers and Reports Flyers Meeting Notes Letters Write from anywhere Create, edit, and share documents from any location with Word online. Work confidently from any device with features like real-time updates, automatic saving, and version history. Create your perfect resume with our resume builder Create a winning resume with our resume builder for Word and open doors to new opportunities. Plus, access hundreds of professionally designed templates to streamline your life, from polished resumes and cover letters to engaging planners and trackers. Build a resume that stands out Collaborate in real-time Work together effortlessly with real-time collaboration. Share documents instantly, track changes with precision, and keep everyone aligned with comments and suggestions. Your team can access Word online and contribute simultaneously from wherever they work best, making collaboration smoother than ever. Write faster with Copilot Take your writing further with Copilot in Word online, your AI-powered writing assistant. From polishing phrases to generating content ideas, Copilot helps you create compelling documents in less time. Get intelligent suggestions, organized summaries, and creative inspiration - all while maintaining complete control over your work. PrivacyConsumer Health PolicyTerms of Use ©Microsoft 2026",
+  "title": "Create and edit documents for free | Microsoft Word for the Web",
+  "unreadable_stylesheets": 0,
+  "url": "https://word.cloud.microsoft/en-us/",
+  "viewport": {
+    "h": 900,
+    "w": 1440
+  }
+}
