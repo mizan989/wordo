@@ -2278,19 +2278,19 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
               {showTablePicker && (
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className="absolute left-0 top-full mt-1 p-3 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 animate-in fade-in duration-100"
+                  className="absolute left-0 top-full mt-1 p-3 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 animate-in fade-in duration-100 w-[216px] min-w-[216px]"
                 >
                   <div className="text-[11px] font-medium mb-1.5 text-gray-700 dark:text-gray-200">
                     Insert Table ({tableGrid.rows} × {tableGrid.cols})
                   </div>
-                  <div className="grid grid-cols-10 gap-1 mb-2">
+                  <div className="grid grid-cols-10 gap-1 mb-2 w-max">
                     {Array.from({ length: 10 }).map((_, r) =>
                       Array.from({ length: 10 }).map((_, c) => (
                         <div
                           key={`${r}-${c}`}
                           onMouseEnter={() => setTableGrid({ rows: r + 1, cols: c + 1 })}
                           onClick={() => handleInsertTable(r + 1, c + 1)}
-                          className={`w-3.5 h-3.5 border border-gray-300 dark:border-gray-600 cursor-pointer rounded-2xs ${
+                          className={`w-3.5 h-3.5 shrink-0 border border-gray-300 dark:border-gray-600 cursor-pointer rounded-2xs ${
                             r < tableGrid.rows && c < tableGrid.cols
                               ? 'bg-[#185abd]/30 border-[#185abd]'
                               : 'bg-gray-50 dark:bg-gray-800'

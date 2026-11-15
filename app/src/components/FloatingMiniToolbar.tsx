@@ -435,7 +435,7 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
               e.preventDefault();
               e.stopPropagation();
             }}
-            className="absolute left-0 top-full mt-1 p-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded-md shadow-xl grid grid-cols-4 gap-1 z-50"
+            className="absolute left-0 top-full mt-1 p-2 bg-white dark:bg-[#252526] border border-gray-300 dark:border-gray-600 rounded-md shadow-2xl grid grid-cols-4 gap-1.5 z-50 w-[96px] min-w-[96px]"
           >
             {MINI_COLORS.map((c) => (
               <button
@@ -448,7 +448,7 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
                   editor.chain().focus().setColor(c).run();
                   setShowColorPicker(false);
                 }}
-                className="w-4 h-4 rounded-xs border border-gray-300 hover:scale-110"
+                className="w-4 h-4 shrink-0 rounded-xs border border-gray-300 dark:border-gray-600 hover:scale-110 transition-transform"
                 style={{ backgroundColor: c }}
               />
             ))}
@@ -481,7 +481,7 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
               e.preventDefault();
               e.stopPropagation();
             }}
-            className="absolute left-0 top-full mt-1 p-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded-md shadow-xl grid grid-cols-3 gap-1 z-50"
+            className="absolute left-0 top-full mt-1 p-2 bg-white dark:bg-[#252526] border border-gray-300 dark:border-gray-600 rounded-md shadow-2xl grid grid-cols-3 gap-1.5 z-50 w-[76px] min-w-[76px]"
           >
             {MINI_HIGHLIGHTS.map((c) => (
               <button
@@ -494,7 +494,7 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
                   editor.chain().focus().toggleHighlight({ color: c }).run();
                   setShowHighlightPicker(false);
                 }}
-                className="w-4 h-4 rounded-xs border border-gray-300 hover:scale-110"
+                className="w-4 h-4 shrink-0 rounded-xs border border-gray-300 dark:border-gray-600 hover:scale-110 transition-transform"
                 style={{ backgroundColor: c }}
               />
             ))}
