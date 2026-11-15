@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Editor } from '@tiptap/react';
 import {
   X,
@@ -13,23 +13,55 @@ interface NavigationSidebarProps {
   editor: Editor | null;
   onClose: () => void;
   defaultTab?: 'outline' | 'search';
+  initialSearchFocus?: 'find' | 'replace';
 }
 
 interface MatchRange {
   from: number;
   to: number;
+  snippet?: string;
 }
 
 export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
   editor,
   onClose,
   defaultTab = 'outline',
+  initialSearchFocus = 'find',
 }) => {
   const [activeTab, setActiveTab] = useState<'outline' | 'search'>(defaultTab);
   const [searchTerm, setSearchTerm] = useState('');
   const [replaceTerm, setReplaceTerm] = useState('');
+  const [matchCase, setMatchCase] = useState(false);
+  const [wholeWord, setWholeWord] = useState(false);
   const [matches, setMatches] = useState<MatchRange[]>([]);
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
+  const [replaceStatus, setReplaceStatus] = useState<string | null>(null);
+
+  const findInputRef = useRef<HTMLInputElement>(null);
+  const replaceInputRef = useRef<HTMLInputElement>(null);
+
+  // Sync tab if defaultTab changes externally
+  useEffect(() => {
+    if (defaultTab) {
+      setActiveTab(defaultTab);
+    }
+  }, [defaultTab]);
+
+  // Focus the appropriate input when opening search tab or changing focus mode
+  useEffect(() => {
+    if (activeTab === 'search') {
+      const timer = setTimeout(() => {
+        if (initialSearchFocus === 'replace' && replaceInputRef.current) {
+          replaceInputRef.current.focus();
+          replaceInputRef.current.select();
+        } else if (findInputRef.current) {
+          findInputRef.current.focus();
+          findInputRef.current.select();
+        }
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [activeTab, initialSearchFocus]);
 
   // Extract headings with exact ProseMirror node positions
   const extractHeadings = useCallback(() => {
@@ -68,49 +100,110 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
 
   // Find all matches in document using ProseMirror text nodes
   const findMatches = useCallback(
-    (term: string): MatchRange[] => {
+    (term: string, caseSensitive: boolean = matchCase, wholeWords: boolean = wholeWord): MatchRange[] => {
       const results: MatchRange[] = [];
       if (!editor || !term.trim()) return results;
 
-      const lowerTerm = term.toLowerCase();
+      const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const pattern = wholeWords ? `\\b${escaped}\\b` : escaped;
+
+      let regex: RegExp;
+      try {
+        regex = new RegExp(pattern, caseSensitive ? 'gu' : 'giu');
+      } catch {
+        return results;
+      }
+
       editor.state.doc.descendants((node, pos) => {
         if (node.isText && node.text) {
-          const text = node.text.toLowerCase();
-          let index = text.indexOf(lowerTerm);
-          while (index !== -1) {
+          regex.lastIndex = 0;
+          let match: RegExpExecArray | null;
+          while ((match = regex.exec(node.text)) !== null) {
+            const matchIndex = match.index;
+            const matchLength = match[0].length;
+
+            // Generate context snippet around the match
+            const start = Math.max(0, matchIndex - 25);
+            const end = Math.min(node.text.length, matchIndex + matchLength + 25);
+            let snippet = node.text.substring(start, end).replace(/\s+/g, ' ');
+            if (start > 0) snippet = '…' + snippet;
+            if (end < node.text.length) snippet = snippet + '…';
+
             results.push({
-              from: pos + index,
-              to: pos + index + term.length,
+              from: pos + matchIndex,
+              to: pos + matchIndex + matchLength,
+              snippet,
             });
-            index = text.indexOf(lowerTerm, index + 1);
+
+            if (matchLength === 0) {
+              regex.lastIndex++;
+            }
           }
         }
       });
       return results;
     },
+    [editor, matchCase, wholeWord]
+  );
+
+  const selectMatch = useCallback(
+    (match: MatchRange) => {
+      if (!editor) return;
+      editor
+        .chain()
+        .focus()
+        .setTextSelection({ from: match.from, to: match.to })
+        .scrollIntoView()
+        .run();
+
+      // Smooth scroll the matched DOM container into center view
+      try {
+        const dom = editor.view.domAtPos(match.from);
+        const element = dom.node instanceof HTMLElement ? dom.node : dom.node.parentElement;
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+        }
+      } catch {}
+    },
     [editor]
   );
 
-  const selectMatch = (match: MatchRange) => {
-    if (!editor) return;
-    editor.chain().focus().setTextSelection({ from: match.from, to: match.to }).run();
-  };
-
-  const handleSearchChange = (term: string) => {
+  const handleSearchChange = (
+    term: string,
+    caseSensitive: boolean = matchCase,
+    wholeWords: boolean = wholeWord
+  ) => {
     setSearchTerm(term);
+    setReplaceStatus(null);
     if (!term.trim()) {
       setMatches([]);
       setCurrentMatchIndex(0);
       return;
     }
 
-    const found = findMatches(term);
+    const found = findMatches(term, caseSensitive, wholeWords);
     setMatches(found);
     if (found.length > 0) {
       setCurrentMatchIndex(1);
       selectMatch(found[0]);
     } else {
       setCurrentMatchIndex(0);
+    }
+  };
+
+  const handleToggleMatchCase = () => {
+    const nextCase = !matchCase;
+    setMatchCase(nextCase);
+    if (searchTerm.trim()) {
+      handleSearchChange(searchTerm, nextCase, wholeWord);
+    }
+  };
+
+  const handleToggleWholeWord = () => {
+    const nextWhole = !wholeWord;
+    setWholeWord(nextWhole);
+    if (searchTerm.trim()) {
+      handleSearchChange(searchTerm, matchCase, nextWhole);
     }
   };
 
@@ -132,39 +225,94 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
 
   const handleReplaceOne = () => {
     if (!editor || !searchTerm.trim() || matches.length === 0) return;
-    const target = matches[currentMatchIndex - 1] || matches[0];
+    const targetIdx = currentMatchIndex > 0 ? currentMatchIndex - 1 : 0;
+    const target = matches[targetIdx];
     if (!target) return;
 
-    editor.chain().focus().insertContentAt({ from: target.from, to: target.to }, replaceTerm).run();
-    handleSearchChange(searchTerm);
+    const { tr } = editor.state;
+    tr.insertText(replaceTerm, target.from, target.to);
+    editor.view.dispatch(tr);
+
+    // Refresh matches with updated document state
+    const newMatches = findMatches(searchTerm, matchCase, wholeWord);
+    setMatches(newMatches);
+
+    if (newMatches.length === 0) {
+      setCurrentMatchIndex(0);
+      setReplaceStatus('Replaced 1 match. No more matches found.');
+    } else {
+      // Advance to the match now occupying targetIdx, or wrap to first
+      const nextIndex = targetIdx < newMatches.length ? targetIdx + 1 : 1;
+      setCurrentMatchIndex(nextIndex);
+      selectMatch(newMatches[nextIndex - 1]);
+      setReplaceStatus(`Replaced 1 match. (${newMatches.length} remaining)`);
+    }
   };
 
   const handleReplaceAll = () => {
     if (!editor || !searchTerm.trim()) return;
-    const currentMatches = findMatches(searchTerm);
-    if (currentMatches.length === 0) return;
+    const currentMatches = findMatches(searchTerm, matchCase, wholeWord);
+    if (currentMatches.length === 0) {
+      setReplaceStatus('No matches found to replace.');
+      return;
+    }
 
+    const count = currentMatches.length;
     const { tr } = editor.state;
     // Replace in reverse position order so node positions do not get offset
-    for (let i = currentMatches.length - 1; i >= 0; i--) {
+    for (let i = count - 1; i >= 0; i--) {
       const m = currentMatches[i];
       tr.insertText(replaceTerm, m.from, m.to);
     }
     editor.view.dispatch(tr);
-    handleSearchChange(searchTerm);
+
+    const newMatches = findMatches(searchTerm, matchCase, wholeWord);
+    setMatches(newMatches);
+    if (newMatches.length > 0) {
+      setCurrentMatchIndex(1);
+      selectMatch(newMatches[0]);
+    } else {
+      setCurrentMatchIndex(0);
+    }
+    setReplaceStatus(`Replaced all ${count} occurrence${count === 1 ? '' : 's'}.`);
   };
 
+  // Keep matches and headings in sync when editor content changes
+  useEffect(() => {
+    if (!editor) return;
+    const onDocUpdate = () => {
+      if (activeTab === 'search' && searchTerm.trim()) {
+        const found = findMatches(searchTerm, matchCase, wholeWord);
+        setMatches(found);
+        setCurrentMatchIndex((prev) => {
+          if (found.length === 0) return 0;
+          if (prev > found.length) return found.length;
+          if (prev === 0) return 1;
+          return prev;
+        });
+      } else if (activeTab === 'outline') {
+        setHeadings(extractHeadings());
+      }
+    };
+
+    editor.on('update', onDocUpdate);
+    return () => {
+      editor.off('update', onDocUpdate);
+    };
+  }, [editor, activeTab, searchTerm, matchCase, wholeWord, findMatches, extractHeadings]);
+
   return (
-    <aside className="w-72 bg-white dark:bg-[#252526] border-r border-[#e0e0e0] dark:border-[#383838] flex flex-col h-full shadow-sm z-10 select-none text-xs">
+    <aside className="w-80 bg-white dark:bg-[#252526] border-r border-[#e0e0e0] dark:border-[#383838] flex flex-col h-full shadow-sm z-10 select-none text-xs">
       {/* Sidebar Header */}
       <div className="h-9 px-3 border-b border-[#e0e0e0] dark:border-[#383838] flex items-center justify-between bg-[#f5f5f5] dark:bg-[#1e1e1e]">
-        <div className="flex items-center space-x-1 font-semibold text-gray-700 dark:text-gray-200">
+        <div className="flex items-center space-x-1.5 font-semibold text-gray-700 dark:text-gray-200">
           <ListTree className="w-4 h-4 text-[#185abd]" />
           <span>Navigation</span>
         </div>
         <button
           onClick={onClose}
           className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] transition-colors"
+          title="Close navigation pane"
         >
           <X className="w-3.5 h-3.5" />
         </button>
@@ -198,7 +346,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto p-3">
+      <div className="flex-1 overflow-y-auto p-3 flex flex-col">
         {/* OUTLINE TAB */}
         {activeTab === 'outline' && (
           <div className="space-y-1">
@@ -231,25 +379,78 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
 
         {/* SEARCH & REPLACE TAB */}
         {activeTab === 'search' && (
-          <div className="space-y-3">
+          <div className="space-y-3 flex-1 flex flex-col">
+            {/* FIND SECTION */}
             <div>
               <label className="block text-[11px] font-semibold text-gray-600 dark:text-gray-400 mb-1">
                 Find
               </label>
               <div className="relative">
                 <input
+                  ref={findInputRef}
                   type="text"
                   placeholder="Search in document..."
                   value={searchTerm}
                   onChange={(e) => handleSearchChange(e.target.value)}
-                  className="w-full px-2.5 py-1.5 pl-8 bg-white dark:bg-[#1f1f1f] border border-gray-300 dark:border-gray-600 rounded text-xs outline-hidden focus:border-[#185abd]"
-                  autoFocus
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      if (e.shiftKey) {
+                        handlePrevMatch();
+                      } else {
+                        handleNextMatch();
+                      }
+                    } else if (e.key === 'Escape') {
+                      onClose();
+                    }
+                  }}
+                  className="w-full px-2.5 py-1.5 pl-8 pr-7 bg-white dark:bg-[#1f1f1f] border border-gray-300 dark:border-gray-600 rounded text-xs outline-hidden focus:border-[#185abd]"
                 />
                 <Search className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2.5" />
+                {searchTerm && (
+                  <button
+                    onClick={() => {
+                      handleSearchChange('');
+                      findInputRef.current?.focus();
+                    }}
+                    className="absolute right-2 top-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+                    title="Clear search"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+
+              {/* Search Options: Case Sensitivity & Whole Word */}
+              <div className="flex items-center space-x-1.5 mt-2">
+                <button
+                  type="button"
+                  onClick={handleToggleMatchCase}
+                  title="Match Case (Case sensitive)"
+                  className={`px-2 py-0.5 rounded text-[10px] font-semibold border transition-colors ${
+                    matchCase
+                      ? 'bg-[#185abd] text-white border-[#185abd]'
+                      : 'bg-white dark:bg-[#2d2d2d] text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-[#383838]'
+                  }`}
+                >
+                  Aa Match Case
+                </button>
+                <button
+                  type="button"
+                  onClick={handleToggleWholeWord}
+                  title="Match Whole Words Only"
+                  className={`px-2 py-0.5 rounded text-[10px] font-semibold border transition-colors ${
+                    wholeWord
+                      ? 'bg-[#185abd] text-white border-[#185abd]'
+                      : 'bg-white dark:bg-[#2d2d2d] text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-[#383838]'
+                  }`}
+                >
+                  [ab] Whole Word
+                </button>
               </div>
 
               {searchTerm.trim() && (
-                <div className="flex items-center justify-between mt-1 text-[11px] text-gray-500">
+                <div className="flex items-center justify-between mt-2 text-[11px] text-gray-500">
                   <span>
                     {matches.length > 0
                       ? `Match ${currentMatchIndex} of ${matches.length}`
@@ -260,7 +461,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                       onClick={handlePrevMatch}
                       disabled={matches.length === 0}
                       className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] disabled:opacity-30"
-                      title="Previous match"
+                      title="Previous match (Shift+Enter)"
                     >
                       <ChevronUp className="w-3.5 h-3.5" />
                     </button>
@@ -268,7 +469,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                       onClick={handleNextMatch}
                       disabled={matches.length === 0}
                       className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] disabled:opacity-30"
-                      title="Next match"
+                      title="Next match (Enter)"
                     >
                       <ChevronDown className="w-3.5 h-3.5" />
                     </button>
@@ -277,35 +478,98 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
               )}
             </div>
 
+            {/* REPLACE SECTION */}
             <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
               <label className="block text-[11px] font-semibold text-gray-600 dark:text-gray-400 mb-1">
                 Replace With
               </label>
               <input
+                ref={replaceInputRef}
                 type="text"
                 placeholder="Replacement text..."
                 value={replaceTerm}
-                onChange={(e) => setReplaceTerm(e.target.value)}
+                onChange={(e) => {
+                  setReplaceTerm(e.target.value);
+                  setReplaceStatus(null);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (e.ctrlKey || e.metaKey) {
+                      handleReplaceAll();
+                    } else {
+                      handleReplaceOne();
+                    }
+                  } else if (e.key === 'Escape') {
+                    onClose();
+                  }
+                }}
                 className="w-full px-2.5 py-1.5 bg-white dark:bg-[#1f1f1f] border border-gray-300 dark:border-gray-600 rounded text-xs outline-hidden focus:border-[#185abd]"
               />
 
               <div className="flex items-center space-x-2 mt-2">
                 <button
+                  type="button"
                   onClick={handleReplaceOne}
                   disabled={matches.length === 0}
-                  className="flex-1 py-1 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-[#383838] rounded font-medium disabled:opacity-40"
+                  className="flex-1 py-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-[#383838] rounded font-medium disabled:opacity-40 transition-colors"
+                  title="Replace current match (Enter)"
                 >
                   Replace
                 </button>
                 <button
+                  type="button"
                   onClick={handleReplaceAll}
                   disabled={matches.length === 0}
-                  className="flex-1 py-1 bg-[#185abd] text-white hover:bg-[#1651aa] rounded font-medium disabled:opacity-40"
+                  className="flex-1 py-1.5 bg-[#185abd] text-white hover:bg-[#1651aa] rounded font-medium disabled:opacity-40 transition-colors"
+                  title="Replace all matches (Ctrl+Enter)"
                 >
                   Replace All
                 </button>
               </div>
+
+              {replaceStatus && (
+                <div className="mt-1.5 text-[11px] text-[#185abd] dark:text-blue-400 font-medium">
+                  {replaceStatus}
+                </div>
+              )}
             </div>
+
+            {/* MATCHES LIST (MICROSOFT WORD STYLE NAVIGATION RESULTS) */}
+            {matches.length > 0 && (
+              <div className="pt-2 border-t border-gray-200 dark:border-gray-700 flex-1 flex flex-col min-h-0">
+                <div className="text-[11px] font-semibold text-gray-500 dark:text-gray-400 mb-1.5">
+                  Results ({matches.length})
+                </div>
+                <div className="flex-1 overflow-y-auto space-y-1 pr-1 max-h-56">
+                  {matches.map((m, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => {
+                        setCurrentMatchIndex(idx + 1);
+                        selectMatch(m);
+                      }}
+                      className={`w-full text-left px-2 py-1.5 rounded text-xs transition-colors border ${
+                        currentMatchIndex === idx + 1
+                          ? 'bg-[#eef5fc] dark:bg-[#1a365d] border-[#185abd] text-[#185abd] dark:text-blue-300 font-medium shadow-2xs'
+                          : 'bg-white dark:bg-[#252526] border-transparent hover:bg-gray-100 dark:hover:bg-[#333] text-gray-700 dark:text-gray-300'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between text-[10px] text-gray-400 mb-0.5">
+                        <span>Match {idx + 1}</span>
+                        {currentMatchIndex === idx + 1 && (
+                          <span className="text-[#185abd] dark:text-blue-300 font-semibold">Current</span>
+                        )}
+                      </div>
+                      <div className="truncate font-sans text-[11px]">
+                        {m.snippet || searchTerm}
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -62,6 +62,7 @@ export const App: React.FC = () => {
   const [showRuler, setShowRuler] = useState(true);
   const [showNavSidebar, setShowNavSidebar] = useState(false);
   const [navDefaultTab, setNavDefaultTab] = useState<'outline' | 'search'>('outline');
+  const [navSearchFocus, setNavSearchFocus] = useState<'find' | 'replace'>('find');
   const [showSpellCheck, setShowSpellCheck] = useState(false);
   const [showWordCount, setShowWordCount] = useState(false);
   const [showBackstage, setShowBackstage] = useState(false);
@@ -443,6 +444,12 @@ export const App: React.FC = () => {
       } else if (isMod && e.key.toLowerCase() === 'f') {
         e.preventDefault();
         setNavDefaultTab('search');
+        setNavSearchFocus('find');
+        setShowNavSidebar(true);
+      } else if (isMod && e.key.toLowerCase() === 'h') {
+        e.preventDefault();
+        setNavDefaultTab('search');
+        setNavSearchFocus('replace');
         setShowNavSidebar(true);
       } else if (isMod && e.key.toLowerCase() === 'k') {
         e.preventDefault();
@@ -547,6 +554,12 @@ export const App: React.FC = () => {
   }, [editor, documentTitle]);
 
   // Action handlers
+  const handleOpenSearch = (mode: 'find' | 'replace' = 'find') => {
+    setNavDefaultTab('search');
+    setNavSearchFocus(mode);
+    setShowNavSidebar(true);
+  };
+
   const handleNewDocument = () => {
     if (!editor) return;
     if (isDirty) {
@@ -807,10 +820,7 @@ export const App: React.FC = () => {
               setIsDirty(true);
             }}
             onToggleTheme={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-            onOpenSearch={() => {
-              setNavDefaultTab('search');
-              setShowNavSidebar(true);
-            }}
+            onOpenSearch={() => handleOpenSearch('find')}
             onRequestClose={requestWindowClose}
           />
         </div>
@@ -850,10 +860,7 @@ export const App: React.FC = () => {
             onCloseDocument={handleCloseDocument}
             onOpenAbout={() => setShowAboutModal(true)}
             onOpenShortcuts={() => setShowShortcutsModal(true)}
-            onOpenSearch={() => {
-              setNavDefaultTab('search');
-              setShowNavSidebar(true);
-            }}
+            onOpenSearch={handleOpenSearch}
             onOpenSpellCheck={() => setShowSpellCheck(true)}
             onOpenWordCount={() => setShowWordCount(true)}
             onOpenRecovery={() => {
@@ -945,6 +952,7 @@ export const App: React.FC = () => {
             <NavigationSidebar
               editor={editor}
               defaultTab={navDefaultTab}
+              initialSearchFocus={navSearchFocus}
               onClose={() => setShowNavSidebar(false)}
             />
           </div>

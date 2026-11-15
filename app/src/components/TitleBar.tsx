@@ -17,7 +17,7 @@ interface TitleBarProps {
   theme: 'light' | 'dark';
   onTitleChange: (newTitle: string) => void;
   onToggleTheme: () => void;
-  onOpenSearch?: () => void;
+  onOpenSearch?: (mode?: 'find' | 'replace') => void;
   onRequestClose?: () => void;
   isEditingTitleExternal?: boolean;
   onStartEditingTitle?: () => void;
@@ -115,7 +115,7 @@ export const TitleBar: React.FC<TitleBarProps> = ({
       {/* 2. Center: Search Bar ("Search for tools, help, and more (Alt + Q)") */}
       <div className="flex-1 flex justify-center max-w-[500px] mx-4">
         <button
-          onClick={onOpenSearch}
+          onClick={() => onOpenSearch?.('find')}
           title="Search tools, commands and help (Alt+Q)"
           className="w-full flex items-center space-x-2 bg-white dark:bg-[#2d2c2b] hover:bg-white/90 border border-[#e1dfdd] dark:border-gray-700 hover:border-gray-400 rounded-md px-3 py-1 text-xs text-gray-500 dark:text-gray-400 shadow-2xs transition-colors"
         >

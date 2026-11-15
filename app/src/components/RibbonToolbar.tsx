@@ -88,7 +88,7 @@ import { FileMenuDropdown } from './FileMenuDropdown';
 interface RibbonToolbarProps {
   editor: Editor | null;
   documentTitle?: string;
-  onOpenSearch: () => void;
+  onOpenSearch: (mode?: 'find' | 'replace') => void;
   onOpenSpellCheck: () => void;
   onOpenWordCount: () => void;
   onOpenRecovery: () => void;
@@ -2135,7 +2135,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
             <div className="flex flex-col justify-between h-full px-1">
               <div className="flex flex-col space-y-0.5">
                 <button
-                  onClick={onOpenSearch}
+                  onClick={() => onOpenSearch('find')}
                   onMouseDown={(e) => e.preventDefault()}
                   className="flex items-center space-x-1.5 px-2 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-[11px]"
                   title="Find (Ctrl+F)"
@@ -2144,7 +2144,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   <span>Find</span>
                 </button>
                 <button
-                  onClick={onOpenSearch}
+                  onClick={() => onOpenSearch('replace')}
                   onMouseDown={(e) => e.preventDefault()}
                   className="flex items-center space-x-1.5 px-2 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-[11px]"
                   title="Replace (Ctrl+H)"
@@ -3258,7 +3258,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
             {/* 3. Insights */}
             <div className="flex flex-col justify-between items-center h-full px-1">
               <button
-                onClick={onOpenSearch}
+                onClick={() => onOpenSearch('find')}
                 onMouseDown={(e) => e.preventDefault()}
                 title="Search Smart Insights"
                 className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"

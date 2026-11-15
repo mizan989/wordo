@@ -32,7 +32,8 @@ export const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ isOpen, onClose 
         { label: 'Copy Selection', keys: [modKey, 'C'] },
         { label: 'Paste Clipboard', keys: [modKey, 'V'] },
         { label: 'Select All', keys: [modKey, 'A'] },
-        { label: 'Find & Replace', keys: [modKey, 'F'] },
+        { label: 'Find in Document', keys: [modKey, 'F'] },
+        { label: 'Replace in Document', keys: [modKey, 'H'] },
       ],
     },
     {
