@@ -831,7 +831,7 @@ export const App: React.FC = () => {
 
       {/* 2. Office 365 Ribbon Toolbar (Unified with Backstage) */}
       {!isFocusMode && (
-        <div className="no-print relative z-40">
+        <div className="no-print relative z-50 overflow-visible">
           <RibbonToolbar
             editor={editor}
             onOpenFileMenu={() => setShowBackstage(true)}
@@ -938,7 +938,7 @@ export const App: React.FC = () => {
       )}
 
       {/* 6. Workspace Body (Navigation Sidebar + Editor Canvas + Proofing Panel) */}
-      <div className="wordo-workspace flex-1 flex overflow-hidden relative">
+      <div className="wordo-workspace flex-1 flex overflow-hidden relative z-0">
         {/* Navigation Sidebar */}
         {showNavSidebar && !isFocusMode && (
           <div className="no-print">

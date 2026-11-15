@@ -1157,9 +1157,9 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
   };
 
   return (
-    <div className="relative z-40 bg-[#f3f2f1] dark:bg-[#201f1e] border-b border-[#e1dfdd] dark:border-[#37373d] shadow-2xs select-none">
+    <div className="relative z-50 bg-[#f3f2f1] dark:bg-[#201f1e] border-b border-[#e1dfdd] dark:border-[#37373d] shadow-2xs select-none overflow-visible">
       {/* Ribbon Tabs Row */}
-      <div className="flex items-center justify-between px-3 pt-1 border-b border-[#e1dfdd] dark:border-[#333333] text-xs bg-[#f3f2f1] dark:bg-[#201f1e]">
+      <div className="flex items-center justify-between px-3 pt-1 border-b border-[#e1dfdd] dark:border-[#333333] text-xs bg-[#f3f2f1] dark:bg-[#201f1e] overflow-visible">
         <div className="flex items-center space-x-1">
           {/* File Tab */}
           <div className="relative">
@@ -1309,7 +1309,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
 
       {/* Ribbon Command Strip */}
       {!isRibbonCollapsed && (
-        <div className="h-[84px] bg-white dark:bg-[#252423] border-b border-[#edebe9] dark:border-[#2d2c2b] shadow-2xs px-3 py-1 flex items-stretch justify-between overflow-x-auto text-xs text-gray-700 dark:text-gray-200 transition-all">
+        <div className="h-[84px] bg-white dark:bg-[#252423] border-b border-[#edebe9] dark:border-[#2d2c2b] shadow-2xs px-3 py-1 flex items-stretch justify-between overflow-visible text-xs text-gray-700 dark:text-gray-200 transition-all">
           <div className="flex items-stretch space-x-1 flex-1">
         {/* HOME TAB */}
         {activeTab === 'home' && (
