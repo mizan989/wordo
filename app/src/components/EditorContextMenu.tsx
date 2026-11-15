@@ -30,17 +30,9 @@ import {
 } from 'lucide-react';
 import { FONT_SIZE_STEPS } from '../extensions/typography';
 import { SpellService } from '../services/spellService';
+import { CLOUD_FONTS, STANDARD_FONTS } from './RibbonToolbar';
 
-const CONTEXT_FONTS = [
-  'Aptos',
-  'Calibri',
-  'Segoe UI',
-  'Arial',
-  'Times New Roman',
-  'Georgia',
-  'Consolas',
-  'Garamond',
-];
+const CONTEXT_FONTS = Array.from(new Set([...CLOUD_FONTS, ...STANDARD_FONTS]));
 
 const MINI_COLORS = [
   '#000000',
