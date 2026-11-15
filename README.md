@@ -255,7 +255,7 @@ wordo/
 │   │   └── static/            # Static assets and local fonts
 │   ├── scripts/
 │   │   ├── generate_site.py   # Multi-page marketing & utility tool generator
-│   │   └── postbuild.js       # Post-build packaging hook
+│   │   └── run_generate.js    # Cross-platform site generation runner
 │   ├── src/
 │   │   ├── assets/            # Wordo branding logo and visual assets
 │   │   ├── components/        # UI components

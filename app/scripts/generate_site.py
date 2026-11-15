@@ -32,7 +32,7 @@ def create_favicon(dist_path, public_path):
 
 # 1. Prepare start page from capture/page.html with working interaction scripts & CORS interception
 def generate_start_page():
-    page_html_path = os.path.join(WORKSPACE_DIR, 'capture', 'page.html')
+    page_html_path = os.path.join(os.path.dirname(__file__), 'site_templates', 'page.html')
     with open(page_html_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
@@ -1382,7 +1382,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 # 2. Convert route capture.json outline into semantic HTML
 def generate_route_html(route_dir, route_name):
-    json_path = os.path.join(WORKSPACE_DIR, 'capture', 'routes', route_dir, 'capture.json')
+    json_path = os.path.join(os.path.dirname(__file__), 'site_templates', 'routes', route_dir, 'capture.json')
     with open(json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
