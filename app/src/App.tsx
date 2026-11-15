@@ -104,12 +104,17 @@ export const App: React.FC = () => {
     showPageNumbers: false,
   });
 
-  // Apply dark theme class to root html element
+  // Apply dark theme class to root html element and Astryx neutral theme attributes
   useEffect(() => {
+    document.documentElement.setAttribute('data-astryx-theme', 'neutral');
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.documentElement.setAttribute('data-astryx-media', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
+      document.documentElement.setAttribute('data-theme', 'light');
+      document.documentElement.setAttribute('data-astryx-media', 'light');
     }
     StorageService.saveTheme(theme);
   }, [theme]);

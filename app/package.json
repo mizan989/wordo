@@ -12,6 +12,7 @@
     "tauri:build": "tauri build"
   },
   "dependencies": {
+    "@astryxdesign/theme-neutral": "^0.7.16",
     "@tiptap/extension-character-count": "^3.32.2",
     "@tiptap/extension-color": "^3.32.2",
     "@tiptap/extension-highlight": "^3.32.2",

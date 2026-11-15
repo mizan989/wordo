@@ -1,3 +1,5 @@
+@import "@astryxdesign/theme-neutral/fonts.css";
+@import "@astryxdesign/theme-neutral/theme.css";
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
