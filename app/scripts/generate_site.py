@@ -2933,6 +2933,10 @@ def main():
         assets_dst = os.path.join(editor_dir, 'assets')
         if os.path.isdir(assets_src):
             shutil.copytree(assets_src, assets_dst, dirs_exist_ok=True)
+        static_src = os.path.join(DIST_DIR, 'static')
+        static_dst = os.path.join(editor_dir, 'static')
+        if os.path.isdir(static_src):
+            shutil.copytree(static_src, static_dst, dirs_exist_ok=True)
         with open(os.path.join(editor_dir, 'index.html'), 'w', encoding='utf-8') as f:
             f.write(editor_html)
         print('Saved Wordo Desktop Editor and assets to /editor/')
