@@ -393,6 +393,33 @@
 
 .wordo-page-break { border-top: 1px dashed #9ca3af; margin: 1rem 0; height: 1px; }
 
+/* Find & Replace highlight decorations */
+.search-result-match {
+  background-color: #fef08a !important; /* amber-200 / bright soft yellow */
+  color: #1c1917 !important;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+.dark .search-result-match {
+  background-color: #854d0e !important; /* amber-800 */
+  color: #fef3c7 !important;
+}
+
+.search-result-active {
+  background-color: #f97316 !important; /* vivid orange */
+  color: #ffffff !important;
+  border-radius: 2px;
+  padding: 0 2px;
+  box-shadow: 0 0 0 2px #ea580c;
+}
+
+.dark .search-result-active {
+  background-color: #f59e0b !important;
+  color: #18181b !important;
+  box-shadow: 0 0 0 2px #d97706;
+}
+
 @media print {
   html, body, #root { width: 100% !important; height: auto !important; min-height: 0 !important; margin: 0 !important; overflow: visible !important; background: #fff !important; }
   .wordo-app-shell { display: block !important; width: 100% !important; height: auto !important; min-height: 0 !important; overflow: visible !important; }

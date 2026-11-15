@@ -19,6 +19,7 @@ import TaskItem from '@tiptap/extension-task-item';
 import CharacterCount from '@tiptap/extension-character-count';
 import { TypographyExtension } from './extensions/typography';
 import { PageBreak } from './extensions/pageBreak';
+import { SearchHighlightExtension } from './extensions/searchHighlight';
 
 import { TitleBar } from './components/TitleBar';
 import { BackstageView } from './components/BackstageView';
@@ -167,6 +168,7 @@ export const App: React.FC = () => {
       CharacterCount,
       TypographyExtension,
       PageBreak,
+      SearchHighlightExtension,
     ],
     content: initialContent,
     autofocus: true,

@@ -8,6 +8,7 @@ import {
   ChevronDown,
   ChevronUp,
 } from 'lucide-react';
+import { searchHighlightPluginKey } from '../extensions/searchHighlight';
 
 interface NavigationSidebarProps {
   editor: Editor | null;
@@ -62,6 +63,31 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
       return () => clearTimeout(timer);
     }
   }, [activeTab, initialSearchFocus]);
+
+  // Dispatch live search highlight decorations to ProseMirror document canvas
+  const updateSearchDecorations = useCallback(
+    (currentMatches: MatchRange[], activeIdx: number) => {
+      if (!editor || editor.isDestroyed) return;
+      const { tr } = editor.state;
+      tr.setMeta(searchHighlightPluginKey, {
+        matches: currentMatches.map((m) => ({ from: m.from, to: m.to })),
+        activeIndex: activeIdx > 0 ? activeIdx - 1 : -1,
+      });
+      editor.view.dispatch(tr);
+    },
+    [editor]
+  );
+
+  // Clear decorations on unmount or close
+  useEffect(() => {
+    return () => {
+      if (editor && !editor.isDestroyed) {
+        const { tr } = editor.state;
+        tr.setMeta(searchHighlightPluginKey, { matches: [], activeIndex: -1 });
+        editor.view.dispatch(tr);
+      }
+    };
+  }, [editor]);
 
   // Extract headings with exact ProseMirror node positions
   const extractHeadings = useCallback(() => {
@@ -146,12 +172,14 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
     [editor, matchCase, wholeWord]
   );
 
+  // Set selection and scroll without stealing DOM focus from the search inputs
   const selectMatch = useCallback(
     (match: MatchRange) => {
       if (!editor) return;
+      // Do NOT call editor.chain().focus() here!
+      // This keeps the typing pointer strictly inside the Find/Replace input.
       editor
         .chain()
-        .focus()
         .setTextSelection({ from: match.from, to: match.to })
         .scrollIntoView()
         .run();
@@ -178,6 +206,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
     if (!term.trim()) {
       setMatches([]);
       setCurrentMatchIndex(0);
+      updateSearchDecorations([], 0);
       return;
     }
 
@@ -185,9 +214,11 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
     setMatches(found);
     if (found.length > 0) {
       setCurrentMatchIndex(1);
+      updateSearchDecorations(found, 1);
       selectMatch(found[0]);
     } else {
       setCurrentMatchIndex(0);
+      updateSearchDecorations([], 0);
     }
   };
 
@@ -211,6 +242,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
     if (matches.length > 0) {
       const nextIndex = currentMatchIndex >= matches.length ? 1 : currentMatchIndex + 1;
       setCurrentMatchIndex(nextIndex);
+      updateSearchDecorations(matches, nextIndex);
       selectMatch(matches[nextIndex - 1]);
     }
   };
@@ -219,6 +251,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
     if (matches.length > 0) {
       const prevIndex = currentMatchIndex <= 1 ? matches.length : currentMatchIndex - 1;
       setCurrentMatchIndex(prevIndex);
+      updateSearchDecorations(matches, prevIndex);
       selectMatch(matches[prevIndex - 1]);
     }
   };
@@ -239,11 +272,13 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
 
     if (newMatches.length === 0) {
       setCurrentMatchIndex(0);
+      updateSearchDecorations([], 0);
       setReplaceStatus('Replaced 1 match. No more matches found.');
     } else {
       // Advance to the match now occupying targetIdx, or wrap to first
       const nextIndex = targetIdx < newMatches.length ? targetIdx + 1 : 1;
       setCurrentMatchIndex(nextIndex);
+      updateSearchDecorations(newMatches, nextIndex);
       selectMatch(newMatches[nextIndex - 1]);
       setReplaceStatus(`Replaced 1 match. (${newMatches.length} remaining)`);
     }
@@ -270,9 +305,11 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
     setMatches(newMatches);
     if (newMatches.length > 0) {
       setCurrentMatchIndex(1);
+      updateSearchDecorations(newMatches, 1);
       selectMatch(newMatches[0]);
     } else {
       setCurrentMatchIndex(0);
+      updateSearchDecorations([], 0);
     }
     setReplaceStatus(`Replaced all ${count} occurrence${count === 1 ? '' : 's'}.`);
   };
@@ -285,10 +322,13 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
         const found = findMatches(searchTerm, matchCase, wholeWord);
         setMatches(found);
         setCurrentMatchIndex((prev) => {
-          if (found.length === 0) return 0;
-          if (prev > found.length) return found.length;
-          if (prev === 0) return 1;
-          return prev;
+          if (found.length === 0) {
+            updateSearchDecorations([], 0);
+            return 0;
+          }
+          const nextIdx = prev > found.length ? found.length : (prev === 0 ? 1 : prev);
+          updateSearchDecorations(found, nextIdx);
+          return nextIdx;
         });
       } else if (activeTab === 'outline') {
         setHeadings(extractHeadings());
@@ -299,7 +339,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
     return () => {
       editor.off('update', onDocUpdate);
     };
-  }, [editor, activeTab, searchTerm, matchCase, wholeWord, findMatches, extractHeadings]);
+  }, [editor, activeTab, searchTerm, matchCase, wholeWord, findMatches, extractHeadings, updateSearchDecorations]);
 
   return (
     <aside className="w-80 bg-white dark:bg-[#252526] border-r border-[#e0e0e0] dark:border-[#383838] flex flex-col h-full shadow-sm z-10 select-none text-xs">
@@ -323,6 +363,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
         <button
           onClick={() => {
             setActiveTab('outline');
+            updateSearchDecorations([], 0);
             setHeadings(extractHeadings());
           }}
           className={`flex-1 py-1.5 text-center font-medium border-b-2 transition-colors ${
@@ -334,7 +375,12 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
           Headings ({headings.length})
         </button>
         <button
-          onClick={() => setActiveTab('search')}
+          onClick={() => {
+            setActiveTab('search');
+            if (matches.length > 0) {
+              updateSearchDecorations(matches, currentMatchIndex);
+            }
+          }}
           className={`flex-1 py-1.5 text-center font-medium border-b-2 transition-colors ${
             activeTab === 'search'
               ? 'border-[#185abd] text-[#185abd] bg-white dark:bg-[#252526]'
@@ -409,6 +455,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                 <Search className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2.5" />
                 {searchTerm && (
                   <button
+                    onMouseDown={(e) => e.preventDefault()}
                     onClick={() => {
                       handleSearchChange('');
                       findInputRef.current?.focus();
@@ -425,6 +472,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
               <div className="flex items-center space-x-1.5 mt-2">
                 <button
                   type="button"
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={handleToggleMatchCase}
                   title="Match Case (Case sensitive)"
                   className={`px-2 py-0.5 rounded text-[10px] font-semibold border transition-colors ${
@@ -437,6 +485,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                 </button>
                 <button
                   type="button"
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={handleToggleWholeWord}
                   title="Match Whole Words Only"
                   className={`px-2 py-0.5 rounded text-[10px] font-semibold border transition-colors ${
@@ -458,6 +507,8 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                   </span>
                   <div className="flex space-x-1">
                     <button
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
                       onClick={handlePrevMatch}
                       disabled={matches.length === 0}
                       className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] disabled:opacity-30"
@@ -466,6 +517,8 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                       <ChevronUp className="w-3.5 h-3.5" />
                     </button>
                     <button
+                      type="button"
+                      onMouseDown={(e) => e.preventDefault()}
                       onClick={handleNextMatch}
                       disabled={matches.length === 0}
                       className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] disabled:opacity-30"
@@ -510,6 +563,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
               <div className="flex items-center space-x-2 mt-2">
                 <button
                   type="button"
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={handleReplaceOne}
                   disabled={matches.length === 0}
                   className="flex-1 py-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-[#383838] rounded font-medium disabled:opacity-40 transition-colors"
@@ -519,6 +573,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                 </button>
                 <button
                   type="button"
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={handleReplaceAll}
                   disabled={matches.length === 0}
                   className="flex-1 py-1.5 bg-[#185abd] text-white hover:bg-[#1651aa] rounded font-medium disabled:opacity-40 transition-colors"
@@ -546,8 +601,10 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                     <button
                       key={idx}
                       type="button"
+                      onMouseDown={(e) => e.preventDefault()}
                       onClick={() => {
                         setCurrentMatchIndex(idx + 1);
+                        updateSearchDecorations(matches, idx + 1);
                         selectMatch(m);
                       }}
                       className={`w-full text-left px-2 py-1.5 rounded text-xs transition-colors border ${
