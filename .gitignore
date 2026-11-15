@@ -7,6 +7,27 @@ target/
 app/src-tauri/target/
 app/src-tauri/gen/
 
+# Installation & package bundles (Linux, Windows, macOS, Mobile)
+*.deb
+*.rpm
+*.appimage
+*.AppImage
+*.snap
+*.flatpak
+*.exe
+*.msi
+*.msix
+*.appx
+*.dmg
+*.pkg
+*.app/
+*.ipa
+*.apk
+*.aab
+*.tar.gz
+*.tar.xz
+*.tar.bz2
+
 # Frontend distribution
 dist/
 app/dist/
