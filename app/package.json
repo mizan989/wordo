@@ -1,6 +1,6 @@
 {
   "name": "wordo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Premium Cross-Platform Desktop Word Processor",
   "type": "module",
   "scripts": {
