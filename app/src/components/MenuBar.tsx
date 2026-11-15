@@ -31,6 +31,9 @@ import {
   FileCode,
   FileCheck,
   ChevronRight,
+  Volume2,
+  Languages,
+  Eye,
 } from 'lucide-react';
 import { RecentDocument } from '../types';
 
@@ -84,6 +87,14 @@ interface MenuBarProps {
   onOpenSettings: () => void;
   onOpenAbout: () => void;
   onOpenShortcuts: () => void;
+
+  onOpenSymbolModal?: () => void;
+  onOpenDateTimeModal?: () => void;
+  onOpenCitationModal?: () => void;
+  onOpenTranslateModal?: () => void;
+  onOpenAccessibilityModal?: () => void;
+  onToggleReadAloud?: () => void;
+  onToggleFocusMode?: () => void;
 }
 
 export const MenuBar: React.FC<MenuBarProps> = ({
@@ -131,6 +142,13 @@ export const MenuBar: React.FC<MenuBarProps> = ({
   onOpenSettings,
   onOpenAbout,
   onOpenShortcuts,
+  onOpenSymbolModal,
+  onOpenDateTimeModal,
+  onOpenCitationModal,
+  onOpenTranslateModal,
+  onOpenAccessibilityModal,
+  onToggleReadAloud,
+  onToggleFocusMode,
 }) => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const menuBarRef = useRef<HTMLDivElement>(null);
@@ -178,7 +196,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
         </button>
 
         {activeMenu === 'file' && (
-          <div className="absolute left-0 top-full mt-0.5 w-60 bg-white dark:bg-[#1e1e1e] border border-[#d1d5db] dark:border-[#3f3f46] rounded-md shadow-xl py-1 text-xs z-50 animate-in fade-in-50">
+          <div onMouseDown={(e) => e.preventDefault()} className="absolute left-0 top-full mt-0.5 w-60 bg-white dark:bg-[#1e1e1e] border border-[#d1d5db] dark:border-[#3f3f46] rounded-md shadow-xl py-1 text-xs z-50 animate-in fade-in-50">
             <button
               onClick={() => {
                 onNew();
@@ -369,7 +387,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
         </button>
 
         {activeMenu === 'edit' && (
-          <div className="absolute left-0 top-full mt-0.5 w-52 bg-white dark:bg-[#1e1e1e] border border-gray-200 dark:border-[#3f3f46] rounded-md shadow-xl py-1 text-xs z-50">
+          <div onMouseDown={(e) => e.preventDefault()} className="absolute left-0 top-full mt-0.5 w-52 bg-white dark:bg-[#1e1e1e] border border-gray-200 dark:border-[#3f3f46] rounded-md shadow-xl py-1 text-xs z-50">
             <button
               onClick={() => {
                 onUndo();
@@ -486,7 +504,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
         </button>
 
         {activeMenu === 'insert' && (
-          <div className="absolute left-0 top-full mt-0.5 w-52 bg-white dark:bg-[#1e1e1e] border border-gray-200 dark:border-[#3f3f46] rounded-md shadow-xl py-1 text-xs z-50">
+          <div onMouseDown={(e) => e.preventDefault()} className="absolute left-0 top-full mt-0.5 w-52 bg-white dark:bg-[#1e1e1e] border border-gray-200 dark:border-[#3f3f46] rounded-md shadow-xl py-1 text-xs z-50">
             <button
               onClick={() => {
                 onInsertTable(3, 3);
@@ -556,6 +574,34 @@ export const MenuBar: React.FC<MenuBarProps> = ({
             <div className="my-1 border-t border-gray-200 dark:border-[#333]" />
             <button
               onClick={() => {
+                onOpenSymbolModal?.();
+                closeMenu();
+              }}
+              className="w-full px-3 py-1.5 text-left hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+            >
+              Special Characters & Symbols (Ω)...
+            </button>
+            <button
+              onClick={() => {
+                onOpenDateTimeModal?.();
+                closeMenu();
+              }}
+              className="w-full px-3 py-1.5 text-left hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+            >
+              Date and Time...
+            </button>
+            <button
+              onClick={() => {
+                onOpenCitationModal?.();
+                closeMenu();
+              }}
+              className="w-full px-3 py-1.5 text-left hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+            >
+              Citations & Bibliography...
+            </button>
+            <div className="my-1 border-t border-gray-200 dark:border-[#333]" />
+            <button
+              onClick={() => {
                 onOpenSettings();
                 closeMenu();
               }}
@@ -582,7 +628,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
         </button>
 
         {activeMenu === 'format' && (
-          <div className="absolute left-0 top-full mt-0.5 w-52 bg-white dark:bg-[#1e1e1e] border border-gray-200 dark:border-[#3f3f46] rounded-md shadow-xl py-1 text-xs z-50">
+          <div onMouseDown={(e) => e.preventDefault()} className="absolute left-0 top-full mt-0.5 w-52 bg-white dark:bg-[#1e1e1e] border border-gray-200 dark:border-[#3f3f46] rounded-md shadow-xl py-1 text-xs z-50">
             <button
               onClick={() => {
                 onFormatBold();
@@ -677,7 +723,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
         </button>
 
         {activeMenu === 'view' && (
-          <div className="absolute left-0 top-full mt-0.5 w-52 bg-white dark:bg-[#1e1e1e] border border-gray-200 dark:border-[#3f3f46] rounded-md shadow-xl py-1 text-xs z-50">
+          <div onMouseDown={(e) => e.preventDefault()} className="absolute left-0 top-full mt-0.5 w-52 bg-white dark:bg-[#1e1e1e] border border-gray-200 dark:border-[#3f3f46] rounded-md shadow-xl py-1 text-xs z-50">
             <button
               onClick={() => {
                 onToggleRuler();
@@ -706,6 +752,16 @@ export const MenuBar: React.FC<MenuBarProps> = ({
               className="w-full px-3 py-1.5 text-left hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
             >
               Toggle Light / Dark Mode
+            </button>
+            <button
+              onClick={() => {
+                onToggleFocusMode?.();
+                closeMenu();
+              }}
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+            >
+              <span>Focus Mode (Fullscreen)</span>
+              <span className="text-[10px] text-gray-400">Esc to exit</span>
             </button>
 
             <div className="h-[1px] bg-gray-200 dark:bg-[#333] my-1" />
@@ -742,7 +798,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
         </button>
 
         {activeMenu === 'tools' && (
-          <div className="absolute left-0 top-full mt-0.5 w-56 bg-white dark:bg-[#1e1e1e] border border-gray-200 dark:border-[#3f3f46] rounded-md shadow-xl py-1 text-xs z-50">
+          <div onMouseDown={(e) => e.preventDefault()} className="absolute left-0 top-full mt-0.5 w-56 bg-white dark:bg-[#1e1e1e] border border-gray-200 dark:border-[#3f3f46] rounded-md shadow-xl py-1 text-xs z-50">
             <button
               onClick={() => {
                 onOpenWordCount();
@@ -775,6 +831,33 @@ export const MenuBar: React.FC<MenuBarProps> = ({
             </button>
             <button
               onClick={() => {
+                onToggleReadAloud?.();
+                closeMenu();
+              }}
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+            >
+              <Volume2 className="w-3.5 h-3.5 mr-2 text-blue-500" /> Read Aloud Text-to-Speech
+            </button>
+            <button
+              onClick={() => {
+                onOpenTranslateModal?.();
+                closeMenu();
+              }}
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+            >
+              <Languages className="w-3.5 h-3.5 mr-2 text-teal-600" /> Translate Document / Selection...
+            </button>
+            <button
+              onClick={() => {
+                onOpenAccessibilityModal?.();
+                closeMenu();
+              }}
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+            >
+              <Eye className="w-3.5 h-3.5 mr-2 text-indigo-500" /> Check Accessibility...
+            </button>
+            <button
+              onClick={() => {
                 onOpenSettings();
                 closeMenu();
               }}
@@ -801,7 +884,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
         </button>
 
         {activeMenu === 'help' && (
-          <div className="absolute left-0 top-full mt-0.5 w-52 bg-white dark:bg-[#1e1e1e] border border-gray-200 dark:border-[#3f3f46] rounded-md shadow-xl py-1 text-xs z-50">
+          <div onMouseDown={(e) => e.preventDefault()} className="absolute left-0 top-full mt-0.5 w-52 bg-white dark:bg-[#1e1e1e] border border-gray-200 dark:border-[#3f3f46] rounded-md shadow-xl py-1 text-xs z-50">
             <button
               onClick={() => {
                 onOpenAbout();

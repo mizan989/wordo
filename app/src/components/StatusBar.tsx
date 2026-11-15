@@ -20,6 +20,8 @@ interface StatusBarProps {
   onOpenWordCount: () => void;
   onOpenSpellCheck: () => void;
   isDirty: boolean;
+  onToggleFocusMode?: () => void;
+  isFocusMode?: boolean;
 }
 
 export const StatusBar: React.FC<StatusBarProps> = ({
@@ -31,6 +33,8 @@ export const StatusBar: React.FC<StatusBarProps> = ({
   onOpenWordCount,
   onOpenSpellCheck,
   isDirty,
+  onToggleFocusMode,
+  isFocusMode,
 }) => {
   return (
     <footer className="h-6 bg-[#185abd] text-white flex items-center justify-between px-3 text-[11px] select-none z-20 shadow-xs border-t border-[#1651aa]">
@@ -87,13 +91,20 @@ export const StatusBar: React.FC<StatusBarProps> = ({
       <div className="flex items-center space-x-3">
         {/* Layout Mode Icons */}
         <div className="flex items-center space-x-1 opacity-90">
-          <button title="Page Layout View unavailable" disabled className="p-0.5 opacity-40 cursor-not-allowed">
+          <button
+            onClick={() => {
+              if (isFocusMode && onToggleFocusMode) onToggleFocusMode();
+            }}
+            title="Page Layout View"
+            className={`p-1 rounded hover:bg-white/20 transition-colors ${!isFocusMode ? 'bg-white/25 text-white' : ''}`}
+          >
             <Layout className="w-3.5 h-3.5" />
           </button>
-          <button title="Web Layout View unavailable" disabled className="p-0.5 opacity-40 cursor-not-allowed">
-            <Globe className="w-3.5 h-3.5" />
-          </button>
-          <button title="Reading View unavailable" disabled className="p-0.5 opacity-40 cursor-not-allowed">
+          <button
+            onClick={onToggleFocusMode}
+            title="Focus / Reading View (Esc to exit)"
+            className={`p-1 rounded hover:bg-white/20 transition-colors ${isFocusMode ? 'bg-white/25 text-white' : ''}`}
+          >
             <BookOpen className="w-3.5 h-3.5" />
           </button>
         </div>

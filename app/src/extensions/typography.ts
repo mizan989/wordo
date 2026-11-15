@@ -2,6 +2,25 @@ import { Extension } from '@tiptap/core';
 
 export const FONT_SIZE_STEPS = [8, 9, 10, 10.5, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72];
 
+const getFontFallback = (font: string) => {
+  const serifFonts = [
+    'Times New Roman',
+    'Georgia',
+    'Cambria',
+    'Garamond',
+    'Palatino Linotype',
+    'Aptos Serif',
+    'Sitka Text',
+    'Sitka Heading',
+    'Sitka Display',
+    'Constantia',
+  ];
+  const monoFonts = ['Consolas', 'Courier New', 'Cascadia Code', 'Cascadia Mono', 'Aptos Mono'];
+  if (serifFonts.includes(font)) return 'serif';
+  if (monoFonts.includes(font)) return 'monospace';
+  return '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif';
+};
+
 export const TypographyExtension = Extension.create({
   name: 'typographyExtension',
 
@@ -34,8 +53,9 @@ export const TypographyExtension = Extension.create({
               if (!attributes.fontFamily) {
                 return {};
               }
+              const fallback = getFontFallback(attributes.fontFamily);
               return {
-                style: `font-family: "${attributes.fontFamily}", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`,
+                style: `font-family: "${attributes.fontFamily}", ${fallback}`,
               };
             },
           },
@@ -44,6 +64,32 @@ export const TypographyExtension = Extension.create({
       {
         types: ['paragraph', 'heading'],
         attributes: {
+          fontFamily: {
+            default: null,
+            parseHTML: (element) => element.style.fontFamily?.replace(/['"]/g, '') || null,
+            renderHTML: (attributes) => {
+              if (!attributes.fontFamily) return {};
+              const fallback = getFontFallback(attributes.fontFamily);
+              return {
+                style: `font-family: "${attributes.fontFamily}", ${fallback}`,
+              };
+            },
+          },
+          fontSize: {
+            default: null,
+            parseHTML: (element) => element.style.fontSize?.replace('pt', '') || null,
+            renderHTML: (attributes) => {
+              if (!attributes.fontSize) return {};
+              const size =
+                attributes.fontSize.toString().includes('px') ||
+                attributes.fontSize.toString().includes('pt')
+                  ? attributes.fontSize
+                  : `${attributes.fontSize}pt`;
+              return {
+                style: `font-size: ${size}`,
+              };
+            },
+          },
           lineHeight: {
             default: null,
             parseHTML: (element) => element.style.lineHeight || null,
@@ -105,12 +151,62 @@ export const TypographyExtension = Extension.create({
     return {
       setFontSize:
         (size: string | number) =>
-        ({ chain }: any) => {
+        ({ editor, chain }: any) => {
+          const { selection } = editor.state;
+          if (selection.empty) {
+            const { $from } = selection;
+            const text = $from.parent.textBetween(0, $from.parent.content.size, undefined, '\uFFFC');
+            const offset = $from.parentOffset;
+            let start = offset;
+            let end = offset;
+            while (start > 0 && /\S/.test(text[start - 1])) start--;
+            while (end < text.length && /\S/.test(text[end])) end++;
+            if (start < end) {
+              const from = $from.start() + start;
+              const to = $from.start() + end;
+              return chain()
+                .focus()
+                .setTextSelection({ from, to })
+                .setMark('textStyle', { fontSize: `${size}` })
+                .setTextSelection(selection.from)
+                .run();
+            }
+            return chain()
+              .focus()
+              .setMark('textStyle', { fontSize: `${size}` })
+              .updateAttributes('paragraph', { fontSize: `${size}` })
+              .run();
+          }
           return chain().focus().setMark('textStyle', { fontSize: `${size}` }).run();
         },
       setFontFamily:
         (font: string) =>
-        ({ chain }: any) => {
+        ({ editor, chain }: any) => {
+          const { selection } = editor.state;
+          if (selection.empty) {
+            const { $from } = selection;
+            const text = $from.parent.textBetween(0, $from.parent.content.size, undefined, '\uFFFC');
+            const offset = $from.parentOffset;
+            let start = offset;
+            let end = offset;
+            while (start > 0 && /\S/.test(text[start - 1])) start--;
+            while (end < text.length && /\S/.test(text[end])) end++;
+            if (start < end) {
+              const from = $from.start() + start;
+              const to = $from.start() + end;
+              return chain()
+                .focus()
+                .setTextSelection({ from, to })
+                .setMark('textStyle', { fontFamily: font })
+                .setTextSelection(selection.from)
+                .run();
+            }
+            return chain()
+              .focus()
+              .setMark('textStyle', { fontFamily: font })
+              .updateAttributes('paragraph', { fontFamily: font })
+              .run();
+          }
           return chain().focus().setMark('textStyle', { fontFamily: font }).run();
         },
       growFontSize:

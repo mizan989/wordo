@@ -11,18 +11,10 @@ import {
   ChevronUp,
   Baseline,
   RemoveFormatting,
+  Check,
 } from 'lucide-react';
 import { FONT_SIZE_STEPS } from '../extensions/typography';
-
-const MINI_FONT_FAMILIES = [
-  'Aptos',
-  'Calibri',
-  'Segoe UI',
-  'Arial',
-  'Times New Roman',
-  'Georgia',
-  'Consolas',
-];
+import { CLOUD_FONTS, STANDARD_FONTS } from './RibbonToolbar';
 
 const MINI_COLORS = [
   '#000000',
@@ -50,9 +42,14 @@ interface FloatingMiniToolbarProps {
 
 export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor }) => {
   const [position, setPosition] = useState<{ top: number; left: number } | null>(null);
+  const [showFontDropdown, setShowFontDropdown] = useState(false);
+  const [showSizeDropdown, setShowSizeDropdown] = useState(false);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [showHighlightPicker, setShowHighlightPicker] = useState(false);
+  
   const toolbarRef = useRef<HTMLDivElement>(null);
+  const lastSelectionRef = useRef<any>(null);
+  const isInteractingRef = useRef(false);
 
   useEffect(() => {
     if (!editor) return;
@@ -60,44 +57,68 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
     const updatePosition = () => {
       const { selection } = editor.state;
       if (selection.empty || !editor.isFocused) {
-        setPosition(null);
-        setShowColorPicker(false);
-        setShowHighlightPicker(false);
+        if (!isInteractingRef.current) {
+          setPosition(null);
+          setShowFontDropdown(false);
+          setShowSizeDropdown(false);
+          setShowColorPicker(false);
+          setShowHighlightPicker(false);
+        }
         return;
       }
+
+      // Save selection whenever it updates
+      lastSelectionRef.current = selection;
 
       try {
         const fromCoords = editor.view.coordsAtPos(selection.from);
         const toCoords = editor.view.coordsAtPos(selection.to);
         const left = (fromCoords.left + toCoords.left) / 2;
-        const top = fromCoords.top - 52;
+        const top = fromCoords.top - 54;
 
         if (top > 10 && left > 10) {
           setPosition({ top, left });
         } else {
-          // If too close to top edge, show below selection
           setPosition({ top: toCoords.bottom + 10, left });
         }
       } catch (e) {
-        setPosition(null);
+        if (!isInteractingRef.current) {
+          setPosition(null);
+        }
       }
     };
 
     editor.on('selectionUpdate', updatePosition);
     editor.on('blur', () => {
-      // Small timeout so clicking inside the toolbar doesn't immediately hide it
       setTimeout(() => {
+        if (isInteractingRef.current) return;
         if (!toolbarRef.current?.contains(document.activeElement)) {
           setPosition(null);
+          setShowFontDropdown(false);
+          setShowSizeDropdown(false);
+          setShowColorPicker(false);
+          setShowHighlightPicker(false);
         }
-      }, 150);
+      }, 200);
     });
 
+    const handleGlobalMouseDown = (e: MouseEvent) => {
+      if (toolbarRef.current && !toolbarRef.current.contains(e.target as Node)) {
+        isInteractingRef.current = false;
+        setShowFontDropdown(false);
+        setShowSizeDropdown(false);
+        setShowColorPicker(false);
+        setShowHighlightPicker(false);
+      }
+    };
+
+    window.addEventListener('mousedown', handleGlobalMouseDown);
     window.addEventListener('resize', updatePosition);
     window.addEventListener('scroll', updatePosition, true);
 
     return () => {
       editor.off('selectionUpdate', updatePosition);
+      window.removeEventListener('mousedown', handleGlobalMouseDown);
       window.removeEventListener('resize', updatePosition);
       window.removeEventListener('scroll', updatePosition, true);
     };
@@ -107,6 +128,44 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
 
   const currentFont = editor.getAttributes('textStyle')?.fontFamily || 'Aptos';
   const currentSize = editor.getAttributes('textStyle')?.fontSize || '11';
+
+  const handleApplyFont = (font: string) => {
+    isInteractingRef.current = false;
+    setShowFontDropdown(false);
+    if (!editor) return;
+
+    const sel = lastSelectionRef.current || editor.state.selection;
+    if (sel && !sel.empty) {
+      editor
+        .chain()
+        .focus()
+        .setTextSelection({ from: sel.from, to: sel.to })
+        .setMark('textStyle', { fontFamily: font })
+        .setTextSelection({ from: sel.from, to: sel.to })
+        .run();
+    } else {
+      (editor.commands as any).setFontFamily(font);
+    }
+  };
+
+  const handleApplySize = (size: string) => {
+    isInteractingRef.current = false;
+    setShowSizeDropdown(false);
+    if (!editor) return;
+
+    const sel = lastSelectionRef.current || editor.state.selection;
+    if (sel && !sel.empty) {
+      editor
+        .chain()
+        .focus()
+        .setTextSelection({ from: sel.from, to: sel.to })
+        .setMark('textStyle', { fontSize: size })
+        .setTextSelection({ from: sel.from, to: sel.to })
+        .run();
+    } else {
+      (editor.commands as any).setFontSize(size);
+    }
+  };
 
   const handleLink = () => {
     const previousUrl = editor.getAttributes('link').href;
@@ -122,7 +181,10 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
   return (
     <div
       ref={toolbarRef}
-      onMouseDown={(e) => e.preventDefault()}
+      onMouseDown={(e) => {
+        // Prevent default so editor does not lose focus, but allow clicking controls
+        e.preventDefault();
+      }}
       style={{
         position: 'fixed',
         top: `${position.top}px`,
@@ -132,48 +194,151 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
       }}
       className="flex items-center space-x-1 p-1 bg-white dark:bg-[#252526] border border-[#d1d5db] dark:border-[#444] rounded-lg shadow-2xl text-xs select-none animate-in fade-in zoom-in-95 duration-100"
     >
-      {/* Font Family */}
-      <select
-        value={currentFont}
-        onChange={(e) => {
-          (editor.commands as any).setFontFamily(e.target.value);
-        }}
-        className="h-6 px-1 bg-gray-50 dark:bg-[#333] border border-gray-200 dark:border-gray-600 rounded text-[11px] outline-hidden w-20 text-gray-800 dark:text-gray-100 truncate"
-      >
-        {MINI_FONT_FAMILIES.map((f) => (
-          <option key={f} value={f}>
-            {f}
-          </option>
-        ))}
-      </select>
+      {/* 1. Custom Font Family Dropdown */}
+      <div className="relative">
+        <button
+          type="button"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            lastSelectionRef.current = editor.state.selection;
+            isInteractingRef.current = !showFontDropdown;
+            setShowFontDropdown(!showFontDropdown);
+            setShowSizeDropdown(false);
+            setShowColorPicker(false);
+            setShowHighlightPicker(false);
+          }}
+          className="h-6 px-1.5 bg-gray-50 dark:bg-[#333] hover:bg-gray-100 dark:hover:bg-[#3d3d3d] border border-gray-200 dark:border-gray-600 rounded text-[11px] flex items-center justify-between space-x-1 w-24 text-gray-800 dark:text-gray-100 font-medium transition-colors"
+          title="Font Family"
+        >
+          <span className="truncate">{currentFont}</span>
+          <ChevronDown className="w-2.5 h-2.5 opacity-60 flex-shrink-0" />
+        </button>
 
-      {/* Font Size */}
-      <select
-        value={currentSize}
-        onChange={(e) => {
-          (editor.commands as any).setFontSize(e.target.value);
-        }}
-        className="h-6 px-0.5 bg-gray-50 dark:bg-[#333] border border-gray-200 dark:border-gray-600 rounded text-[11px] outline-hidden w-11 text-gray-800 dark:text-gray-100"
-      >
-        {FONT_SIZE_STEPS.map((s) => (
-          <option key={s} value={s}>
-            {s}
-          </option>
-        ))}
-      </select>
+        {showFontDropdown && (
+          <div
+            onMouseDown={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+            className="absolute left-0 top-full mt-1 w-48 max-h-60 overflow-y-auto bg-white dark:bg-[#252526] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl py-1 z-50 text-xs"
+          >
+            <div className="px-2 py-0.5 text-[9px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+              Cloud Fonts
+            </div>
+            {CLOUD_FONTS.map((font) => (
+              <button
+                key={font}
+                type="button"
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleApplyFont(font);
+                }}
+                className={`w-full text-left px-2.5 py-1 flex items-center justify-between hover:bg-blue-50 dark:hover:bg-blue-950/40 text-[11px] ${
+                  currentFont === font ? 'text-[#185abd] dark:text-[#5fa2f8] font-semibold bg-blue-50/50 dark:bg-blue-900/20' : 'text-gray-700 dark:text-gray-200'
+                }`}
+                style={{ fontFamily: `"${font}", sans-serif` }}
+              >
+                <span className="truncate">{font}</span>
+                {currentFont === font && <Check className="w-3 h-3 text-[#185abd] dark:text-[#5fa2f8] flex-shrink-0" />}
+              </button>
+            ))}
+
+            <div className="px-2 py-0.5 text-[9px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider border-t border-gray-100 dark:border-gray-800 mt-1 pt-1">
+              Standard Fonts
+            </div>
+            {STANDARD_FONTS.map((font) => (
+              <button
+                key={font}
+                type="button"
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleApplyFont(font);
+                }}
+                className={`w-full text-left px-2.5 py-1 flex items-center justify-between hover:bg-blue-50 dark:hover:bg-blue-950/40 text-[11px] ${
+                  currentFont === font ? 'text-[#185abd] dark:text-[#5fa2f8] font-semibold bg-blue-50/50 dark:bg-blue-900/20' : 'text-gray-700 dark:text-gray-200'
+                }`}
+                style={{ fontFamily: `"${font}", sans-serif` }}
+              >
+                <span className="truncate">{font}</span>
+                {currentFont === font && <Check className="w-3 h-3 text-[#185abd] dark:text-[#5fa2f8] flex-shrink-0" />}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* 2. Custom Font Size Dropdown */}
+      <div className="relative">
+        <button
+          type="button"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            lastSelectionRef.current = editor.state.selection;
+            isInteractingRef.current = !showSizeDropdown;
+            setShowSizeDropdown(!showSizeDropdown);
+            setShowFontDropdown(false);
+            setShowColorPicker(false);
+            setShowHighlightPicker(false);
+          }}
+          className="h-6 px-1 bg-gray-50 dark:bg-[#333] hover:bg-gray-100 dark:hover:bg-[#3d3d3d] border border-gray-200 dark:border-gray-600 rounded text-[11px] flex items-center justify-between space-x-0.5 w-12 text-gray-800 dark:text-gray-100 font-medium transition-colors"
+          title="Font Size"
+        >
+          <span>{currentSize}</span>
+          <ChevronDown className="w-2.5 h-2.5 opacity-60 flex-shrink-0" />
+        </button>
+
+        {showSizeDropdown && (
+          <div
+            onMouseDown={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+            className="absolute left-0 top-full mt-1 w-16 max-h-48 overflow-y-auto bg-white dark:bg-[#252526] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl py-1 z-50 text-xs"
+          >
+            {FONT_SIZE_STEPS.map((s) => (
+              <button
+                key={s}
+                type="button"
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleApplySize(`${s}`);
+                }}
+                className={`w-full text-center py-1 text-[11px] hover:bg-blue-50 dark:hover:bg-blue-950/40 ${
+                  `${currentSize}` === `${s}` ? 'text-[#185abd] dark:text-[#5fa2f8] font-semibold bg-blue-50/50 dark:bg-blue-900/20' : 'text-gray-700 dark:text-gray-200'
+                }`}
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Grow / Shrink */}
       <button
-        onClick={() => (editor.commands as any).growFontSize()}
+        type="button"
+        onMouseDown={(e) => {
+          e.preventDefault();
+          (editor.commands as any).growFontSize();
+        }}
         title="Grow Font"
-        className="p-1 rounded hover:bg-gray-100 dark:hover:bg-[#383838] flex items-center text-[10px] font-bold"
+        className="p-1 rounded hover:bg-gray-100 dark:hover:bg-[#383838] flex items-center text-[10px] font-bold text-gray-700 dark:text-gray-200"
       >
         A<ChevronUp className="w-2.5 h-2.5 -ml-0.5 text-blue-600" />
       </button>
       <button
-        onClick={() => (editor.commands as any).shrinkFontSize()}
+        type="button"
+        onMouseDown={(e) => {
+          e.preventDefault();
+          (editor.commands as any).shrinkFontSize();
+        }}
         title="Shrink Font"
-        className="p-1 rounded hover:bg-gray-100 dark:hover:bg-[#383838] flex items-center text-[10px]"
+        className="p-1 rounded hover:bg-gray-100 dark:hover:bg-[#383838] flex items-center text-[10px] text-gray-700 dark:text-gray-200"
       >
         A<ChevronDown className="w-2.5 h-2.5 -ml-0.5 text-blue-600" />
       </button>
@@ -182,9 +347,13 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
 
       {/* Formatting buttons */}
       <button
-        onClick={() => editor.chain().focus().toggleBold().run()}
+        type="button"
+        onMouseDown={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleBold().run();
+        }}
         title="Bold"
-        className={`p-1 rounded ${
+        className={`p-1 rounded transition-colors ${
           editor.isActive('bold')
             ? 'bg-[#185abd] text-white'
             : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#333]'
@@ -194,9 +363,13 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
       </button>
 
       <button
-        onClick={() => editor.chain().focus().toggleItalic().run()}
+        type="button"
+        onMouseDown={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleItalic().run();
+        }}
         title="Italic"
-        className={`p-1 rounded ${
+        className={`p-1 rounded transition-colors ${
           editor.isActive('italic')
             ? 'bg-[#185abd] text-white'
             : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#333]'
@@ -206,9 +379,13 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
       </button>
 
       <button
-        onClick={() => editor.chain().focus().toggleUnderline().run()}
+        type="button"
+        onMouseDown={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleUnderline().run();
+        }}
         title="Underline"
-        className={`p-1 rounded ${
+        className={`p-1 rounded transition-colors ${
           editor.isActive('underline')
             ? 'bg-[#185abd] text-white'
             : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#333]'
@@ -218,9 +395,13 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
       </button>
 
       <button
-        onClick={() => editor.chain().focus().toggleStrike().run()}
+        type="button"
+        onMouseDown={(e) => {
+          e.preventDefault();
+          editor.chain().focus().toggleStrike().run();
+        }}
         title="Strikethrough"
-        className={`p-1 rounded ${
+        className={`p-1 rounded transition-colors ${
           editor.isActive('strike')
             ? 'bg-[#185abd] text-white'
             : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#333]'
@@ -232,9 +413,16 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
       {/* Text Color */}
       <div className="relative">
         <button
-          onClick={() => {
+          type="button"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            lastSelectionRef.current = editor.state.selection;
+            isInteractingRef.current = !showColorPicker;
             setShowColorPicker(!showColorPicker);
             setShowHighlightPicker(false);
+            setShowFontDropdown(false);
+            setShowSizeDropdown(false);
           }}
           title="Font Color"
           className="p-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] flex items-center"
@@ -242,11 +430,21 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
           <Baseline className="w-3.5 h-3.5 text-red-600" />
         </button>
         {showColorPicker && (
-          <div className="absolute left-0 top-full mt-1 p-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded-md shadow-xl grid grid-cols-4 gap-1 z-50">
+          <div
+            onMouseDown={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+            className="absolute left-0 top-full mt-1 p-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded-md shadow-xl grid grid-cols-4 gap-1 z-50"
+          >
             {MINI_COLORS.map((c) => (
               <button
                 key={c}
-                onClick={() => {
+                type="button"
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  isInteractingRef.current = false;
                   editor.chain().focus().setColor(c).run();
                   setShowColorPicker(false);
                 }}
@@ -261,9 +459,16 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
       {/* Highlighter */}
       <div className="relative">
         <button
-          onClick={() => {
+          type="button"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            lastSelectionRef.current = editor.state.selection;
+            isInteractingRef.current = !showHighlightPicker;
             setShowHighlightPicker(!showHighlightPicker);
             setShowColorPicker(false);
+            setShowFontDropdown(false);
+            setShowSizeDropdown(false);
           }}
           title="Highlight Color"
           className="p-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] flex items-center"
@@ -271,11 +476,21 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
           <Highlighter className="w-3.5 h-3.5 text-amber-500" />
         </button>
         {showHighlightPicker && (
-          <div className="absolute left-0 top-full mt-1 p-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded-md shadow-xl grid grid-cols-3 gap-1 z-50">
+          <div
+            onMouseDown={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+            className="absolute left-0 top-full mt-1 p-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded-md shadow-xl grid grid-cols-3 gap-1 z-50"
+          >
             {MINI_HIGHLIGHTS.map((c) => (
               <button
                 key={c}
-                onClick={() => {
+                type="button"
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  isInteractingRef.current = false;
                   editor.chain().focus().toggleHighlight({ color: c }).run();
                   setShowHighlightPicker(false);
                 }}
@@ -291,7 +506,11 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
 
       {/* Link */}
       <button
-        onClick={handleLink}
+        type="button"
+        onMouseDown={(e) => {
+          e.preventDefault();
+          handleLink();
+        }}
         title="Insert Link"
         className={`p-1 rounded ${
           editor.isActive('link')
@@ -304,7 +523,11 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
 
       {/* Clear Formatting */}
       <button
-        onClick={() => editor.chain().focus().unsetAllMarks().run()}
+        type="button"
+        onMouseDown={(e) => {
+          e.preventDefault();
+          editor.chain().focus().unsetAllMarks().run();
+        }}
         title="Clear Formatting"
         className="p-1 rounded text-gray-500 hover:bg-gray-100 dark:hover:bg-[#333]"
       >

@@ -21,6 +21,13 @@ function tauriDialog() {
   return dialog;
 }
 
+function getTauriWindow() {
+  const win = (window as any).__TAURI__?.window?.getCurrentWindow?.();
+  if (win) return win;
+  const webviewWin = (window as any).__TAURI__?.webviewWindow?.getCurrentWebviewWindow?.();
+  return webviewWin || null;
+}
+
 export class PlatformService {
   private static isTauriEnv(): boolean {
     return typeof window !== 'undefined' && ('__TAURI_INTERNALS__' in window || '__TAURI__' in window);
@@ -39,9 +46,19 @@ export class PlatformService {
 
   public static async openFileDialog(acceptTypes = '.docx,.txt,.html'): Promise<OpenedFile | null> {
     if (this.isTauriEnv()) {
-      const extensions = acceptTypes.split(',').map((value) => value.trim().replace(/^\./, '')).filter(Boolean);
-      const selected = await tauriDialog().open({ multiple: false, filters: [{ name: 'Documents', extensions }] });
-      const path = Array.isArray(selected) ? selected[0] : selected;
+      let path: string | null = null;
+      try {
+        path = await tauriInvoke<string | null>('pick_file_dialog', {
+          title: 'Open Document',
+          acceptTypes,
+        });
+      } catch (dialogErr) {
+        console.warn('[Wordo] Native pick_file_dialog failed, falling back to plugin dialog:', dialogErr);
+        const extensions = acceptTypes.split(',').map((value) => value.trim().replace(/^\./, '')).filter(Boolean);
+        const selected = await tauriDialog().open({ multiple: false, filters: [{ name: 'Documents', extensions }] });
+        path = Array.isArray(selected) ? selected[0] : selected;
+      }
+
       if (!path) return null;
       const bytes = await tauriInvoke<number[]>('read_document_file', { path });
       const binary = Uint8Array.from(bytes);
@@ -90,7 +107,24 @@ export class PlatformService {
     try {
       const blob = data instanceof Blob ? data : new Blob([data as BlobPart], { type: mimeType });
       if (this.isTauriEnv()) {
-        const path = destinationPath || await tauriDialog().save({ defaultPath: filename, filters: [{ name: 'Document', extensions: [filename.split('.').pop() || 'docx'] }] });
+        let path = destinationPath;
+        if (!path) {
+          const extension = filename.split('.').pop() || 'docx';
+          try {
+            path = (await tauriInvoke<string | null>('save_file_dialog', {
+              title: 'Save Document',
+              defaultPath: filename,
+              filterExtension: extension,
+            })) || undefined;
+          } catch (dialogErr) {
+            console.warn('[Wordo] Native save_file_dialog failed, falling back to plugin dialog:', dialogErr);
+            const selected = await tauriDialog().save({
+              defaultPath: filename,
+              filters: [{ name: 'Document', extensions: [extension] }],
+            });
+            path = selected || undefined;
+          }
+        }
         if (!path) return false;
         const bytes = Array.from(new Uint8Array(await blob.arrayBuffer()));
         await tauriInvoke<void>('write_document_file', { path, data: bytes });
@@ -120,16 +154,68 @@ export class PlatformService {
     }
   }
 
-  public static minimizeWindow(): void {
-    if (this.isTauriEnv()) void tauriInvoke('plugin:window|minimize');
+  public static async minimizeWindow(): Promise<void> {
+    if (this.isTauriEnv()) {
+      try {
+        const win = getTauriWindow();
+        if (win && typeof win.minimize === 'function') {
+          await win.minimize();
+        } else {
+          await tauriInvoke('plugin:window|minimize');
+        }
+      } catch (err) {
+        console.error('[Wordo] Failed to minimize window:', err);
+      }
+    }
   }
-  public static toggleMaximizeWindow(): void {
-    if (this.isTauriEnv()) void tauriInvoke('plugin:window|toggle_maximize');
-    else if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
-    else void document.exitFullscreen().catch(() => {});
+
+  public static async toggleMaximizeWindow(): Promise<void> {
+    if (this.isTauriEnv()) {
+      try {
+        const win = getTauriWindow();
+        if (win && typeof win.toggleMaximize === 'function') {
+          await win.toggleMaximize();
+        } else {
+          await tauriInvoke('plugin:window|toggle_maximize');
+        }
+      } catch (err) {
+        console.error('[Wordo] Failed to toggle maximize window:', err);
+      }
+    } else if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      void document.exitFullscreen().catch(() => {});
+    }
   }
-  public static closeWindow(): void {
-    if (this.isTauriEnv()) void tauriInvoke('plugin:window|close');
-    else if (window.confirm('Are you sure you want to exit Wordo? Unsaved work may be recovered next time.')) window.close();
+
+  public static async closeWindow(): Promise<void> {
+    if (this.isTauriEnv()) {
+      try {
+        const win = getTauriWindow();
+        if (win && typeof win.destroy === 'function') {
+          await win.destroy();
+          return;
+        }
+        if (win && typeof win.close === 'function') {
+          await win.close();
+          return;
+        }
+        await tauriInvoke('close_window');
+      } catch (err) {
+        console.error('[Wordo] Primary close window attempt failed, trying fallback:', err);
+        try {
+          await tauriInvoke('close_window');
+        } catch {
+          try {
+            await tauriInvoke('plugin:window|destroy');
+          } catch (pluginErr) {
+            console.error('[Wordo] All window close methods failed:', pluginErr);
+            throw err;
+          }
+        }
+      }
+    } else if (window.confirm('Are you sure you want to exit Wordo? Unsaved work may be recovered next time.')) {
+      window.close();
+    }
   }
 }

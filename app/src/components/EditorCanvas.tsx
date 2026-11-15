@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Editor, EditorContent } from '@tiptap/react';
 import { PageSettings } from '../types';
 import { FloatingMiniToolbar } from './FloatingMiniToolbar';
+import { EditorContextMenu } from './EditorContextMenu';
 
 interface EditorCanvasProps {
   editor: Editor | null;
@@ -9,6 +10,9 @@ interface EditorCanvasProps {
   documentTitle: string;
   pageSettings?: PageSettings;
   onUpdatePageSettings?: (settings: PageSettings) => void;
+  paperTheme?: 'white' | 'dark' | 'sepia';
+  onOpenTranslate?: (text: string) => void;
+  onReadAloud?: (text: string) => void;
 }
 
 export const EditorCanvas: React.FC<EditorCanvasProps> = ({
@@ -17,12 +21,40 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
   documentTitle,
   pageSettings,
   onUpdatePageSettings,
+  paperTheme = 'white',
+  onOpenTranslate,
+  onReadAloud,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [editingHeader, setEditingHeader] = useState(false);
   const [editingFooter, setEditingFooter] = useState(false);
   const [headerVal, setHeaderVal] = useState('');
   const [footerVal, setFooterVal] = useState('');
+  const [contextMenu, setContextMenu] = useState<{ isOpen: boolean; x: number; y: number }>({
+    isOpen: false,
+    x: 0,
+    y: 0,
+  });
+
+  const handleContextMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!editor) return;
+
+    // Check if right-clicked outside active selection
+    const coords = { left: e.clientX, top: e.clientY };
+    const pos = editor.view.posAtCoords(coords);
+    const { selection } = editor.state;
+
+    if (pos && (selection.empty || pos.pos < selection.from || pos.pos > selection.to)) {
+      editor.chain().focus().setTextSelection(pos.pos).run();
+    }
+
+    setContextMenu({
+      isOpen: true,
+      x: e.clientX,
+      y: e.clientY,
+    });
+  };
 
   if (!editor) {
     return (
@@ -43,7 +75,12 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
   const footerRightText = pageSettings?.footerRight ?? '';
 
   // Page background color styling
-  const pageBgColor = pageSettings?.pageColor || '#ffffff';
+  const pageBgColor =
+    paperTheme === 'sepia'
+      ? '#fbf0d9'
+      : paperTheme === 'dark'
+      ? '#1e1e1e'
+      : pageSettings?.pageColor || '#ffffff';
   const watermarkText = pageSettings?.watermarkText;
 
   // Luminance calculation to dynamically adapt text color on dark tinted pages
@@ -58,6 +95,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
   };
 
   const isDarkPage = isDarkPageBg(pageBgColor);
+  const isSepiaPage = paperTheme === 'sepia';
 
   const getEffectiveSettings = (): PageSettings => {
     return (
@@ -76,11 +114,23 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
   return (
     <div
       ref={containerRef}
+      onContextMenu={handleContextMenu}
       className="wordo-canvas-scroll flex-1 overflow-auto bg-[#eaeaea] dark:bg-[#181818] p-8 flex flex-col items-center transition-colors print:p-0 print:bg-white relative"
     >
       <style>{`@media print { @page { size: ${paperName} ${printOrientation}; margin: 0; } }`}</style>
       {/* Floating Selection Mini Toolbar */}
       <FloatingMiniToolbar editor={editor} />
+
+      {/* Right Click Tool Menu (MS Word Context Menu) */}
+      <EditorContextMenu
+        editor={editor}
+        isOpen={contextMenu.isOpen}
+        x={contextMenu.x}
+        y={contextMenu.y}
+        onClose={() => setContextMenu((prev) => ({ ...prev, isOpen: false }))}
+        onOpenTranslate={onOpenTranslate}
+        onReadAloud={onReadAloud}
+      />
 
       {/* Zoom transform container */}
       <div
@@ -95,7 +145,11 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
         <div
           id="wordo-page-canvas"
           className={`shadow-xl border border-gray-300 dark:border-gray-800 print:border-none print:shadow-none print-page relative flex flex-col transition-colors overflow-visible ${
-            isDarkPage ? 'text-[#f1f5f9] dark-page-mode' : 'text-[#242424]'
+            isSepiaPage
+              ? 'text-[#382e20]'
+              : isDarkPage
+              ? 'text-[#f1f5f9] dark-page-mode'
+              : 'text-[#242424]'
           }`}
           style={{
             width: `${pageWidthPx}px`,

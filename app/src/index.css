@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-brand-50: #eef5fc;
   --color-brand-100: #d2e0f4;
@@ -18,30 +20,134 @@
   }
 }
 
-/* Fallback local font declarations */
+/* Microsoft 365 Cloud Fonts with full weight and style coverage */
 @font-face {
   font-family: 'Aptos';
-  src: local('Aptos'), local('Calibri'), local('Segoe UI');
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Aptos'), local('Inter'), local('Segoe UI'), local('Calibri'), local('Liberation Sans'), sans-serif;
 }
 @font-face {
-  font-family: 'Calibri';
-  src: local('Calibri'), local('Segoe UI'), local('Arial');
+  font-family: 'Aptos Display';
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Aptos Display'), local('Aptos'), local('Inter'), local('Segoe UI Semibold'), sans-serif;
 }
 @font-face {
-  font-family: 'Segoe UI';
-  src: local('Segoe UI'), local('Segoe UI Web (West European)'), local('Arial');
+  font-family: 'Aptos Serif';
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Aptos Serif'), local('Cambria'), local('Georgia'), local('Times New Roman'), local('Liberation Serif'), serif;
 }
 @font-face {
-  font-family: 'Cambria';
-  src: local('Cambria'), local('Georgia'), local('Times New Roman');
+  font-family: 'Aptos Narrow';
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Aptos Narrow'), local('Arial Narrow'), local('Liberation Sans Narrow'), sans-serif;
 }
 @font-face {
-  font-family: 'Garamond';
-  src: local('Garamond'), local('Georgia'), local('Times New Roman');
+  font-family: 'Aptos Mono';
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Aptos Mono'), local('Cascadia Code'), local('Consolas'), monospace;
 }
 @font-face {
-  font-family: 'Consolas';
-  src: local('Consolas'), local('Courier New'), monospace;
+  font-family: 'Bierstadt';
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Bierstadt'), local('Aptos'), local('Inter'), local('Arial'), sans-serif;
+}
+@font-face {
+  font-family: 'Grandview';
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Grandview'), local('Barlow'), local('Bahnschrift'), local('Segoe UI Semibold'), sans-serif;
+}
+@font-face {
+  font-family: 'Seaford';
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Seaford'), local('Source Sans 3'), local('Segoe UI'), local('Georgia'), sans-serif;
+}
+@font-face {
+  font-family: 'Skeena';
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Skeena'), local('Optima'), local('Trebuchet MS'), local('Segoe UI'), sans-serif;
+}
+@font-face {
+  font-family: 'Tenorite';
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Tenorite'), local('Outfit'), local('Century Gothic'), local('Montserrat'), sans-serif;
+}
+@font-face {
+  font-family: 'Bahnschrift';
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Bahnschrift'), local('DIN Alternate'), local('Arial Narrow'), sans-serif;
+}
+@font-face {
+  font-family: 'Cascadia Code';
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Cascadia Code'), local('Fira Code'), local('Consolas'), monospace;
+}
+@font-face {
+  font-family: 'Cascadia Mono';
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Cascadia Mono'), local('Consolas'), monospace;
+}
+@font-face {
+  font-family: 'Sitka Text';
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Sitka Text'), local('Cambria'), local('Georgia'), serif;
+}
+@font-face {
+  font-family: 'Sitka Heading';
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Sitka Heading'), local('Cambria'), local('Georgia'), serif;
+}
+@font-face {
+  font-family: 'Sitka Display';
+  font-weight: 100 900;
+  font-style: normal italic;
+  src: local('Sitka Display'), local('Cambria'), local('Georgia'), serif;
+}
+
+/* Ensure rich-text editor typographic styling & font synthesis */
+.tiptap-content,
+.ProseMirror {
+  font-synthesis: weight style !important;
+}
+
+.tiptap-content strong,
+.ProseMirror strong,
+.tiptap-content b,
+.ProseMirror b {
+  font-weight: 700 !important;
+}
+
+.tiptap-content em,
+.ProseMirror em,
+.tiptap-content i,
+.ProseMirror i {
+  font-style: italic !important;
+}
+
+.tiptap-content u,
+.ProseMirror u {
+  text-decoration: underline !important;
+}
+
+.tiptap-content s,
+.ProseMirror s,
+.tiptap-content strike,
+.ProseMirror strike {
+  text-decoration: line-through !important;
 }
 
 /* Print styles for page rendering and PDF export */

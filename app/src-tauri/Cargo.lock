@@ -4332,6 +4332,7 @@ name = "wordo"
 version = "1.0.0"
 dependencies = [
  "dirs 5.0.1",
+ "gtk",
  "serde",
  "serde_json",
  "tauri",

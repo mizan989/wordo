@@ -42,12 +42,52 @@ import {
   Columns,
   Trash2,
   Plus,
+  BookOpen,
+  Languages,
+  Volume2,
+  Eye,
+  Layers,
+  Bookmark,
+  Hash,
+  MessageSquare,
+  Maximize2,
+  Sun,
+  Moon,
+  BookmarkCheck,
+  HelpCircle,
+  Clock,
+  CheckCircle2,
+  Undo2,
+  Redo2,
+  ArrowDownAZ,
+  Pilcrow,
+  Smile,
+  Video,
+  PenTool,
+  Headphones,
+  MessageCircle,
+  Keyboard,
+  Megaphone,
+  ExternalLink,
+  Edit3,
+  Sliders,
+  ChevronRight,
+  Mic,
+  LayoutGrid,
+  RefreshCw,
+  CheckCheck,
+  RotateCcw,
+  Info as InfoIcon,
+  ChevronLeft,
+  XCircle,
 } from 'lucide-react';
 import { Editor } from '@tiptap/react';
 import { FONT_SIZE_STEPS } from '../extensions/typography';
+import { FileMenuDropdown } from './FileMenuDropdown';
 
 interface RibbonToolbarProps {
   editor: Editor | null;
+  documentTitle?: string;
   onOpenSearch: () => void;
   onOpenSpellCheck: () => void;
   onOpenWordCount: () => void;
@@ -63,11 +103,62 @@ interface RibbonToolbarProps {
   onToggleNavSidebar: () => void;
   pageSettings?: any;
   onUpdatePageSettings?: (settings: any) => void;
+
+  // File Backstage & Menu Integration
+  onOpenFileMenu?: () => void;
+  onNew?: () => void;
+  onNewFromTemplate?: (template: any) => void;
+  onOpen?: () => void;
+  onOpenRecent?: (doc: any) => void;
+  recentDocuments?: any[];
+  onSave?: () => void;
+  onSaveAs?: () => void;
+  onExportHtml?: () => void;
+  onExportTxt?: () => void;
+  onPrint?: () => void;
+  onCloseDocument?: () => void;
+  onOpenAbout?: () => void;
+  onOpenShortcuts?: () => void;
+  onRename?: () => void;
+  onOpenInfo?: () => void;
+
+  // Word Online / M365 Deep Features
+  onOpenSymbolModal?: () => void;
+  onOpenDateTimeModal?: () => void;
+  onOpenCitationModal?: () => void;
+  onOpenTranslateModal?: () => void;
+  onOpenAccessibilityModal?: () => void;
+  onToggleReadAloud?: () => void;
+  isReadAloudOpen?: boolean;
+  onToggleFocusMode?: () => void;
+  isFocusMode?: boolean;
+  paperTheme?: 'white' | 'dark' | 'sepia';
+  onSetPaperTheme?: (theme: 'white' | 'dark' | 'sepia') => void;
 }
 
-const FONT_FAMILIES = [
+export const CLOUD_FONTS = [
   'Aptos',
   'Aptos Display',
+  'Aptos Serif',
+  'Aptos Narrow',
+  'Aptos Mono',
+  'Bierstadt',
+  'Grandview',
+  'Seaford',
+  'Skeena',
+  'Tenorite',
+  'Bahnschrift',
+  'Cascadia Code',
+  'Cascadia Mono',
+  'Sitka Text',
+  'Sitka Heading',
+  'Sitka Display',
+  'Constantia',
+  'Corbel',
+  'Candara',
+];
+
+export const STANDARD_FONTS = [
   'Calibri',
   'Calibri Light',
   'Segoe UI',
@@ -83,11 +174,15 @@ const FONT_FAMILIES = [
   'Trebuchet MS',
   'Century Gothic',
   'Book Antiqua',
+  'Palatino Linotype',
+  'Franklin Gothic Medium',
   'Consolas',
   'Courier New',
   'Comic Sans MS',
   'Impact',
 ];
+
+const FONT_FAMILIES = [...CLOUD_FONTS, ...STANDARD_FONTS];
 
 const FONT_SIZES = ['8', '9', '10', '10.5', '11', '12', '14', '16', '18', '20', '22', '24', '26', '28', '36', '48', '72'];
 
@@ -186,8 +281,47 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
   onToggleNavSidebar,
   pageSettings,
   onUpdatePageSettings,
+  onOpenSymbolModal,
+  onOpenDateTimeModal,
+  onOpenCitationModal,
+  onOpenTranslateModal,
+  onOpenAccessibilityModal,
+  onToggleReadAloud,
+  isReadAloudOpen,
+  onToggleFocusMode,
+  isFocusMode,
+  paperTheme,
+  onSetPaperTheme,
+  onOpenFileMenu,
+  onNew,
+  onNewFromTemplate,
+  onOpen,
+  onOpenRecent,
+  recentDocuments,
+  onSave,
+  onSaveAs,
+  onExportHtml,
+  onExportTxt,
+  onPrint,
+  onCloseDocument,
+  onOpenAbout,
+  onOpenShortcuts,
+  documentTitle,
+  onRename,
+  onOpenInfo,
 }) => {
-  const [activeTab, setActiveTab] = useState<'home' | 'insert' | 'layout' | 'view' | 'tools' | 'table'>('home');
+  const [activeTab, setActiveTab] = useState<'home' | 'insert' | 'layout' | 'references' | 'review' | 'view' | 'help' | 'table'>('home');
+  const [showFileDropdown, setShowFileDropdown] = useState(false);
+  const [isSimplifiedRibbon, setIsSimplifiedRibbon] = useState(false);
+  const [isRibbonCollapsed, setIsRibbonCollapsed] = useState(false);
+  const [showMarginsDropdown, setShowMarginsDropdown] = useState(false);
+  const [showOrientationDropdown, setShowOrientationDropdown] = useState(false);
+  const [showSizeDropdown, setShowSizeDropdown] = useState(false);
+  const [showBreaksDropdown, setShowBreaksDropdown] = useState(false);
+  const [showColumnsDropdown, setShowColumnsDropdown] = useState(false);
+  const [showLineNumbersDropdown, setShowLineNumbersDropdown] = useState(false);
+  const [showPageBordersDropdown, setShowPageBordersDropdown] = useState(false);
+  const [showEditingDropdown, setShowEditingDropdown] = useState(false);
   const [selectedFont, setSelectedFont] = useState('Aptos');
   const [customFontSize, setCustomFontSize] = useState<string | null>(null);
   const [showFontSizeDropdown, setShowFontSizeDropdown] = useState(false);
@@ -200,7 +334,41 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showPageColorPicker, setShowPageColorPicker] = useState(false);
   const [showWatermarkPicker, setShowWatermarkPicker] = useState(false);
+  const [showCoverPageMenu, setShowCoverPageMenu] = useState(false);
+  const [showCalloutMenu, setShowCalloutMenu] = useState(false);
+  const [showTocMenu, setShowTocMenu] = useState(false);
+  const [showCopilotMenu, setShowCopilotMenu] = useState(false);
   const [tableGrid, setTableGrid] = useState({ rows: 3, cols: 3 });
+
+  // Insert Tab Dropdowns
+  const [showPictureDropdown, setShowPictureDropdown] = useState(false);
+  const [showDrawingDropdown, setShowDrawingDropdown] = useState(false);
+  const [showLinkDropdown, setShowLinkDropdown] = useState(false);
+  const [showBookmarksDropdown, setShowBookmarksDropdown] = useState(false);
+  const [showPageNumbersDropdown, setShowPageNumbersDropdown] = useState(false);
+  const [showEmojiDropdown, setShowEmojiDropdown] = useState(false);
+
+  // References Tab Dropdowns
+  const [showFootnotesDropdown, setShowFootnotesDropdown] = useState(false);
+
+  // Review Tab Dropdowns & Tracking
+  const [showProofingDropdown, setShowProofingDropdown] = useState(false);
+  const [showTranslateDropdown, setShowTranslateDropdown] = useState(false);
+  const [showCommentsDropdown, setShowCommentsDropdown] = useState(false);
+  const [showMarkupDropdown, setShowMarkupDropdown] = useState(false);
+  const [showTrackingDropdown, setShowTrackingDropdown] = useState(false);
+  const [showChangesDropdown, setShowChangesDropdown] = useState(false);
+  const [trackChangesMode, setTrackChangesMode] = useState<'Off' | 'For Everyone' | 'Just Mine'>('Off');
+  const [markupViewMode, setMarkupViewMode] = useState<'All Markup' | 'Simple Markup' | 'No Markup' | 'Original'>('All Markup');
+
+  // View Tab Dropdowns
+  const [showZoomDropdown, setShowZoomDropdown] = useState(false);
+
+  // Layout Paragraph State
+  const [indentLeft, setIndentLeft] = useState(0);
+  const [indentRight, setIndentRight] = useState(0);
+  const [spacingBefore, setSpacingBefore] = useState(0);
+  const [spacingAfter, setSpacingAfter] = useState(8);
 
   // Format Painter State
   const [formatPainter, setFormatPainter] = useState<{
@@ -224,6 +392,33 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
       setShowDatePicker(false);
       setShowPageColorPicker(false);
       setShowWatermarkPicker(false);
+      setShowCoverPageMenu(false);
+      setShowCalloutMenu(false);
+      setShowTocMenu(false);
+      setShowCopilotMenu(false);
+      setShowMarginsDropdown(false);
+      setShowOrientationDropdown(false);
+      setShowSizeDropdown(false);
+      setShowBreaksDropdown(false);
+      setShowColumnsDropdown(false);
+      setShowLineNumbersDropdown(false);
+      setShowPageBordersDropdown(false);
+      setShowEditingDropdown(false);
+      setShowFileDropdown(false);
+      setShowPictureDropdown(false);
+      setShowDrawingDropdown(false);
+      setShowLinkDropdown(false);
+      setShowBookmarksDropdown(false);
+      setShowPageNumbersDropdown(false);
+      setShowEmojiDropdown(false);
+      setShowFootnotesDropdown(false);
+      setShowProofingDropdown(false);
+      setShowTranslateDropdown(false);
+      setShowCommentsDropdown(false);
+      setShowMarkupDropdown(false);
+      setShowTrackingDropdown(false);
+      setShowChangesDropdown(false);
+      setShowZoomDropdown(false);
     };
     window.addEventListener('click', handleGlobalClick);
     return () => window.removeEventListener('click', handleGlobalClick);
@@ -272,9 +467,43 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
 
   if (!editor) return null;
 
+  const lastSelectionRef = useRef<any>(null);
   const isTableActive = editor.isActive('table');
   const currentFontSize = editor.getAttributes('textStyle')?.fontSize || '11';
   const currentFontFamily = editor.getAttributes('textStyle')?.fontFamily || selectedFont;
+
+  const toggleFormatting = (mark: 'bold' | 'italic' | 'underline' | 'strike' | 'subscript' | 'superscript') => {
+    if (!editor) return;
+    const { selection } = editor.state;
+    if (selection.empty && (mark === 'bold' || mark === 'italic' || mark === 'underline' || mark === 'strike')) {
+      const { $from } = selection;
+      const text = $from.parent.textBetween(0, $from.parent.content.size, undefined, '\uFFFC');
+      const offset = $from.parentOffset;
+      let start = offset;
+      let end = offset;
+      while (start > 0 && /\S/.test(text[start - 1])) start--;
+      while (end < text.length && /\S/.test(text[end])) end++;
+      if (start < end) {
+        const from = $from.start() + start;
+        const to = $from.start() + end;
+        editor
+          .chain()
+          .focus()
+          .setTextSelection({ from, to })
+          .toggleMark(mark)
+          .setTextSelection(selection.from)
+          .run();
+        return;
+      }
+    }
+
+    if (mark === 'bold') editor.chain().focus().toggleBold().run();
+    else if (mark === 'italic') editor.chain().focus().toggleItalic().run();
+    else if (mark === 'underline') editor.chain().focus().toggleUnderline().run();
+    else if (mark === 'strike') editor.chain().focus().toggleStrike().run();
+    else if (mark === 'subscript') editor.chain().focus().toggleSubscript().run();
+    else if (mark === 'superscript') editor.chain().focus().toggleSuperscript().run();
+  };
 
   const handleCopyFormatting = (isPinned = false) => {
     const currentTextStyle = editor.getAttributes('textStyle');
@@ -311,6 +540,81 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
         spaceAfter: true,
       })
       .run();
+  };
+
+  const handleInsertOnlineVideo = () => {
+    const url = prompt('Enter the URL of the online video (YouTube, Vimeo, etc.):');
+    if (!url || !editor) return;
+    let embedUrl = url;
+    if (url.includes('youtube.com/watch?v=')) {
+      const vid = url.split('v=')[1]?.split('&')[0];
+      embedUrl = `https://www.youtube.com/embed/${vid}`;
+    } else if (url.includes('youtu.be/')) {
+      const vid = url.split('youtu.be/')[1]?.split('?')[0];
+      embedUrl = `https://www.youtube.com/embed/${vid}`;
+    }
+    const html = `<div class="wordo-video-embed" style="margin: 16px 0; text-align: center;"><iframe src="${embedUrl}" width="560" height="315" frameborder="0" allowfullscreen style="max-width: 100%; border-radius: 8px; border: 1px solid #cbd5e1;"></iframe></div><p></p>`;
+    editor.chain().focus().insertContent(html).run();
+  };
+
+  const handleInsertBookmark = () => {
+    const name = prompt('Enter bookmark name:');
+    if (!name || !editor) return;
+    editor.chain().focus().insertContent(`<span id="bookmark-${name.toLowerCase().replace(/\s+/g, '-')}" class="wordo-bookmark" title="Bookmark: ${name}" style="background-color: #e0f2fe; border-bottom: 2px solid #0284c7; padding: 0 2px;">🔖 ${name}</span>&nbsp;`).run();
+  };
+
+  const handleInsertComment = () => {
+    if (!editor) return;
+    const { selection } = editor.state;
+    if (selection.empty) {
+      alert('Please select text to add a comment to.');
+      return;
+    }
+    const commentText = prompt('Enter your comment:');
+    if (!commentText) return;
+    editor.chain().focus().setHighlight({ color: '#fef08a' }).run();
+  };
+
+  const handleRemoveTableOfContents = () => {
+    if (!editor) return;
+    const html = editor.getHTML();
+    const clean = html.replace(/<div class="wordo-toc"[\s\S]*?<\/div>/gi, '');
+    editor.commands.setContent(clean);
+  };
+
+  const handleScrollToFootnotes = () => {
+    const el = document.querySelector('.wordo-footnote') || document.querySelector('sup');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleIndentChange = (delta: number) => {
+    const newVal = Math.max(0, Number((indentLeft + delta).toFixed(2)));
+    setIndentLeft(newVal);
+    if (editor) {
+      if (delta > 0) (editor.commands as any).indentParagraph?.();
+      else (editor.commands as any).outdentParagraph?.();
+    }
+  };
+
+  const handleIndentRightChange = (delta: number) => {
+    const newVal = Math.max(0, Number((indentRight + delta).toFixed(2)));
+    setIndentRight(newVal);
+  };
+
+  const handleSpacingBeforeChange = (delta: number) => {
+    const newVal = Math.max(0, spacingBefore + delta);
+    setSpacingBefore(newVal);
+    if (editor) {
+      editor.chain().focus().updateAttributes('paragraph', { spaceBefore: newVal > 0 }).run();
+    }
+  };
+
+  const handleSpacingAfterChange = (delta: number) => {
+    const newVal = Math.max(0, spacingAfter + delta);
+    setSpacingAfter(newVal);
+    if (editor) {
+      editor.chain().focus().updateAttributes('paragraph', { spaceAfter: newVal > 0 }).run();
+    }
   };
 
   const handleInsertTable = (rows: number, cols: number) => {
@@ -358,105 +662,454 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
     ];
   };
 
+  const handleInsertCoverPage = (template: 'executive' | 'modern' | 'academic') => {
+    if (!editor) return;
+    const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    let coverHtml = '';
+    if (template === 'executive') {
+      coverHtml = `
+        <div class="wordo-cover-page" style="padding: 48px 0; text-align: left; min-height: 850px; display: flex; flex-direction: column; justify-content: space-between; border-bottom: 2px solid #185abd; margin-bottom: 48px;">
+          <div>
+            <div style="height: 8px; width: 80px; background: #185abd; margin-bottom: 32px;"></div>
+            <h1 style="font-size: 32pt; font-weight: 800; color: #0f172a; line-height: 1.1; margin-bottom: 12px;">EXECUTIVE REPORT</h1>
+            <h3 style="font-size: 16pt; font-weight: 400; color: #64748b; margin-top: 0;">Comprehensive Analysis & Strategy Document</h3>
+          </div>
+          <div style="border-top: 1px solid #cbd5e1; padding-top: 24px; margin-top: 150px;">
+            <p style="font-size: 11pt; font-weight: 600; margin: 0; color: #1e293b;">Author: Microsoft 365 Team</p>
+            <p style="font-size: 10pt; color: #64748b; margin: 4px 0 0 0;">Date: ${dateStr}</p>
+            <p style="font-size: 10pt; color: #64748b; margin: 4px 0 0 0;">Organization: Wordo Cloud</p>
+          </div>
+        </div>
+        <div class="wordo-page-break" style="break-before: page; page-break-before: always; height: 1px; border-bottom: 1px dashed #cbd5e1; margin: 24px 0;"></div>
+      `;
+    } else if (template === 'modern') {
+      coverHtml = `
+        <div class="wordo-cover-page" style="padding: 60px 0; text-align: center; min-height: 850px; display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 48px;">
+          <div style="margin-top: 80px;">
+            <h1 style="font-size: 36pt; font-weight: 900; color: #185abd; letter-spacing: -0.5px; margin-bottom: 16px;">DOCUMENT TITLE</h1>
+            <p style="font-size: 14pt; color: #475569; max-width: 600px; margin: 0 auto;">A concise subtitle or abstract detailing the purpose of this project.</p>
+          </div>
+          <div style="margin-bottom: 40px;">
+            <p style="font-size: 12pt; font-weight: 600; color: #1e293b; margin: 0;">Prepared By: Author Name</p>
+            <p style="font-size: 10pt; color: #64748b; margin-top: 4px;">${dateStr}</p>
+          </div>
+        </div>
+        <div class="wordo-page-break" style="break-before: page; page-break-before: always; height: 1px; border-bottom: 1px dashed #cbd5e1; margin: 24px 0;"></div>
+      `;
+    } else {
+      coverHtml = `
+        <div class="wordo-cover-page" style="padding: 48px 0; min-height: 850px; display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 48px;">
+          <div style="border-left: 4px solid #185abd; padding-left: 20px;">
+            <h1 style="font-size: 28pt; font-weight: bold; color: #1e293b; margin-bottom: 8px;">RESEARCH PAPER TITLE</h1>
+            <p style="font-size: 12pt; color: #64748b; margin: 0;">Academic Term / Subject Area</p>
+          </div>
+          <div style="margin-top: 180px; font-size: 11pt; color: #334155;">
+            <p style="margin: 4px 0;"><strong>Student Name:</strong> Author</p>
+            <p style="margin: 4px 0;"><strong>Course:</strong> Advanced Studies</p>
+            <p style="margin: 4px 0;"><strong>Date:</strong> ${dateStr}</p>
+          </div>
+        </div>
+        <div class="wordo-page-break" style="break-before: page; page-break-before: always; height: 1px; border-bottom: 1px dashed #cbd5e1; margin: 24px 0;"></div>
+      `;
+    }
+    editor.chain().focus().setTextSelection(0).insertContent(coverHtml).run();
+    setShowCoverPageMenu(false);
+  };
+
+  const handleInsertCallout = (type: 'note' | 'tip' | 'warning' | 'important') => {
+    if (!editor) return;
+    const styles = {
+      note: { bg: '#eff6ff', border: '#3b82f6', text: '#1e40af', title: 'Note', icon: 'ℹ️' },
+      tip: { bg: '#f0fdf4', border: '#22c55e', text: '#166534', title: 'Tip', icon: '💡' },
+      warning: { bg: '#fffbeb', border: '#f59e0b', text: '#92400e', title: 'Warning', icon: '⚠️' },
+      important: { bg: '#fef2f2', border: '#ef4444', text: '#991b1b', title: 'Important', icon: '❗' },
+    }[type];
+
+    const html = `
+      <div class="wordo-callout" style="background-color: ${styles.bg}; border-left: 4px solid ${styles.border}; color: ${styles.text}; padding: 12px 16px; margin: 16px 0; border-radius: 0 6px 6px 0;">
+        <p style="margin: 0; font-weight: 600; font-size: 10.5pt;">${styles.icon} ${styles.title}</p>
+        <p style="margin: 4px 0 0 0; font-size: 10pt; opacity: 0.95;">Write your callout message here...</p>
+      </div>
+    `;
+    editor.chain().focus().insertContent(html).run();
+    setShowCalloutMenu(false);
+  };
+
+  const handleInsertTableOfContents = () => {
+    if (!editor) return;
+    const json = editor.getJSON();
+    const headings: { level: number; text: string }[] = [];
+
+    const extract = (node: any) => {
+      if (node.type === 'heading' && node.content) {
+        const text = node.content.map((c: any) => c.text || '').join('');
+        if (text.trim()) {
+          headings.push({ level: node.attrs?.level || 1, text: text.trim() });
+        }
+      }
+      if (node.content && Array.isArray(node.content)) {
+        node.content.forEach(extract);
+      }
+    };
+    extract(json);
+
+    if (headings.length === 0) {
+      headings.push(
+        { level: 1, text: 'Executive Summary' },
+        { level: 2, text: 'Project Goals & Objectives' },
+        { level: 1, text: 'Market Analysis & Insights' },
+        { level: 2, text: 'Competitive Landscape' },
+        { level: 1, text: 'Conclusion & Next Steps' }
+      );
+    }
+
+    const itemsHtml = headings
+      .map((h, i) => {
+        const indent = (h.level - 1) * 20;
+        const pageNum = i + 1;
+        return `
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-left: ${indent}px; margin-bottom: 6px; font-size: 11pt; color: #1e293b;">
+          <span style="font-weight: ${h.level === 1 ? '600' : '400'};">${h.text}</span>
+          <span style="flex: 1; border-bottom: 1px dotted #94a3b8; margin: 0 8px; height: 1em;"></span>
+          <span style="font-weight: ${h.level === 1 ? '600' : '400'}; color: #64748b;">${pageNum}</span>
+        </div>
+      `;
+      })
+      .join('');
+
+    const tocHtml = `
+      <div class="wordo-toc" style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 24px; margin: 24px 0; background-color: #f8fafc;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0f172a; padding-bottom: 8px; margin-bottom: 16px;">
+          <h2 style="margin: 0; font-size: 16pt; font-weight: bold; color: #0f172a;">Table of Contents</h2>
+          <span style="font-size: 9pt; color: #64748b; font-style: italic;">Auto-generated</span>
+        </div>
+        ${itemsHtml}
+      </div>
+    `;
+
+    editor.chain().focus().insertContent(tocHtml).run();
+    setShowTocMenu(false);
+  };
+
+  const handleInsertFootnote = () => {
+    if (!editor) return;
+    const html = editor.getHTML();
+    const count = (html.match(/<sup>\[\d+\]<\/sup>/g) || []).length + 1;
+    editor.chain().focus().insertContent(`<sup>[${count}]</sup>`).run();
+    const noteHtml = `<p style="font-size: 9pt; color: #64748b; margin-top: 12px; border-top: 1px solid #e2e8f0; padding-top: 4px;"><sup>[${count}]</sup> Footnote text...</p>`;
+    editor.chain().focus().insertContent(noteHtml).run();
+  };
+
+  const handleInsertEndnote = () => {
+    if (!editor) return;
+    editor.chain().focus().insertContent(`<sup>(i)</sup>`).run();
+  };
+
+  const handleInsertCaption = (type: 'Figure' | 'Table') => {
+    if (!editor) return;
+    editor.chain().focus().insertContent(`<p style="font-size: 9pt; color: #64748b; font-style: italic; margin-top: 4px;"><strong>${type} 1:</strong> Description of ${type.toLowerCase()}...</p>`).run();
+  };
+
+  const handleWordoCopilotRewrite = (style: 'formal' | 'concise' | 'expand' | 'tone') => {
+    if (!editor) return;
+    const { from, to, empty } = editor.state.selection;
+    if (empty) {
+      alert('Please select or highlight some text in your document to use Wordo Copilot.');
+      return;
+    }
+    const text = editor.state.doc.textBetween(from, to, ' ');
+    let rewritten = text;
+    if (style === 'formal') {
+      rewritten = text
+        .replace(/\b(can't|cannot)\b/gi, 'is unable to')
+        .replace(/\b(don't)\b/gi, 'does not')
+        .replace(/\b(get)\b/gi, 'obtain')
+        .replace(/\b(tell)\b/gi, 'inform')
+        .replace(/\b(help)\b/gi, 'assist')
+        .replace(/\b(big)\b/gi, 'substantial')
+        .replace(/\b(good)\b/gi, 'favorable');
+    } else if (style === 'concise') {
+      rewritten = text
+        .replace(/\bin order to\b/gi, 'to')
+        .replace(/\bdue to the fact that\b/gi, 'because')
+        .replace(/\bat this point in time\b/gi, 'now')
+        .replace(/\ba large number of\b/gi, 'many')
+        .replace(/\bfor the purpose of\b/gi, 'for');
+    } else if (style === 'expand') {
+      rewritten = `${text} Furthermore, this strategic aspect warrants thorough examination in order to achieve optimal outcomes and maintain continuous alignment across all stakeholders.`;
+    } else if (style === 'tone') {
+      rewritten = text.charAt(0).toUpperCase() + text.slice(1);
+      if (!rewritten.endsWith('.')) rewritten += '.';
+    }
+    editor.chain().focus().insertContent(rewritten).run();
+    setShowCopilotMenu(false);
+  };
+
   return (
-    <div className="bg-[#fbfbfb] dark:bg-[#1f1f1f] border-b border-[#e5e7eb] dark:border-[#37373d] shadow-xs select-none">
-      {/* Ribbon Tabs */}
-      <div className="flex items-center space-x-1 px-3 pt-1 border-b border-[#e5e7eb] dark:border-[#333333] text-xs">
-        {[
-          { id: 'home', label: 'Home' },
-          { id: 'insert', label: 'Insert' },
-          { id: 'layout', label: 'Layout' },
-          { id: 'view', label: 'View' },
-          { id: 'tools', label: 'Tools' },
-          ...(isTableActive ? [{ id: 'table', label: 'Table Design & Layout', isContextual: true }] : []),
-        ].map((tab) => (
+    <div className="relative z-40 bg-[#f3f2f1] dark:bg-[#201f1e] border-b border-[#e1dfdd] dark:border-[#37373d] shadow-2xs select-none">
+      {/* Ribbon Tabs Row */}
+      <div className="flex items-center justify-between px-3 pt-1 border-b border-[#e1dfdd] dark:border-[#333333] text-xs bg-[#f3f2f1] dark:bg-[#201f1e]">
+        <div className="flex items-center space-x-1">
+          {/* File Tab */}
+          <div className="relative">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowFileDropdown(!showFileDropdown);
+              }}
+              onMouseDown={(e) => e.preventDefault()}
+              className={`px-3 py-1 font-medium transition-colors rounded-t-sm ${
+                showFileDropdown
+                  ? 'bg-white dark:bg-[#252423] text-gray-900 dark:text-white shadow-xs'
+                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200/80 dark:hover:bg-[#333]'
+              }`}
+            >
+              File
+            </button>
+
+            {/* Exact Fluent File Dropdown from Image 8 */}
+            <FileMenuDropdown
+              isOpen={showFileDropdown}
+              onClose={() => setShowFileDropdown(false)}
+              onNew={() => {
+                setShowFileDropdown(false);
+                onNew?.();
+              }}
+              onNewFromTemplate={(tmpl) => {
+                setShowFileDropdown(false);
+                onNewFromTemplate?.(tmpl);
+              }}
+              onOpenLocalFile={() => {
+                setShowFileDropdown(false);
+                onOpen?.();
+              }}
+              onOpenRecent={(doc) => {
+                setShowFileDropdown(false);
+                onOpenRecent?.(doc);
+              }}
+              recentDocuments={recentDocuments || []}
+              onSaveAs={() => {
+                setShowFileDropdown(false);
+                onSaveAs?.();
+              }}
+              onExportDocx={() => {
+                setShowFileDropdown(false);
+                onExportDocx?.();
+              }}
+              onExportPdf={() => {
+                setShowFileDropdown(false);
+                onExportPdf?.();
+              }}
+              onExportHtml={() => {
+                setShowFileDropdown(false);
+                onExportHtml?.();
+              }}
+              onExportTxt={() => {
+                setShowFileDropdown(false);
+                onExportTxt?.();
+              }}
+              onPrint={() => {
+                setShowFileDropdown(false);
+                onPrint?.();
+              }}
+              onRename={() => {
+                setShowFileDropdown(false);
+                onRename?.();
+              }}
+              onOpenRecovery={() => {
+                setShowFileDropdown(false);
+                onOpenRecovery?.();
+              }}
+              onCloseDocument={() => {
+                setShowFileDropdown(false);
+                onCloseDocument?.();
+              }}
+              onOpenInfo={() => {
+                setShowFileDropdown(false);
+                onOpenWordCount?.();
+              }}
+              documentTitle={documentTitle || 'Document'}
+            />
+          </div>
+
+          {[
+            { id: 'home', label: 'Home' },
+            { id: 'insert', label: 'Insert' },
+            { id: 'layout', label: 'Layout' },
+            { id: 'references', label: 'References' },
+            { id: 'review', label: 'Review' },
+            { id: 'view', label: 'View' },
+            { id: 'help', label: 'Help' },
+            ...(isTableActive ? [{ id: 'table', label: 'Table Design & Layout', isContextual: true }] : []),
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => {
+                setShowFileDropdown(false);
+                setActiveTab(tab.id as any);
+                if (isRibbonCollapsed) setIsRibbonCollapsed(false);
+              }}
+              onMouseDown={(e) => e.preventDefault()}
+              className={`px-3 py-1 font-medium transition-colors relative rounded-t-sm ${
+                tab.isContextual
+                  ? activeTab === tab.id
+                    ? 'text-indigo-600 dark:text-indigo-400 font-semibold'
+                    : 'text-indigo-700 dark:text-indigo-400 hover:bg-gray-200/80 dark:hover:bg-[#333]'
+                  : activeTab === tab.id
+                  ? 'text-[#185abd] dark:text-[#5fa2f8] font-semibold'
+                  : 'text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-200/80 dark:hover:bg-[#333]'
+              }`}
+            >
+              {tab.label}
+              {activeTab === tab.id && (
+                <span
+                  className={`absolute bottom-0 left-2 right-2 h-[2.5px] rounded-full transition-all duration-150 ${
+                    tab.isContextual ? 'bg-indigo-600' : 'bg-[#185abd] dark:bg-[#5fa2f8]'
+                  }`}
+                />
+              )}
+            </button>
+          ))}
+        </div>
+
+        {/* Right side of Tabs row: Comments button, Editing dropdown */}
+        <div className="flex items-center space-x-1.5 pb-0.5">
           <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
-            className={`px-3 py-1 font-medium transition-colors border-b-2 -mb-[1px] ${
-              tab.isContextual
-                ? activeTab === tab.id
-                  ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400 bg-white dark:bg-[#282828] rounded-t font-semibold'
-                  : 'border-transparent text-indigo-700 dark:text-indigo-400 bg-indigo-50/60 dark:bg-indigo-950/30 hover:bg-indigo-100 rounded-t'
-                : activeTab === tab.id
-                ? 'border-[#185abd] text-[#185abd] dark:text-[#5fa2f8] bg-white dark:bg-[#282828] rounded-t'
-                : 'border-transparent text-gray-700 dark:text-gray-300 hover:text-[#185abd] dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#2c2c2c] rounded-t'
-            }`}
+            onClick={() => onOpenWordCount?.()}
+            onMouseDown={(e) => e.preventDefault()}
+            title="Comments"
+            className="flex items-center space-x-1 px-2.5 py-1 rounded text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#333] transition-colors"
           >
-            {tab.label}
+            <MessageSquare className="w-3.5 h-3.5 text-gray-500" />
+            <span>Comments</span>
           </button>
-        ))}
+
+          <button
+            onClick={() => {}}
+            onMouseDown={(e) => e.preventDefault()}
+            className="flex items-center space-x-1 px-2.5 py-1 rounded text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#333] transition-colors"
+          >
+            <Edit3 className="w-3.5 h-3.5 text-gray-500" />
+            <span>Editing</span>
+            <ChevronDown className="w-2.5 h-2.5 text-gray-400" />
+          </button>
+        </div>
       </div>
 
       {/* Ribbon Command Strip */}
-      <div className="h-16 px-3 py-1 flex items-center overflow-x-auto text-xs space-x-3 text-gray-700 dark:text-gray-200">
+      {!isRibbonCollapsed && (
+        <div className="h-[84px] bg-white dark:bg-[#252423] border-b border-[#edebe9] dark:border-[#2d2c2b] shadow-2xs px-3 py-1 flex items-stretch justify-between overflow-x-auto text-xs text-gray-700 dark:text-gray-200 transition-all">
+          <div className="flex items-stretch space-x-1 flex-1">
         {/* HOME TAB */}
         {activeTab === 'home' && (
           <>
-            {/* 1. Clipboard */}
-            <div className="flex items-center space-x-1 pr-2 border-r border-gray-300 dark:border-gray-700">
+            {/* 0. Undo */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
               <button
-                onClick={() => {
-                  navigator.clipboard.readText().then((text) => {
-                    editor.commands.insertContent(text);
-                  });
-                }}
-                title="Paste (Ctrl+V)"
-                className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#333] transition-colors"
+                onClick={() => editor.chain().focus().undo().run()}
+                onMouseDown={(e) => e.preventDefault()}
+                title="Undo (Ctrl+Z)"
+                className="flex flex-col items-center justify-center p-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
               >
-                <Clipboard className="w-4 h-4 text-[#185abd]" />
-                <span className="text-[10px]">Paste</span>
+                <Undo2 className="w-4 h-4 text-[#185abd]" />
+                <span className="text-[10px] flex items-center">Undo <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" /></span>
               </button>
-              <div className="flex flex-col space-y-0.5">
-                <button
-                  onClick={() => document.execCommand('cut')}
-                  title="Cut (Ctrl+X)"
-                  className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
-                >
-                  <Scissors className="w-3.5 h-3.5" />
-                </button>
-                <button
-                  onClick={() => document.execCommand('copy')}
-                  title="Copy (Ctrl+C)"
-                  className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
-                >
-                  <Copy className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              <button
-                onClick={() => handleCopyFormatting(false)}
-                onDoubleClick={() => handleCopyFormatting(true)}
-                title="Format Painter (Ctrl+Shift+C / Ctrl+Shift+V) - Double-click to pin"
-                className={`p-1.5 rounded flex flex-col items-center justify-center transition-colors ${
-                  formatPainter?.active
-                    ? 'bg-[#185abd] text-white shadow-xs'
-                    : 'hover:bg-gray-200 dark:hover:bg-[#333]'
-                }`}
-              >
-                <Paintbrush className="w-4 h-4" />
-                <span className="text-[9px]">Painter</span>
-              </button>
+              <div className="h-3" />
             </div>
 
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 1. Clipboard */}
+            <div className="flex flex-col justify-between h-full px-1">
+              <div className="flex items-center space-x-1">
+                <button
+                  onClick={() => {
+                    navigator.clipboard.readText().then((text) => {
+                      editor.commands.insertContent(text);
+                    });
+                  }}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Paste (Ctrl+V)"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                >
+                  <Clipboard className="w-5 h-5 text-[#185abd]" />
+                  <span className="text-[10px] flex items-center">Paste <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" /></span>
+                </button>
+                <div className="flex flex-col space-y-0.5">
+                  <button
+                    onClick={() => document.execCommand('cut')}
+                    onMouseDown={(e) => e.preventDefault()}
+                    title="Cut (Ctrl+X)"
+                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-[10px]"
+                  >
+                    <Scissors className="w-3 h-3 text-gray-600 dark:text-gray-300" />
+                    <span>Cut</span>
+                  </button>
+                  <button
+                    onClick={() => document.execCommand('copy')}
+                    onMouseDown={(e) => e.preventDefault()}
+                    title="Copy (Ctrl+C)"
+                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-[10px]"
+                  >
+                    <Copy className="w-3 h-3 text-gray-600 dark:text-gray-300" />
+                    <span>Copy</span>
+                  </button>
+                </div>
+                <button
+                  onClick={() => handleCopyFormatting(false)}
+                  onDoubleClick={() => handleCopyFormatting(true)}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Format Painter (Ctrl+Shift+C / Ctrl+Shift+V) - Double-click to pin"
+                  className={`p-1 px-1.5 rounded flex flex-col items-center justify-center transition-colors ${
+                    formatPainter?.active
+                      ? 'bg-[#185abd] text-white shadow-xs'
+                      : 'hover:bg-gray-100 dark:hover:bg-[#333]'
+                  }`}
+                >
+                  <Paintbrush className="w-4 h-4 text-amber-600" />
+                  <span className="text-[10px] text-center leading-tight">Format<br/>Painter</span>
+                </button>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center">Clipboard</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
             {/* 2. Font Controls */}
-            <div className="flex flex-col justify-between py-0.5 space-y-1 pr-2 border-r border-gray-300 dark:border-gray-700">
+            <div className="flex flex-col justify-between h-full px-1">
+              <div className="space-y-1">
               {/* Row 1 */}
               <div className="flex items-center space-x-1">
                 <select
                   value={currentFontFamily}
+                  onFocus={() => {
+                    lastSelectionRef.current = editor.state.selection;
+                  }}
                   onChange={(e) => {
                     const font = e.target.value;
                     setSelectedFont(font);
+                    if (lastSelectionRef.current && !lastSelectionRef.current.empty) {
+                      editor.commands.setTextSelection(lastSelectionRef.current);
+                    }
                     (editor.commands as any).setFontFamily(font);
                   }}
-                  className="h-6 px-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-[#444] rounded text-xs outline-hidden w-32 font-medium truncate"
+                  className="h-6 px-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-[#444] rounded text-xs outline-hidden w-36 font-medium truncate"
                   title="Font Family"
                 >
-                  {FONT_FAMILIES.map((f) => (
-                    <option key={f} value={f} style={{ fontFamily: `"${f}", sans-serif` }}>
-                      {f}
-                    </option>
-                  ))}
+                  <optgroup label="☁️ Office 365 Cloud Fonts">
+                    {CLOUD_FONTS.map((f) => (
+                      <option key={f} value={f} style={{ fontFamily: `"${f}", sans-serif` }}>
+                        ☁️ {f}
+                      </option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="Standard Fonts">
+                    {STANDARD_FONTS.map((f) => (
+                      <option key={f} value={f} style={{ fontFamily: `"${f}", sans-serif` }}>
+                        {f}
+                      </option>
+                    ))}
+                  </optgroup>
                 </select>
 
                 {/* Font Size */}
@@ -465,11 +1118,17 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     type="text"
                     value={customFontSize !== null ? customFontSize : currentFontSize}
                     onChange={(e) => setCustomFontSize(e.target.value)}
-                    onFocus={() => setCustomFontSize(currentFontSize)}
+                    onFocus={() => {
+                      lastSelectionRef.current = editor.state.selection;
+                      setCustomFontSize(currentFontSize);
+                    }}
                     onBlur={() => {
                       if (customFontSize !== null && customFontSize.trim() !== '') {
                         const parsed = parseFloat(customFontSize);
                         if (!isNaN(parsed) && parsed > 0 && parsed <= 500) {
+                          if (lastSelectionRef.current && !lastSelectionRef.current.empty) {
+                            editor.commands.setTextSelection(lastSelectionRef.current);
+                          }
                           (editor.commands as any).setFontSize(parsed);
                         }
                       }
@@ -480,6 +1139,9 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                         e.preventDefault();
                         const parsed = parseFloat((e.target as HTMLInputElement).value);
                         if (!isNaN(parsed) && parsed > 0 && parsed <= 500) {
+                          if (lastSelectionRef.current && !lastSelectionRef.current.empty) {
+                            editor.commands.setTextSelection(lastSelectionRef.current);
+                          }
                           (editor.commands as any).setFontSize(parsed);
                         }
                         (e.target as HTMLInputElement).blur();
@@ -489,6 +1151,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     title="Font Size (select or type)"
                   />
                   <button
+                    onMouseDown={(e) => e.preventDefault()}
                     onClick={(e) => {
                       e.stopPropagation();
                       setShowFontSizeDropdown(!showFontSizeDropdown);
@@ -507,6 +1170,9 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                           key={s}
                           onMouseDown={(e) => {
                             e.preventDefault();
+                            if (lastSelectionRef.current && !lastSelectionRef.current.empty) {
+                              editor.commands.setTextSelection(lastSelectionRef.current);
+                            }
                             (editor.commands as any).setFontSize(s);
                             setShowFontSizeDropdown(false);
                           }}
@@ -522,6 +1188,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 </div>
 
                 <button
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={() => (editor.commands as any).growFontSize()}
                   title="Increase Font Size (Ctrl+Shift+>)"
                   className="h-6 px-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] flex items-center text-xs font-bold"
@@ -530,6 +1197,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 </button>
 
                 <button
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={() => (editor.commands as any).shrinkFontSize()}
                   title="Decrease Font Size (Ctrl+Shift+<)"
                   className="h-6 px-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] flex items-center text-[11px]"
@@ -540,6 +1208,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 {/* Case */}
                 <div className="relative">
                   <button
+                    onMouseDown={(e) => e.preventDefault()}
                     onClick={(e) => {
                       e.stopPropagation();
                       setShowCaseMenu(!showCaseMenu);
@@ -564,6 +1233,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       ].map((item) => (
                         <button
                           key={item.id}
+                          onMouseDown={(e) => e.preventDefault()}
                           onClick={() => {
                             (editor.commands as any).transformCase(item.id);
                             setShowCaseMenu(false);
@@ -578,6 +1248,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 </div>
 
                 <button
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={handleClearFormatting}
                   title="Clear All Formatting (Ctrl+Space)"
                   className="h-6 px-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] flex items-center text-gray-500 hover:text-red-600"
@@ -589,7 +1260,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
               {/* Row 2 */}
               <div className="flex items-center space-x-0.5">
                 <button
-                  onClick={() => editor.chain().focus().toggleBold().run()}
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => toggleFormatting('bold')}
                   title="Bold (Ctrl+B)"
                   className={`p-1 rounded transition-colors ${
                     editor.isActive('bold')
@@ -600,7 +1272,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   <Bold className="w-3.5 h-3.5" />
                 </button>
                 <button
-                  onClick={() => editor.chain().focus().toggleItalic().run()}
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => toggleFormatting('italic')}
                   title="Italic (Ctrl+I)"
                   className={`p-1 rounded transition-colors ${
                     editor.isActive('italic')
@@ -611,7 +1284,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   <Italic className="w-3.5 h-3.5" />
                 </button>
                 <button
-                  onClick={() => editor.chain().focus().toggleUnderline().run()}
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => toggleFormatting('underline')}
                   title="Underline (Ctrl+U)"
                   className={`p-1 rounded transition-colors ${
                     editor.isActive('underline')
@@ -622,7 +1296,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   <Underline className="w-3.5 h-3.5" />
                 </button>
                 <button
-                  onClick={() => editor.chain().focus().toggleStrike().run()}
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => toggleFormatting('strike')}
                   title="Strikethrough"
                   className={`p-1 rounded transition-colors ${
                     editor.isActive('strike')
@@ -633,7 +1308,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   <Strikethrough className="w-3.5 h-3.5" />
                 </button>
                 <button
-                  onClick={() => editor.chain().focus().toggleSubscript().run()}
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => toggleFormatting('subscript')}
                   title="Subscript (Ctrl+=)"
                   className={`p-1 rounded transition-colors ${
                     editor.isActive('subscript')
@@ -644,7 +1320,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   <Subscript className="w-3.5 h-3.5" />
                 </button>
                 <button
-                  onClick={() => editor.chain().focus().toggleSuperscript().run()}
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => toggleFormatting('superscript')}
                   title="Superscript (Ctrl+Shift++)"
                   className={`p-1 rounded transition-colors ${
                     editor.isActive('superscript')
@@ -829,12 +1506,28 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   )}
                 </div>
               </div>
+              </div>
+              <div className="flex items-center justify-center space-x-1 text-[10px] text-gray-400 dark:text-gray-500 font-normal">
+                <span>Font</span>
+                <button
+                  onClick={onOpenSettings}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Font options"
+                  className="p-0.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                >
+                  <ExternalLink className="w-2.5 h-2.5 opacity-60 hover:opacity-100" />
+                </button>
+              </div>
             </div>
 
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
             {/* 3. Paragraph */}
-            <div className="flex flex-col justify-between py-0.5 space-y-1 pr-2 border-r border-gray-300 dark:border-gray-700">
+            <div className="flex flex-col justify-between h-full px-1">
+              <div className="space-y-1">
               <div className="flex items-center space-x-0.5">
                 <button
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={() => editor.chain().focus().toggleBulletList().run()}
                   title="Bulleted List"
                   className={`p-1 rounded ${
@@ -846,6 +1539,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   <List className="w-3.5 h-3.5" />
                 </button>
                 <button
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={() => editor.chain().focus().toggleOrderedList().run()}
                   title="Numbered List"
                   className={`p-1 rounded ${
@@ -857,6 +1551,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   <ListOrdered className="w-3.5 h-3.5" />
                 </button>
                 <button
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={() => editor.chain().focus().toggleTaskList().run()}
                   title="Checklist Task"
                   className={`p-1 rounded ${
@@ -869,6 +1564,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 </button>
                 <div className="w-[1px] h-3 bg-gray-300 dark:bg-gray-600 mx-1" />
                 <button
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={() => (editor.commands as any).outdentParagraph()}
                   title="Decrease Indent"
                   className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
@@ -876,6 +1572,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   <Outdent className="w-3.5 h-3.5" />
                 </button>
                 <button
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={() => (editor.commands as any).indentParagraph()}
                   title="Increase Indent"
                   className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
@@ -886,6 +1583,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
 
               <div className="flex items-center space-x-0.5">
                 <button
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={() => editor.chain().focus().setTextAlign('left').run()}
                   title="Align Left (Ctrl+L)"
                   className={`p-1 rounded ${
@@ -897,6 +1595,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   <AlignLeft className="w-3.5 h-3.5" />
                 </button>
                 <button
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={() => editor.chain().focus().setTextAlign('center').run()}
                   title="Align Center (Ctrl+E)"
                   className={`p-1 rounded ${
@@ -908,6 +1607,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   <AlignCenter className="w-3.5 h-3.5" />
                 </button>
                 <button
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={() => editor.chain().focus().setTextAlign('right').run()}
                   title="Align Right (Ctrl+R)"
                   className={`p-1 rounded ${
@@ -919,6 +1619,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   <AlignRight className="w-3.5 h-3.5" />
                 </button>
                 <button
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={() => editor.chain().focus().setTextAlign('justify').run()}
                   title="Justify (Ctrl+J)"
                   className={`p-1 rounded ${
@@ -992,10 +1693,25 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   )}
                 </div>
               </div>
+              </div>
+              <div className="flex items-center justify-center space-x-1 text-[10px] text-gray-400 dark:text-gray-500 font-normal">
+                <span>Paragraph</span>
+                <button
+                  onClick={onOpenSettings}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Paragraph options"
+                  className="p-0.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                >
+                  <ExternalLink className="w-2.5 h-2.5 opacity-60 hover:opacity-100" />
+                </button>
+              </div>
             </div>
 
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
             {/* 4. Quick Styles */}
-            <div className="flex items-center space-x-1.5 pr-2 border-r border-gray-300 dark:border-gray-700">
+            <div className="flex flex-col justify-between h-full px-1">
+              <div className="flex items-center space-x-1">
               <button
                 onClick={() => editor.chain().focus().setParagraph().run()}
                 className={`flex flex-col items-start px-2 py-1 rounded border min-w-[62px] text-left transition-colors ${
@@ -1088,64 +1804,182 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 <span className="text-[11px] italic font-serif leading-none">"Quote"</span>
                 <span className="text-[10px] text-gray-500 mt-1">Quote</span>
               </button>
+              </div>
+              <div className="flex items-center justify-center space-x-1 text-[10px] text-gray-400 dark:text-gray-500 font-normal">
+                <span>Styles</span>
+                <button
+                  onClick={onOpenSettings}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Styles pane"
+                  className="p-0.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                >
+                  <ExternalLink className="w-2.5 h-2.5 opacity-60 hover:opacity-100" />
+                </button>
+              </div>
             </div>
 
-            {/* 5. Find & Spell Assistant */}
-            <div className="flex items-center space-x-1">
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 5. Editing */}
+            <div className="flex flex-col justify-between h-full px-1">
+              <div className="flex flex-col space-y-0.5">
+                <button
+                  onClick={onOpenSearch}
+                  onMouseDown={(e) => e.preventDefault()}
+                  className="flex items-center space-x-1.5 px-2 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-[11px]"
+                  title="Find (Ctrl+F)"
+                >
+                  <Search className="w-3.5 h-3.5 text-[#185abd]" />
+                  <span>Find</span>
+                </button>
+                <button
+                  onClick={onOpenSearch}
+                  onMouseDown={(e) => e.preventDefault()}
+                  className="flex items-center space-x-1.5 px-2 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-[11px]"
+                  title="Replace (Ctrl+H)"
+                >
+                  <span className="text-[10px] font-bold text-gray-600 dark:text-gray-300">ab→ac</span>
+                  <span>Replace</span>
+                </button>
+                <button
+                  onClick={() => editor.chain().focus().selectAll().run()}
+                  onMouseDown={(e) => e.preventDefault()}
+                  className="flex items-center space-x-1 px-2 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-[11px]"
+                  title="Select All (Ctrl+A)"
+                >
+                  <span>Select</span>
+                  <ChevronDown className="w-2.5 h-2.5 opacity-60" />
+                </button>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center">Editing</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 6. Voice */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
               <button
-                onClick={onOpenSearch}
-                className="flex flex-col items-center justify-center p-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#333] transition-colors text-xs"
-                title="Find and Replace (Ctrl+F)"
+                onClick={() => {
+                  const SpeechRec = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+                  if (!SpeechRec) {
+                    alert('Dictation requires Web Speech API support.');
+                    return;
+                  }
+                  try {
+                    const rec = new SpeechRec();
+                    rec.onresult = (evt: any) => {
+                      const text = evt.results?.[0]?.[0]?.transcript;
+                      if (text) editor.chain().focus().insertContent(text + ' ').run();
+                    };
+                    rec.start();
+                  } catch (err) {
+                    console.error('Dictation error:', err);
+                  }
+                }}
+                onMouseDown={(e) => e.preventDefault()}
+                className="flex flex-col items-center justify-center p-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-xs"
+                title="Dictate (Speech to Text)"
               >
-                <Search className="w-4 h-4 text-[#185abd]" />
-                <span className="text-[10px]">Find & Replace</span>
+                <Mic className="w-4 h-4 text-[#185abd]" />
+                <span className="text-[10px] mt-0.5">Dictate</span>
               </button>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center">Voice</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 7. Proofing */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
               <button
                 onClick={onOpenSpellCheck}
-                className="flex flex-col items-center justify-center p-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#333] transition-colors text-xs"
-                title="Editor / Spell Assistant"
+                onMouseDown={(e) => e.preventDefault()}
+                className="flex flex-col items-center justify-center p-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-xs"
+                title="Editor / AI Proofing Assistant"
               >
                 <Sparkles className="w-4 h-4 text-indigo-600" />
-                <span className="text-[10px]">Editor</span>
+                <span className="text-[10px] mt-0.5 font-medium">Editor</span>
               </button>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center">Proofing</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 8. Add-ins */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <button
+                onClick={onOpenSettings}
+                onMouseDown={(e) => e.preventDefault()}
+                className="flex flex-col items-center justify-center p-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-xs"
+                title="Office Add-ins and Extensions"
+              >
+                <div className="grid grid-cols-2 gap-0.5 p-0.5">
+                  <div className="w-1.5 h-1.5 bg-orange-500 rounded-2xs" />
+                  <div className="w-1.5 h-1.5 bg-orange-500 rounded-2xs" />
+                  <div className="w-1.5 h-1.5 bg-orange-500 rounded-2xs" />
+                  <div className="w-1.5 h-1.5 bg-orange-500 rounded-2xs" />
+                </div>
+                <span className="text-[10px] mt-0.5">Add-ins</span>
+              </button>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center">Add-ins</div>
             </div>
           </>
         )}
 
         {/* INSERT TAB */}
         {activeTab === 'insert' && (
-          <div className="flex items-center space-x-3">
-            {/* Table Inserter */}
-            <div className="relative">
+          <>
+            {/* 1. Pages */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <button
+                onClick={() => {
+                  editor.chain().focus().insertContent('<div class="wordo-page-break" style="break-before: page; page-break-before: always; height: 1px; border-bottom: 1px dashed #cbd5e1; margin: 24px 0;"></div><p></p>').run();
+                }}
+                onMouseDown={(e) => e.preventDefault()}
+                title="Page Break (Ctrl+Enter)"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+              >
+                <div className="w-5 h-5 flex flex-col items-center justify-center border border-gray-400 dark:border-gray-500 rounded-xs mb-0.5">
+                  <div className="w-3 h-0.5 border-b border-dashed border-[#185abd]" />
+                </div>
+                <span className="text-[10px]">Page Break</span>
+              </button>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Pages</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 2. Tables */}
+            <div className="flex flex-col justify-between items-center h-full px-1 relative">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowTablePicker(!showTablePicker);
                 }}
-                className="flex flex-col items-center justify-center p-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
+                onMouseDown={(e) => e.preventDefault()}
+                title="Insert Table"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
               >
-                <TableIcon className="w-4 h-4 text-[#185abd]" />
+                <TableIcon className="w-4 h-4 text-[#185abd] dark:text-[#5fa2f8] mb-0.5" />
                 <span className="text-[10px] flex items-center">
-                  Table <ChevronDown className="w-2.5 h-2.5 ml-0.5" />
+                  Table <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
                 </span>
               </button>
-
               {showTablePicker && (
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className="absolute left-0 top-full mt-1 p-3 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded-md shadow-2xl z-50"
+                  className="absolute left-0 top-full mt-1 p-3 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 animate-in fade-in duration-100"
                 >
-                  <div className="text-[11px] font-medium mb-1.5">
-                    Select Grid ({tableGrid.rows} × {tableGrid.cols})
+                  <div className="text-[11px] font-medium mb-1.5 text-gray-700 dark:text-gray-200">
+                    Insert Table ({tableGrid.rows} × {tableGrid.cols})
                   </div>
-                  <div className="grid grid-cols-10 gap-1">
+                  <div className="grid grid-cols-10 gap-1 mb-2">
                     {Array.from({ length: 10 }).map((_, r) =>
                       Array.from({ length: 10 }).map((_, c) => (
                         <div
                           key={`${r}-${c}`}
                           onMouseEnter={() => setTableGrid({ rows: r + 1, cols: c + 1 })}
                           onClick={() => handleInsertTable(r + 1, c + 1)}
-                          className={`w-4 h-4 border border-gray-300 cursor-pointer ${
+                          className={`w-3.5 h-3.5 border border-gray-300 dark:border-gray-600 cursor-pointer rounded-2xs ${
                             r < tableGrid.rows && c < tableGrid.cols
                               ? 'bg-[#185abd]/30 border-[#185abd]'
                               : 'bg-gray-50 dark:bg-gray-800'
@@ -1154,446 +1988,1469 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       ))
                     )}
                   </div>
-                </div>
-              )}
-            </div>
-
-            <button
-              onClick={handleInsertImage}
-              className="flex flex-col items-center justify-center p-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
-              title="Insert Picture"
-            >
-              <ImageIcon className="w-4 h-4 text-green-600" />
-              <span className="text-[10px]">Picture</span>
-            </button>
-
-            <button
-              onClick={handleInsertLink}
-              className="flex flex-col items-center justify-center p-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
-              title="Insert Hyperlink (Ctrl+K)"
-            >
-              <LinkIcon className="w-4 h-4 text-blue-500" />
-              <span className="text-[10px]">Link</span>
-            </button>
-
-            <div className="w-[1px] h-8 bg-gray-300 dark:bg-gray-700" />
-
-            <button
-              onClick={() => editor.chain().focus().setHorizontalRule().run()}
-              className="flex flex-col items-center justify-center p-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
-              title="Page Break (Ctrl+Enter)"
-            >
-              <Minus className="w-4 h-4 text-gray-500" />
-              <span className="text-[10px]">Page Break</span>
-            </button>
-
-            <button
-              onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-              className="flex flex-col items-center justify-center p-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
-              title="Code Block"
-            >
-              <Code className="w-4 h-4 text-purple-600" />
-              <span className="text-[10px]">Code Block</span>
-            </button>
-
-            {/* Special Symbols Inserter */}
-            <div className="relative">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowSymbolPicker(!showSymbolPicker);
-                }}
-                className="flex flex-col items-center justify-center p-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
-                title="Special Symbols & Glyphs"
-              >
-                <span className="font-serif text-sm font-bold text-amber-600">Ω</span>
-                <span className="text-[10px] flex items-center">
-                  Symbol <ChevronDown className="w-2.5 h-2.5 ml-0.5" />
-                </span>
-              </button>
-              {showSymbolPicker && (
-                <div
-                  onClick={(e) => e.stopPropagation()}
-                  className="absolute left-0 top-full mt-1 p-2 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded-md shadow-2xl z-50 grid grid-cols-8 gap-1 w-64"
-                >
-                  {SPECIAL_SYMBOLS.map((sym) => (
+                  <div className="border-t border-gray-200 dark:border-gray-700 pt-1 text-center">
                     <button
-                      key={sym}
-                      onClick={() => {
-                        editor.chain().focus().insertContent(sym).run();
-                        setShowSymbolPicker(false);
-                      }}
-                      className="w-7 h-7 flex items-center justify-center text-sm font-sans hover:bg-blue-100 dark:hover:bg-blue-900/40 rounded transition-colors"
+                      onClick={() => handleInsertTable(4, 4)}
+                      className="text-xs text-[#185abd] dark:text-[#5fa2f8] hover:underline"
                     >
-                      {sym}
+                      Insert Standard 4×4 Table
                     </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Date & Time Inserter */}
-            <div className="relative">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowDatePicker(!showDatePicker);
-                }}
-                className="flex flex-col items-center justify-center p-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
-                title="Insert Current Date & Time"
-              >
-                <Calendar className="w-4 h-4 text-emerald-600" />
-                <span className="text-[10px] flex items-center">
-                  Date/Time <ChevronDown className="w-2.5 h-2.5 ml-0.5" />
-                </span>
-              </button>
-              {showDatePicker && (
-                <div
-                  onClick={(e) => e.stopPropagation()}
-                  className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded-md shadow-2xl z-50 w-56 text-xs"
-                >
-                  <div className="px-2 py-1 text-[10px] text-gray-400 font-semibold uppercase">
-                    Select Format
                   </div>
-                  {getDateOptions().map((opt, i) => (
-                    <button
-                      key={i}
-                      onClick={() => {
-                        editor.chain().focus().insertContent(opt).run();
-                        setShowDatePicker(false);
-                      }}
-                      className="w-full text-left px-2.5 py-1.5 hover:bg-blue-50 dark:hover:bg-blue-900/40 text-gray-800 dark:text-gray-200 rounded"
+                </div>
+              )}
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Tables</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 3. Illustrations */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <div className="flex items-center space-x-1">
+                {/* Picture dropdown */}
+                <div className="relative">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowPictureDropdown(!showPictureDropdown);
+                    }}
+                    onMouseDown={(e) => e.preventDefault()}
+                    title="Insert Picture"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  >
+                    <ImageIcon className="w-4 h-4 text-emerald-600 mb-0.5" />
+                    <span className="text-[10px] flex items-center">
+                      Picture <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                    </span>
+                  </button>
+                  {showPictureDropdown && (
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44 text-xs"
                     >
-                      {opt}
+                      <button
+                        onClick={() => {
+                          setShowPictureDropdown(false);
+                          handleInsertImage();
+                        }}
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded flex items-center space-x-2"
+                      >
+                        <ImageIcon className="w-3.5 h-3.5 text-blue-600" />
+                        <span>This Device...</span>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setShowPictureDropdown(false);
+                          const url = prompt('Enter image URL:');
+                          if (url && editor) editor.chain().focus().setImage({ src: url }).run();
+                        }}
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded flex items-center space-x-2"
+                      >
+                        <Search className="w-3.5 h-3.5 text-purple-600" />
+                        <span>Online Pictures...</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* Drawing dropdown */}
+                <div className="relative">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowDrawingDropdown(!showDrawingDropdown);
+                    }}
+                    onMouseDown={(e) => e.preventDefault()}
+                    title="Drawing & Callouts"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  >
+                    <PenTool className="w-4 h-4 text-purple-600 mb-0.5" />
+                    <span className="text-[10px] flex items-center">
+                      Drawing <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                    </span>
+                  </button>
+                  {showDrawingDropdown && (
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44 text-xs"
+                    >
+                      <button
+                        onClick={() => {
+                          setShowDrawingDropdown(false);
+                          handleInsertCallout('note');
+                        }}
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-blue-50 dark:hover:bg-blue-950/40 text-blue-700 dark:text-blue-300 rounded font-medium"
+                      >
+                        Note Box (Blue)
+                      </button>
+                      <button
+                        onClick={() => {
+                          setShowDrawingDropdown(false);
+                          handleInsertCallout('tip');
+                        }}
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-green-50 dark:hover:bg-green-950/40 text-green-700 dark:text-green-300 rounded font-medium"
+                      >
+                        Tip Box (Green)
+                      </button>
+                      <button
+                        onClick={() => {
+                          setShowDrawingDropdown(false);
+                          handleInsertCallout('warning');
+                        }}
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-amber-50 dark:hover:bg-amber-950/40 text-amber-700 dark:text-amber-300 rounded font-medium"
+                      >
+                        Warning Box (Amber)
+                      </button>
+                      <button
+                        onClick={() => {
+                          setShowDrawingDropdown(false);
+                          editor.chain().focus().setHorizontalRule().run();
+                        }}
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                      >
+                        Horizontal Line Divider
+                      </button>
+                      <button
+                        onClick={() => {
+                          setShowDrawingDropdown(false);
+                          editor.chain().focus().toggleCodeBlock().run();
+                        }}
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                      >
+                        Code Snippet Box
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Illustrations</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 4. Links */}
+            <div className="flex flex-col justify-between items-center h-full px-1 relative">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowLinkDropdown(!showLinkDropdown);
+                }}
+                onMouseDown={(e) => e.preventDefault()}
+                title="Link (Ctrl+K)"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+              >
+                <LinkIcon className="w-4 h-4 text-blue-600 mb-0.5" />
+                <span className="text-[10px] flex items-center">
+                  Link <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                </span>
+              </button>
+              {showLinkDropdown && (
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44 text-xs"
+                >
+                  <button
+                    onClick={() => {
+                      setShowLinkDropdown(false);
+                      handleInsertLink();
+                    }}
+                    className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                  >
+                    Insert Link... (Ctrl+K)
+                  </button>
+                  <button
+                    onClick={() => {
+                      setShowLinkDropdown(false);
+                      editor.chain().focus().unsetLink().run();
+                    }}
+                    className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded text-red-600"
+                  >
+                    Remove Link
+                  </button>
+                </div>
+              )}
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Links</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 5. Table of Contents */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <button
+                onClick={handleInsertTableOfContents}
+                onMouseDown={(e) => e.preventDefault()}
+                title="Insert Table of Contents"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+              >
+                <Layers className="w-4 h-4 text-[#185abd] dark:text-[#5fa2f8] mb-0.5" />
+                <span className="text-[10px] text-center leading-tight">Table of<br/>Contents</span>
+              </button>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Table of Contents</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 6. Bookmarks */}
+            <div className="flex flex-col justify-between items-center h-full px-1 relative">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowBookmarksDropdown(!showBookmarksDropdown);
+                }}
+                onMouseDown={(e) => e.preventDefault()}
+                title="Bookmarks"
+                className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+              >
+                <Bookmark className="w-4 h-4 text-amber-600 mb-0.5" />
+                <span className="text-[10px] flex items-center">
+                  Bookmarks <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                </span>
+              </button>
+              {showBookmarksDropdown && (
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44 text-xs"
+                >
+                  <button
+                    onClick={() => {
+                      setShowBookmarksDropdown(false);
+                      handleInsertBookmark();
+                    }}
+                    className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                  >
+                    Add Bookmark...
+                  </button>
+                </div>
+              )}
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Bookmarks</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 7. Media */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <button
+                onClick={handleInsertOnlineVideo}
+                onMouseDown={(e) => e.preventDefault()}
+                title="Online Video"
+                className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+              >
+                <Video className="w-4 h-4 text-blue-500 mb-0.5" />
+                <span className="text-[10px] text-center leading-tight">Online<br/>Video</span>
+              </button>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Media</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 8. Comments */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <button
+                onClick={handleInsertComment}
+                onMouseDown={(e) => e.preventDefault()}
+                title="New Comment"
+                className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+              >
+                <div className="relative mb-0.5">
+                  <MessageSquare className="w-4 h-4 text-emerald-600" />
+                  <Plus className="w-2 h-2 text-emerald-700 absolute -top-0.5 -right-0.5" />
+                </div>
+                <span className="text-[10px] text-center leading-tight">New<br/>Comment</span>
+              </button>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Comments</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 9. Header & Footer */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <div className="flex items-center space-x-1">
+                <button
+                  onClick={() => onOpenSettings?.()}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Header & Footer Options"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                >
+                  <div className="w-4 h-4 border border-gray-400 rounded-xs flex flex-col justify-between p-0.5 mb-0.5">
+                    <div className="w-full h-0.5 bg-orange-500" />
+                    <div className="w-full h-0.5 bg-orange-500" />
+                  </div>
+                  <span className="text-[10px] text-center leading-tight">Header &<br/>Footer</span>
+                </button>
+
+                <div className="relative">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowPageNumbersDropdown(!showPageNumbersDropdown);
+                    }}
+                    onMouseDown={(e) => e.preventDefault()}
+                    title="Page Numbers"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  >
+                    <Hash className="w-4 h-4 text-blue-600 mb-0.5" />
+                    <span className="text-[10px] flex items-center text-center leading-tight">
+                      Page<br/>Numbers <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                    </span>
+                  </button>
+                  {showPageNumbersDropdown && (
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-48 text-xs"
+                    >
+                      <button
+                        onClick={() => {
+                          setShowPageNumbersDropdown(false);
+                          editor.chain().focus().insertContent('<p style="text-align: right; font-size: 10pt; color: #64748b;">Page 1</p>').run();
+                        }}
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                      >
+                        Top of Page
+                      </button>
+                      <button
+                        onClick={() => {
+                          setShowPageNumbersDropdown(false);
+                          editor.chain().focus().insertContent('<p style="text-align: center; font-size: 10pt; color: #64748b; margin-top: 24px;">— 1 —</p>').run();
+                        }}
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                      >
+                        Bottom of Page
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Header & Footer</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 10. Symbols */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <div className="flex items-center space-x-1">
+                <button
+                  onClick={() => {
+                    editor.chain().focus().insertContent('<span style="font-family: serif; font-style: italic;">f(x) = a·x² + b·x + c</span>').run();
+                  }}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Insert Math Equation"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                >
+                  <span className="font-serif text-sm font-bold text-gray-700 dark:text-gray-200">π</span>
+                  <span className="text-[10px]">Equation</span>
+                </button>
+
+                <div className="relative">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowSymbolPicker(!showSymbolPicker);
+                    }}
+                    onMouseDown={(e) => e.preventDefault()}
+                    title="Insert Symbol"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  >
+                    <span className="font-serif text-sm font-bold text-amber-600">Ω</span>
+                    <span className="text-[10px] flex items-center">
+                      Symbol <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                    </span>
+                  </button>
+                  {showSymbolPicker && (
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className="absolute right-0 top-full mt-1 p-2 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 grid grid-cols-8 gap-1 w-64"
+                    >
+                      {SPECIAL_SYMBOLS.map((sym) => (
+                        <button
+                          key={sym}
+                          onClick={() => {
+                            editor.chain().focus().insertContent(sym).run();
+                            setShowSymbolPicker(false);
+                          }}
+                          className="w-7 h-7 flex items-center justify-center text-sm font-sans hover:bg-blue-100 dark:hover:bg-blue-900/40 rounded transition-colors"
+                        >
+                          {sym}
+                        </button>
+                      ))}
+                      <div className="col-span-8 border-t border-gray-200 dark:border-gray-700 pt-1 mt-1 text-center">
+                        <button
+                          onClick={() => {
+                            setShowSymbolPicker(false);
+                            onOpenSymbolModal?.();
+                          }}
+                          className="w-full py-1 text-xs text-[#185abd] dark:text-[#5fa2f8] hover:underline font-medium"
+                        >
+                          More Symbols...
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Symbols</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 11. Emojis */}
+            <div className="flex flex-col justify-between items-center h-full px-1 relative">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowEmojiDropdown(!showEmojiDropdown);
+                }}
+                onMouseDown={(e) => e.preventDefault()}
+                title="Emojis"
+                className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+              >
+                <Smile className="w-4 h-4 text-amber-500 mb-0.5" />
+                <span className="text-[10px] flex items-center">
+                  Emoji <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                </span>
+              </button>
+              {showEmojiDropdown && (
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="absolute right-0 top-full mt-1 p-2 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 grid grid-cols-6 gap-1 w-52"
+                >
+                  {['😀', '😂', '😊', '😍', '👍', '👎', '❤️', '🎉', '🔥', '✨', '💡', '📌', '🚀', '⭐', '✅', '❌', '⚠️', '📝'].map((em) => (
+                    <button
+                      key={em}
+                      onClick={() => {
+                        editor.chain().focus().insertContent(em).run();
+                        setShowEmojiDropdown(false);
+                      }}
+                      className="w-7 h-7 flex items-center justify-center text-base hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                    >
+                      {em}
                     </button>
                   ))}
                 </div>
               )}
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Emojis</div>
             </div>
-
-            {onOpenSettings && (
-              <>
-                <div className="w-[1px] h-8 bg-gray-300 dark:bg-gray-700" />
-                <button
-                  onClick={onOpenSettings}
-                  className="flex flex-col items-center justify-center p-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
-                  title="Header & Footer Presets"
-                >
-                  <FileText className="w-4 h-4 text-indigo-600" />
-                  <span className="text-[10px]">Header & Footer</span>
-                </button>
-              </>
-            )}
-          </div>
+          </>
         )}
 
         {/* LAYOUT TAB */}
         {activeTab === 'layout' && (
-          <div className="flex items-center space-x-3">
-            {onOpenSettings && (
-              <button
-                onClick={onOpenSettings}
-                className="flex items-center space-x-1.5 px-2.5 py-1.5 bg-blue-50 dark:bg-blue-950/40 text-[#185abd] border border-[#185abd] rounded hover:bg-blue-100 dark:hover:bg-blue-900/50 text-xs font-medium"
-                title="Page Setup, Margins & Header/Footer Presets"
-              >
-                <FileText className="w-3.5 h-3.5" />
-                <span>Page Setup</span>
-              </button>
-            )}
-
-            <div className="w-[1px] h-8 bg-gray-300 dark:bg-gray-700" />
-
-            <div className="flex flex-col space-y-0.5">
-              <span className="text-[10px] text-gray-400 font-semibold uppercase">Page Margins</span>
+          <>
+            {/* 1. Page Setup */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
               <div className="flex items-center space-x-1">
-                <button
-                  onClick={() =>
-                    onUpdatePageSettings?.({
-                      ...(pageSettings || {
-                        size: 'a4',
-                        orientation: 'portrait',
-                        showPageNumbers: true,
-                      }),
-                      margins: { top: 96, bottom: 96, left: 96, right: 96 },
-                    })
-                  }
-                  className={`px-2 py-1 rounded text-[11px] border transition-colors ${
-                    pageSettings?.margins?.left === 96
-                      ? 'bg-blue-50 dark:bg-blue-950/40 text-[#185abd] border-[#185abd] font-semibold'
-                      : 'bg-white dark:bg-[#2d2d2d] border-gray-300 dark:border-gray-600 hover:bg-gray-100'
-                  }`}
-                >
-                  Normal (1")
-                </button>
-                <button
-                  onClick={() =>
-                    onUpdatePageSettings?.({
-                      ...(pageSettings || {
-                        size: 'a4',
-                        orientation: 'portrait',
-                        showPageNumbers: true,
-                      }),
-                      margins: { top: 48, bottom: 48, left: 48, right: 48 },
-                    })
-                  }
-                  className={`px-2 py-1 rounded text-[11px] border transition-colors ${
-                    pageSettings?.margins?.left === 48
-                      ? 'bg-blue-50 dark:bg-blue-950/40 text-[#185abd] border-[#185abd] font-semibold'
-                      : 'bg-white dark:bg-[#2d2d2d] border-gray-300 dark:border-gray-600 hover:bg-gray-100'
-                  }`}
-                >
-                  Narrow (0.5")
-                </button>
-                <button
-                  onClick={() =>
-                    onUpdatePageSettings?.({
-                      ...(pageSettings || {
-                        size: 'a4',
-                        orientation: 'portrait',
-                        showPageNumbers: true,
-                      }),
-                      margins: { top: 96, bottom: 96, left: 144, right: 144 },
-                    })
-                  }
-                  className={`px-2 py-1 rounded text-[11px] border transition-colors ${
-                    pageSettings?.margins?.left === 144
-                      ? 'bg-blue-50 dark:bg-blue-950/40 text-[#185abd] border-[#185abd] font-semibold'
-                      : 'bg-white dark:bg-[#2d2d2d] border-gray-300 dark:border-gray-600 hover:bg-gray-100'
-                  }`}
-                >
-                  Wide (1.5")
+                {/* Margins */}
+                <div className="relative">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowMarginsDropdown(!showMarginsDropdown);
+                    }}
+                    onMouseDown={(e) => e.preventDefault()}
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    title="Page Margins"
+                  >
+                    <div className="w-4 h-5 border border-dashed border-[#185abd] dark:border-blue-400 rounded-xs flex items-center justify-center mb-0.5">
+                      <div className="w-2 h-3 bg-[#185abd]/20 dark:bg-blue-400/20" />
+                    </div>
+                    <span className="text-[10px] flex items-center">
+                      Margins <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                    </span>
+                  </button>
+                  {showMarginsDropdown && (
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-64 text-xs"
+                    >
+                      {[
+                        { label: 'Normal', desc: 'Top: 1" · Bottom: 1" · Left: 1" · Right: 1"', m: { top: 96, bottom: 96, left: 96, right: 96 } },
+                        { label: 'Narrow', desc: 'Top: 0.5" · Bottom: 0.5" · Left: 0.5" · Right: 0.5"', m: { top: 48, bottom: 48, left: 48, right: 48 } },
+                        { label: 'Moderate', desc: 'Top: 1" · Bottom: 1" · Left: 0.75" · Right: 0.75"', m: { top: 96, bottom: 96, left: 72, right: 72 } },
+                        { label: 'Wide', desc: 'Top: 1" · Bottom: 1" · Left: 1.5" · Right: 1.5"', m: { top: 96, bottom: 96, left: 144, right: 144 } },
+                      ].map((item) => (
+                        <button
+                          key={item.label}
+                          onClick={() => {
+                            onUpdatePageSettings?.({ ...(pageSettings || {}), margins: item.m });
+                            setShowMarginsDropdown(false);
+                          }}
+                          className="w-full flex items-center justify-between p-2 rounded hover:bg-blue-50 dark:hover:bg-blue-900/30 text-left transition-colors"
+                        >
+                          <div>
+                            <div className="font-semibold text-gray-800 dark:text-gray-200">{item.label}</div>
+                            <div className="text-[10px] text-gray-500">{item.desc}</div>
+                          </div>
+                          {pageSettings?.margins?.left === item.m.left && <Check className="w-4 h-4 text-[#185abd]" />}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Orientation */}
+                <div className="relative">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowOrientationDropdown(!showOrientationDropdown);
+                    }}
+                    onMouseDown={(e) => e.preventDefault()}
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    title="Page Orientation"
+                  >
+                    <RotateCcw className="w-4 h-4 text-blue-600 mb-0.5" />
+                    <span className="text-[10px] flex items-center">
+                      Orientation <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                    </span>
+                  </button>
+                  {showOrientationDropdown && (
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44 text-xs"
+                    >
+                      <button
+                        onClick={() => {
+                          onUpdatePageSettings?.({ ...(pageSettings || {}), orientation: 'portrait' });
+                          setShowOrientationDropdown(false);
+                        }}
+                        className="w-full flex items-center justify-between p-2 rounded hover:bg-blue-50 dark:hover:bg-blue-900/30"
+                      >
+                        <span>Portrait</span>
+                        {pageSettings?.orientation !== 'landscape' && <Check className="w-4 h-4 text-[#185abd]" />}
+                      </button>
+                      <button
+                        onClick={() => {
+                          onUpdatePageSettings?.({ ...(pageSettings || {}), orientation: 'landscape' });
+                          setShowOrientationDropdown(false);
+                        }}
+                        className="w-full flex items-center justify-between p-2 rounded hover:bg-blue-50 dark:hover:bg-blue-900/30"
+                      >
+                        <span>Landscape</span>
+                        {pageSettings?.orientation === 'landscape' && <Check className="w-4 h-4 text-[#185abd]" />}
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* Size */}
+                <div className="relative">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowSizeDropdown(!showSizeDropdown);
+                    }}
+                    onMouseDown={(e) => e.preventDefault()}
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    title="Paper Size"
+                  >
+                    <div className="w-4 h-5 border border-gray-400 dark:border-gray-500 rounded-xs flex items-center justify-center mb-0.5">
+                      <span className="text-[8px] font-bold">A4</span>
+                    </div>
+                    <span className="text-[10px] flex items-center">
+                      Size <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                    </span>
+                  </button>
+                  {showSizeDropdown && (
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-52 text-xs"
+                    >
+                      {[
+                        { label: 'Letter', desc: '8.5" × 11"', size: 'letter' },
+                        { label: 'A4', desc: '8.27" × 11.69"', size: 'a4' },
+                        { label: 'Legal', desc: '8.5" × 14"', size: 'legal' },
+                        { label: 'Executive', desc: '7.25" × 10.5"', size: 'executive' },
+                      ].map((item) => (
+                        <button
+                          key={item.label}
+                          onClick={() => {
+                            onUpdatePageSettings?.({ ...(pageSettings || {}), pageSize: item.size });
+                            setShowSizeDropdown(false);
+                          }}
+                          className="w-full flex items-center justify-between p-2 rounded hover:bg-blue-50 dark:hover:bg-blue-900/30"
+                        >
+                          <div>
+                            <div className="font-semibold">{item.label}</div>
+                            <div className="text-[10px] text-gray-500">{item.desc}</div>
+                          </div>
+                          {pageSettings?.pageSize === item.size && <Check className="w-4 h-4 text-[#185abd]" />}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Columns */}
+                <div className="relative">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowColumnsDropdown(!showColumnsDropdown);
+                    }}
+                    onMouseDown={(e) => e.preventDefault()}
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    title="Columns"
+                  >
+                    <Columns className="w-4 h-4 text-emerald-600 mb-0.5" />
+                    <span className="text-[10px] flex items-center">
+                      Columns <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                    </span>
+                  </button>
+                  {showColumnsDropdown && (
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-40 text-xs"
+                    >
+                      {['One', 'Two', 'Three'].map((col, idx) => (
+                        <button
+                          key={col}
+                          onClick={() => {
+                            onUpdatePageSettings?.({ ...(pageSettings || {}), columns: idx + 1 });
+                            setShowColumnsDropdown(false);
+                          }}
+                          className="w-full flex items-center justify-between p-2 rounded hover:bg-blue-50 dark:hover:bg-blue-900/30"
+                        >
+                          <span>{col}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Breaks */}
+                <div className="relative">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowBreaksDropdown(!showBreaksDropdown);
+                    }}
+                    onMouseDown={(e) => e.preventDefault()}
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    title="Breaks"
+                  >
+                    <Minus className="w-4 h-4 text-indigo-600 mb-0.5" />
+                    <span className="text-[10px] flex items-center">
+                      Breaks <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                    </span>
+                  </button>
+                  {showBreaksDropdown && (
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-52 text-xs"
+                    >
+                      <button
+                        onClick={() => {
+                          setShowBreaksDropdown(false);
+                          editor.chain().focus().insertContent('<div class="wordo-page-break" style="break-before: page; page-break-before: always; height: 1px; border-bottom: 1px dashed #cbd5e1; margin: 24px 0;"></div><p></p>').run();
+                        }}
+                        className="w-full text-left p-2 rounded hover:bg-gray-100 dark:hover:bg-[#333]"
+                      >
+                        <div className="font-semibold">Page Break</div>
+                        <div className="text-[10px] text-gray-500">Mark point where page ends (Ctrl+Enter)</div>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setShowBreaksDropdown(false);
+                          editor.chain().focus().insertContent('<div class="wordo-section-break" style="break-before: page; page-break-before: always; height: 2px; border-bottom: 2px solid #94a3b8; margin: 24px 0;"></div><p></p>').run();
+                        }}
+                        className="w-full text-left p-2 rounded hover:bg-gray-100 dark:hover:bg-[#333]"
+                      >
+                        <div className="font-semibold">Section Break (Next Page)</div>
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* Line Numbers */}
+                <div className="relative">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowLineNumbersDropdown(!showLineNumbersDropdown);
+                    }}
+                    onMouseDown={(e) => e.preventDefault()}
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    title="Line Numbers"
+                  >
+                    <div className="w-4 h-4 flex items-center justify-center text-[9px] font-bold text-gray-600 dark:text-gray-300 border border-gray-400 rounded-xs mb-0.5">
+                      12
+                    </div>
+                    <span className="text-[10px] flex items-center">
+                      Line Numbers <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                    </span>
+                  </button>
+                  {showLineNumbersDropdown && (
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44 text-xs"
+                    >
+                      {['None', 'Continuous', 'Restart Each Page'].map((opt) => (
+                        <button
+                          key={opt}
+                          onClick={() => setShowLineNumbersDropdown(false)}
+                          className="w-full text-left p-2 rounded hover:bg-gray-100 dark:hover:bg-[#333]"
+                        >
+                          {opt}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Page Setup</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 2. Paragraph Steppers */}
+            <div className="flex flex-col justify-between h-full px-2">
+              <div className="flex flex-col space-y-1">
+                {/* Row 1: Indent Left & Spacing Before */}
+                <div className="flex items-center space-x-3">
+                  <div className="flex items-center space-x-1.5">
+                    <span className="text-[10px] text-gray-500 font-medium w-10">Indent</span>
+                    <span className="text-[10px] text-gray-600 dark:text-gray-400">Left:</span>
+                    <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1 py-0.5 text-[10px]">
+                      <span className="w-6 text-center">{indentLeft}"</span>
+                      <div className="flex flex-col ml-0.5">
+                        <button onClick={() => handleIndentChange(0.25)} className="hover:text-blue-600"><ChevronUp className="w-2 h-2" /></button>
+                        <button onClick={() => handleIndentChange(-0.25)} className="hover:text-blue-600"><ChevronDown className="w-2 h-2" /></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-1.5">
+                    <span className="text-[10px] text-gray-500 font-medium w-12">Spacing</span>
+                    <span className="text-[10px] text-gray-600 dark:text-gray-400">Before:</span>
+                    <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1 py-0.5 text-[10px]">
+                      <span className="w-8 text-center">{spacingBefore} pt</span>
+                      <div className="flex flex-col ml-0.5">
+                        <button onClick={() => handleSpacingBeforeChange(2)} className="hover:text-blue-600"><ChevronUp className="w-2 h-2" /></button>
+                        <button onClick={() => handleSpacingBeforeChange(-2)} className="hover:text-blue-600"><ChevronDown className="w-2 h-2" /></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Row 2: Indent Right & Spacing After */}
+                <div className="flex items-center space-x-3">
+                  <div className="flex items-center space-x-1.5">
+                    <div className="w-10" />
+                    <span className="text-[10px] text-gray-600 dark:text-gray-400">Right:</span>
+                    <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1 py-0.5 text-[10px]">
+                      <span className="w-6 text-center">{indentRight}"</span>
+                      <div className="flex flex-col ml-0.5">
+                        <button onClick={() => handleIndentRightChange(0.25)} className="hover:text-blue-600"><ChevronUp className="w-2 h-2" /></button>
+                        <button onClick={() => handleIndentRightChange(-0.25)} className="hover:text-blue-600"><ChevronDown className="w-2 h-2" /></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-1.5">
+                    <div className="w-12" />
+                    <span className="text-[10px] text-gray-600 dark:text-gray-400">After:</span>
+                    <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1 py-0.5 text-[10px]">
+                      <span className="w-8 text-center">{spacingAfter} pt</span>
+                      <div className="flex flex-col ml-0.5">
+                        <button onClick={() => handleSpacingAfterChange(2)} className="hover:text-blue-600"><ChevronUp className="w-2 h-2" /></button>
+                        <button onClick={() => handleSpacingAfterChange(-2)} className="hover:text-blue-600"><ChevronDown className="w-2 h-2" /></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-center space-x-1 text-[10px] text-gray-400 dark:text-gray-500 font-normal select-none">
+                <span>Paragraph</span>
+                <button onClick={onOpenSettings} title="Paragraph Settings" className="hover:text-gray-600">
+                  <ExternalLink className="w-2.5 h-2.5" />
                 </button>
               </div>
             </div>
 
-            <div className="w-[1px] h-8 bg-gray-300 dark:bg-gray-700" />
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
 
-            {/* Page Orientation */}
-            <div className="flex flex-col space-y-0.5">
-              <span className="text-[10px] text-gray-400 font-semibold uppercase">Orientation</span>
+            {/* 3. Page Background */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <div className="flex items-center space-x-1">
+                {/* Page Borders */}
+                <div className="relative">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowPageBordersDropdown(!showPageBordersDropdown);
+                    }}
+                    onMouseDown={(e) => e.preventDefault()}
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    title="Page Borders"
+                  >
+                    <div className="w-4 h-5 border-2 border-indigo-600 rounded-xs mb-0.5" />
+                    <span className="text-[10px] flex items-center">
+                      Page Borders <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                    </span>
+                  </button>
+                  {showPageBordersDropdown && (
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44 text-xs"
+                    >
+                      {['None', 'Box (Thin)', 'Box (Medium)', 'Shadow', 'Custom...'].map((b) => (
+                        <button
+                          key={b}
+                          onClick={() => {
+                            setShowPageBordersDropdown(false);
+                            onUpdatePageSettings?.({ ...(pageSettings || {}), pageBorder: b });
+                          }}
+                          className="w-full text-left p-2 rounded hover:bg-gray-100 dark:hover:bg-[#333]"
+                        >
+                          {b}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Page Color */}
+                <div className="relative">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowPageColorPicker(!showPageColorPicker);
+                    }}
+                    onMouseDown={(e) => e.preventDefault()}
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    title="Page Color"
+                  >
+                    <Palette className="w-4 h-4 text-purple-600 mb-0.5" />
+                    <span className="text-[10px] flex items-center">
+                      Page Color <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                    </span>
+                  </button>
+                  {showPageColorPicker && (
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className="absolute right-0 top-full mt-1 p-2 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44"
+                    >
+                      {PAGE_COLORS.map((pc) => (
+                        <button
+                          key={pc.name}
+                          onClick={() => {
+                            onUpdatePageSettings?.({ ...(pageSettings || {}), backgroundColor: pc.color });
+                            setShowPageColorPicker(false);
+                          }}
+                          className="w-full flex items-center space-x-2 px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-xs"
+                        >
+                          <div className="w-4 h-4 rounded border border-gray-300" style={{ backgroundColor: pc.color || '#ffffff' }} />
+                          <span>{pc.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Page Background</div>
+            </div>
+          </>
+        )}
+
+        {/* REFERENCES TAB */}
+        {activeTab === 'references' && (
+          <>
+            {/* 1. Table of Contents */}
+            <div className="flex flex-col justify-between h-full px-1">
+              <div className="flex items-center space-x-1.5">
+                <button
+                  onClick={handleInsertTableOfContents}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Insert Table of Contents"
+                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                >
+                  <Layers className="w-5 h-5 text-[#185abd] dark:text-[#5fa2f8] mb-0.5" />
+                  <span className="text-[10px] font-semibold text-center leading-tight">Insert Table of<br/>Contents</span>
+                </button>
+
+                <div className="flex flex-col space-y-0.5">
+                  <button
+                    onClick={handleInsertTableOfContents}
+                    onMouseDown={(e) => e.preventDefault()}
+                    title="Update Table of Contents"
+                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-[10px]"
+                  >
+                    <RefreshCw className="w-3 h-3 text-emerald-600" />
+                    <span>Update Table of Contents</span>
+                  </button>
+                  <button
+                    onClick={handleRemoveTableOfContents}
+                    onMouseDown={(e) => e.preventDefault()}
+                    title="Remove Table of Contents"
+                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-[10px] text-red-600"
+                  >
+                    <Trash2 className="w-3 h-3" />
+                    <span>Remove Table of Contents</span>
+                  </button>
+                </div>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Table of Contents</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 2. Footnotes */}
+            <div className="flex flex-col justify-between h-full px-1">
+              <div className="flex items-center space-x-1.5">
+                <button
+                  onClick={handleInsertFootnote}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Insert Footnote"
+                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                >
+                  <div className="flex items-baseline mb-0.5">
+                    <span className="text-sm font-bold text-gray-700 dark:text-gray-200">Ab</span>
+                    <span className="text-[10px] font-bold text-[#185abd]">1</span>
+                  </div>
+                  <span className="text-[10px] font-semibold text-center leading-tight">Insert<br/>Footnote</span>
+                </button>
+
+                <div className="flex flex-col space-y-0.5">
+                  <button
+                    onClick={handleInsertEndnote}
+                    onMouseDown={(e) => e.preventDefault()}
+                    title="Insert Endnote"
+                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-[10px]"
+                  >
+                    <FileText className="w-3 h-3 text-blue-500" />
+                    <span>Insert Endnote</span>
+                  </button>
+                  <button
+                    onClick={handleScrollToFootnotes}
+                    onMouseDown={(e) => e.preventDefault()}
+                    title="Show Footnotes"
+                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-[10px]"
+                  >
+                    <Eye className="w-3 h-3 text-teal-600" />
+                    <span>Show Footnotes</span>
+                  </button>
+                  <button
+                    onClick={handleScrollToFootnotes}
+                    onMouseDown={(e) => e.preventDefault()}
+                    title="Show Endnotes"
+                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-[10px]"
+                  >
+                    <Eye className="w-3 h-3 text-indigo-600" />
+                    <span>Show Endnotes</span>
+                  </button>
+                </div>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Footnotes</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 3. Insights */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <button
+                onClick={onOpenSearch}
+                onMouseDown={(e) => e.preventDefault()}
+                title="Search Smart Insights"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+              >
+                <div className="relative mb-0.5">
+                  <Search className="w-4 h-4 text-blue-600" />
+                  <InfoIcon className="w-2.5 h-2.5 text-blue-800 absolute -bottom-1 -right-1" />
+                </div>
+                <span className="text-[10px] mt-0.5">Search</span>
+              </button>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Insights</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 4. Citation & Bibliography */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <button
+                onClick={() => onOpenCitationModal?.()}
+                onMouseDown={(e) => e.preventDefault()}
+                title="Manage Citations & Bibliography"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+              >
+                <div className="w-4 h-5 border-2 border-red-500 rounded-xs flex items-center justify-center mb-0.5">
+                  <span className="text-[8px] font-bold text-red-500">[]</span>
+                </div>
+                <span className="text-[10px] flex items-center">
+                  Citations <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                </span>
+              </button>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Citation & Bibliography</div>
+            </div>
+          </>
+        )}
+
+        {/* REVIEW TAB */}
+        {activeTab === 'review' && (
+          <>
+            {/* 1. Proofing */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
               <div className="flex items-center space-x-1">
                 <button
-                  onClick={() =>
-                    onUpdatePageSettings?.({
-                      ...(pageSettings || {
-                        size: 'a4',
-                        margins: { top: 96, bottom: 96, left: 96, right: 96 },
-                        showPageNumbers: true,
-                      }),
-                      orientation: 'portrait',
-                    })
-                  }
-                  className={`px-2 py-1 rounded text-[11px] border transition-colors ${
-                    pageSettings?.orientation !== 'landscape'
-                      ? 'bg-blue-50 dark:bg-blue-950/40 text-[#185abd] border-[#185abd] font-semibold'
-                      : 'bg-white dark:bg-[#2d2d2d] border-gray-300 dark:border-gray-600 hover:bg-gray-100'
-                  }`}
+                  onClick={onOpenSpellCheck}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Editor / Grammar Check"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
                 >
-                  Portrait
+                  <Sparkles className="w-4 h-4 text-indigo-600 mb-0.5" />
+                  <span className="text-[10px] flex items-center font-semibold">
+                    Editor <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                  </span>
                 </button>
+
                 <button
-                  onClick={() =>
-                    onUpdatePageSettings?.({
-                      ...(pageSettings || {
-                        size: 'a4',
-                        margins: { top: 96, bottom: 96, left: 96, right: 96 },
-                        showPageNumbers: true,
-                      }),
-                      orientation: 'landscape',
-                    })
-                  }
-                  className={`px-2 py-1 rounded text-[11px] border transition-colors ${
-                    pageSettings?.orientation === 'landscape'
-                      ? 'bg-blue-50 dark:bg-blue-950/40 text-[#185abd] border-[#185abd] font-semibold'
-                      : 'bg-white dark:bg-[#2d2d2d] border-gray-300 dark:border-gray-600 hover:bg-gray-100'
-                  }`}
+                  onClick={onOpenSpellCheck}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Spelling & Grammar"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
                 >
-                  Landscape
+                  <div className="flex items-center mb-0.5">
+                    <span className="text-xs font-bold text-gray-700 dark:text-gray-300">ABC</span>
+                    <Check className="w-3 h-3 text-emerald-600 -ml-1 -mt-1" />
+                  </div>
+                  <span className="text-[10px] flex items-center text-center leading-tight">
+                    Spelling &<br/>Grammar <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                  </span>
+                </button>
+
+                <button
+                  onClick={onOpenWordCount}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Word Count"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                >
+                  <div className="text-xs font-bold text-blue-600 mb-0.5">123</div>
+                  <span className="text-[10px] flex items-center text-center leading-tight">
+                    Word<br/>Count <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                  </span>
                 </button>
               </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Proofing</div>
             </div>
 
-            <div className="w-[1px] h-8 bg-gray-300 dark:bg-gray-700" />
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
 
-            {/* Page Color */}
-            <div className="relative">
+            {/* 2. Accessibility */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowPageColorPicker(!showPageColorPicker);
-                }}
-                className="flex items-center space-x-1.5 px-2.5 py-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-100 text-xs font-medium"
-                title="Page Color Tint"
+                onClick={() => onOpenAccessibilityModal?.()}
+                onMouseDown={(e) => e.preventDefault()}
+                title="Check Accessibility"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
               >
-                <Palette className="w-3.5 h-3.5 text-purple-600" />
-                <span>Page Color</span>
+                <Eye className="w-4 h-4 text-teal-600 mb-0.5" />
+                <span className="text-[10px] text-center leading-tight">Check<br/>Accessibility</span>
               </button>
-              {showPageColorPicker && (
-                <div
-                  onClick={(e) => e.stopPropagation()}
-                  className="absolute left-0 top-full mt-1 p-2 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded-md shadow-2xl z-50 w-44"
-                >
-                  {PAGE_COLORS.map((pc) => (
-                    <button
-                      key={pc.color}
-                      onClick={() => {
-                        onUpdatePageSettings?.({
-                          ...(pageSettings || {
-                            size: 'a4',
-                            orientation: 'portrait',
-                            margins: { top: 96, bottom: 96, left: 96, right: 96 },
-                            showPageNumbers: true,
-                          }),
-                          pageColor: pc.color,
-                        });
-                        setShowPageColorPicker(false);
-                      }}
-                      className="w-full text-left px-2 py-1 rounded text-xs hover:bg-gray-100 dark:hover:bg-[#383838] flex items-center space-x-2"
-                    >
-                      <div
-                        className="w-4 h-4 rounded-xs border border-gray-300"
-                        style={{ backgroundColor: pc.color }}
-                      />
-                      <span>{pc.name}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Accessibility</div>
             </div>
 
-            {/* Watermark */}
-            <div className="relative">
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 3. Translate */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowWatermarkPicker(!showWatermarkPicker);
-                }}
-                className="flex items-center space-x-1.5 px-2.5 py-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-100 text-xs font-medium"
-                title="Document Watermark"
+                onClick={() => onOpenTranslateModal?.()}
+                onMouseDown={(e) => e.preventDefault()}
+                title="Translate"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
               >
-                <span className="font-bold text-xs text-gray-400">WM</span>
-                <span>Watermark</span>
+                <Languages className="w-4 h-4 text-blue-600 mb-0.5" />
+                <span className="text-[10px] flex items-center">
+                  Translate <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                </span>
               </button>
-              {showWatermarkPicker && (
-                <div
-                  onClick={(e) => e.stopPropagation()}
-                  className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded-md shadow-2xl z-50 w-48 text-xs"
-                >
-                  <button
-                    onClick={() => {
-                      onUpdatePageSettings?.({
-                        ...(pageSettings || {
-                          size: 'a4',
-                          orientation: 'portrait',
-                          margins: { top: 96, bottom: 96, left: 96, right: 96 },
-                          showPageNumbers: true,
-                        }),
-                        watermarkText: undefined,
-                      });
-                      setShowWatermarkPicker(false);
-                    }}
-                    className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#383838] text-gray-500 rounded"
-                  >
-                    No Watermark
-                  </button>
-                  <div className="my-1 border-t border-gray-200 dark:border-gray-700" />
-                  {WATERMARK_PRESETS.map((wm) => (
-                    <button
-                      key={wm}
-                      onClick={() => {
-                        onUpdatePageSettings?.({
-                          ...(pageSettings || {
-                            size: 'a4',
-                            orientation: 'portrait',
-                            margins: { top: 96, bottom: 96, left: 96, right: 96 },
-                            showPageNumbers: true,
-                          }),
-                          watermarkText: wm,
-                        });
-                        setShowWatermarkPicker(false);
-                      }}
-                      className="w-full text-left px-2.5 py-1 hover:bg-blue-50 dark:hover:bg-blue-900/40 text-gray-800 dark:text-gray-200 rounded font-medium"
-                    >
-                      {wm}
-                    </button>
-                  ))}
-                  <div className="my-1 border-t border-gray-200 dark:border-gray-700" />
-                  <button
-                    onClick={() => {
-                      const custom = window.prompt('Enter custom watermark text:');
-                      if (custom) {
-                        onUpdatePageSettings?.({
-                          ...(pageSettings || {
-                            size: 'a4',
-                            orientation: 'portrait',
-                            margins: { top: 96, bottom: 96, left: 96, right: 96 },
-                            showPageNumbers: true,
-                          }),
-                          watermarkText: custom.toUpperCase(),
-                        });
-                      }
-                      setShowWatermarkPicker(false);
-                    }}
-                    className="w-full text-left px-2.5 py-1 hover:bg-blue-50 dark:hover:bg-blue-900/40 text-[#185abd] font-medium"
-                  >
-                    Custom Watermark...
-                  </button>
-                </div>
-              )}
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Translate</div>
             </div>
-          </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 4. Comments */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <div className="flex items-center space-x-1">
+                <button
+                  onClick={handleInsertComment}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="New Comment"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                >
+                  <div className="relative mb-0.5">
+                    <MessageSquare className="w-4 h-4 text-emerald-600" />
+                    <Plus className="w-2 h-2 text-emerald-700 absolute -top-0.5 -right-0.5" />
+                  </div>
+                  <span className="text-[10px] text-center leading-tight">New<br/>Comment</span>
+                </button>
+
+                <button
+                  onClick={() => {}}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Previous Comment"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-gray-500"
+                >
+                  <ChevronLeft className="w-4 h-4 mb-0.5" />
+                  <span className="text-[10px]">Previous</span>
+                </button>
+
+                <button
+                  onClick={() => {}}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Next Comment"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-gray-500"
+                >
+                  <ChevronRight className="w-4 h-4 mb-0.5" />
+                  <span className="text-[10px]">Next</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    editor.chain().focus().unsetHighlight().run();
+                  }}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Delete Comment"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-red-500"
+                >
+                  <Trash2 className="w-4 h-4 mb-0.5" />
+                  <span className="text-[10px] flex items-center">
+                    Delete <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                  </span>
+                </button>
+
+                <button
+                  onClick={onToggleNavSidebar}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Show Comments Pane"
+                  className={`flex flex-col items-center justify-center p-1 px-1.5 rounded border transition-colors ${
+                    showNavSidebar
+                      ? 'border-[#185abd] bg-blue-50 dark:bg-blue-950/40 text-[#185abd]'
+                      : 'border-transparent hover:bg-gray-100 dark:hover:bg-[#333]'
+                  }`}
+                >
+                  <MessageSquare className="w-4 h-4 mb-0.5" />
+                  <span className="text-[10px] text-center leading-tight">Show<br/>Comments</span>
+                </button>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Comments</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 5. Markup */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <div className="flex items-center space-x-1.5">
+                <button
+                  onClick={() => {}}
+                  onMouseDown={(e) => e.preventDefault()}
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-gray-500"
+                >
+                  <MessageSquare className="w-4 h-4 mb-0.5" />
+                  <span className="text-[10px] flex items-center">
+                    Filter <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                  </span>
+                </button>
+
+                <div className="flex flex-col space-y-0.5">
+                  <span className="text-[10px] text-gray-500 font-medium">Markup view:</span>
+                  <select
+                    value={markupViewMode}
+                    onChange={(e) => setMarkupViewMode(e.target.value as any)}
+                    className="border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1.5 py-0.5 text-[10px] text-gray-700 dark:text-gray-200 focus:outline-none"
+                  >
+                    <option value="All Markup">All Markup</option>
+                    <option value="Simple Markup">Simple Markup</option>
+                    <option value="No Markup">No Markup</option>
+                    <option value="Original">Original</option>
+                  </select>
+                </div>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Markup</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 6. Tracking */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <div className="flex flex-col space-y-0.5 justify-center mt-1">
+                <span className="text-[10px] text-gray-500 font-medium">Track Changes:</span>
+                <select
+                  value={trackChangesMode}
+                  onChange={(e) => setTrackChangesMode(e.target.value as any)}
+                  className="border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1.5 py-0.5 text-[10px] text-gray-700 dark:text-gray-200 focus:outline-none"
+                >
+                  <option value="Off">Off</option>
+                  <option value="For Everyone">For Everyone</option>
+                  <option value="Just Mine">Just Mine</option>
+                </select>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Tracking</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 7. Changes */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <div className="flex items-center space-x-1">
+                <button
+                  onClick={() => {}}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Accept Change"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-emerald-600"
+                >
+                  <Check className="w-4 h-4 mb-0.5" />
+                  <span className="text-[10px] flex items-center">
+                    Accept <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                  </span>
+                </button>
+
+                <button
+                  onClick={() => {}}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Reject Change"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-red-600"
+                >
+                  <XCircle className="w-4 h-4 mb-0.5" />
+                  <span className="text-[10px] flex items-center">
+                    Reject <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
+                  </span>
+                </button>
+
+                <button
+                  onClick={() => {}}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Previous Change"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-gray-500"
+                >
+                  <ChevronLeft className="w-4 h-4 mb-0.5" />
+                  <span className="text-[10px]">Previous</span>
+                </button>
+
+                <button
+                  onClick={() => {}}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Next Change"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-gray-500"
+                >
+                  <ChevronRight className="w-4 h-4 mb-0.5" />
+                  <span className="text-[10px]">Next</span>
+                </button>
+
+                <button
+                  onClick={() => {}}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Mark All as Read"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-blue-600"
+                >
+                  <CheckCheck className="w-4 h-4 mb-0.5" />
+                  <span className="text-[10px] text-center leading-tight">Mark All<br/>as Read</span>
+                </button>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Changes</div>
+            </div>
+          </>
         )}
 
         {/* VIEW TAB */}
         {activeTab === 'view' && (
-          <div className="flex items-center space-x-3">
-            <button
-              onClick={onToggleRuler}
-              className={`flex items-center px-2 py-1.5 rounded transition-colors ${
-                showRuler
-                  ? 'bg-blue-50 dark:bg-blue-950/40 text-[#185abd] border border-[#185abd] font-medium'
-                  : 'hover:bg-gray-200 dark:hover:bg-[#333]'
-              }`}
-            >
-              Horizontal Ruler
-            </button>
-
-            <button
-              onClick={onToggleNavSidebar}
-              className={`flex items-center px-2 py-1.5 rounded transition-colors ${
-                showNavSidebar
-                  ? 'bg-blue-50 dark:bg-blue-950/40 text-[#185abd] border border-[#185abd] font-medium'
-                  : 'hover:bg-gray-200 dark:hover:bg-[#333]'
-              }`}
-            >
-              Navigation Pane
-            </button>
-
-            <div className="w-[1px] h-8 bg-gray-300 dark:bg-gray-700" />
-
-            <div className="flex items-center space-x-1">
-              <span className="text-[10px] text-gray-400 font-semibold mr-1">Zoom:</span>
-              {[75, 100, 125, 150].map((z) => (
+          <>
+            {/* 1. Document Views */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <div className="flex items-center space-x-1">
                 <button
-                  key={z}
-                  onClick={() => onZoomChange(z)}
-                  className={`px-2 py-1 rounded text-[11px] ${
-                    currentZoom === z
-                      ? 'bg-[#185abd] text-white font-bold'
-                      : 'bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 hover:bg-gray-100'
+                  onClick={() => {}}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Separate Pages View"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded border border-[#185abd] bg-blue-50 dark:bg-blue-950/40 text-[#185abd] transition-colors"
+                >
+                  <FileText className="w-4 h-4 mb-0.5" />
+                  <span className="text-[10px] font-semibold text-center leading-tight">Separate<br/>Pages</span>
+                </button>
+
+                <button
+                  onClick={() => onToggleReadAloud?.()}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Immersive Reader"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-purple-600 transition-colors"
+                >
+                  <div className="flex items-center mb-0.5">
+                    <BookOpen className="w-4 h-4" />
+                    <Volume2 className="w-3 h-3 -ml-1 text-purple-500" />
+                  </div>
+                  <span className="text-[10px] text-center leading-tight">Immersive<br/>Reader</span>
+                </button>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Document Views</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 2. Zoom */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-1">
+                  <Search className="w-3.5 h-3.5 text-gray-500" />
+                  <span className="text-[10px] text-gray-500 font-medium">Zoom:</span>
+                  <select
+                    value={currentZoom}
+                    onChange={(e) => onZoomChange(Number(e.target.value))}
+                    className="border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1.5 py-0.5 text-[10px] text-gray-700 dark:text-gray-200 focus:outline-none"
+                  >
+                    {[50, 75, 100, 125, 150, 200].map((z) => (
+                      <option key={z} value={z}>{z}%</option>
+                    ))}
+                  </select>
+                </div>
+
+                <button
+                  onClick={() => onZoomChange(100)}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Reset to 100%"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                >
+                  <div className="w-5 h-4 border border-blue-600 rounded flex items-center justify-center text-[8px] font-bold text-blue-600 mb-0.5">
+                    100
+                  </div>
+                  <span className="text-[10px]">100%</span>
+                </button>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Zoom</div>
+            </div>
+
+            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+
+            {/* 3. Show */}
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <div className="flex items-center space-x-1">
+                <button
+                  onClick={onToggleRuler}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Horizontal Ruler"
+                  className={`flex flex-col items-center justify-center p-1 px-1.5 rounded transition-colors ${
+                    showRuler
+                      ? 'border border-[#185abd] bg-blue-50 dark:bg-blue-950/40 text-[#185abd] font-semibold'
+                      : 'hover:bg-gray-100 dark:hover:bg-[#333] text-gray-600 dark:text-gray-300'
                   }`}
                 >
-                  {z}%
+                  <Sliders className="w-4 h-4 mb-0.5" />
+                  <span className="text-[10px]">Ruler</span>
                 </button>
-              ))}
+
+                <button
+                  onClick={onToggleNavSidebar}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Navigation Pane"
+                  className={`flex flex-col items-center justify-center p-1 px-1.5 rounded transition-colors ${
+                    showNavSidebar
+                      ? 'border border-[#185abd] bg-blue-50 dark:bg-blue-950/40 text-[#185abd] font-semibold'
+                      : 'hover:bg-gray-100 dark:hover:bg-[#333] text-gray-600 dark:text-gray-300'
+                  }`}
+                >
+                  <LayoutGrid className="w-4 h-4 mb-0.5" />
+                  <span className="text-[10px]">Navigation</span>
+                </button>
+
+                <button
+                  onClick={() => onOpenSettings?.()}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Header & Footer"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                >
+                  <FileText className="w-4 h-4 text-orange-500 mb-0.5" />
+                  <span className="text-[10px] text-center leading-tight">Header &<br/>Footer</span>
+                </button>
+
+                <button
+                  onClick={handleScrollToFootnotes}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Footnotes"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                >
+                  <span className="text-[11px] font-bold text-gray-500 mb-0.5">Ab¹</span>
+                  <span className="text-[10px]">Footnotes</span>
+                </button>
+
+                <button
+                  onClick={handleScrollToFootnotes}
+                  onMouseDown={(e) => e.preventDefault()}
+                  title="Endnotes"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                >
+                  <FileText className="w-4 h-4 text-gray-400 mb-0.5" />
+                  <span className="text-[10px]">Endnotes</span>
+                </button>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Show</div>
             </div>
-          </div>
+          </>
+        )}
+
+        {/* HELP TAB */}
+        {activeTab === 'help' && (
+          <>
+            <div className="flex flex-col justify-between items-center h-full px-1">
+              <div className="flex items-center space-x-1">
+                <button
+                  onClick={() => onOpenShortcuts?.()}
+                  onMouseDown={(e) => e.preventDefault()}
+                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  title="Wordo Help & Guide"
+                >
+                  <HelpCircle className="w-4 h-4 text-[#185abd] mb-0.5" />
+                  <span className="text-[10px]">Help</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    alert('Wordo Help Desk: Online support is available 24/7 in offline mode via built-in documentation and shortcuts.');
+                  }}
+                  onMouseDown={(e) => e.preventDefault()}
+                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  title="Contact Support"
+                >
+                  <Headphones className="w-4 h-4 text-emerald-600 mb-0.5" />
+                  <span className="text-[10px] text-center leading-tight">Contact<br/>Support</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    prompt('We appreciate your feedback! What can we improve in Wordo?');
+                  }}
+                  onMouseDown={(e) => e.preventDefault()}
+                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  title="Send Feedback"
+                >
+                  <MessageCircle className="w-4 h-4 text-blue-500 mb-0.5" />
+                  <span className="text-[10px]">Feedback</span>
+                </button>
+
+                <button
+                  onClick={() => onOpenShortcuts?.()}
+                  onMouseDown={(e) => e.preventDefault()}
+                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  title="Keyboard Shortcuts (Ctrl+/)"
+                >
+                  <Keyboard className="w-4 h-4 text-purple-600 mb-0.5" />
+                  <span className="text-[10px] text-center leading-tight">Keyboard<br/>Shortcuts</span>
+                </button>
+
+                <button
+                  onClick={() => onOpenAbout?.()}
+                  onMouseDown={(e) => e.preventDefault()}
+                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  title="What's New in Wordo 365"
+                >
+                  <Megaphone className="w-4 h-4 text-amber-500 mb-0.5" />
+                  <span className="text-[10px] text-center leading-tight">What's<br/>New</span>
+                </button>
+              </div>
+              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Help</div>
+            </div>
+          </>
         )}
 
         {/* CONTEXTUAL TABLE TAB */}
         {activeTab === 'table' && (
           <div className="flex items-center space-x-3">
-            {/* Rows & Columns Group */}
             <div className="flex items-center space-x-1 pr-2 border-r border-gray-300 dark:border-gray-700">
               <div className="flex flex-col space-y-0.5">
                 <button
@@ -1630,32 +3487,27 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
               </div>
             </div>
 
-            {/* Delete Group */}
             <div className="flex items-center space-x-1 pr-2 border-r border-gray-300 dark:border-gray-700">
               <button
                 onClick={() => editor.chain().focus().deleteRow().run()}
-                className="px-2 py-1 bg-red-50 dark:bg-red-950/30 text-red-600 hover:bg-red-100 rounded text-[11px] flex items-center space-x-1"
+                className="px-2 py-1 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-100 rounded text-[11px]"
               >
-                <Trash2 className="w-3 h-3" />
-                <span>Delete Row</span>
+                Delete Row
               </button>
               <button
                 onClick={() => editor.chain().focus().deleteColumn().run()}
-                className="px-2 py-1 bg-red-50 dark:bg-red-950/30 text-red-600 hover:bg-red-100 rounded text-[11px] flex items-center space-x-1"
+                className="px-2 py-1 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-100 rounded text-[11px]"
               >
-                <Trash2 className="w-3 h-3" />
-                <span>Delete Column</span>
+                Delete Col
               </button>
               <button
                 onClick={() => editor.chain().focus().deleteTable().run()}
-                className="px-2 py-1 bg-red-600 text-white hover:bg-red-700 rounded text-[11px] flex items-center space-x-1 font-medium shadow-xs"
+                className="px-2 py-1 bg-red-600 text-white hover:bg-red-700 rounded text-[11px]"
               >
-                <Trash2 className="w-3 h-3" />
-                <span>Delete Table</span>
+                Delete Table
               </button>
             </div>
 
-            {/* Merge / Header Group */}
             <div className="flex items-center space-x-1">
               <button
                 onClick={() => editor.chain().focus().mergeCells().run()}
@@ -1678,54 +3530,20 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
             </div>
           </div>
         )}
-
-        {/* TOOLS TAB */}
-        {activeTab === 'tools' && (
-          <div className="flex items-center space-x-3">
+          </div>
+          {/* Far right: Collapse Ribbon Chevron */}
+          <div className="flex items-center pl-2 border-l border-gray-100 dark:border-gray-800">
             <button
-              onClick={onOpenWordCount}
-              className="flex items-center space-x-1.5 px-2.5 py-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded hover:bg-blue-50 dark:hover:bg-blue-950/30 text-xs font-medium"
+              onClick={() => setIsRibbonCollapsed(!isRibbonCollapsed)}
+              onMouseDown={(e) => e.preventDefault()}
+              title="Collapse the ribbon"
+              className="p-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-gray-500 transition-colors"
             >
-              <FileText className="w-4 h-4 text-[#185abd]" />
-              <span>Word Count & Insights</span>
-            </button>
-
-            <button
-              onClick={onOpenSpellCheck}
-              className="flex items-center space-x-1.5 px-2.5 py-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded hover:bg-blue-50 dark:hover:bg-blue-950/30 text-xs font-medium"
-            >
-              <Sparkles className="w-4 h-4 text-indigo-600" />
-              <span>Spell & Grammar Assistant</span>
-            </button>
-
-            <button
-              onClick={onOpenRecovery}
-              className="flex items-center space-x-1.5 px-2.5 py-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded hover:bg-blue-50 dark:hover:bg-blue-950/30 text-xs font-medium"
-            >
-              <FileCheck className="w-4 h-4 text-emerald-600" />
-              <span>Document Recovery</span>
-            </button>
-
-            <div className="w-[1px] h-8 bg-gray-300 dark:bg-gray-700" />
-
-            <button
-              onClick={onExportDocx}
-              className="flex items-center space-x-1.5 px-2.5 py-1.5 bg-[#185abd] text-white rounded hover:bg-[#1651aa] text-xs font-medium shadow-xs"
-            >
-              <FileDown className="w-4 h-4" />
-              <span>Export Word .docx</span>
-            </button>
-
-            <button
-              onClick={onExportPdf}
-              className="flex items-center space-x-1.5 px-2.5 py-1.5 bg-red-600 text-white rounded hover:bg-red-700 text-xs font-medium shadow-xs"
-            >
-              <Printer className="w-4 h-4" />
-              <span>Export PDF</span>
+              <ChevronUp className="w-3.5 h-3.5" />
             </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -21,7 +21,7 @@ import { TypographyExtension } from './extensions/typography';
 import { PageBreak } from './extensions/pageBreak';
 
 import { TitleBar } from './components/TitleBar';
-import { MenuBar } from './components/MenuBar';
+import { BackstageView } from './components/BackstageView';
 import { RibbonToolbar } from './components/RibbonToolbar';
 import { Ruler } from './components/Ruler';
 import { EditorCanvas } from './components/EditorCanvas';
@@ -34,6 +34,13 @@ import { ShortcutsModal } from './components/ShortcutsModal';
 import { AboutModal } from './components/AboutModal';
 import { DocumentSettingsModal } from './components/DocumentSettingsModal';
 import { RecoveryBanner } from './components/RecoveryBanner';
+import { CloseConfirmModal } from './components/CloseConfirmModal';
+import { InsertSymbolModal } from './components/InsertSymbolModal';
+import { InsertDateTimeModal } from './components/InsertDateTimeModal';
+import { CitationModal } from './components/CitationModal';
+import { TranslateModal } from './components/TranslateModal';
+import { AccessibilityModal } from './components/AccessibilityModal';
+import { ReadAloudBar } from './components/ReadAloudBar';
 
 import { PlatformService } from './services/platform';
 import { DocxService } from './services/docxService';
@@ -57,10 +64,20 @@ export const App: React.FC = () => {
   const [navDefaultTab, setNavDefaultTab] = useState<'outline' | 'search'>('outline');
   const [showSpellCheck, setShowSpellCheck] = useState(false);
   const [showWordCount, setShowWordCount] = useState(false);
+  const [showBackstage, setShowBackstage] = useState(false);
   const [showTemplateModal, setShowTemplateModal] = useState(false);
   const [showShortcutsModal, setShowShortcutsModal] = useState(false);
   const [showAboutModal, setShowAboutModal] = useState(false);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [showCloseConfirmModal, setShowCloseConfirmModal] = useState(false);
+  const [showSymbolModal, setShowSymbolModal] = useState(false);
+  const [showDateTimeModal, setShowDateTimeModal] = useState(false);
+  const [showCitationModal, setShowCitationModal] = useState(false);
+  const [showTranslateModal, setShowTranslateModal] = useState(false);
+  const [showAccessibilityModal, setShowAccessibilityModal] = useState(false);
+  const [isReadAloudOpen, setIsReadAloudOpen] = useState(false);
+  const [isFocusMode, setIsFocusMode] = useState(false);
+  const [paperTheme, setPaperTheme] = useState<'white' | 'dark' | 'sepia'>('white');
 
   const [activeRecoveryDraft, setActiveRecoveryDraft] = useState<RecoveryDraft | null>(null);
   const [recentDocuments, setRecentDocuments] = useState<RecentDocument[]>(() =>
@@ -94,6 +111,17 @@ export const App: React.FC = () => {
     }
     StorageService.saveTheme(theme);
   }, [theme]);
+
+  // Escape key exits Focus Mode
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isFocusMode) {
+        setIsFocusMode(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isFocusMode]);
 
   // A new document starts empty; templates are only opened from the template picker.
   const initialContent = '<p></p>';
@@ -202,18 +230,158 @@ export const App: React.FC = () => {
     }
   }, []);
 
-  // Flush the current draft synchronously before a native window closes.
+  // Keep a ref to the latest document state for the close handler
+  const closeStateRef = useRef({ isDirty, editor, documentTitle, pageSettings });
   useEffect(() => {
-    const getCurrentWindow = (window as any).__TAURI__?.window?.getCurrentWindow;
-    if (!getCurrentWindow) return;
-    let unlisten: (() => void) | undefined;
-    getCurrentWindow().onCloseRequested(() => {
-      if (isDirty && editor) {
-        StorageService.saveDraft(documentTitle, editor.getHTML(), editor.getJSON(), pageSettings);
+    closeStateRef.current = { isDirty, editor, documentTitle, pageSettings };
+  }, [isDirty, editor, documentTitle, pageSettings]);
+
+  // Check if document has any written text, modified formatting, or changed settings
+  const isDocumentModified = useCallback((): boolean => {
+    // 1. If actively marked dirty by typing, formatting, or settings changes:
+    if (isDirty) return true;
+
+    if (!editor) return false;
+
+    // 2. If it's a new unsaved document (no file path):
+    if (!currentFilePath) {
+      // Check if any non-empty text has been written
+      const text = editor.getText().trim();
+      if (text.length > 0) return true;
+
+      // Check if non-text elements (images, tables, hr) exist in the content
+      const html = editor.getHTML();
+      if (
+        html !== '<p></p>' &&
+        html !== '' &&
+        (html.includes('<img') || html.includes('<table') || html.includes('<hr') || html.includes('data-page-break'))
+      ) {
+        return true;
       }
-    }).then((stop: () => void) => { unlisten = stop; }).catch(() => {});
-    return () => unlisten?.();
-  }, [editor, isDirty, documentTitle, pageSettings]);
+
+      // Check if document title was customized
+      if (documentTitle !== 'Document 1' && documentTitle.trim() !== '') return true;
+
+      // Check if page settings changed from defaults (margins, orientation, size, page numbers)
+      if (
+        pageSettings.size !== 'a4' ||
+        pageSettings.orientation !== 'portrait' ||
+        pageSettings.showPageNumbers !== false ||
+        pageSettings.margins.top !== 96 ||
+        pageSettings.margins.bottom !== 96 ||
+        pageSettings.margins.left !== 96 ||
+        pageSettings.margins.right !== 96
+      ) {
+        return true;
+      }
+    }
+
+    return false;
+  }, [isDirty, editor, currentFilePath, documentTitle, pageSettings]);
+
+  const isDocumentModifiedRef = useRef(isDocumentModified);
+  useEffect(() => {
+    isDocumentModifiedRef.current = isDocumentModified;
+  }, [isDocumentModified]);
+
+  const performDirectClose = async () => {
+    const win =
+      (window as any).__TAURI__?.window?.getCurrentWindow?.() ||
+      (window as any).__TAURI__?.webviewWindow?.getCurrentWebviewWindow?.();
+
+    if (win && typeof win.destroy === 'function') {
+      try {
+        await win.destroy();
+        return;
+      } catch (e) {
+        console.error('[Wordo] Direct destroy failed:', e);
+      }
+    }
+
+    try {
+      const invoke = (window as any).__TAURI__?.core?.invoke;
+      if (invoke) {
+        await invoke('close_window');
+        return;
+      }
+    } catch (e) {
+      console.error('[Wordo] IPC close_window failed:', e);
+    }
+
+    window.close();
+  };
+
+  const requestWindowClose = useCallback(() => {
+    if (isDocumentModifiedRef.current()) {
+      setShowCloseConfirmModal(true);
+    } else {
+      void performDirectClose();
+    }
+  }, []);
+
+  // Window close interception
+  useEffect(() => {
+    const getWin = () =>
+      (window as any).__TAURI__?.window?.getCurrentWindow?.() ||
+      (window as any).__TAURI__?.webviewWindow?.getCurrentWebviewWindow?.();
+
+    const win = getWin();
+    const unlisteners: (() => void)[] = [];
+
+    const handleClose = () => {
+      requestWindowClose();
+    };
+
+    // 1. Listen for custom "request-close" emitted by Rust on_window_event
+    const tauriEvent = (window as any).__TAURI__?.event;
+    if (typeof tauriEvent?.listen === 'function') {
+      tauriEvent.listen('request-close', handleClose).then((unlisten: () => void) => {
+        unlisteners.push(unlisten);
+      }).catch((err: any) => {
+        console.error('[Wordo] Failed to listen to request-close event:', err);
+      });
+    }
+
+    if (win && typeof win.listen === 'function') {
+      win.listen('request-close', handleClose).then((unlisten: () => void) => {
+        unlisteners.push(unlisten);
+      }).catch((err: any) => {
+        console.error('[Wordo] Failed to listen to win request-close:', err);
+      });
+    }
+
+    // 2. Also listen for onCloseRequested
+    if (win && typeof win.onCloseRequested === 'function') {
+      try {
+        win.onCloseRequested((event: any) => {
+          if (event && typeof event.preventDefault === 'function') {
+            event.preventDefault();
+          }
+          handleClose();
+        }).then((unlisten: () => void) => {
+          unlisteners.push(unlisten);
+        }).catch((err: any) => {
+          console.error('[Wordo] Failed to register onCloseRequested handler:', err);
+        });
+      } catch (err) {
+        console.error('[Wordo] Could not attach onCloseRequested listener:', err);
+      }
+    }
+
+    // 3. Web beforeunload fallback
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (isDocumentModifiedRef.current()) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      unlisteners.forEach((u) => u());
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [requestWindowClose]);
 
   // Autosave periodically (every 4 seconds if dirty)
   useEffect(() => {
@@ -245,6 +413,13 @@ export const App: React.FC = () => {
   // Keyboard shortcut listener
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Global exit shortcut
+      if (e.altKey && (e.key === 'F4' || e.key === 'f4')) {
+        e.preventDefault();
+        requestWindowClose();
+        return;
+      }
+
       const isMod = e.ctrlKey || e.metaKey;
 
       if (!editor) return;
@@ -472,8 +647,8 @@ export const App: React.FC = () => {
     }
   };
 
-  const handleSave = async () => {
-    if (!editor) return;
+  const handleSave = async (): Promise<boolean> => {
+    if (!editor) return false;
     try {
       const saved = currentFilePath && currentFileFormat !== 'docx'
         ? await PlatformService.saveFile(
@@ -483,15 +658,17 @@ export const App: React.FC = () => {
             currentFilePath,
           )
         : await DocxService.exportDocx(editor.getJSON(), editor.getHTML(), `${documentTitle}.docx`, pageSettings, currentFilePath || undefined);
-      if (!saved) return;
+      if (!saved) return false;
       const savedPath = typeof saved === 'string' && PlatformService.isDesktop() ? saved : currentFilePath;
       if (savedPath !== currentFilePath) setCurrentFilePath(savedPath);
       setIsDirty(false);
       StorageService.discardRecoverableDraft();
       StorageService.addRecentDocument(documentTitle, editor.getText(), savedPath || undefined, editor.getHTML(), pageSettings);
       setRecentDocuments(StorageService.getRecentDocuments());
+      return true;
     } catch (err: any) {
       alert(`Save error: ${err.message}`);
+      return false;
     }
   };
 
@@ -553,6 +730,25 @@ export const App: React.FC = () => {
     setIsDirty(false);
   };
 
+  const handleUpdatePageSettings = (newSettings: PageSettings) => {
+    setPageSettings(newSettings);
+    setIsDirty(true);
+  };
+
+  const handleConfirmSaveAndClose = async () => {
+    const saved = await handleSave();
+    if (saved) {
+      setShowCloseConfirmModal(false);
+      await performDirectClose();
+    }
+  };
+
+  const handleConfirmCloseWithoutSaving = async () => {
+    setShowCloseConfirmModal(false);
+    StorageService.discardRecoverableDraft();
+    await performDirectClose();
+  };
+
   const handleRestoreDraft = () => {
     if (!editor || !activeRecoveryDraft) return;
     editor.commands.setContent(activeRecoveryDraft.contentHtml);
@@ -568,34 +764,259 @@ export const App: React.FC = () => {
     setActiveRecoveryDraft(null);
   };
 
+  const handleToggleFormattingMark = (mark: 'bold' | 'italic' | 'underline') => {
+    if (!editor) return;
+    const { selection } = editor.state;
+    if (selection.empty) {
+      const { $from } = selection;
+      const text = $from.parent.textBetween(0, $from.parent.content.size, undefined, '\uFFFC');
+      const offset = $from.parentOffset;
+      let start = offset;
+      let end = offset;
+      while (start > 0 && /\S/.test(text[start - 1])) start--;
+      while (end < text.length && /\S/.test(text[end])) end++;
+      if (start < end) {
+        const from = $from.start() + start;
+        const to = $from.start() + end;
+        editor
+          .chain()
+          .focus()
+          .setTextSelection({ from, to })
+          .toggleMark(mark)
+          .setTextSelection(selection.from)
+          .run();
+        return;
+      }
+    }
+    if (mark === 'bold') editor.chain().focus().toggleBold().run();
+    else if (mark === 'italic') editor.chain().focus().toggleItalic().run();
+    else if (mark === 'underline') editor.chain().focus().toggleUnderline().run();
+  };
+
   return (
     <div className="wordo-app-shell flex flex-col h-screen w-screen overflow-hidden bg-[#f5f5f5] dark:bg-[#1f1f1f] text-[#242424] dark:text-[#cccccc] select-none">
       {/* 1. Desktop Window Title Bar */}
+      {!isFocusMode && (
+        <div className="no-print">
+          <TitleBar
+            documentTitle={documentTitle}
+            isDirty={isDirty}
+            theme={theme}
+            onTitleChange={(title) => {
+              setDocumentTitle(title);
+              setIsDirty(true);
+            }}
+            onToggleTheme={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+            onOpenSearch={() => {
+              setNavDefaultTab('search');
+              setShowNavSidebar(true);
+            }}
+            onRequestClose={requestWindowClose}
+          />
+        </div>
+      )}
+
+      {/* Focus Mode floating exit button */}
+      {isFocusMode && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 no-print">
+          <button
+            onClick={() => setIsFocusMode(false)}
+            className="px-4 py-1.5 bg-neutral-900/90 hover:bg-black text-white rounded-full shadow-2xl text-xs font-medium flex items-center space-x-2 backdrop-blur-xs transition-transform hover:scale-105 border border-white/20"
+          >
+            <span>Exit Focus Mode</span>
+            <span className="bg-white/20 px-1.5 py-0.5 rounded text-[10px]">Esc</span>
+          </button>
+        </div>
+      )}
+
+      {/* 2. Office 365 Ribbon Toolbar (Unified with Backstage) */}
+      {!isFocusMode && (
+        <div className="no-print relative z-40">
+          <RibbonToolbar
+            editor={editor}
+            onOpenFileMenu={() => setShowBackstage(true)}
+            onNew={handleNewDocument}
+            onNewFromTemplate={handleSelectTemplate}
+            onOpen={handleOpenLocalFile}
+            onOpenRecent={handleOpenRecent}
+            recentDocuments={recentDocuments}
+            onSave={handleSave}
+            onSaveAs={handleSaveAs}
+            onExportDocx={handleExportDocx}
+            onExportPdf={handleExportPdf}
+            onExportHtml={handleExportHtml}
+            onExportTxt={handleExportTxt}
+            onPrint={handlePrint}
+            onCloseDocument={handleCloseDocument}
+            onOpenAbout={() => setShowAboutModal(true)}
+            onOpenShortcuts={() => setShowShortcutsModal(true)}
+            onOpenSearch={() => {
+              setNavDefaultTab('search');
+              setShowNavSidebar(true);
+            }}
+            onOpenSpellCheck={() => setShowSpellCheck(true)}
+            onOpenWordCount={() => setShowWordCount(true)}
+            onOpenRecovery={() => {
+              const draft = StorageService.getRecoverableDraft();
+              if (draft) setActiveRecoveryDraft(draft);
+            }}
+            onOpenSettings={() => setShowSettingsModal(true)}
+            currentZoom={zoom}
+            onZoomChange={setZoom}
+            showRuler={showRuler}
+            onToggleRuler={() => setShowRuler(!showRuler)}
+            showNavSidebar={showNavSidebar}
+            onToggleNavSidebar={() => setShowNavSidebar(!showNavSidebar)}
+            pageSettings={pageSettings}
+            onUpdatePageSettings={handleUpdatePageSettings}
+            onOpenSymbolModal={() => setShowSymbolModal(true)}
+            onOpenDateTimeModal={() => setShowDateTimeModal(true)}
+            onOpenCitationModal={() => setShowCitationModal(true)}
+            onOpenTranslateModal={() => setShowTranslateModal(true)}
+            onOpenAccessibilityModal={() => setShowAccessibilityModal(true)}
+            onToggleReadAloud={() => setIsReadAloudOpen(!isReadAloudOpen)}
+            isReadAloudOpen={isReadAloudOpen}
+            onToggleFocusMode={() => setIsFocusMode(!isFocusMode)}
+            isFocusMode={isFocusMode}
+            paperTheme={paperTheme}
+            onSetPaperTheme={setPaperTheme}
+          />
+        </div>
+      )}
+
+      {/* Read Aloud Text-to-Speech Control Bar */}
       <div className="no-print">
-      <TitleBar
-        documentTitle={documentTitle}
-        isDirty={isDirty}
-        theme={theme}
-        onTitleChange={setDocumentTitle}
-        onNew={handleNewDocument}
-        onOpen={handleOpenLocalFile}
-        onSave={handleSave}
-        onUndo={() => editor?.chain().focus().undo().run()}
-        onRedo={() => editor?.chain().focus().redo().run()}
-        onPrint={handlePrint}
-        onToggleTheme={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-        canUndo={editor?.can().undo() ?? false}
-        canRedo={editor?.can().redo() ?? false}
-      />
+        <ReadAloudBar
+          isOpen={isReadAloudOpen}
+          onClose={() => setIsReadAloudOpen(false)}
+          editor={editor}
+        />
       </div>
 
-      {/* 2. Main Menu Bar */}
-      <div className="no-print">
-      <MenuBar
-        onNew={handleNewDocument}
-        onNewFromTemplate={() => setShowTemplateModal(true)}
-        onOpen={handleOpenLocalFile}
-        onOpenRecent={handleOpenRecent}
+      {/* 4. Document Recovery Alert Banner */}
+      {activeRecoveryDraft && !isFocusMode && (
+        <div className="no-print">
+          <RecoveryBanner
+            draft={activeRecoveryDraft}
+            onRestore={handleRestoreDraft}
+            onDiscard={handleDiscardDraft}
+          />
+        </div>
+      )}
+
+      {/* 5. Horizontal Ruler */}
+      {showRuler && !isFocusMode && (
+        <div className="no-print">
+          <Ruler
+            pageWidth={
+              (pageSettings.orientation === 'landscape'
+                ? pageSettings.size === 'a4'
+                  ? 1123
+                  : pageSettings.size === 'legal'
+                  ? 1344
+                  : 1056
+                : pageSettings.size === 'a4'
+                ? 794
+                : 816) *
+              (zoom / 100)
+            }
+            marginLeft={pageSettings.margins.left * (zoom / 100)}
+            marginRight={pageSettings.margins.right * (zoom / 100)}
+            onMarginChange={(newLeft, newRight) => {
+              const scale = zoom / 100;
+              handleUpdatePageSettings({
+                ...pageSettings,
+                margins: {
+                  ...pageSettings.margins,
+                  left: Math.round(newLeft / scale),
+                  right: Math.round(newRight / scale),
+                },
+              });
+            }}
+          />
+        </div>
+      )}
+
+      {/* 6. Workspace Body (Navigation Sidebar + Editor Canvas + Proofing Panel) */}
+      <div className="wordo-workspace flex-1 flex overflow-hidden relative">
+        {/* Navigation Sidebar */}
+        {showNavSidebar && !isFocusMode && (
+          <div className="no-print">
+            <NavigationSidebar
+              editor={editor}
+              defaultTab={navDefaultTab}
+              onClose={() => setShowNavSidebar(false)}
+            />
+          </div>
+        )}
+
+        {/* Multi-Page Document Canvas */}
+        <EditorCanvas
+          editor={editor}
+          zoom={zoom}
+          documentTitle={documentTitle}
+          pageSettings={pageSettings}
+          onUpdatePageSettings={handleUpdatePageSettings}
+          paperTheme={paperTheme}
+          onOpenTranslate={(text) => {
+            setShowTranslateModal(true);
+          }}
+          onReadAloud={() => {
+            setIsReadAloudOpen(true);
+          }}
+        />
+
+        {/* Proofing / Spell Check Assistant */}
+        {showSpellCheck && !isFocusMode && (
+          <div className="no-print">
+            <SpellCheckPanel
+              editor={editor}
+              issues={spellIssues}
+              onRefresh={() => updateDocumentStats(editor)}
+              onClose={() => setShowSpellCheck(false)}
+            />
+          </div>
+        )}
+      </div>
+
+      {/* 7. Bottom Status Bar */}
+      {!isFocusMode && (
+        <div className="no-print">
+          <StatusBar
+            wordCount={stats.words}
+            charCount={stats.characters}
+            issueCount={spellIssues.length}
+            zoom={zoom}
+            onZoomChange={setZoom}
+            onOpenWordCount={() => setShowWordCount(true)}
+            onOpenSpellCheck={() => setShowSpellCheck(true)}
+            isDirty={isDirty}
+            onToggleFocusMode={() => setIsFocusMode(!isFocusMode)}
+            isFocusMode={isFocusMode}
+          />
+        </div>
+      )}
+
+      {/* Dialog Modals */}
+      <BackstageView
+        isOpen={showBackstage}
+        onClose={() => setShowBackstage(false)}
+        onNew={() => {
+          setShowBackstage(false);
+          handleNewDocument();
+        }}
+        onNewFromTemplate={(tmpl) => {
+          setShowBackstage(false);
+          handleSelectTemplate(tmpl);
+        }}
+        onOpenLocalFile={() => {
+          setShowBackstage(false);
+          handleOpenLocalFile();
+        }}
+        onOpenRecent={(doc) => {
+          setShowBackstage(false);
+          handleOpenRecent(doc);
+        }}
         recentDocuments={recentDocuments}
         onSave={handleSave}
         onSaveAs={handleSaveAs}
@@ -605,156 +1026,19 @@ export const App: React.FC = () => {
         onExportTxt={handleExportTxt}
         onPrint={handlePrint}
         onCloseDocument={handleCloseDocument}
-        onUndo={() => editor?.chain().focus().undo().run()}
-        onRedo={() => editor?.chain().focus().redo().run()}
-        onCut={() => document.execCommand('cut')}
-        onCopy={() => document.execCommand('copy')}
-        onPaste={() => navigator.clipboard.readText().then((t) => editor?.commands.insertContent(t))}
-        onSelectAll={() => editor?.chain().focus().selectAll().run()}
-        onFind={() => {
-          setNavDefaultTab('search');
-          setShowNavSidebar(true);
-        }}
-        onClearFormat={() => editor?.chain().focus().unsetAllMarks().clearNodes().run()}
-        onInsertTable={(r, c) => editor?.chain().focus().insertTable({ rows: r, cols: c }).run()}
-        onInsertImage={() => {
-          const url = window.prompt('Enter Image URL:');
-          if (url) editor?.chain().focus().setImage({ src: url }).run();
-        }}
-        onInsertLink={() => {
-          const url = window.prompt('Enter Link URL:');
-          if (url) editor?.chain().focus().setLink({ href: url }).run();
-        }}
-        onInsertPageBreak={() => editor?.chain().focus().insertContent({ type: 'pageBreak' }).run()}
-        onInsertHorizontalRule={() => editor?.chain().focus().setHorizontalRule().run()}
-        onInsertBlockquote={() => editor?.chain().focus().toggleBlockquote().run()}
-        onInsertTaskList={() => editor?.chain().focus().toggleTaskList().run()}
-        onFormatBold={() => editor?.chain().focus().toggleBold().run()}
-        onFormatItalic={() => editor?.chain().focus().toggleItalic().run()}
-        onFormatUnderline={() => editor?.chain().focus().toggleUnderline().run()}
-        onFormatAlign={(align) => editor?.chain().focus().setTextAlign(align).run()}
-        onZoomChange={setZoom}
-        onToggleRuler={() => setShowRuler(!showRuler)}
-        showRuler={showRuler}
-        onToggleNavSidebar={() => setShowNavSidebar(!showNavSidebar)}
-        showNavSidebar={showNavSidebar}
-        onToggleTheme={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-        onOpenWordCount={() => setShowWordCount(true)}
-        onOpenSpellCheck={() => setShowSpellCheck(true)}
+        onOpenSettings={() => setShowSettingsModal(true)}
+        onOpenAbout={() => setShowAboutModal(true)}
+        onOpenShortcuts={() => setShowShortcutsModal(true)}
         onOpenRecovery={() => {
           const draft = StorageService.getRecoverableDraft();
           if (draft) setActiveRecoveryDraft(draft);
           else alert('No recovery drafts currently stored.');
         }}
-        onOpenSettings={() => setShowSettingsModal(true)}
-        onOpenAbout={() => setShowAboutModal(true)}
-        onOpenShortcuts={() => setShowShortcutsModal(true)}
+        documentTitle={documentTitle}
+        stats={stats}
+        currentFilePath={currentFilePath}
       />
-      </div>
 
-      {/* 3. Office-Style Ribbon Toolbar */}
-      <div className="no-print">
-      <RibbonToolbar
-        editor={editor}
-        onOpenSearch={() => {
-          setNavDefaultTab('search');
-          setShowNavSidebar(true);
-        }}
-        onOpenSpellCheck={() => setShowSpellCheck(true)}
-        onOpenWordCount={() => setShowWordCount(true)}
-        onOpenRecovery={() => {
-          const draft = StorageService.getRecoverableDraft();
-          if (draft) setActiveRecoveryDraft(draft);
-        }}
-        onExportDocx={handleExportDocx}
-        onExportPdf={handleExportPdf}
-        onOpenSettings={() => setShowSettingsModal(true)}
-        currentZoom={zoom}
-        onZoomChange={setZoom}
-        showRuler={showRuler}
-        onToggleRuler={() => setShowRuler(!showRuler)}
-        showNavSidebar={showNavSidebar}
-        onToggleNavSidebar={() => setShowNavSidebar(!showNavSidebar)}
-        pageSettings={pageSettings}
-        onUpdatePageSettings={setPageSettings}
-      />
-      </div>
-
-      {/* 4. Document Recovery Alert Banner */}
-      {activeRecoveryDraft && (
-        <div className="no-print"><RecoveryBanner
-          draft={activeRecoveryDraft}
-          onRestore={handleRestoreDraft}
-          onDiscard={handleDiscardDraft}
-        /></div>
-      )}
-
-      {/* 5. Horizontal Ruler */}
-      {showRuler && (
-        <div className="no-print"><Ruler
-          pageWidth={((pageSettings.orientation === 'landscape'
-            ? (pageSettings.size === 'a4' ? 1123 : pageSettings.size === 'legal' ? 1344 : 1056)
-            : (pageSettings.size === 'a4' ? 794 : 816)) * (zoom / 100))}
-          marginLeft={pageSettings.margins.left * (zoom / 100)}
-          marginRight={pageSettings.margins.right * (zoom / 100)}
-          onMarginChange={(newLeft, newRight) => {
-            const scale = zoom / 100;
-            setPageSettings({
-              ...pageSettings,
-              margins: {
-                ...pageSettings.margins,
-                left: Math.round(newLeft / scale),
-                right: Math.round(newRight / scale),
-              },
-            });
-          }}
-        /></div>
-      )}
-
-      {/* 6. Workspace Body (Navigation Sidebar + Editor Canvas + Proofing Panel) */}
-      <div className="wordo-workspace flex-1 flex overflow-hidden relative">
-        {/* Navigation Sidebar */}
-        {showNavSidebar && (
-          <div className="no-print"><NavigationSidebar
-            editor={editor}
-            defaultTab={navDefaultTab}
-            onClose={() => setShowNavSidebar(false)}
-          /></div>
-        )}
-
-        {/* Multi-Page Document Canvas */}
-        <EditorCanvas
-          editor={editor}
-          zoom={zoom}
-          documentTitle={documentTitle}
-          pageSettings={pageSettings}
-          onUpdatePageSettings={setPageSettings}
-        />
-
-        {/* Proofing / Spell Check Assistant */}
-        {showSpellCheck && (
-          <div className="no-print"><SpellCheckPanel
-            editor={editor}
-            issues={spellIssues}
-            onRefresh={() => updateDocumentStats(editor)}
-            onClose={() => setShowSpellCheck(false)}
-          /></div>
-        )}
-      </div>
-
-      {/* 7. Bottom Status Bar */}
-      <div className="no-print"><StatusBar
-        wordCount={stats.words}
-        charCount={stats.characters}
-        issueCount={spellIssues.length}
-        zoom={zoom}
-        onZoomChange={setZoom}
-        onOpenWordCount={() => setShowWordCount(true)}
-        onOpenSpellCheck={() => setShowSpellCheck(true)}
-        isDirty={isDirty}
-      /></div>
-
-      {/* Dialog Modals */}
       {showWordCount && (
         <WordCountDialog stats={stats} onClose={() => setShowWordCount(false)} />
       )}
@@ -779,8 +1063,49 @@ export const App: React.FC = () => {
       <DocumentSettingsModal
         isOpen={showSettingsModal}
         settings={pageSettings}
-        onSaveSettings={setPageSettings}
+        onSaveSettings={handleUpdatePageSettings}
         onClose={() => setShowSettingsModal(false)}
+      />
+
+      {/* Insert Modals */}
+      <InsertSymbolModal
+        isOpen={showSymbolModal}
+        onClose={() => setShowSymbolModal(false)}
+        editor={editor}
+      />
+
+      <InsertDateTimeModal
+        isOpen={showDateTimeModal}
+        onClose={() => setShowDateTimeModal(false)}
+        editor={editor}
+      />
+
+      {/* References & Review Modals */}
+      <CitationModal
+        isOpen={showCitationModal}
+        onClose={() => setShowCitationModal(false)}
+        editor={editor}
+      />
+
+      <TranslateModal
+        isOpen={showTranslateModal}
+        onClose={() => setShowTranslateModal(false)}
+        editor={editor}
+      />
+
+      <AccessibilityModal
+        isOpen={showAccessibilityModal}
+        onClose={() => setShowAccessibilityModal(false)}
+        editor={editor}
+      />
+
+      {/* Close Document Confirmation Dialog */}
+      <CloseConfirmModal
+        isOpen={showCloseConfirmModal}
+        documentTitle={documentTitle}
+        onSave={handleConfirmSaveAndClose}
+        onCloseWithoutSaving={handleConfirmCloseWithoutSaving}
+        onCancel={() => setShowCloseConfirmModal(false)}
       />
     </div>
   );

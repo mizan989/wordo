@@ -25,3 +25,5 @@ usage.json
 .playwright-cli/
 .DS_Store
 Thumbs.db
+rea_tool/
+rea_analysis.json
