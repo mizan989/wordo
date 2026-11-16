@@ -549,18 +549,24 @@
 .tiptap-content {
   outline: none;
   min-height: 100%;
+  color: #1D1D1F;
+}
+
+.tiptap-content .ProseMirror {
+  caret-color: #1D1D1F;
 }
 
 .tiptap-content p {
   margin-top: 0;
   margin-bottom: 0.5rem;
   line-height: 1.5;
+  color: inherit;
 }
 
 .tiptap-content h1 {
   font-size: 1.875rem;
   font-weight: 700;
-  color: var(--text-primary, #1D1D1F);
+  color: #1D1D1F;
   margin-top: 1.25rem;
   margin-bottom: 0.75rem;
   line-height: 1.25;
@@ -569,7 +575,7 @@
 .tiptap-content h2 {
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--text-primary, #242424);
+  color: #242424;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
   line-height: 1.3;
@@ -578,7 +584,7 @@
 .tiptap-content h3 {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--text-secondary, #424242);
+  color: #424242;
   margin-top: 0.75rem;
   margin-bottom: 0.5rem;
 }

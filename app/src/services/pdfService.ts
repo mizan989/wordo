@@ -41,6 +41,26 @@ export class PdfService {
     clone.style.boxShadow = 'none';
     clone.style.border = 'none';
 
+    // Strip any interactive inputs/buttons or temporary UI from the export clone
+    clone.querySelectorAll('input, textarea').forEach((el) => {
+      const input = el as HTMLInputElement;
+      const text = input.value || '';
+      if (text) {
+        const span = document.createElement('span');
+        span.textContent = text;
+        span.className = input.className;
+        span.style.border = 'none';
+        span.style.background = 'transparent';
+        span.style.outline = 'none';
+        input.parentNode?.replaceChild(span, input);
+      } else {
+        input.remove();
+      }
+    });
+    clone.querySelectorAll('button, .print\\:hidden').forEach((el) => {
+      el.remove();
+    });
+
     document.body.appendChild(clone);
 
     try {

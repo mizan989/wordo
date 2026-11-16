@@ -211,12 +211,19 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
       recalculatePagination();
     };
 
+    const handleFocus = () => {
+      setEditingHeader(false);
+      setEditingFooter(false);
+    };
+
     editor.on('update', handleUpdate);
+    editor.on('focus', handleFocus);
     window.addEventListener('resize', handleUpdate);
 
     return () => {
       clearTimeout(timer);
       editor.off('update', handleUpdate);
+      editor.off('focus', handleFocus);
       window.removeEventListener('resize', handleUpdate);
     };
   }, [editor, recalculatePagination]);
@@ -292,7 +299,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
               ? 'text-[#382e20]'
               : isDarkPage
               ? 'text-[#f1f5f9] dark-page-mode'
-              : 'text-[var(--text-primary)]'
+              : 'text-[#1D1D1F]'
           }`}
           style={{
             width: `${pageWidthPx}px`,
@@ -322,11 +329,22 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
           {/* Page 1 Header (margin zone) */}
           <div
             onDoubleClick={() => {
-              setHeaderVal(pageSettings?.headerText || headerLeftText);
-              setEditingHeader(true);
+              if (pageSettings?.headerText || headerLeftText) {
+                setHeaderVal(pageSettings?.headerText || headerLeftText);
+                setEditingHeader(true);
+              } else {
+                editor.chain().focus('start').run();
+              }
             }}
-            title="Double-click to edit header"
-            className="flex items-center justify-between text-[11px] text-gray-400 border-b border-transparent hover:border-gray-300 select-none transition-colors relative z-10 cursor-pointer"
+            onClick={() => {
+              if (!pageSettings?.headerText && !headerLeftText) {
+                editor.chain().focus('start').run();
+              }
+            }}
+            title={headerLeftText ? "Double-click to edit header" : undefined}
+            className={`flex items-center justify-between text-[11px] text-gray-400 border-b border-transparent ${
+              headerLeftText ? 'hover:border-gray-300 cursor-pointer' : 'cursor-text'
+            } select-none transition-colors relative z-10`}
             style={{
               paddingTop: `${Math.max(16, marginTop / 4)}px`,
               paddingBottom: '8px',
@@ -335,7 +353,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
             }}
           >
             {editingHeader ? (
-              <div className="flex items-center space-x-2 w-full" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center space-x-2 w-full print:hidden" onClick={(e) => e.stopPropagation()}>
                 <input
                   type="text"
                   autoFocus
@@ -358,7 +376,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
                       setEditingHeader(false);
                     }
                   }}
-                  className="px-2 py-0.5 border border-[var(--accent-color)] rounded-[var(--radius-sm)] bg-white text-xs w-full text-gray-800 outline-none"
+                  className="px-1 py-0.5 border-b border-gray-300 bg-transparent text-xs w-full text-[#1D1D1F] outline-none"
                   placeholder="Enter page header text..."
                 />
               </div>
@@ -374,6 +392,8 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
           <div
             ref={contentAreaRef}
             onClick={(e) => {
+              if (editingHeader) setEditingHeader(false);
+              if (editingFooter) setEditingFooter(false);
               if (e.target === e.currentTarget) {
                 editor.chain().focus('end').run();
               }
@@ -442,11 +462,22 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
           {/* Last Page Footer (margin zone) */}
           <div
             onDoubleClick={() => {
-              setFooterVal(pageSettings?.footerText || footerLeftText);
-              setEditingFooter(true);
+              if (pageSettings?.footerText || footerLeftText) {
+                setFooterVal(pageSettings?.footerText || footerLeftText);
+                setEditingFooter(true);
+              } else {
+                editor.chain().focus('end').run();
+              }
             }}
-            title="Double-click to edit footer"
-            className="flex items-center justify-between text-[11px] text-gray-400 border-t border-transparent hover:border-gray-300 select-none transition-colors relative z-10 cursor-pointer"
+            onClick={() => {
+              if (!pageSettings?.footerText && !footerLeftText) {
+                editor.chain().focus('end').run();
+              }
+            }}
+            title={footerLeftText ? "Double-click to edit footer" : undefined}
+            className={`flex items-center justify-between text-[11px] text-gray-400 border-t border-transparent ${
+              footerLeftText ? 'hover:border-gray-300 cursor-pointer' : 'cursor-text'
+            } select-none transition-colors relative z-10`}
             style={{
               paddingTop: '8px',
               paddingBottom: `${Math.max(16, marginBottom / 4)}px`,
@@ -455,7 +486,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
             }}
           >
             {editingFooter ? (
-              <div className="flex items-center space-x-2 w-full" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center space-x-2 w-full print:hidden" onClick={(e) => e.stopPropagation()}>
                 <input
                   type="text"
                   autoFocus
@@ -478,7 +509,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
                       setEditingFooter(false);
                     }
                   }}
-                  className="px-2 py-0.5 border border-[var(--accent-color)] rounded-[var(--radius-sm)] bg-white text-xs w-full text-gray-800 outline-none"
+                  className="px-1 py-0.5 border-b border-gray-300 bg-transparent text-xs w-full text-[#1D1D1F] outline-none"
                   placeholder="Enter page footer text..."
                 />
               </div>
