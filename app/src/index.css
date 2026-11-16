@@ -546,13 +546,31 @@
 }
 
 /* Tiptap editor typography & styles */
+.tiptap-content,
+.tiptap-content *,
+.ProseMirror,
+.ProseMirror *,
+.ProseMirror-focused,
+[contenteditable="true"],
+[contenteditable="true"]:focus,
+[contenteditable="true"]:focus-visible {
+  outline: none !important;
+  outline-color: transparent !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  box-shadow: none !important;
+}
+
 .tiptap-content {
-  outline: none;
+  outline: none !important;
   min-height: 100%;
   color: #1D1D1F;
 }
 
-.tiptap-content .ProseMirror {
+.tiptap-content .ProseMirror,
+.ProseMirror {
+  outline: none !important;
+  border: none !important;
   caret-color: #1D1D1F;
 }
 

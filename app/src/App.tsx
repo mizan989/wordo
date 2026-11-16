@@ -177,6 +177,11 @@ export const App: React.FC = () => {
     ],
     content: initialContent,
     autofocus: true,
+    editorProps: {
+      attributes: {
+        class: 'outline-none focus:outline-none focus-visible:outline-none border-none ring-0 focus:ring-0',
+      },
+    },
     onUpdate: ({ editor: ed }) => {
       setIsDirty(true);
       setEditRevision((revision) => revision + 1);

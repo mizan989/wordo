@@ -32,10 +32,6 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentAreaRef = useRef<HTMLDivElement>(null);
-  const [editingHeader, setEditingHeader] = useState(false);
-  const [editingFooter, setEditingFooter] = useState(false);
-  const [headerVal, setHeaderVal] = useState('');
-  const [footerVal, setFooterVal] = useState('');
   const [pageBreaks, setPageBreaks] = useState<PageBreakInfo[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [contextMenu, setContextMenu] = useState<{ isOpen: boolean; x: number; y: number }>({
@@ -108,17 +104,6 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
 
   const isDarkPage = isDarkPageBg(pageBgColor);
   const isSepiaPage = paperTheme === 'sepia';
-
-  const getEffectiveSettings = (): PageSettings => {
-    return (
-      pageSettings || {
-        size: 'a4',
-        orientation: 'portrait',
-        margins: { top: 96, bottom: 96, left: 96, right: 96 },
-        showPageNumbers: true,
-      }
-    );
-  };
 
   const paperName = pageSettings?.size === 'a4' ? 'A4' : pageSettings?.size === 'legal' ? 'Legal' : 'Letter';
   const printOrientation = isLandscape ? 'landscape' : 'portrait';
@@ -211,19 +196,12 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
       recalculatePagination();
     };
 
-    const handleFocus = () => {
-      setEditingHeader(false);
-      setEditingFooter(false);
-    };
-
     editor.on('update', handleUpdate);
-    editor.on('focus', handleFocus);
     window.addEventListener('resize', handleUpdate);
 
     return () => {
       clearTimeout(timer);
       editor.off('update', handleUpdate);
-      editor.off('focus', handleFocus);
       window.removeEventListener('resize', handleUpdate);
     };
   }, [editor, recalculatePagination]);
@@ -328,23 +306,9 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
 
           {/* Page 1 Header (margin zone) */}
           <div
-            onDoubleClick={() => {
-              if (pageSettings?.headerText || headerLeftText) {
-                setHeaderVal(pageSettings?.headerText || headerLeftText);
-                setEditingHeader(true);
-              } else {
-                editor.chain().focus('start').run();
-              }
-            }}
-            onClick={() => {
-              if (!pageSettings?.headerText && !headerLeftText) {
-                editor.chain().focus('start').run();
-              }
-            }}
-            title={headerLeftText ? "Double-click to edit header" : undefined}
-            className={`flex items-center justify-between text-[11px] text-gray-400 border-b border-transparent ${
-              headerLeftText ? 'hover:border-gray-300 cursor-pointer' : 'cursor-text'
-            } select-none transition-colors relative z-10`}
+            title={headerLeftText ? 'Page Header' : undefined}
+            onClick={() => editor.chain().focus('start').run()}
+            className="flex items-center justify-between text-[11px] text-gray-400 select-none relative z-10 cursor-text"
             style={{
               paddingTop: `${Math.max(16, marginTop / 4)}px`,
               paddingBottom: '8px',
@@ -352,53 +316,19 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
               paddingRight: `${marginRight}px`,
             }}
           >
-            {editingHeader ? (
-              <div className="flex items-center space-x-2 w-full print:hidden" onClick={(e) => e.stopPropagation()}>
-                <input
-                  type="text"
-                  autoFocus
-                  value={headerVal}
-                  onChange={(e) => setHeaderVal(e.target.value)}
-                  onBlur={() => {
-                    if (onUpdatePageSettings) {
-                      onUpdatePageSettings({
-                        ...getEffectiveSettings(),
-                        headerText: headerVal,
-                        headerLeft: headerVal,
-                      });
-                    }
-                    setEditingHeader(false);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      (e.target as HTMLInputElement).blur();
-                    } else if (e.key === 'Escape') {
-                      setEditingHeader(false);
-                    }
-                  }}
-                  className="px-1 py-0.5 border-b border-gray-300 bg-transparent text-xs w-full text-[#1D1D1F] outline-none"
-                  placeholder="Enter page header text..."
-                />
-              </div>
-            ) : (
-              <>
-                <span className="truncate max-w-[300px]">{headerLeftText}</span>
-                <span>{headerRightText}</span>
-              </>
-            )}
+            <span className="truncate max-w-[300px]">{headerLeftText}</span>
+            <span>{headerRightText}</span>
           </div>
 
           {/* Editable Document Body */}
           <div
             ref={contentAreaRef}
             onClick={(e) => {
-              if (editingHeader) setEditingHeader(false);
-              if (editingFooter) setEditingFooter(false);
               if (e.target === e.currentTarget) {
                 editor.chain().focus('end').run();
               }
             }}
-            className="flex-1 cursor-text transition-all min-h-[600px] relative z-10"
+            className="flex-1 cursor-text transition-all min-h-[600px] relative z-10 outline-none focus:outline-none ring-0"
             style={{
               paddingTop: `${Math.max(16, marginTop / 2)}px`,
               paddingBottom: `${Math.max(16, marginBottom / 2)}px`,
@@ -406,7 +336,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
               paddingRight: `${marginRight}px`,
             }}
           >
-            <EditorContent editor={editor} className="tiptap-content font-sans text-sm min-h-[500px]" />
+            <EditorContent editor={editor} className="tiptap-content font-sans text-sm min-h-[500px] outline-none focus:outline-none ring-0" />
           </div>
 
           {/* Page Break Overlays (Page footers, physical desk gaps, page headers between pages) */}
@@ -461,23 +391,9 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
 
           {/* Last Page Footer (margin zone) */}
           <div
-            onDoubleClick={() => {
-              if (pageSettings?.footerText || footerLeftText) {
-                setFooterVal(pageSettings?.footerText || footerLeftText);
-                setEditingFooter(true);
-              } else {
-                editor.chain().focus('end').run();
-              }
-            }}
-            onClick={() => {
-              if (!pageSettings?.footerText && !footerLeftText) {
-                editor.chain().focus('end').run();
-              }
-            }}
-            title={footerLeftText ? "Double-click to edit footer" : undefined}
-            className={`flex items-center justify-between text-[11px] text-gray-400 border-t border-transparent ${
-              footerLeftText ? 'hover:border-gray-300 cursor-pointer' : 'cursor-text'
-            } select-none transition-colors relative z-10`}
+            title={footerLeftText ? 'Page Footer' : undefined}
+            onClick={() => editor.chain().focus('end').run()}
+            className="flex items-center justify-between text-[11px] text-gray-400 select-none relative z-10 cursor-text"
             style={{
               paddingTop: '8px',
               paddingBottom: `${Math.max(16, marginBottom / 4)}px`,
@@ -485,40 +401,8 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
               paddingRight: `${marginRight}px`,
             }}
           >
-            {editingFooter ? (
-              <div className="flex items-center space-x-2 w-full print:hidden" onClick={(e) => e.stopPropagation()}>
-                <input
-                  type="text"
-                  autoFocus
-                  value={footerVal}
-                  onChange={(e) => setFooterVal(e.target.value)}
-                  onBlur={() => {
-                    if (onUpdatePageSettings) {
-                      onUpdatePageSettings({
-                        ...getEffectiveSettings(),
-                        footerText: footerVal,
-                        footerLeft: footerVal,
-                      });
-                    }
-                    setEditingFooter(false);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      (e.target as HTMLInputElement).blur();
-                    } else if (e.key === 'Escape') {
-                      setEditingFooter(false);
-                    }
-                  }}
-                  className="px-1 py-0.5 border-b border-gray-300 bg-transparent text-xs w-full text-[#1D1D1F] outline-none"
-                  placeholder="Enter page footer text..."
-                />
-              </div>
-            ) : (
-              <>
-                <span>{footerLeftText}</span>
-                <span>{showPageNumbers ? `Page ${totalPages} of ${totalPages}` : footerRightText}</span>
-              </>
-            )}
+            <span>{footerLeftText}</span>
+            <span>{showPageNumbers ? `Page ${totalPages} of ${totalPages}` : footerRightText}</span>
           </div>
         </div>
       </div>

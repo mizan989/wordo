@@ -61,6 +61,16 @@ export class PdfService {
       el.remove();
     });
 
+    // Ensure all elements in the clone have outline and box-shadow removed so no focus rings appear in PDF
+    clone.querySelectorAll('*').forEach((el) => {
+      const htmlEl = el as HTMLElement;
+      if (htmlEl.style) {
+        htmlEl.style.outline = 'none';
+        htmlEl.style.outlineWidth = '0';
+        htmlEl.style.boxShadow = 'none';
+      }
+    });
+
     document.body.appendChild(clone);
 
     try {
