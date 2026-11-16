@@ -77,8 +77,37 @@ Unlike cloud-locked document platforms, Wordo treats privacy as non-negotiable: 
 ## UI Preview
 
 <p align="center">
-  <img src="./app/src/assets/wordo-logo.png" alt="Wordo Preview" width="280" />
+  <img src="./docs/screenshots/screenshot-1.png" alt="Wordo Modern Desktop Word Processor" width="100%" />
 </p>
+
+<div align="center">
+  <table>
+    <tr>
+      <td width="50%" align="center">
+        <img src="./docs/screenshots/screenshot-2.png" alt="Page Layout & Paper Geometry" width="100%" />
+        <br />
+        <em>Page Layout & Paper Geometry</em>
+      </td>
+      <td width="50%" align="center">
+        <img src="./docs/screenshots/screenshot-3.png" alt="Insert & Rich Media Formatting" width="100%" />
+        <br />
+        <em>Insert & Rich Media Formatting</em>
+      </td>
+    </tr>
+    <tr>
+      <td width="50%" align="center">
+        <img src="./docs/screenshots/screenshot-4.png" alt="Navigation Sidebar & Document Structure" width="100%" />
+        <br />
+        <em>Navigation Sidebar & Document Structure</em>
+      </td>
+      <td width="50%" align="center">
+        <img src="./docs/screenshots/screenshot-5.png" alt="Native Dark Mode with Paper Contrast" width="100%" />
+        <br />
+        <em>Native Dark Mode with Paper Contrast</em>
+      </td>
+    </tr>
+  </table>
+</div>
 
 ---
 
