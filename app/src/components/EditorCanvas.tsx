@@ -15,6 +15,11 @@ interface EditorCanvasProps {
   onReadAloud?: (text: string) => void;
 }
 
+interface PageBreakInfo {
+  top: number;
+  pageNumber: number;
+}
+
 export const EditorCanvas: React.FC<EditorCanvasProps> = ({
   editor,
   zoom,
@@ -31,6 +36,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
   const [editingFooter, setEditingFooter] = useState(false);
   const [headerVal, setHeaderVal] = useState('');
   const [footerVal, setFooterVal] = useState('');
+  const [pageBreaks, setPageBreaks] = useState<PageBreakInfo[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [contextMenu, setContextMenu] = useState<{ isOpen: boolean; x: number; y: number }>({
     isOpen: false,
@@ -72,6 +78,9 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
   const marginBottom = pageSettings?.margins?.bottom ?? 96;
   const marginLeft = pageSettings?.margins?.left ?? 64;
   const marginRight = pageSettings?.margins?.right ?? 64;
+
+  const deskGap = 32;
+  const breakGapTotal = marginBottom + deskGap + marginTop;
 
   const headerLeftText = (pageSettings?.headerLeft ?? pageSettings?.headerText ?? '').replace('{title}', documentTitle);
   const headerRightText = pageSettings?.headerRight ?? '';
@@ -118,82 +127,66 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
   const pageContentHeight = Math.max(300, pageMinHeightPx - marginTop - marginBottom);
 
   /**
-   * Recalculate document pagination:
-   * Splits long content across pages, respects manual page breaks,
-   * and renders page headers and footers with accurate page counts.
+   * Recalculates page flow and margins without inserting unmanaged foreign DOM nodes into ProseMirror.
+   * Modifies CSS margins on block elements so text flows across pages naturally,
+   * while rendering page break dividers (footer, desk gap, header) in non-intrusive overlays.
    */
   const recalculatePagination = useCallback(() => {
     if (!editor || !contentAreaRef.current) return;
     const pmRoot = contentAreaRef.current.querySelector('.ProseMirror') as HTMLElement | null;
     if (!pmRoot) return;
 
-    // Remove old synthetic auto-breaks before re-measuring
-    const existingAutoBreaks = pmRoot.querySelectorAll('.wordo-auto-page-break');
-    existingAutoBreaks.forEach((node) => node.remove());
-
     const children = Array.from(pmRoot.children) as HTMLElement[];
+    if (children.length === 0) {
+      setPageBreaks([]);
+      setTotalPages(1);
+      return;
+    }
+
+    // Step 1: Reset dynamic top margins and manual break heights before measuring
+    for (const child of children) {
+      child.style.marginTop = '';
+      if (child.hasAttribute('data-wordo-page-break') || child.classList.contains('wordo-page-break')) {
+        child.style.height = '';
+      }
+    }
+
+    // Step 2: Measure blocks and compute break points
     let currentTop = 0;
     let pageCount = 1;
+    const newBreaks: PageBreakInfo[] = [];
 
     for (let i = 0; i < children.length; i++) {
       const child = children[i];
-      if (child.classList.contains('wordo-auto-page-break')) continue;
-
-      const isManualBreak = child.hasAttribute('data-wordo-page-break') || child.classList.contains('wordo-page-break');
+      const isManualBreak =
+        child.hasAttribute('data-wordo-page-break') || child.classList.contains('wordo-page-break');
 
       if (isManualBreak) {
         const remaining = Math.max(0, pageContentHeight - (currentTop % pageContentHeight));
-        child.style.height = `${remaining + 64}px`;
+        child.style.height = `${remaining + breakGapTotal}px`;
         child.style.boxSizing = 'border-box';
-        child.setAttribute('data-page-index', String(pageCount));
-        child.setAttribute('contenteditable', 'false');
+        child.style.border = 'none';
 
-        // Populate manual break widget inner content
-        const nextPage = pageCount + 1;
-        child.innerHTML = `
-          <div class="wordo-break-content flex flex-col justify-between h-full select-none" style="padding-left: ${marginLeft}px; padding-right: ${marginRight}px;">
-            <div class="wordo-break-footer flex items-center justify-between text-[11px] text-gray-400 py-2 border-t border-gray-200 dark:border-gray-800">
-              <span>${footerLeftText}</span>
-              <span>${showPageNumbers ? `Page ${pageCount} of <span class="wordo-total-pages">${pageCount}</span>` : footerRightText}</span>
-            </div>
-            <div class="wordo-break-gap w-full bg-[#eaeaea] dark:bg-[#181818] border-y border-gray-300 dark:border-gray-800 shadow-inner -mx-[${marginLeft}px]" style="height: 32px; margin-left: -${marginLeft}px; margin-right: -${marginRight}px; width: calc(100% + ${marginLeft + marginRight}px);"></div>
-            <div class="wordo-break-header flex items-center justify-between text-[11px] text-gray-400 py-2 border-b border-gray-200 dark:border-gray-800">
-              <span>${headerLeftText}</span>
-              <span>${headerRightText}</span>
-            </div>
-          </div>
-        `;
+        newBreaks.push({
+          top: currentTop + remaining,
+          pageNumber: pageCount,
+        });
 
         pageCount++;
         currentTop = 0;
       } else {
         const childHeight = child.offsetHeight;
+
         if (currentTop > 0 && currentTop + childHeight > pageContentHeight) {
           // Automatic page break needed before this element
           const remaining = Math.max(0, pageContentHeight - currentTop);
-          const autoBreak = document.createElement('div');
-          autoBreak.className = 'wordo-auto-page-break select-none';
-          autoBreak.setAttribute('contenteditable', 'false');
-          autoBreak.setAttribute('data-page-index', String(pageCount));
-          autoBreak.style.height = `${remaining + 64}px`;
-          autoBreak.style.boxSizing = 'border-box';
+          child.style.marginTop = `${remaining + breakGapTotal}px`;
 
-          const nextPage = pageCount + 1;
-          autoBreak.innerHTML = `
-            <div class="wordo-break-content flex flex-col justify-between h-full select-none" style="padding-left: ${marginLeft}px; padding-right: ${marginRight}px;">
-              <div class="wordo-break-footer flex items-center justify-between text-[11px] text-gray-400 py-2 border-t border-gray-200 dark:border-gray-800">
-                <span>${footerLeftText}</span>
-                <span>${showPageNumbers ? `Page ${pageCount} of <span class="wordo-total-pages">${pageCount}</span>` : footerRightText}</span>
-              </div>
-              <div class="wordo-break-gap w-full bg-[#eaeaea] dark:bg-[#181818] border-y border-gray-300 dark:border-gray-800 shadow-inner" style="height: 32px; margin-left: -${marginLeft}px; margin-right: -${marginRight}px; width: calc(100% + ${marginLeft + marginRight}px);"></div>
-              <div class="wordo-break-header flex items-center justify-between text-[11px] text-gray-400 py-2 border-b border-gray-200 dark:border-gray-800">
-                <span>${headerLeftText}</span>
-                <span>${headerRightText}</span>
-              </div>
-            </div>
-          `;
+          newBreaks.push({
+            top: currentTop + remaining,
+            pageNumber: pageCount,
+          });
 
-          pmRoot.insertBefore(autoBreak, child);
           pageCount++;
           currentTop = childHeight;
         } else {
@@ -202,24 +195,9 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
       }
     }
 
+    setPageBreaks(newBreaks);
     setTotalPages(pageCount);
-
-    // Update total pages in all page break footer spans
-    const totalSpans = pmRoot.querySelectorAll('.wordo-total-pages');
-    totalSpans.forEach((span) => {
-      span.textContent = String(pageCount);
-    });
-  }, [
-    editor,
-    pageContentHeight,
-    marginLeft,
-    marginRight,
-    footerLeftText,
-    footerRightText,
-    headerLeftText,
-    headerRightText,
-    showPageNumbers,
-  ]);
+  }, [editor, pageContentHeight, breakGapTotal]);
 
   // Recalculate pagination on content changes and window resize
   useEffect(() => {
@@ -227,7 +205,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
 
     const timer = setTimeout(() => {
       recalculatePagination();
-    }, 50);
+    }, 40);
 
     const handleUpdate = () => {
       recalculatePagination();
@@ -251,6 +229,11 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
     );
   }
 
+  const canvasHeight = Math.max(
+    pageMinHeightPx,
+    totalPages * pageMinHeightPx + (totalPages - 1) * deskGap
+  );
+
   return (
     <div
       ref={containerRef}
@@ -263,7 +246,6 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
             size: ${paperName} ${printOrientation};
             margin: 0;
           }
-          .wordo-auto-page-break,
           .wordo-page-break {
             break-before: page !important;
             page-break-before: always !important;
@@ -273,10 +255,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
             padding: 0 !important;
             border: none !important;
           }
-          .wordo-break-content,
-          .wordo-break-gap,
-          .wordo-break-header,
-          .wordo-break-footer {
+          .wordo-page-overlay-break {
             display: none !important;
           }
         }
@@ -317,7 +296,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
           }`}
           style={{
             width: `${pageWidthPx}px`,
-            minHeight: `${pageMinHeightPx}px`,
+            minHeight: `${canvasHeight}px`,
             backgroundColor: pageBgColor,
             boxSizing: 'border-box',
             ['--page-bg' as any]: pageBgColor,
@@ -389,7 +368,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
             )}
           </div>
 
-          {/* Editable Document Body (dynamic margins) */}
+          {/* Editable Document Body */}
           <div
             ref={contentAreaRef}
             onClick={(e) => {
@@ -407,6 +386,57 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
           >
             <EditorContent editor={editor} className="tiptap-content font-sans text-sm min-h-[500px]" />
           </div>
+
+          {/* Page Break Overlays (Page footers, physical desk gaps, page headers between pages) */}
+          {pageBreaks.map((pb, idx) => {
+            const pageNum = pb.pageNumber;
+            // Vertical offset inside canvas: initial marginTop + pb.top + (idx * breakGapTotal)
+            const topOffset = marginTop / 2 + pb.top + idx * breakGapTotal;
+            return (
+              <div
+                key={`page_break_${pageNum}_${idx}`}
+                className="wordo-page-overlay-break absolute left-0 right-0 pointer-events-none select-none z-20 flex flex-col justify-between"
+                style={{
+                  top: `${topOffset}px`,
+                  height: `${breakGapTotal}px`,
+                }}
+              >
+                {/* Footer of ending page */}
+                <div
+                  className="flex items-center justify-between text-[11px] text-gray-400 py-1 border-t border-gray-200 dark:border-gray-800"
+                  style={{
+                    paddingLeft: `${marginLeft}px`,
+                    paddingRight: `${marginRight}px`,
+                    height: `${marginBottom}px`,
+                    boxSizing: 'border-box',
+                  }}
+                >
+                  <span>{footerLeftText}</span>
+                  <span>{showPageNumbers ? `Page ${pageNum} of ${totalPages}` : footerRightText}</span>
+                </div>
+
+                {/* Desk gap between paper sheets */}
+                <div
+                  className="w-full bg-[#eaeaea] dark:bg-[#181818] border-y border-gray-300 dark:border-gray-800 shadow-inner"
+                  style={{ height: `${deskGap}px` }}
+                />
+
+                {/* Header of starting page */}
+                <div
+                  className="flex items-center justify-between text-[11px] text-gray-400 py-1 border-b border-gray-200 dark:border-gray-800"
+                  style={{
+                    paddingLeft: `${marginLeft}px`,
+                    paddingRight: `${marginRight}px`,
+                    height: `${marginTop}px`,
+                    boxSizing: 'border-box',
+                  }}
+                >
+                  <span className="truncate max-w-[300px]">{headerLeftText}</span>
+                  <span>{headerRightText}</span>
+                </div>
+              </div>
+            );
+          })}
 
           {/* Last Page Footer (margin zone) */}
           <div

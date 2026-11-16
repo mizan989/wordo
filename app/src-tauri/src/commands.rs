@@ -34,9 +34,25 @@ pub fn normalize_path(path: &Path) -> Result<PathBuf, String> {
         return fs::canonicalize(path).map_err(|e| format!("Failed to canonicalize path: {}", e));
     }
 
-    // For a path that doesn't exist yet, find the closest existing ancestor
+    // First, resolve lexical '.' and '..' components
+    let mut lexical = PathBuf::new();
+    for component in path.components() {
+        match component {
+            Component::ParentDir => {
+                lexical.pop();
+            }
+            Component::CurDir => {}
+            _ => lexical.push(component),
+        }
+    }
+
+    if lexical.exists() {
+        return fs::canonicalize(&lexical).map_err(|e| format!("Failed to canonicalize path: {}", e));
+    }
+
+    // For a path that doesn't exist yet, walk up until the nearest existing ancestor is found
     let mut ancestors = Vec::new();
-    let mut current = path;
+    let mut current = lexical.as_path();
     while !current.exists() {
         if let Some(file_name) = current.file_name() {
             ancestors.push(file_name);
@@ -55,17 +71,7 @@ pub fn normalize_path(path: &Path) -> Result<PathBuf, String> {
         }
         Ok(canon)
     } else {
-        let mut normalized = PathBuf::new();
-        for component in path.components() {
-            match component {
-                Component::ParentDir => {
-                    normalized.pop();
-                }
-                Component::CurDir => {}
-                _ => normalized.push(component),
-            }
-        }
-        Ok(normalized)
+        Ok(lexical)
     }
 }
 
@@ -122,6 +128,11 @@ impl SecurityState {
         let list: Vec<PathBuf> = guard.iter().cloned().collect();
         if let Ok(json) = serde_json::to_string(&list) {
             let _ = fs::write(&self.auth_file_path, json);
+            #[cfg(unix)]
+            {
+                use std::os::unix::fs::PermissionsExt;
+                let _ = fs::set_permissions(&self.auth_file_path, fs::Permissions::from_mode(0o600));
+            }
         }
 
         Ok(norm)
@@ -154,10 +165,11 @@ pub fn read_document_file(state: tauri::State<'_, SecurityState>, path: String) 
     if !state.is_authorized(&path_buf) {
         return Err(format!("Access denied: path is not authorized: {}", path));
     }
-    if !path_buf.exists() {
+    let norm = normalize_path(&path_buf)?;
+    if !norm.exists() {
         return Err(format!("File does not exist: {}", path));
     }
-    fs::read(&path_buf).map_err(|e| format!("Failed to read file: {}", e))
+    fs::read(&norm).map_err(|e| format!("Failed to read file: {}", e))
 }
 
 /// Secure command to write file to disk (authorized paths only)
@@ -171,12 +183,13 @@ pub fn write_document_file(
     if !state.is_authorized(&path_buf) {
         return Err(format!("Access denied: path is not authorized: {}", path));
     }
-    if let Some(parent) = path_buf.parent() {
+    let norm = normalize_path(&path_buf)?;
+    if let Some(parent) = norm.parent() {
         if !parent.exists() {
             fs::create_dir_all(parent).map_err(|e| format!("Failed to create directories: {}", e))?;
         }
     }
-    fs::write(&path_buf, data).map_err(|e| format!("Failed to write file: {}", e))
+    fs::write(&norm, data).map_err(|e| format!("Failed to write file: {}", e))
 }
 
 /// Seed authorized paths from valid existing recent document files
@@ -189,11 +202,25 @@ pub fn seed_authorized_paths(
     for p_str in paths {
         let p = PathBuf::from(&p_str);
         if p.exists() && p.is_file() {
-            if let Some(ext) = p.extension().and_then(|s| s.to_str()) {
-                let ext_lower = ext.to_lowercase();
-                if matches!(ext_lower.as_str(), "docx" | "txt" | "html" | "htm" | "rtf" | "odt" | "pdf") {
-                    if state.authorize(&p).is_ok() {
-                        added += 1;
+            if let Ok(norm) = normalize_path(&p) {
+                #[cfg(unix)]
+                let is_system = norm.starts_with("/etc")
+                    || norm.starts_with("/sys")
+                    || norm.starts_with("/proc")
+                    || norm.starts_with("/dev")
+                    || norm.starts_with("/boot")
+                    || norm.starts_with("/root");
+                #[cfg(not(unix))]
+                let is_system = false;
+
+                if !is_system {
+                    if let Some(ext) = norm.extension().and_then(|s| s.to_str()) {
+                        let ext_lower = ext.to_lowercase();
+                        if matches!(ext_lower.as_str(), "docx" | "txt" | "html" | "htm" | "rtf" | "odt" | "pdf") {
+                            if state.authorize(&norm).is_ok() {
+                                added += 1;
+                            }
+                        }
                     }
                 }
             }
@@ -212,6 +239,11 @@ pub fn get_recovery_dir() -> Result<String, String> {
 
     if !data_dir.exists() {
         fs::create_dir_all(&data_dir).map_err(|e| format!("Failed to create recovery dir: {}", e))?;
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::PermissionsExt;
+            let _ = fs::set_permissions(&data_dir, fs::Permissions::from_mode(0o700));
+        }
     }
 
     Ok(data_dir.to_string_lossy().to_string())
@@ -420,4 +452,48 @@ pub async fn save_file_dialog(
     }
 
     Ok(selected_path)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_path_normalization_and_security() {
+        let temp_dir = std::env::temp_dir().join(format!(
+            "wordo_audit_test_{}",
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        fs::create_dir_all(&temp_dir).unwrap();
+
+        let state = SecurityState::new(temp_dir.clone());
+
+        // 1. Path traversal attempting to escape
+        let traversal = temp_dir.join("subdir/../../../../../../etc/passwd");
+        assert!(!state.is_authorized(&traversal));
+
+        // 2. Unauthorised file
+        let unauthorized = temp_dir.join("secret.docx");
+        assert!(!state.is_authorized(&unauthorized));
+
+        // 3. Explicitly authorised file
+        let legal_doc = temp_dir.join("document.docx");
+        fs::write(&legal_doc, b"test docx data").unwrap();
+        assert!(state.authorize(&legal_doc).is_ok());
+        assert!(state.is_authorized(&legal_doc));
+
+        // 4. Recovery directory paths
+        let rec_file = state.recovery_dir.join("draft_123.json");
+        assert!(state.is_authorized(&rec_file));
+
+        // 5. New Save As path that does not exist yet
+        let new_save_path = temp_dir.join("newly_created_folder/NewDocument.docx");
+        assert!(state.authorize(&new_save_path).is_ok());
+        assert!(state.is_authorized(&new_save_path));
+
+        let _ = fs::remove_dir_all(&temp_dir);
+    }
 }

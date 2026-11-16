@@ -650,15 +650,20 @@ export const App: React.FC = () => {
       }
 
       const cleanTitle = fileData.name.replace(/\.[^/.]+$/, '');
-      const ext = lowerName.split('.').pop() || 'docx';
-      const format = isHtml ? 'html' : ext === 'txt' ? 'txt' : 'docx';
-
       setDocumentTitle(cleanTitle);
-      setCurrentFilePath(fileData.path || null);
-      setCurrentFileFormat(format);
+
+      if (isDocx) {
+        // Existing DOCX opened from disk: preserve path so Save directly updates this DOCX
+        setCurrentFilePath(fileData.path || null);
+        setCurrentFileFormat('docx');
+      } else {
+        // Imported TXT or HTML: keep original intact on disk; Save creates a new Wordo DOCX copy
+        setCurrentFilePath(null);
+        setCurrentFileFormat('docx');
+      }
       setIsDirty(false);
 
-      StorageService.addRecentDocument(cleanTitle, editor.getText(), fileData.path, editor.getHTML(), pageSettings);
+      StorageService.addRecentDocument(cleanTitle, editor.getText(), isDocx ? fileData.path : undefined, editor.getHTML(), pageSettings);
       setRecentDocuments(StorageService.getRecentDocuments());
     } catch (err: any) {
       alert(`Could not open document: ${err.message}`);
@@ -702,10 +707,15 @@ export const App: React.FC = () => {
           editor.commands.setContent(html);
           if (recent.pageSettings) setPageSettings(recent.pageSettings);
 
-          setCurrentFilePath(recent.filePath);
-          const ext = lowerName.split('.').pop() || 'docx';
-          const format = isHtml ? 'html' : ext === 'txt' ? 'txt' : 'docx';
-          setCurrentFileFormat(format);
+          if (isDocx) {
+            // Recent DOCX: preserve path so Save directly updates this DOCX
+            setCurrentFilePath(recent.filePath);
+            setCurrentFileFormat('docx');
+          } else {
+            // Recent TXT or HTML: keep original intact on disk; Save creates a new DOCX copy
+            setCurrentFilePath(null);
+            setCurrentFileFormat('docx');
+          }
         } catch (readErr) {
           if (recent.contentHtml) {
             console.warn('Original file not found on disk, falling back to cached snapshot:', readErr);
@@ -736,17 +746,14 @@ export const App: React.FC = () => {
   const handleSave = async (): Promise<boolean> => {
     if (!editor) return false;
     try {
-      if (currentFilePath) {
-        let saved: string | boolean = false;
-        if (currentFileFormat === 'html') {
-          const fullHtml = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${documentTitle}</title></head><body>${editor.getHTML()}</body></html>`;
-          saved = await PlatformService.saveFile(`${documentTitle}.html`, fullHtml, 'text/html', currentFilePath);
-        } else if (currentFileFormat === 'txt') {
-          saved = await PlatformService.saveFile(`${documentTitle}.txt`, editor.getText(), 'text/plain', currentFilePath);
-        } else {
-          saved = await DocxService.exportDocx(editor.getJSON(), editor.getHTML(), `${documentTitle}.docx`, pageSettings, currentFilePath);
-        }
-
+      if (currentFilePath && currentFilePath.toLowerCase().endsWith('.docx')) {
+        const saved = await DocxService.exportDocx(
+          editor.getJSON(),
+          editor.getHTML(),
+          `${documentTitle}.docx`,
+          pageSettings,
+          currentFilePath
+        );
         if (!saved) return false;
         setIsDirty(false);
         StorageService.discardRecoverableDraft(currentFilePath);
@@ -754,6 +761,7 @@ export const App: React.FC = () => {
         setRecentDocuments(StorageService.getRecentDocuments());
         return true;
       } else {
+        // Document has no path yet or was imported from TXT/HTML -> prompt Save As for new DOCX copy!
         return await handleSaveAs();
       }
     } catch (err: any) {
@@ -853,7 +861,15 @@ export const App: React.FC = () => {
     editor.commands.setContent(activeRecoveryDraft.contentHtml);
     if (activeRecoveryDraft.pageSettings) setPageSettings(activeRecoveryDraft.pageSettings);
     setDocumentTitle(activeRecoveryDraft.title);
-    setCurrentFilePath(null);
+    // If the draft was associated with an existing DOCX file, restore its path;
+    // otherwise set to null so Save prompts Save As and never overwrites an unrelated file!
+    const draftPath = activeRecoveryDraft.filePath;
+    if (draftPath && draftPath.toLowerCase().endsWith('.docx')) {
+      setCurrentFilePath(draftPath);
+    } else {
+      setCurrentFilePath(null);
+    }
+    setCurrentFileFormat('docx');
     setIsDirty(true);
     setActiveRecoveryDraft(null);
   };

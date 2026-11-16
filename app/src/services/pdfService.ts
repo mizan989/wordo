@@ -32,9 +32,12 @@ export class PdfService {
     const clone = containerElement.cloneNode(true) as HTMLElement;
     clone.style.transform = 'none';
     clone.style.margin = '0';
-    clone.style.position = 'absolute';
-    clone.style.top = '-99999px';
-    clone.style.left = '-99999px';
+    clone.style.position = 'fixed';
+    clone.style.top = '0';
+    clone.style.left = '0';
+    clone.style.zIndex = '-9999';
+    clone.style.opacity = '1';
+    clone.style.pointerEvents = 'none';
     clone.style.boxShadow = 'none';
     clone.style.border = 'none';
 
