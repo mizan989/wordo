@@ -388,13 +388,12 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
           </div>
 
           {/* Page Break Overlays (Page footers, physical desk gaps, page headers between pages) */}
-          {pageBreaks.map((pb, idx) => {
-            const pageNum = pb.pageNumber;
-            // Vertical offset inside canvas: initial marginTop + pb.top + (idx * breakGapTotal)
-            const topOffset = marginTop / 2 + pb.top + idx * breakGapTotal;
+          {Array.from({ length: Math.max(0, totalPages - 1) }).map((_, idx) => {
+            const pageNum = idx + 1;
+            const topOffset = pageNum * pageMinHeightPx + idx * deskGap - marginBottom;
             return (
               <div
-                key={`page_break_${pageNum}_${idx}`}
+                key={`page_break_${pageNum}`}
                 className="wordo-page-overlay-break absolute left-0 right-0 pointer-events-none select-none z-20 flex flex-col justify-between"
                 style={{
                   top: `${topOffset}px`,
