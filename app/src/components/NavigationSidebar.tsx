@@ -342,62 +342,64 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
   }, [editor, activeTab, searchTerm, matchCase, wholeWord, findMatches, extractHeadings, updateSearchDecorations]);
 
   return (
-    <aside className="w-80 bg-white dark:bg-[#252526] border-r border-[#e0e0e0] dark:border-[#383838] flex flex-col h-full shadow-sm z-10 select-none text-xs">
+    <aside className="w-80 bg-[var(--surface-primary)] border-r border-[var(--border-color)] flex flex-col h-full z-10 select-none text-xs text-[var(--text-primary)] transition-colors">
       {/* Sidebar Header */}
-      <div className="h-9 px-3 border-b border-[#e0e0e0] dark:border-[#383838] flex items-center justify-between bg-[#f5f5f5] dark:bg-[#1e1e1e]">
-        <div className="flex items-center space-x-1.5 font-semibold text-gray-700 dark:text-gray-200">
-          <ListTree className="w-4 h-4 text-[#185abd]" />
+      <div className="h-9 px-3 border-b border-[var(--border-color)] flex items-center justify-between bg-[var(--surface-secondary)]">
+        <div className="flex items-center space-x-1.5 font-medium text-[var(--text-primary)]">
+          <ListTree className="w-4 h-4 text-[var(--text-secondary)]" />
           <span>Navigation</span>
         </div>
         <button
           onClick={onClose}
-          className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] transition-colors"
+          className="p-1 rounded-[var(--radius-sm)] hover:bg-[var(--hover-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
           title="Close navigation pane"
         >
           <X className="w-3.5 h-3.5" />
         </button>
       </div>
 
-      {/* Tabs */}
-      <div className="flex border-b border-[#e0e0e0] dark:border-[#383838] bg-[#fafafa] dark:bg-[#1f1f1f]">
-        <button
-          onClick={() => {
-            setActiveTab('outline');
-            updateSearchDecorations([], 0);
-            setHeadings(extractHeadings());
-          }}
-          className={`flex-1 py-1.5 text-center font-medium border-b-2 transition-colors ${
-            activeTab === 'outline'
-              ? 'border-[#185abd] text-[#185abd] bg-white dark:bg-[#252526]'
-              : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-[#185abd]'
-          }`}
-        >
-          Headings ({headings.length})
-        </button>
-        <button
-          onClick={() => {
-            setActiveTab('search');
-            if (matches.length > 0) {
-              updateSearchDecorations(matches, currentMatchIndex);
-            }
-          }}
-          className={`flex-1 py-1.5 text-center font-medium border-b-2 transition-colors ${
-            activeTab === 'search'
-              ? 'border-[#185abd] text-[#185abd] bg-white dark:bg-[#252526]'
-              : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-[#185abd]'
-          }`}
-        >
-          Find & Replace
-        </button>
+      {/* Segmented Control Tabs */}
+      <div className="p-2 border-b border-[var(--border-color)] bg-[var(--surface-secondary)]">
+        <div className="flex p-0.5 bg-[var(--surface-tertiary)] rounded-[var(--radius-md)] border border-[var(--border-subtle)]">
+          <button
+            onClick={() => {
+              setActiveTab('outline');
+              updateSearchDecorations([], 0);
+              setHeadings(extractHeadings());
+            }}
+            className={`flex-1 py-1 text-center font-medium rounded-[var(--radius-sm)] transition-all ${
+              activeTab === 'outline'
+                ? 'bg-[var(--surface-primary)] text-[var(--text-primary)] shadow-xs'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+            }`}
+          >
+            Headings ({headings.length})
+          </button>
+          <button
+            onClick={() => {
+              setActiveTab('search');
+              if (matches.length > 0) {
+                updateSearchDecorations(matches, currentMatchIndex);
+              }
+            }}
+            className={`flex-1 py-1 text-center font-medium rounded-[var(--radius-sm)] transition-all ${
+              activeTab === 'search'
+                ? 'bg-[var(--surface-primary)] text-[var(--text-primary)] shadow-xs'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+            }`}
+          >
+            Find & Replace
+          </button>
+        </div>
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto p-3 flex flex-col">
+      <div className="flex-1 overflow-y-auto p-3 flex flex-col bg-[var(--surface-primary)]">
         {/* OUTLINE TAB */}
         {activeTab === 'outline' && (
           <div className="space-y-1">
             {headings.length === 0 ? (
-              <div className="py-8 text-center text-gray-400">
+              <div className="py-8 text-center text-[var(--text-muted)]">
                 <FileText className="w-8 h-8 mx-auto mb-2 opacity-40" />
                 <p>No headings in document.</p>
                 <p className="text-[10px] mt-1">Apply Heading 1, 2, or 3 styles to build an outline.</p>
@@ -407,12 +409,12 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                 <div
                   key={i}
                   onClick={() => handleHeadingClick(h.pos)}
-                  className={`py-1 px-2 rounded hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e] cursor-pointer transition-colors truncate font-sans ${
+                  className={`py-1.5 px-2.5 rounded-[var(--radius-md)] hover:bg-[var(--hover-bg)] cursor-pointer transition-colors truncate font-sans ${
                     h.level === 1
-                      ? 'font-bold text-[#185abd] text-xs'
+                      ? 'font-semibold text-[var(--text-primary)] text-xs'
                       : h.level === 2
-                      ? 'pl-4 font-semibold text-gray-700 dark:text-gray-300'
-                      : 'pl-6 font-normal text-gray-600 dark:text-gray-400'
+                      ? 'pl-4 font-medium text-[var(--text-secondary)]'
+                      : 'pl-6 font-normal text-[var(--text-muted)]'
                   }`}
                   title={h.text}
                 >
@@ -428,7 +430,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
           <div className="space-y-3 flex-1 flex flex-col">
             {/* FIND SECTION */}
             <div>
-              <label className="block text-[11px] font-semibold text-gray-600 dark:text-gray-400 mb-1">
+              <label className="block text-[11px] font-medium text-[var(--text-secondary)] mb-1">
                 Find
               </label>
               <div className="relative">
@@ -450,9 +452,9 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                       onClose();
                     }
                   }}
-                  className="w-full px-2.5 py-1.5 pl-8 pr-7 bg-white dark:bg-[#1f1f1f] border border-gray-300 dark:border-gray-600 rounded text-xs outline-hidden focus:border-[#185abd]"
+                  className="w-full px-2.5 py-1.5 pl-8 pr-7 bg-[var(--surface-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] focus:border-[var(--accent-color)] rounded-[var(--radius-md)] text-xs outline-hidden"
                 />
-                <Search className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2.5" />
+                <Search className="w-3.5 h-3.5 text-[var(--text-muted)] absolute left-2.5 top-2.5" />
                 {searchTerm && (
                   <button
                     onMouseDown={(e) => e.preventDefault()}
@@ -460,7 +462,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                       handleSearchChange('');
                       findInputRef.current?.focus();
                     }}
-                    className="absolute right-2 top-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+                    className="absolute right-2 top-2 text-[var(--text-muted)] hover:text-[var(--text-primary)]"
                     title="Clear search"
                   >
                     <X className="w-3.5 h-3.5" />
@@ -475,10 +477,10 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={handleToggleMatchCase}
                   title="Match Case (Case sensitive)"
-                  className={`px-2 py-0.5 rounded text-[10px] font-semibold border transition-colors ${
+                  className={`px-2 py-0.5 rounded-[var(--radius-sm)] text-[10px] font-medium border transition-colors ${
                     matchCase
-                      ? 'bg-[#185abd] text-white border-[#185abd]'
-                      : 'bg-white dark:bg-[#2d2d2d] text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-[#383838]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] border-[var(--accent-color)]'
+                      : 'bg-[var(--surface-secondary)] text-[var(--text-secondary)] border-[var(--border-color)] hover:bg-[var(--hover-bg)] hover:text-[var(--text-primary)]'
                   }`}
                 >
                   Aa Match Case
@@ -488,10 +490,10 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={handleToggleWholeWord}
                   title="Match Whole Words Only"
-                  className={`px-2 py-0.5 rounded text-[10px] font-semibold border transition-colors ${
+                  className={`px-2 py-0.5 rounded-[var(--radius-sm)] text-[10px] font-medium border transition-colors ${
                     wholeWord
-                      ? 'bg-[#185abd] text-white border-[#185abd]'
-                      : 'bg-white dark:bg-[#2d2d2d] text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-[#383838]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] border-[var(--accent-color)]'
+                      : 'bg-[var(--surface-secondary)] text-[var(--text-secondary)] border-[var(--border-color)] hover:bg-[var(--hover-bg)] hover:text-[var(--text-primary)]'
                   }`}
                 >
                   [ab] Whole Word
@@ -499,7 +501,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
               </div>
 
               {searchTerm.trim() && (
-                <div className="flex items-center justify-between mt-2 text-[11px] text-gray-500">
+                <div className="flex items-center justify-between mt-2 text-[11px] text-[var(--text-muted)]">
                   <span>
                     {matches.length > 0
                       ? `Match ${currentMatchIndex} of ${matches.length}`
@@ -511,7 +513,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={handlePrevMatch}
                       disabled={matches.length === 0}
-                      className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] disabled:opacity-30"
+                      className="p-1 rounded-[var(--radius-sm)] hover:bg-[var(--hover-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] disabled:opacity-30"
                       title="Previous match (Shift+Enter)"
                     >
                       <ChevronUp className="w-3.5 h-3.5" />
@@ -521,7 +523,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                       onMouseDown={(e) => e.preventDefault()}
                       onClick={handleNextMatch}
                       disabled={matches.length === 0}
-                      className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] disabled:opacity-30"
+                      className="p-1 rounded-[var(--radius-sm)] hover:bg-[var(--hover-bg)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] disabled:opacity-30"
                       title="Next match (Enter)"
                     >
                       <ChevronDown className="w-3.5 h-3.5" />
@@ -532,8 +534,8 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
             </div>
 
             {/* REPLACE SECTION */}
-            <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
-              <label className="block text-[11px] font-semibold text-gray-600 dark:text-gray-400 mb-1">
+            <div className="pt-2 border-t border-[var(--border-color)]">
+              <label className="block text-[11px] font-medium text-[var(--text-secondary)] mb-1">
                 Replace With
               </label>
               <input
@@ -557,7 +559,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                     onClose();
                   }
                 }}
-                className="w-full px-2.5 py-1.5 bg-white dark:bg-[#1f1f1f] border border-gray-300 dark:border-gray-600 rounded text-xs outline-hidden focus:border-[#185abd]"
+                className="w-full px-2.5 py-1.5 bg-[var(--surface-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] focus:border-[var(--accent-color)] rounded-[var(--radius-md)] text-xs outline-hidden"
               />
 
               <div className="flex items-center space-x-2 mt-2">
@@ -566,7 +568,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={handleReplaceOne}
                   disabled={matches.length === 0}
-                  className="flex-1 py-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-[#383838] rounded font-medium disabled:opacity-40 transition-colors"
+                  className="flex-1 py-1 bg-[var(--surface-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] hover:bg-[var(--hover-bg)] rounded-[var(--radius-md)] font-medium disabled:opacity-40 transition-colors"
                   title="Replace current match (Enter)"
                 >
                   Replace
@@ -576,7 +578,7 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={handleReplaceAll}
                   disabled={matches.length === 0}
-                  className="flex-1 py-1.5 bg-[#185abd] text-white hover:bg-[#1651aa] rounded font-medium disabled:opacity-40 transition-colors"
+                  className="flex-1 py-1 bg-[var(--accent-color)] text-[var(--text-on-accent)] hover:bg-[var(--accent-hover)] rounded-[var(--radius-md)] font-medium disabled:opacity-40 transition-colors"
                   title="Replace all matches (Ctrl+Enter)"
                 >
                   Replace All
@@ -584,16 +586,16 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
               </div>
 
               {replaceStatus && (
-                <div className="mt-1.5 text-[11px] text-[#185abd] dark:text-blue-400 font-medium">
+                <div className="mt-1.5 text-[11px] text-[var(--accent-color)] font-medium">
                   {replaceStatus}
                 </div>
               )}
             </div>
 
-            {/* MATCHES LIST (MICROSOFT WORD STYLE NAVIGATION RESULTS) */}
+            {/* MATCHES LIST */}
             {matches.length > 0 && (
-              <div className="pt-2 border-t border-gray-200 dark:border-gray-700 flex-1 flex flex-col min-h-0">
-                <div className="text-[11px] font-semibold text-gray-500 dark:text-gray-400 mb-1.5">
+              <div className="pt-2 border-t border-[var(--border-color)] flex-1 flex flex-col min-h-0">
+                <div className="text-[11px] font-medium text-[var(--text-muted)] mb-1.5">
                   Results ({matches.length})
                 </div>
                 <div className="flex-1 overflow-y-auto space-y-1 pr-1 max-h-56">
@@ -607,16 +609,16 @@ export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
                         updateSearchDecorations(matches, idx + 1);
                         selectMatch(m);
                       }}
-                      className={`w-full text-left px-2 py-1.5 rounded text-xs transition-colors border ${
+                      className={`w-full text-left px-2.5 py-1.5 rounded-[var(--radius-md)] text-xs transition-colors border ${
                         currentMatchIndex === idx + 1
-                          ? 'bg-[#eef5fc] dark:bg-[#1a365d] border-[#185abd] text-[#185abd] dark:text-blue-300 font-medium shadow-2xs'
-                          : 'bg-white dark:bg-[#252526] border-transparent hover:bg-gray-100 dark:hover:bg-[#333] text-gray-700 dark:text-gray-300'
+                          ? 'bg-[var(--selection-bg)] border-[var(--accent-color)] text-[var(--text-primary)] font-medium shadow-2xs'
+                          : 'bg-[var(--surface-secondary)] border-transparent hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                       }`}
                     >
-                      <div className="flex items-center justify-between text-[10px] text-gray-400 mb-0.5">
+                      <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)] mb-0.5">
                         <span>Match {idx + 1}</span>
                         {currentMatchIndex === idx + 1 && (
-                          <span className="text-[#185abd] dark:text-blue-300 font-semibold">Current</span>
+                          <span className="text-[var(--accent-color)] font-semibold">Current</span>
                         )}
                       </div>
                       <div className="truncate font-sans text-[11px]">

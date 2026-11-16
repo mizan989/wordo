@@ -37,12 +37,12 @@ export const StatusBar: React.FC<StatusBarProps> = ({
   isFocusMode,
 }) => {
   return (
-    <footer className="h-6 bg-[#185abd] text-white flex items-center justify-between px-3 text-[11px] select-none z-20 shadow-xs border-t border-[#1651aa]">
+    <footer className="h-[var(--statusbar-height)] bg-[var(--surface-primary)] text-[var(--text-secondary)] flex items-center justify-between px-3 text-[11px] select-none z-20 border-t border-[var(--border-color)] transition-colors">
       {/* Left items */}
-      <div className="flex items-center space-x-3">
+      <div className="flex items-center space-x-2">
         {/* Page status */}
-        <span className="flex items-center space-x-1 hover:bg-white/20 px-1.5 py-0.5 rounded cursor-pointer transition-colors">
-          <FileText className="w-3 h-3 mr-1" />
+        <span className="flex items-center space-x-1 hover:bg-[var(--hover-bg)] hover:text-[var(--text-primary)] px-2 py-0.5 rounded-[var(--radius-sm)] cursor-pointer transition-colors">
+          <FileText className="w-3 h-3 mr-1 text-[var(--text-muted)]" />
           <span>Document</span>
         </span>
 
@@ -50,30 +50,30 @@ export const StatusBar: React.FC<StatusBarProps> = ({
         <button
           onClick={onOpenWordCount}
           title="Click to view full document statistics"
-          className="hover:bg-white/20 px-1.5 py-0.5 rounded transition-colors font-medium"
+          className="hover:bg-[var(--hover-bg)] hover:text-[var(--text-primary)] px-2 py-0.5 rounded-[var(--radius-sm)] transition-colors font-medium text-[var(--text-primary)]"
         >
           {wordCount.toLocaleString()} {wordCount === 1 ? 'word' : 'words'}
         </button>
 
         {/* Char count */}
-        <span className="opacity-80">
+        <span className="text-[var(--text-muted)]">
           {charCount.toLocaleString()} chars
         </span>
 
         {/* Spell Check Status */}
         <button
           onClick={onOpenSpellCheck}
-          className="flex items-center space-x-1 hover:bg-white/20 px-1.5 py-0.5 rounded transition-colors"
+          className="flex items-center space-x-1 hover:bg-[var(--hover-bg)] hover:text-[var(--text-primary)] px-2 py-0.5 rounded-[var(--radius-sm)] transition-colors"
         >
           {issueCount === 0 ? (
             <>
-              <CheckCircle className="w-3 h-3 text-emerald-300" />
+              <CheckCircle className="w-3 h-3 text-[var(--success-color)]" />
               <span>English (US)</span>
             </>
           ) : (
             <>
-              <AlertCircle className="w-3 h-3 text-amber-300" />
-              <span className="text-amber-200 font-medium">
+              <AlertCircle className="w-3 h-3 text-[var(--warning-color)]" />
+              <span className="text-[var(--warning-color)] font-medium">
                 {issueCount} {issueCount === 1 ? 'correction' : 'corrections'}
               </span>
             </>
@@ -81,42 +81,50 @@ export const StatusBar: React.FC<StatusBarProps> = ({
         </button>
 
         {/* Offline & Autosave state */}
-        <span className="flex items-center opacity-85">
+        <span className="flex items-center text-[var(--text-muted)]">
           <HardDrive className="w-3 h-3 mr-1" />
           {isDirty ? 'Draft modified' : 'No unsaved changes'}
         </span>
       </div>
 
       {/* Right items: Zoom Controls & Layout Modes */}
-      <div className="flex items-center space-x-3">
+      <div className="flex items-center space-x-2">
         {/* Layout Mode Icons */}
-        <div className="flex items-center space-x-1 opacity-90">
+        <div className="flex items-center space-x-0.5 bg-[var(--surface-secondary)] p-0.5 rounded-[var(--radius-md)] border border-[var(--border-subtle)]">
           <button
             onClick={() => {
               if (isFocusMode && onToggleFocusMode) onToggleFocusMode();
             }}
             title="Page Layout View"
-            className={`p-1 rounded hover:bg-white/20 transition-colors ${!isFocusMode ? 'bg-white/25 text-white' : ''}`}
+            className={`p-1 rounded-[var(--radius-sm)] transition-colors ${
+              !isFocusMode
+                ? 'bg-[var(--surface-primary)] text-[var(--text-primary)] shadow-xs font-medium'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+            }`}
           >
             <Layout className="w-3.5 h-3.5" />
           </button>
           <button
             onClick={onToggleFocusMode}
             title="Focus / Reading View (Esc to exit)"
-            className={`p-1 rounded hover:bg-white/20 transition-colors ${isFocusMode ? 'bg-white/25 text-white' : ''}`}
+            className={`p-1 rounded-[var(--radius-sm)] transition-colors ${
+              isFocusMode
+                ? 'bg-[var(--surface-primary)] text-[var(--text-primary)] shadow-xs font-medium'
+                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+            }`}
           >
             <BookOpen className="w-3.5 h-3.5" />
           </button>
         </div>
 
-        <div className="w-[1px] h-3 bg-white/30" />
+        <div className="w-[1px] h-3 bg-[var(--border-color)] mx-1" />
 
         {/* Zoom Slider */}
         <div className="flex items-center space-x-1.5">
           <button
             onClick={() => onZoomChange(Math.max(50, zoom - 10))}
             title="Zoom Out"
-            className="p-0.5 hover:bg-white/20 rounded"
+            className="p-1 hover:bg-[var(--hover-bg)] hover:text-[var(--text-primary)] rounded-[var(--radius-sm)] text-[var(--text-secondary)]"
           >
             <Minus className="w-3 h-3" />
           </button>
@@ -128,13 +136,13 @@ export const StatusBar: React.FC<StatusBarProps> = ({
             step="5"
             value={zoom}
             onChange={(e) => onZoomChange(Number(e.target.value))}
-            className="w-20 h-1 bg-white/40 rounded-lg appearance-none cursor-pointer accent-white"
+            className="w-20 h-1 bg-[var(--surface-tertiary)] rounded-lg appearance-none cursor-pointer accent-[var(--accent-color)]"
           />
 
           <button
             onClick={() => onZoomChange(Math.min(200, zoom + 10))}
             title="Zoom In"
-            className="p-0.5 hover:bg-white/20 rounded"
+            className="p-1 hover:bg-[var(--hover-bg)] hover:text-[var(--text-primary)] rounded-[var(--radius-sm)] text-[var(--text-secondary)]"
           >
             <Plus className="w-3 h-3" />
           </button>
@@ -142,7 +150,7 @@ export const StatusBar: React.FC<StatusBarProps> = ({
           <button
             onClick={() => onZoomChange(100)}
             title="Reset Zoom to 100%"
-            className="w-10 text-right hover:underline font-mono text-[10px]"
+            className="w-10 text-right hover:text-[var(--text-primary)] font-mono text-[10px] text-[var(--text-secondary)]"
           >
             {zoom}%
           </button>

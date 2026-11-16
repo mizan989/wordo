@@ -909,7 +909,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="wordo-app-shell flex flex-col h-screen w-screen overflow-hidden bg-[#f5f5f5] dark:bg-[#1f1f1f] text-[#242424] dark:text-[#cccccc] select-none">
+    <div className="wordo-app-shell flex flex-col h-screen w-screen overflow-hidden bg-[var(--app-bg)] text-[var(--text-primary)] select-none">
       {/* 1. Desktop Window Title Bar */}
       {!isFocusMode && (
         <div className="no-print">

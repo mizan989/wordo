@@ -238,7 +238,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
     <div
       ref={containerRef}
       onContextMenu={handleContextMenu}
-      className="wordo-canvas-scroll flex-1 overflow-auto bg-[#eaeaea] dark:bg-[#181818] p-8 flex flex-col items-center transition-colors print:p-0 print:bg-white relative"
+      className="wordo-canvas-scroll flex-1 overflow-auto bg-[var(--app-bg)] p-8 flex flex-col items-center transition-colors print:p-0 print:bg-white relative"
     >
       <style>{`
         @media print {
@@ -287,17 +287,19 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
         {/* Document Page Canvas */}
         <div
           id="wordo-page-canvas"
-          className={`shadow-xl border border-gray-300 dark:border-gray-800 print:border-none print:shadow-none print-page relative flex flex-col transition-colors overflow-visible ${
+          className={`border border-[var(--border-color)] print:border-none print:shadow-none print-page relative flex flex-col transition-colors overflow-visible ${
             isSepiaPage
               ? 'text-[#382e20]'
               : isDarkPage
               ? 'text-[#f1f5f9] dark-page-mode'
-              : 'text-[#242424]'
+              : 'text-[var(--text-primary)]'
           }`}
           style={{
             width: `${pageWidthPx}px`,
             minHeight: `${canvasHeight}px`,
             backgroundColor: pageBgColor,
+            boxShadow: 'var(--shadow-sheet)',
+            borderRadius: '2px',
             boxSizing: 'border-box',
             ['--page-bg' as any]: pageBgColor,
           }}
@@ -402,7 +404,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
               >
                 {/* Footer of ending page */}
                 <div
-                  className="flex items-center justify-between text-[11px] text-gray-400 py-1 border-t border-gray-200 dark:border-gray-800"
+                  className="flex items-center justify-between text-[11px] text-[var(--text-muted)] py-1 border-t border-[var(--border-subtle)]"
                   style={{
                     paddingLeft: `${marginLeft}px`,
                     paddingRight: `${marginRight}px`,
@@ -416,13 +418,13 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
 
                 {/* Desk gap between paper sheets */}
                 <div
-                  className="w-full bg-[#eaeaea] dark:bg-[#181818] border-y border-gray-300 dark:border-gray-800 shadow-inner"
+                  className="w-full bg-[var(--app-bg)] border-y border-[var(--border-color)]"
                   style={{ height: `${deskGap}px` }}
                 />
 
                 {/* Header of starting page */}
                 <div
-                  className="flex items-center justify-between text-[11px] text-gray-400 py-1 border-b border-gray-200 dark:border-gray-800"
+                  className="flex items-center justify-between text-[11px] text-[var(--text-muted)] py-1 border-b border-[var(--border-subtle)]"
                   style={{
                     paddingLeft: `${marginLeft}px`,
                     paddingRight: `${marginRight}px`,

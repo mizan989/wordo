@@ -1157,9 +1157,9 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
   };
 
   return (
-    <div className="relative z-50 bg-[#f3f2f1] dark:bg-[#201f1e] border-b border-[#e1dfdd] dark:border-[#37373d] shadow-2xs select-none overflow-visible">
+    <div className="relative z-50 bg-[var(--surface-primary)] border-b border-[var(--border-color)] select-none overflow-visible transition-colors">
       {/* Ribbon Tabs Row */}
-      <div className="flex items-center justify-between px-3 pt-1 border-b border-[#e1dfdd] dark:border-[#333333] text-xs bg-[#f3f2f1] dark:bg-[#201f1e] overflow-visible">
+      <div className="flex items-center justify-between px-3 pt-1 border-b border-[var(--border-color)] text-xs bg-[var(--surface-primary)] overflow-visible">
         <div className="flex items-center space-x-1">
           {/* File Tab */}
           <div className="relative">
@@ -1169,10 +1169,10 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 setShowFileDropdown(!showFileDropdown);
               }}
               onMouseDown={(e) => e.preventDefault()}
-              className={`px-3 py-1 font-medium transition-colors rounded-t-sm ${
+              className={`px-3 py-1 font-medium transition-colors rounded-[var(--radius-md)] ${
                 showFileDropdown
-                  ? 'bg-white dark:bg-[#252423] text-gray-900 dark:text-white shadow-xs'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200/80 dark:hover:bg-[#333]'
+                  ? 'bg-[var(--surface-secondary)] text-[var(--text-primary)] shadow-xs font-semibold'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)]'
               }`}
             >
               File
@@ -1261,21 +1261,21 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 if (isRibbonCollapsed) setIsRibbonCollapsed(false);
               }}
               onMouseDown={(e) => e.preventDefault()}
-              className={`px-3 py-1 font-medium transition-colors relative rounded-t-sm ${
+              className={`px-3 py-1 font-medium transition-colors relative rounded-[var(--radius-md)] ${
                 tab.isContextual
                   ? activeTab === tab.id
-                    ? 'text-indigo-600 dark:text-indigo-400 font-semibold'
-                    : 'text-indigo-700 dark:text-indigo-400 hover:bg-gray-200/80 dark:hover:bg-[#333]'
+                    ? 'text-[var(--accent-color)] font-semibold'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)]'
                   : activeTab === tab.id
-                  ? 'text-[#185abd] dark:text-[#5fa2f8] font-semibold'
-                  : 'text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-200/80 dark:hover:bg-[#333]'
+                  ? 'text-[var(--text-primary)] font-semibold'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)]'
               }`}
             >
               {tab.label}
               {activeTab === tab.id && (
                 <span
-                  className={`absolute bottom-0 left-2 right-2 h-[2.5px] rounded-full transition-all duration-150 ${
-                    tab.isContextual ? 'bg-indigo-600' : 'bg-[#185abd] dark:bg-[#5fa2f8]'
+                  className={`absolute -bottom-1 left-2 right-2 h-[2px] rounded-full transition-all duration-150 ${
+                    tab.isContextual ? 'bg-[var(--accent-color)]' : 'bg-[var(--text-primary)] dark:bg-white'
                   }`}
                 />
               )}
@@ -1289,27 +1289,27 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
             onClick={() => onOpenWordCount?.()}
             onMouseDown={(e) => e.preventDefault()}
             title="Comments"
-            className="flex items-center space-x-1 px-2.5 py-1 rounded text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#333] transition-colors"
+            className="flex items-center space-x-1 px-2.5 py-1 rounded-[var(--radius-md)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)] transition-colors"
           >
-            <MessageSquare className="w-3.5 h-3.5 text-gray-500" />
+            <MessageSquare className="w-3.5 h-3.5 text-[var(--text-muted)]" />
             <span>Comments</span>
           </button>
 
           <button
             onClick={() => {}}
             onMouseDown={(e) => e.preventDefault()}
-            className="flex items-center space-x-1 px-2.5 py-1 rounded text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#333] transition-colors"
+            className="flex items-center space-x-1 px-2.5 py-1 rounded-[var(--radius-md)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)] transition-colors"
           >
-            <Edit3 className="w-3.5 h-3.5 text-gray-500" />
+            <Edit3 className="w-3.5 h-3.5 text-[var(--text-muted)]" />
             <span>Editing</span>
-            <ChevronDown className="w-2.5 h-2.5 text-gray-400" />
+            <ChevronDown className="w-2.5 h-2.5 text-[var(--text-muted)]" />
           </button>
         </div>
       </div>
 
       {/* Ribbon Command Strip */}
       {!isRibbonCollapsed && (
-        <div className="h-[84px] bg-white dark:bg-[#252423] border-b border-[#edebe9] dark:border-[#2d2c2b] shadow-2xs px-3 py-1 flex items-stretch justify-between overflow-visible text-xs text-gray-700 dark:text-gray-200 transition-all">
+        <div className="h-[84px] bg-[var(--surface-primary)] border-b border-[var(--border-color)] px-3 py-1 flex items-stretch justify-between overflow-visible text-xs text-[var(--text-primary)] transition-all">
           <div className="flex items-stretch space-x-1 flex-1">
         {/* HOME TAB */}
         {activeTab === 'home' && (
@@ -1320,15 +1320,15 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 onClick={() => editor.chain().focus().undo().run()}
                 onMouseDown={(e) => e.preventDefault()}
                 title="Undo (Ctrl+Z)"
-                className="flex flex-col items-center justify-center p-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                className="flex flex-col items-center justify-center p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
               >
-                <Undo2 className="w-4 h-4 text-[#185abd]" />
+                <Undo2 className="w-4 h-4 text-[var(--accent-color)]" />
                 <span className="text-[10px] flex items-center">Undo <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" /></span>
               </button>
               <div className="h-3" />
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 1. Clipboard */}
             <div className="flex flex-col justify-between h-full px-1">
@@ -1341,9 +1341,9 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   }}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Paste (Ctrl+V)"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                 >
-                  <Clipboard className="w-5 h-5 text-[#185abd]" />
+                  <Clipboard className="w-5 h-5 text-[var(--accent-color)]" />
                   <span className="text-[10px] flex items-center">Paste <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" /></span>
                 </button>
                 <div className="flex flex-col space-y-0.5">
@@ -1351,18 +1351,18 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     onClick={() => document.execCommand('cut')}
                     onMouseDown={(e) => e.preventDefault()}
                     title="Cut (Ctrl+X)"
-                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-[10px]"
+                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[10px]"
                   >
-                    <Scissors className="w-3 h-3 text-gray-600 dark:text-gray-300" />
+                    <Scissors className="w-3 h-3 text-[var(--text-secondary)]" />
                     <span>Cut</span>
                   </button>
                   <button
                     onClick={() => document.execCommand('copy')}
                     onMouseDown={(e) => e.preventDefault()}
                     title="Copy (Ctrl+C)"
-                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-[10px]"
+                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[10px]"
                   >
-                    <Copy className="w-3 h-3 text-gray-600 dark:text-gray-300" />
+                    <Copy className="w-3 h-3 text-[var(--text-secondary)]" />
                     <span>Copy</span>
                   </button>
                 </div>
@@ -1373,18 +1373,18 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Format Painter (Ctrl+Shift+C / Ctrl+Shift+V) - Double-click to pin"
                   className={`p-1 px-1.5 rounded flex flex-col items-center justify-center transition-colors ${
                     formatPainter?.active
-                      ? 'bg-[#185abd] text-white shadow-xs'
-                      : 'hover:bg-gray-100 dark:hover:bg-[#333]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                   }`}
                 >
                   <Paintbrush className="w-4 h-4 text-amber-600" />
                   <span className="text-[10px] text-center leading-tight">Format<br/>Painter</span>
                 </button>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center">Clipboard</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center">Clipboard</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 2. Font Controls */}
             <div className="flex flex-col justify-between h-full px-1">
@@ -1404,7 +1404,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     }
                     (editor.commands as any).setFontFamily(font);
                   }}
-                  className="h-6 px-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-[#444] rounded text-xs outline-hidden w-36 font-medium truncate"
+                  className="h-6 px-1.5 bg-[var(--surface-secondary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-[var(--radius-md)] text-xs outline-hidden w-36 font-medium truncate hover:bg-[var(--hover-bg)]"
                   title="Font Family"
                 >
                   <optgroup label="☁️ Office 365 Cloud Fonts">
@@ -1458,7 +1458,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                         (e.target as HTMLInputElement).blur();
                       }
                     }}
-                    className="h-6 w-10 px-1 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-[#444] rounded-l text-xs outline-hidden text-center text-gray-800 dark:text-gray-100 font-medium"
+                    className="h-6 w-10 px-1 bg-[var(--surface-secondary)] border border-[var(--border-color)] rounded-l-[var(--radius-md)] text-xs outline-hidden text-center text-[var(--text-primary)] font-medium"
                     title="Font Size (select or type)"
                   />
                   <button
@@ -1467,14 +1467,14 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       e.stopPropagation();
                       setShowFontSizeDropdown(!showFontSizeDropdown);
                     }}
-                    className="h-6 px-0.5 bg-gray-100 dark:bg-[#383838] border-y border-r border-gray-300 dark:border-[#444] rounded-r hover:bg-gray-200 dark:hover:bg-[#444]"
+                    className="h-6 px-0.5 bg-[var(--surface-secondary)] border-y border-r border-[var(--border-color)] rounded-r-[var(--radius-md)] hover:bg-[var(--hover-bg)]"
                   >
-                    <ChevronDown className="w-2.5 h-2.5 text-gray-500" />
+                    <ChevronDown className="w-2.5 h-2.5 text-[var(--text-secondary)]" />
                   </button>
                   {showFontSizeDropdown && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute left-0 top-full mt-1 w-16 max-h-56 overflow-y-auto bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded shadow-xl z-50 py-1"
+                      className="absolute left-0 top-full mt-1 w-16 max-h-56 overflow-y-auto bg-[var(--surface-floating)] border border-[var(--border-color)] rounded-[var(--radius-lg)] shadow-[var(--shadow-popover)] z-50 py-1"
                     >
                       {FONT_SIZES.map((s) => (
                         <button
@@ -1487,8 +1487,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                             (editor.commands as any).setFontSize(s);
                             setShowFontSizeDropdown(false);
                           }}
-                          className={`w-full text-left px-2 py-0.5 text-xs hover:bg-blue-50 dark:hover:bg-blue-900/40 ${
-                            currentFontSize === s ? 'font-bold text-[#185abd]' : ''
+                          className={`w-full text-left px-2 py-0.5 text-xs hover:bg-[var(--hover-bg)] ${
+                            currentFontSize === s ? 'font-bold text-[var(--accent-color)]' : ''
                           }`}
                         >
                           {s}
@@ -1502,7 +1502,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={() => (editor.commands as any).growFontSize()}
                   title="Increase Font Size (Ctrl+Shift+>)"
-                  className="h-6 px-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] flex items-center text-xs font-bold"
+                  className="h-6 px-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] flex items-center text-xs font-bold"
                 >
                   A<ChevronUp className="w-3 h-3 -ml-0.5 text-blue-600" />
                 </button>
@@ -1511,7 +1511,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={() => (editor.commands as any).shrinkFontSize()}
                   title="Decrease Font Size (Ctrl+Shift+<)"
-                  className="h-6 px-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] flex items-center text-[11px]"
+                  className="h-6 px-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] flex items-center text-[11px]"
                 >
                   A<ChevronDown className="w-3 h-3 -ml-0.5 text-blue-600" />
                 </button>
@@ -1525,15 +1525,15 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       setShowCaseMenu(!showCaseMenu);
                     }}
                     title="Change Case (Shift+F3)"
-                    className="h-6 px-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] flex items-center text-xs font-serif font-bold text-gray-700 dark:text-gray-200"
+                    className="h-6 px-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] flex items-center text-xs font-serif font-bold text-[var(--text-primary)]"
                   >
                     <span>Aa</span>
-                    <ChevronDown className="w-2.5 h-2.5 ml-0.5 text-gray-400" />
+                    <ChevronDown className="w-2.5 h-2.5 ml-0.5 text-[var(--text-muted)]" />
                   </button>
                   {showCaseMenu && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute left-0 top-full mt-1 w-44 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded-md shadow-xl py-1 z-50 text-xs"
+                      className="absolute left-0 top-full mt-1 w-44 bg-[var(--surface-floating)] border border-[var(--border-color)] rounded-[var(--radius-lg)] shadow-[var(--shadow-popover)] py-1 z-50 text-xs"
                     >
                       {[
                         { id: 'sentence', label: 'Sentence case.' },
@@ -1549,7 +1549,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                             (editor.commands as any).transformCase(item.id);
                             setShowCaseMenu(false);
                           }}
-                          className="w-full text-left px-3 py-1.5 hover:bg-blue-50 dark:hover:bg-blue-900/40 text-gray-800 dark:text-gray-200"
+                          className="w-full text-left px-3 py-1.5 hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
                         >
                           {item.label}
                         </button>
@@ -1562,7 +1562,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={handleClearFormatting}
                   title="Clear All Formatting (Ctrl+Space)"
-                  className="h-6 px-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] flex items-center text-gray-500 hover:text-red-600"
+                  className="h-6 px-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] flex items-center text-[var(--text-secondary)] hover:text-red-600"
                 >
                   <RemoveFormatting className="w-3.5 h-3.5" />
                 </button>
@@ -1576,8 +1576,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Bold (Ctrl+B)"
                   className={`p-1 rounded transition-colors ${
                     editor.isActive('bold')
-                      ? 'bg-[#185abd] text-white'
-                      : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                   }`}
                 >
                   <Bold className="w-3.5 h-3.5" />
@@ -1588,8 +1588,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Italic (Ctrl+I)"
                   className={`p-1 rounded transition-colors ${
                     editor.isActive('italic')
-                      ? 'bg-[#185abd] text-white'
-                      : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                   }`}
                 >
                   <Italic className="w-3.5 h-3.5" />
@@ -1600,8 +1600,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Underline (Ctrl+U)"
                   className={`p-1 rounded transition-colors ${
                     editor.isActive('underline')
-                      ? 'bg-[#185abd] text-white'
-                      : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                   }`}
                 >
                   <Underline className="w-3.5 h-3.5" />
@@ -1612,8 +1612,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Strikethrough"
                   className={`p-1 rounded transition-colors ${
                     editor.isActive('strike')
-                      ? 'bg-[#185abd] text-white'
-                      : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                   }`}
                 >
                   <Strikethrough className="w-3.5 h-3.5" />
@@ -1624,8 +1624,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Subscript (Ctrl+=)"
                   className={`p-1 rounded transition-colors ${
                     editor.isActive('subscript')
-                      ? 'bg-[#185abd] text-white'
-                      : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                   }`}
                 >
                   <Subscript className="w-3.5 h-3.5" />
@@ -1636,8 +1636,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Superscript (Ctrl+Shift++)"
                   className={`p-1 rounded transition-colors ${
                     editor.isActive('superscript')
-                      ? 'bg-[#185abd] text-white'
-                      : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                   }`}
                 >
                   <Superscript className="w-3.5 h-3.5" />
@@ -1654,7 +1654,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       setShowColorPicker(false);
                     }}
                     title="Text Highlight Color"
-                    className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] flex items-center"
+                    className="p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] flex items-center"
                   >
                     <div className="flex flex-col items-center">
                       <Highlighter className="w-3.5 h-3.5 text-amber-500" />
@@ -1671,19 +1671,19 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   {showHighlightPicker && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute left-0 top-full mt-1 p-2 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded-md shadow-2xl z-50 w-44"
+                      className="absolute left-0 top-full mt-1 p-2 bg-[var(--surface-floating)] border border-[var(--border-color)] rounded-[var(--radius-lg)] shadow-[var(--shadow-popover)] z-50 w-44"
                     >
                       <button
                         onClick={() => {
                           editor.chain().focus().unsetHighlight().run();
                           setShowHighlightPicker(false);
                         }}
-                        className="w-full text-left px-2 py-1 mb-1 text-[11px] hover:bg-gray-100 dark:hover:bg-[#383838] rounded flex items-center space-x-1"
+                        className="w-full text-left px-2 py-1 mb-1 text-[11px] hover:bg-[var(--hover-bg)] rounded flex items-center space-x-1"
                       >
-                        <RemoveFormatting className="w-3 h-3 text-gray-500" />
+                        <RemoveFormatting className="w-3 h-3 text-[var(--text-secondary)]" />
                         <span>No Color</span>
                       </button>
-                      <div className="grid grid-cols-5 gap-1.5 pt-1 border-t border-gray-200 dark:border-gray-700">
+                      <div className="grid grid-cols-5 gap-1.5 pt-1 border-t border-[var(--border-color)]">
                         {WORD_HIGHLIGHT_COLORS.map((h) => (
                           <button
                             key={h.color}
@@ -1710,7 +1710,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       setShowHighlightPicker(false);
                     }}
                     title="Font Color"
-                    className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] flex items-center"
+                    className="p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] flex items-center"
                   >
                     <div className="flex flex-col items-center">
                       <Baseline className="w-3.5 h-3.5 text-red-600" />
@@ -1727,25 +1727,25 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   {showColorPicker && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute left-0 top-full mt-1 p-2.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded-md shadow-2xl z-50 w-52 text-xs"
+                      className="absolute left-0 top-full mt-1 p-2.5 bg-[var(--surface-floating)] border border-[var(--border-color)] rounded-[var(--radius-lg)] shadow-[var(--shadow-popover)] z-50 w-52 text-xs"
                     >
                       <button
                         onClick={() => {
                           editor.chain().focus().unsetColor().run();
                           setShowColorPicker(false);
                         }}
-                        className="w-full text-left px-2 py-1 mb-2 font-medium hover:bg-gray-100 dark:hover:bg-[#383838] rounded flex items-center justify-between"
+                        className="w-full text-left px-2 py-1 mb-2 font-medium hover:bg-[var(--hover-bg)] rounded flex items-center justify-between"
                       >
                         <div className="flex items-center space-x-1.5">
                           <div className="w-3.5 h-3.5 bg-black dark:bg-white border border-gray-400 rounded-xs" />
                           <span>Automatic</span>
                         </div>
                         {!editor.getAttributes('textStyle')?.color && (
-                          <Check className="w-3 h-3 text-[#185abd]" />
+                          <Check className="w-3 h-3 text-[var(--accent-color)]" />
                         )}
                       </button>
 
-                      <div className="text-[10px] text-gray-500 font-semibold mb-1">
+                      <div className="text-[10px] text-[var(--text-secondary)] font-semibold mb-1">
                         Theme Colors
                       </div>
                       <div className="grid grid-cols-10 gap-1 mb-1">
@@ -1771,7 +1771,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                                   editor.chain().focus().setColor(c).run();
                                   setShowColorPicker(false);
                                 }}
-                                className="w-4 h-3 border border-gray-200 dark:border-gray-700 hover:scale-110"
+                                className="w-4 h-3 border border-[var(--border-color)] hover:scale-110"
                                 style={{ backgroundColor: c }}
                               />
                             ))}
@@ -1779,7 +1779,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                         ))}
                       </div>
 
-                      <div className="text-[10px] text-gray-500 font-semibold mb-1">
+                      <div className="text-[10px] text-[var(--text-secondary)] font-semibold mb-1">
                         Standard Colors
                       </div>
                       <div className="grid grid-cols-10 gap-1 mb-2">
@@ -1796,10 +1796,10 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                         ))}
                       </div>
 
-                      <div className="pt-1.5 border-t border-gray-200 dark:border-gray-700">
+                      <div className="pt-1.5 border-t border-[var(--border-color)]">
                         <button
                           onClick={() => colorInputRef.current?.click()}
-                          className="w-full text-left px-2 py-1 text-[11px] hover:bg-gray-100 dark:hover:bg-[#383838] rounded text-[#185abd] font-medium"
+                          className="w-full text-left px-2 py-1 text-[11px] hover:bg-[var(--hover-bg)] rounded text-[var(--accent-color)] font-medium"
                         >
                           More Colors...
                         </button>
@@ -1818,20 +1818,20 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 </div>
               </div>
               </div>
-              <div className="flex items-center justify-center space-x-1 text-[10px] text-gray-400 dark:text-gray-500 font-normal">
+              <div className="flex items-center justify-center space-x-1 text-[10px] text-[var(--text-muted)] font-medium tracking-wide">
                 <span>Font</span>
                 <button
                   onClick={onOpenSettings}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Font options"
-                  className="p-0.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                  className="p-0.5 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded"
                 >
                   <ExternalLink className="w-2.5 h-2.5 opacity-60 hover:opacity-100" />
                 </button>
               </div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 3. Paragraph */}
             <div className="flex flex-col justify-between h-full px-1">
@@ -1843,8 +1843,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Bulleted List"
                   className={`p-1 rounded ${
                     editor.isActive('bulletList')
-                      ? 'bg-[#185abd] text-white'
-                      : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                   }`}
                 >
                   <List className="w-3.5 h-3.5" />
@@ -1855,8 +1855,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Numbered List"
                   className={`p-1 rounded ${
                     editor.isActive('orderedList')
-                      ? 'bg-[#185abd] text-white'
-                      : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                   }`}
                 >
                   <ListOrdered className="w-3.5 h-3.5" />
@@ -1867,8 +1867,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Checklist Task"
                   className={`p-1 rounded ${
                     editor.isActive('taskList')
-                      ? 'bg-[#185abd] text-white'
-                      : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                   }`}
                 >
                   <CheckSquare className="w-3.5 h-3.5" />
@@ -1878,7 +1878,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={() => (editor.commands as any).outdentParagraph()}
                   title="Decrease Indent"
-                  className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
+                  className="p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
                 >
                   <Outdent className="w-3.5 h-3.5" />
                 </button>
@@ -1886,7 +1886,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onMouseDown={(e) => e.preventDefault()}
                   onClick={() => (editor.commands as any).indentParagraph()}
                   title="Increase Indent"
-                  className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
+                  className="p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
                 >
                   <Indent className="w-3.5 h-3.5" />
                 </button>
@@ -1899,8 +1899,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Align Left (Ctrl+L)"
                   className={`p-1 rounded ${
                     editor.isActive({ textAlign: 'left' })
-                      ? 'bg-[#185abd] text-white'
-                      : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                   }`}
                 >
                   <AlignLeft className="w-3.5 h-3.5" />
@@ -1911,8 +1911,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Align Center (Ctrl+E)"
                   className={`p-1 rounded ${
                     editor.isActive({ textAlign: 'center' })
-                      ? 'bg-[#185abd] text-white'
-                      : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                   }`}
                 >
                   <AlignCenter className="w-3.5 h-3.5" />
@@ -1923,8 +1923,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Align Right (Ctrl+R)"
                   className={`p-1 rounded ${
                     editor.isActive({ textAlign: 'right' })
-                      ? 'bg-[#185abd] text-white'
-                      : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                   }`}
                 >
                   <AlignRight className="w-3.5 h-3.5" />
@@ -1935,8 +1935,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Justify (Ctrl+J)"
                   className={`p-1 rounded ${
                     editor.isActive({ textAlign: 'justify' })
-                      ? 'bg-[#185abd] text-white'
-                      : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                   }`}
                 >
                   <AlignJustify className="w-3.5 h-3.5" />
@@ -1952,15 +1952,15 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       setShowSpacingMenu(!showSpacingMenu);
                     }}
                     title="Line and Paragraph Spacing"
-                    className="h-6 px-1.5 rounded hover:bg-gray-200 dark:hover:bg-[#333] flex items-center space-x-0.5 text-[11px] font-medium"
+                    className="h-6 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] flex items-center space-x-0.5 text-[11px] font-medium"
                   >
                     <span>{editor.getAttributes('paragraph')?.lineHeight || '1.15'}</span>
-                    <ChevronDown className="w-2.5 h-2.5 text-gray-400" />
+                    <ChevronDown className="w-2.5 h-2.5 text-[var(--text-muted)]" />
                   </button>
                   {showSpacingMenu && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute left-0 top-full mt-1 w-56 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded-md shadow-2xl py-1 z-50 text-xs"
+                      className="absolute left-0 top-full mt-1 w-56 bg-[var(--surface-floating)] border border-[var(--border-color)] rounded-[var(--radius-lg)] shadow-[var(--shadow-popover)] py-1 z-50 text-xs"
                     >
                       {['1.0', '1.15', '1.5', '2.0', '2.5', '3.0'].map((val) => (
                         <button
@@ -1969,21 +1969,21 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                             (editor.commands as any).setLineHeight(val);
                             setShowSpacingMenu(false);
                           }}
-                          className="w-full text-left px-3 py-1 hover:bg-blue-50 dark:hover:bg-blue-900/40 flex items-center justify-between"
+                          className="w-full text-left px-3 py-1 hover:bg-[var(--hover-bg)] flex items-center justify-between"
                         >
                           <span>{val}</span>
                           {(editor.getAttributes('paragraph')?.lineHeight || '1.15') === val && (
-                            <Check className="w-3 h-3 text-[#185abd]" />
+                            <Check className="w-3 h-3 text-[var(--accent-color)]" />
                           )}
                         </button>
                       ))}
-                      <div className="my-1 border-t border-gray-200 dark:border-gray-700" />
+                      <div className="my-1 border-t border-[var(--border-color)]" />
                       <button
                         onClick={() => {
                           (editor.commands as any).toggleSpaceBefore();
                           setShowSpacingMenu(false);
                         }}
-                        className="w-full text-left px-3 py-1 hover:bg-blue-50 dark:hover:bg-blue-900/40"
+                        className="w-full text-left px-3 py-1 hover:bg-[var(--hover-bg)]"
                       >
                         {editor.getAttributes('paragraph')?.spaceBefore
                           ? 'Remove Space Before Paragraph'
@@ -1994,7 +1994,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                           (editor.commands as any).toggleSpaceAfter();
                           setShowSpacingMenu(false);
                         }}
-                        className="w-full text-left px-3 py-1 hover:bg-blue-50 dark:hover:bg-blue-900/40"
+                        className="w-full text-left px-3 py-1 hover:bg-[var(--hover-bg)]"
                       >
                         {editor.getAttributes('paragraph')?.spaceAfter === false
                           ? 'Add Space After Paragraph'
@@ -2005,20 +2005,20 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 </div>
               </div>
               </div>
-              <div className="flex items-center justify-center space-x-1 text-[10px] text-gray-400 dark:text-gray-500 font-normal">
+              <div className="flex items-center justify-center space-x-1 text-[10px] text-[var(--text-muted)] font-medium tracking-wide">
                 <span>Paragraph</span>
                 <button
                   onClick={onOpenSettings}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Paragraph options"
-                  className="p-0.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                  className="p-0.5 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded"
                 >
                   <ExternalLink className="w-2.5 h-2.5 opacity-60 hover:opacity-100" />
                 </button>
               </div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 4. Quick Styles */}
             <div className="flex flex-col justify-between h-full px-1">
@@ -2027,12 +2027,12 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 onClick={() => editor.chain().focus().setParagraph().run()}
                 className={`flex flex-col items-start px-2 py-1 rounded border min-w-[62px] text-left transition-colors ${
                   !editor.isActive('heading') && !editor.isActive('blockquote')
-                    ? 'border-[#185abd] bg-blue-50/80 dark:bg-blue-950/40'
-                    : 'border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-[#333]'
+                    ? 'border-[var(--accent-color)] bg-[var(--selection-bg)] text-[var(--accent-color)]'
+                    : 'border-[var(--border-color)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                 }`}
               >
                 <span className="text-[12px] font-medium leading-none">AaBbCc</span>
-                <span className="text-[10px] text-gray-500 mt-1">Normal</span>
+                <span className="text-[10px] text-[var(--text-secondary)] mt-1">Normal</span>
               </button>
 
               <button
@@ -2044,48 +2044,48 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     .updateAttributes('paragraph', { spaceAfter: false, lineHeight: '1.0' })
                     .run();
                 }}
-                className="flex flex-col items-start px-2 py-1 rounded border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-[#333] min-w-[70px] text-left transition-colors"
+                className="flex flex-col items-start px-2 py-1 rounded border border-[var(--border-color)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)] min-w-[70px] text-left transition-colors"
               >
                 <span className="text-[12px] font-medium leading-none">AaBbCc</span>
-                <span className="text-[10px] text-gray-500 mt-1">No Spacing</span>
+                <span className="text-[10px] text-[var(--text-secondary)] mt-1">No Spacing</span>
               </button>
 
               <button
                 onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
                 className={`flex flex-col items-start px-2 py-1 rounded border min-w-[68px] text-left transition-colors ${
                   editor.isActive('heading', { level: 1 })
-                    ? 'border-[#185abd] bg-blue-50/80 dark:bg-blue-950/40'
-                    : 'border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-[#333]'
+                    ? 'border-[var(--accent-color)] bg-[var(--selection-bg)] text-[var(--accent-color)]'
+                    : 'border-[var(--border-color)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                 }`}
               >
-                <span className="text-[13px] font-bold text-[#185abd] leading-none">AaBbCc</span>
-                <span className="text-[10px] text-gray-500 mt-1">Heading 1</span>
+                <span className="text-[13px] font-bold text-[var(--accent-color)] leading-none">AaBbCc</span>
+                <span className="text-[10px] text-[var(--text-secondary)] mt-1">Heading 1</span>
               </button>
 
               <button
                 onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
                 className={`flex flex-col items-start px-2 py-1 rounded border min-w-[68px] text-left transition-colors ${
                   editor.isActive('heading', { level: 2 })
-                    ? 'border-[#185abd] bg-blue-50/80 dark:bg-blue-950/40'
-                    : 'border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-[#333]'
+                    ? 'border-[var(--accent-color)] bg-[var(--selection-bg)] text-[var(--accent-color)]'
+                    : 'border-[var(--border-color)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                 }`}
               >
                 <span className="text-[12px] font-bold text-[#2b579a] leading-none">AaBbCc</span>
-                <span className="text-[10px] text-gray-500 mt-1">Heading 2</span>
+                <span className="text-[10px] text-[var(--text-secondary)] mt-1">Heading 2</span>
               </button>
 
               <button
                 onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
                 className={`flex flex-col items-start px-2 py-1 rounded border min-w-[68px] text-left transition-colors ${
                   editor.isActive('heading', { level: 3 })
-                    ? 'border-[#185abd] bg-blue-50/80 dark:bg-blue-950/40'
-                    : 'border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-[#333]'
+                    ? 'border-[var(--accent-color)] bg-[var(--selection-bg)] text-[var(--accent-color)]'
+                    : 'border-[var(--border-color)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                 }`}
               >
                 <span className="text-[12px] font-bold text-[#424242] dark:text-gray-300 leading-none">
                   AaBbCc
                 </span>
-                <span className="text-[10px] text-gray-500 mt-1">Heading 3</span>
+                <span className="text-[10px] text-[var(--text-secondary)] mt-1">Heading 3</span>
               </button>
 
               <button
@@ -2098,38 +2098,38 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     .setColor('#185abd')
                     .run();
                 }}
-                className="flex flex-col items-start px-2 py-1 rounded border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-[#333] min-w-[55px] text-left transition-colors"
+                className="flex flex-col items-start px-2 py-1 rounded border border-[var(--border-color)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)] min-w-[55px] text-left transition-colors"
               >
-                <span className="text-[14px] font-light text-[#185abd] leading-none">Title</span>
-                <span className="text-[10px] text-gray-500 mt-1">Title</span>
+                <span className="text-[14px] font-light text-[var(--accent-color)] leading-none">Title</span>
+                <span className="text-[10px] text-[var(--text-secondary)] mt-1">Title</span>
               </button>
 
               <button
                 onClick={() => editor.chain().focus().toggleBlockquote().run()}
                 className={`flex flex-col items-start px-2 py-1 rounded border min-w-[55px] text-left transition-colors ${
                   editor.isActive('blockquote')
-                    ? 'border-[#185abd] bg-blue-50/80 dark:bg-blue-950/40'
-                    : 'border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-[#333]'
+                    ? 'border-[var(--accent-color)] bg-[var(--selection-bg)] text-[var(--accent-color)]'
+                    : 'border-[var(--border-color)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                 }`}
               >
                 <span className="text-[11px] italic font-serif leading-none">"Quote"</span>
-                <span className="text-[10px] text-gray-500 mt-1">Quote</span>
+                <span className="text-[10px] text-[var(--text-secondary)] mt-1">Quote</span>
               </button>
               </div>
-              <div className="flex items-center justify-center space-x-1 text-[10px] text-gray-400 dark:text-gray-500 font-normal">
+              <div className="flex items-center justify-center space-x-1 text-[10px] text-[var(--text-muted)] font-medium tracking-wide">
                 <span>Styles</span>
                 <button
                   onClick={onOpenSettings}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Styles pane"
-                  className="p-0.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                  className="p-0.5 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded"
                 >
                   <ExternalLink className="w-2.5 h-2.5 opacity-60 hover:opacity-100" />
                 </button>
               </div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 5. Editing */}
             <div className="flex flex-col justify-between h-full px-1">
@@ -2137,35 +2137,35 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 <button
                   onClick={() => onOpenSearch('find')}
                   onMouseDown={(e) => e.preventDefault()}
-                  className="flex items-center space-x-1.5 px-2 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-[11px]"
+                  className="flex items-center space-x-1.5 px-2 py-0.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors text-[11px]"
                   title="Find (Ctrl+F)"
                 >
-                  <Search className="w-3.5 h-3.5 text-[#185abd]" />
+                  <Search className="w-3.5 h-3.5 text-[var(--accent-color)]" />
                   <span>Find</span>
                 </button>
                 <button
                   onClick={() => onOpenSearch('replace')}
                   onMouseDown={(e) => e.preventDefault()}
-                  className="flex items-center space-x-1.5 px-2 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-[11px]"
+                  className="flex items-center space-x-1.5 px-2 py-0.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors text-[11px]"
                   title="Replace (Ctrl+H)"
                 >
-                  <span className="text-[10px] font-bold text-gray-600 dark:text-gray-300">ab→ac</span>
+                  <span className="text-[10px] font-bold text-[var(--text-secondary)]">ab→ac</span>
                   <span>Replace</span>
                 </button>
                 <button
                   onClick={() => editor.chain().focus().selectAll().run()}
                   onMouseDown={(e) => e.preventDefault()}
-                  className="flex items-center space-x-1 px-2 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-[11px]"
+                  className="flex items-center space-x-1 px-2 py-0.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors text-[11px]"
                   title="Select All (Ctrl+A)"
                 >
                   <span>Select</span>
                   <ChevronDown className="w-2.5 h-2.5 opacity-60" />
                 </button>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center">Editing</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center">Editing</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 6. Voice */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -2188,39 +2188,39 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   }
                 }}
                 onMouseDown={(e) => e.preventDefault()}
-                className="flex flex-col items-center justify-center p-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-xs"
+                className="flex flex-col items-center justify-center p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors text-xs"
                 title="Dictate (Speech to Text)"
               >
-                <Mic className="w-4 h-4 text-[#185abd]" />
+                <Mic className="w-4 h-4 text-[var(--accent-color)]" />
                 <span className="text-[10px] mt-0.5">Dictate</span>
               </button>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center">Voice</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center">Voice</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 7. Proofing */}
             <div className="flex flex-col justify-between items-center h-full px-1">
               <button
                 onClick={onOpenSpellCheck}
                 onMouseDown={(e) => e.preventDefault()}
-                className="flex flex-col items-center justify-center p-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-xs"
+                className="flex flex-col items-center justify-center p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors text-xs"
                 title="Editor / AI Proofing Assistant"
               >
                 <Sparkles className="w-4 h-4 text-indigo-600" />
                 <span className="text-[10px] mt-0.5 font-medium">Editor</span>
               </button>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center">Proofing</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center">Proofing</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 8. Add-ins */}
             <div className="flex flex-col justify-between items-center h-full px-1">
               <button
                 onClick={onOpenSettings}
                 onMouseDown={(e) => e.preventDefault()}
-                className="flex flex-col items-center justify-center p-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-xs"
+                className="flex flex-col items-center justify-center p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors text-xs"
                 title="Office Add-ins and Extensions"
               >
                 <div className="grid grid-cols-2 gap-0.5 p-0.5">
@@ -2231,7 +2231,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 </div>
                 <span className="text-[10px] mt-0.5">Add-ins</span>
               </button>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center">Add-ins</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center">Add-ins</div>
             </div>
           </>
         )}
@@ -2247,17 +2247,17 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 }}
                 onMouseDown={(e) => e.preventDefault()}
                 title="Page Break (Ctrl+Enter)"
-                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
               >
                 <div className="w-5 h-5 flex flex-col items-center justify-center border border-gray-400 dark:border-gray-500 rounded-xs mb-0.5">
                   <div className="w-3 h-0.5 border-b border-dashed border-[#185abd]" />
                 </div>
                 <span className="text-[10px]">Page Break</span>
               </button>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Pages</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Pages</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 2. Tables */}
             <div className="flex flex-col justify-between items-center h-full px-1 relative">
@@ -2268,9 +2268,9 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 }}
                 onMouseDown={(e) => e.preventDefault()}
                 title="Insert Table"
-                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
               >
-                <TableIcon className="w-4 h-4 text-[#185abd] dark:text-[#5fa2f8] mb-0.5" />
+                <TableIcon className="w-4 h-4 text-[var(--accent-color)] dark:text-[var(--accent-color)] mb-0.5" />
                 <span className="text-[10px] flex items-center">
                   Table <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
                 </span>
@@ -2278,9 +2278,9 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
               {showTablePicker && (
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className="absolute left-0 top-full mt-1 p-3 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 animate-in fade-in duration-100 w-[216px] min-w-[216px]"
+                  className="absolute left-0 top-full mt-1 p-3 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 animate-in fade-in duration-100 w-[216px] min-w-[216px]"
                 >
-                  <div className="text-[11px] font-medium mb-1.5 text-gray-700 dark:text-gray-200">
+                  <div className="text-[11px] font-medium mb-1.5 text-[var(--text-primary)]">
                     Insert Table ({tableGrid.rows} × {tableGrid.cols})
                   </div>
                   <div className="grid grid-cols-10 gap-1 mb-2 w-max">
@@ -2299,20 +2299,20 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       ))
                     )}
                   </div>
-                  <div className="border-t border-gray-200 dark:border-gray-700 pt-1 text-center">
+                  <div className="border-t border-[var(--border-color)] pt-1 text-center">
                     <button
                       onClick={() => handleInsertTable(4, 4)}
-                      className="text-xs text-[#185abd] dark:text-[#5fa2f8] hover:underline"
+                      className="text-xs text-[var(--accent-color)] dark:text-[var(--accent-color)] hover:underline"
                     >
                       Insert Standard 4×4 Table
                     </button>
                   </div>
                 </div>
               )}
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Tables</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Tables</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 3. Illustrations */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -2326,7 +2326,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     }}
                     onMouseDown={(e) => e.preventDefault()}
                     title="Insert Picture"
-                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                   >
                     <ImageIcon className="w-4 h-4 text-emerald-600 mb-0.5" />
                     <span className="text-[10px] flex items-center">
@@ -2336,14 +2336,14 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   {showPictureDropdown && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44 text-xs"
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 w-44 text-xs"
                     >
                       <button
                         onClick={() => {
                           setShowPictureDropdown(false);
                           handleInsertImage();
                         }}
-                        className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded flex items-center space-x-2"
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded flex items-center space-x-2"
                       >
                         <ImageIcon className="w-3.5 h-3.5 text-blue-600" />
                         <span>This Device...</span>
@@ -2354,7 +2354,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                           const url = prompt('Enter image URL:');
                           if (url && editor) editor.chain().focus().setImage({ src: url }).run();
                         }}
-                        className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded flex items-center space-x-2"
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded flex items-center space-x-2"
                       >
                         <Search className="w-3.5 h-3.5 text-purple-600" />
                         <span>Online Pictures...</span>
@@ -2372,7 +2372,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     }}
                     onMouseDown={(e) => e.preventDefault()}
                     title="Drawing & Callouts"
-                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                   >
                     <PenTool className="w-4 h-4 text-purple-600 mb-0.5" />
                     <span className="text-[10px] flex items-center">
@@ -2382,7 +2382,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   {showDrawingDropdown && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44 text-xs"
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 w-44 text-xs"
                     >
                       <button
                         onClick={() => {
@@ -2416,7 +2416,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                           setShowDrawingDropdown(false);
                           editor.chain().focus().setHorizontalRule().run();
                         }}
-                        className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded"
                       >
                         Horizontal Line Divider
                       </button>
@@ -2425,7 +2425,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                           setShowDrawingDropdown(false);
                           editor.chain().focus().toggleCodeBlock().run();
                         }}
-                        className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded"
                       >
                         Code Snippet Box
                       </button>
@@ -2433,10 +2433,10 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   )}
                 </div>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Illustrations</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Illustrations</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 4. Links */}
             <div className="flex flex-col justify-between items-center h-full px-1 relative">
@@ -2447,7 +2447,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 }}
                 onMouseDown={(e) => e.preventDefault()}
                 title="Link (Ctrl+K)"
-                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
               >
                 <LinkIcon className="w-4 h-4 text-blue-600 mb-0.5" />
                 <span className="text-[10px] flex items-center">
@@ -2457,14 +2457,14 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
               {showLinkDropdown && (
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44 text-xs"
+                  className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 w-44 text-xs"
                 >
                   <button
                     onClick={() => {
                       setShowLinkDropdown(false);
                       handleInsertLink();
                     }}
-                    className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                    className="w-full text-left px-2.5 py-1.5 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded"
                   >
                     Insert Link... (Ctrl+K)
                   </button>
@@ -2473,16 +2473,16 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       setShowLinkDropdown(false);
                       editor.chain().focus().unsetLink().run();
                     }}
-                    className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded text-red-600"
+                    className="w-full text-left px-2.5 py-1.5 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded text-red-600"
                   >
                     Remove Link
                   </button>
                 </div>
               )}
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Links</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Links</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 5. Table of Contents */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -2490,15 +2490,15 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 onClick={handleInsertTableOfContents}
                 onMouseDown={(e) => e.preventDefault()}
                 title="Insert Table of Contents"
-                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
               >
-                <Layers className="w-4 h-4 text-[#185abd] dark:text-[#5fa2f8] mb-0.5" />
+                <Layers className="w-4 h-4 text-[var(--accent-color)] dark:text-[var(--accent-color)] mb-0.5" />
                 <span className="text-[10px] text-center leading-tight">Table of<br/>Contents</span>
               </button>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Table of Contents</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Table of Contents</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 6. Bookmarks */}
             <div className="flex flex-col justify-between items-center h-full px-1 relative">
@@ -2509,7 +2509,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 }}
                 onMouseDown={(e) => e.preventDefault()}
                 title="Bookmarks"
-                className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
               >
                 <Bookmark className="w-4 h-4 text-amber-600 mb-0.5" />
                 <span className="text-[10px] flex items-center">
@@ -2519,23 +2519,23 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
               {showBookmarksDropdown && (
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44 text-xs"
+                  className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 w-44 text-xs"
                 >
                   <button
                     onClick={() => {
                       setShowBookmarksDropdown(false);
                       handleInsertBookmark();
                     }}
-                    className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                    className="w-full text-left px-2.5 py-1.5 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded"
                   >
                     Add Bookmark...
                   </button>
                 </div>
               )}
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Bookmarks</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Bookmarks</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 7. Media */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -2543,15 +2543,15 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 onClick={handleInsertOnlineVideo}
                 onMouseDown={(e) => e.preventDefault()}
                 title="Online Video"
-                className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
               >
                 <Video className="w-4 h-4 text-blue-500 mb-0.5" />
                 <span className="text-[10px] text-center leading-tight">Online<br/>Video</span>
               </button>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Media</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Media</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 8. Comments */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -2559,7 +2559,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 onClick={handleInsertComment}
                 onMouseDown={(e) => e.preventDefault()}
                 title="New Comment"
-                className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
               >
                 <div className="relative mb-0.5">
                   <MessageSquare className="w-4 h-4 text-emerald-600" />
@@ -2567,10 +2567,10 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 </div>
                 <span className="text-[10px] text-center leading-tight">New<br/>Comment</span>
               </button>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Comments</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Comments</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 9. Header & Footer */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -2579,7 +2579,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={() => onOpenSettings?.()}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Header & Footer Options"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                 >
                   <div className="w-4 h-4 border border-gray-400 rounded-xs flex flex-col justify-between p-0.5 mb-0.5">
                     <div className="w-full h-0.5 bg-orange-500" />
@@ -2596,7 +2596,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     }}
                     onMouseDown={(e) => e.preventDefault()}
                     title="Page Numbers"
-                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                   >
                     <Hash className="w-4 h-4 text-blue-600 mb-0.5" />
                     <span className="text-[10px] flex items-center text-center leading-tight">
@@ -2606,14 +2606,14 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   {showPageNumbersDropdown && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-48 text-xs"
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 w-48 text-xs"
                     >
                       <button
                         onClick={() => {
                           setShowPageNumbersDropdown(false);
                           editor.chain().focus().insertContent('<p style="text-align: right; font-size: 10pt; color: #64748b;">Page 1</p>').run();
                         }}
-                        className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded"
                       >
                         Top of Page
                       </button>
@@ -2622,7 +2622,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                           setShowPageNumbersDropdown(false);
                           editor.chain().focus().insertContent('<p style="text-align: center; font-size: 10pt; color: #64748b; margin-top: 24px;">— 1 —</p>').run();
                         }}
-                        className="w-full text-left px-2.5 py-1.5 hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                        className="w-full text-left px-2.5 py-1.5 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded"
                       >
                         Bottom of Page
                       </button>
@@ -2630,10 +2630,10 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   )}
                 </div>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Header & Footer</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Header & Footer</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 10. Symbols */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -2644,9 +2644,9 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   }}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Insert Math Equation"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                 >
-                  <span className="font-serif text-sm font-bold text-gray-700 dark:text-gray-200">π</span>
+                  <span className="font-serif text-sm font-bold text-[var(--text-primary)]">π</span>
                   <span className="text-[10px]">Equation</span>
                 </button>
 
@@ -2658,7 +2658,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     }}
                     onMouseDown={(e) => e.preventDefault()}
                     title="Insert Symbol"
-                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                   >
                     <span className="font-serif text-sm font-bold text-amber-600">Ω</span>
                     <span className="text-[10px] flex items-center">
@@ -2668,7 +2668,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   {showSymbolPicker && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute right-0 top-full mt-1 p-2 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 grid grid-cols-8 gap-1 w-64"
+                      className="absolute right-0 top-full mt-1 p-2 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 grid grid-cols-8 gap-1 w-64"
                     >
                       {SPECIAL_SYMBOLS.map((sym) => (
                         <button
@@ -2682,13 +2682,13 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                           {sym}
                         </button>
                       ))}
-                      <div className="col-span-8 border-t border-gray-200 dark:border-gray-700 pt-1 mt-1 text-center">
+                      <div className="col-span-8 border-t border-[var(--border-color)] pt-1 mt-1 text-center">
                         <button
                           onClick={() => {
                             setShowSymbolPicker(false);
                             onOpenSymbolModal?.();
                           }}
-                          className="w-full py-1 text-xs text-[#185abd] dark:text-[#5fa2f8] hover:underline font-medium"
+                          className="w-full py-1 text-xs text-[var(--accent-color)] dark:text-[var(--accent-color)] hover:underline font-medium"
                         >
                           More Symbols...
                         </button>
@@ -2697,10 +2697,10 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   )}
                 </div>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Symbols</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Symbols</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 11. Emojis */}
             <div className="flex flex-col justify-between items-center h-full px-1 relative">
@@ -2711,7 +2711,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 }}
                 onMouseDown={(e) => e.preventDefault()}
                 title="Emojis"
-                className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
               >
                 <Smile className="w-4 h-4 text-amber-500 mb-0.5" />
                 <span className="text-[10px] flex items-center">
@@ -2721,7 +2721,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
               {showEmojiDropdown && (
                 <div
                   onClick={(e) => e.stopPropagation()}
-                  className="absolute right-0 top-full mt-1 p-2 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 grid grid-cols-6 gap-1 w-52"
+                  className="absolute right-0 top-full mt-1 p-2 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 grid grid-cols-6 gap-1 w-52"
                 >
                   {['😀', '😂', '😊', '😍', '👍', '👎', '❤️', '🎉', '🔥', '✨', '💡', '📌', '🚀', '⭐', '✅', '❌', '⚠️', '📝'].map((em) => (
                     <button
@@ -2730,14 +2730,14 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                         editor.chain().focus().insertContent(em).run();
                         setShowEmojiDropdown(false);
                       }}
-                      className="w-7 h-7 flex items-center justify-center text-base hover:bg-gray-100 dark:hover:bg-[#333] rounded"
+                      className="w-7 h-7 flex items-center justify-center text-base hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded"
                     >
                       {em}
                     </button>
                   ))}
                 </div>
               )}
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Emojis</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Emojis</div>
             </div>
           </>
         )}
@@ -2756,7 +2756,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       setShowMarginsDropdown(!showMarginsDropdown);
                     }}
                     onMouseDown={(e) => e.preventDefault()}
-                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                     title="Page Margins"
                   >
                     <div className="w-4 h-5 border border-dashed border-[#185abd] dark:border-blue-400 rounded-xs flex items-center justify-center mb-0.5">
@@ -2769,7 +2769,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   {showMarginsDropdown && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-64 text-xs"
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 w-64 text-xs"
                     >
                       {[
                         { label: 'Normal', desc: 'Top: 1" · Bottom: 1" · Left: 1" · Right: 1"', m: { top: 96, bottom: 96, left: 96, right: 96 } },
@@ -2786,10 +2786,10 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                           className="w-full flex items-center justify-between p-2 rounded hover:bg-blue-50 dark:hover:bg-blue-900/30 text-left transition-colors"
                         >
                           <div>
-                            <div className="font-semibold text-gray-800 dark:text-gray-200">{item.label}</div>
-                            <div className="text-[10px] text-gray-500">{item.desc}</div>
+                            <div className="font-semibold text-[var(--text-primary)]">{item.label}</div>
+                            <div className="text-[10px] text-[var(--text-secondary)]">{item.desc}</div>
                           </div>
-                          {pageSettings?.margins?.left === item.m.left && <Check className="w-4 h-4 text-[#185abd]" />}
+                          {pageSettings?.margins?.left === item.m.left && <Check className="w-4 h-4 text-[var(--accent-color)]" />}
                         </button>
                       ))}
                     </div>
@@ -2804,7 +2804,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       setShowOrientationDropdown(!showOrientationDropdown);
                     }}
                     onMouseDown={(e) => e.preventDefault()}
-                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                     title="Page Orientation"
                   >
                     <RotateCcw className="w-4 h-4 text-blue-600 mb-0.5" />
@@ -2815,7 +2815,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   {showOrientationDropdown && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44 text-xs"
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 w-44 text-xs"
                     >
                       <button
                         onClick={() => {
@@ -2825,7 +2825,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                         className="w-full flex items-center justify-between p-2 rounded hover:bg-blue-50 dark:hover:bg-blue-900/30"
                       >
                         <span>Portrait</span>
-                        {pageSettings?.orientation !== 'landscape' && <Check className="w-4 h-4 text-[#185abd]" />}
+                        {pageSettings?.orientation !== 'landscape' && <Check className="w-4 h-4 text-[var(--accent-color)]" />}
                       </button>
                       <button
                         onClick={() => {
@@ -2835,7 +2835,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                         className="w-full flex items-center justify-between p-2 rounded hover:bg-blue-50 dark:hover:bg-blue-900/30"
                       >
                         <span>Landscape</span>
-                        {pageSettings?.orientation === 'landscape' && <Check className="w-4 h-4 text-[#185abd]" />}
+                        {pageSettings?.orientation === 'landscape' && <Check className="w-4 h-4 text-[var(--accent-color)]" />}
                       </button>
                     </div>
                   )}
@@ -2849,7 +2849,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       setShowSizeDropdown(!showSizeDropdown);
                     }}
                     onMouseDown={(e) => e.preventDefault()}
-                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                     title="Paper Size"
                   >
                     <div className="w-4 h-5 border border-gray-400 dark:border-gray-500 rounded-xs flex items-center justify-center mb-0.5">
@@ -2862,7 +2862,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   {showSizeDropdown && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-52 text-xs"
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 w-52 text-xs"
                     >
                       {[
                         { label: 'Letter', desc: '8.5" × 11"', size: 'letter' },
@@ -2880,9 +2880,9 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                         >
                           <div>
                             <div className="font-semibold">{item.label}</div>
-                            <div className="text-[10px] text-gray-500">{item.desc}</div>
+                            <div className="text-[10px] text-[var(--text-secondary)]">{item.desc}</div>
                           </div>
-                          {pageSettings?.pageSize === item.size && <Check className="w-4 h-4 text-[#185abd]" />}
+                          {pageSettings?.pageSize === item.size && <Check className="w-4 h-4 text-[var(--accent-color)]" />}
                         </button>
                       ))}
                     </div>
@@ -2897,7 +2897,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       setShowColumnsDropdown(!showColumnsDropdown);
                     }}
                     onMouseDown={(e) => e.preventDefault()}
-                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                     title="Columns"
                   >
                     <Columns className="w-4 h-4 text-emerald-600 mb-0.5" />
@@ -2908,7 +2908,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   {showColumnsDropdown && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-40 text-xs"
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 w-40 text-xs"
                     >
                       {['One', 'Two', 'Three'].map((col, idx) => (
                         <button
@@ -2934,7 +2934,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       setShowBreaksDropdown(!showBreaksDropdown);
                     }}
                     onMouseDown={(e) => e.preventDefault()}
-                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                     title="Breaks"
                   >
                     <Minus className="w-4 h-4 text-indigo-600 mb-0.5" />
@@ -2945,24 +2945,24 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   {showBreaksDropdown && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-52 text-xs"
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 w-52 text-xs"
                     >
                       <button
                         onClick={() => {
                           setShowBreaksDropdown(false);
                           editor.chain().focus().insertContent('<div class="wordo-page-break" style="break-before: page; page-break-before: always; height: 1px; border-bottom: 1px dashed #cbd5e1; margin: 24px 0;"></div><p></p>').run();
                         }}
-                        className="w-full text-left p-2 rounded hover:bg-gray-100 dark:hover:bg-[#333]"
+                        className="w-full text-left p-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
                       >
                         <div className="font-semibold">Page Break</div>
-                        <div className="text-[10px] text-gray-500">Mark point where page ends (Ctrl+Enter)</div>
+                        <div className="text-[10px] text-[var(--text-secondary)]">Mark point where page ends (Ctrl+Enter)</div>
                       </button>
                       <button
                         onClick={() => {
                           setShowBreaksDropdown(false);
                           editor.chain().focus().insertContent('<div class="wordo-section-break" style="break-before: page; page-break-before: always; height: 2px; border-bottom: 2px solid #94a3b8; margin: 24px 0;"></div><p></p>').run();
                         }}
-                        className="w-full text-left p-2 rounded hover:bg-gray-100 dark:hover:bg-[#333]"
+                        className="w-full text-left p-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
                       >
                         <div className="font-semibold">Section Break (Next Page)</div>
                       </button>
@@ -2978,10 +2978,10 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       setShowLineNumbersDropdown(!showLineNumbersDropdown);
                     }}
                     onMouseDown={(e) => e.preventDefault()}
-                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                     title="Line Numbers"
                   >
-                    <div className="w-4 h-4 flex items-center justify-center text-[9px] font-bold text-gray-600 dark:text-gray-300 border border-gray-400 rounded-xs mb-0.5">
+                    <div className="w-4 h-4 flex items-center justify-center text-[9px] font-bold text-[var(--text-secondary)] border border-gray-400 rounded-xs mb-0.5">
                       12
                     </div>
                     <span className="text-[10px] flex items-center">
@@ -2991,13 +2991,13 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   {showLineNumbersDropdown && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44 text-xs"
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 w-44 text-xs"
                     >
                       {['None', 'Continuous', 'Restart Each Page'].map((opt) => (
                         <button
                           key={opt}
                           onClick={() => setShowLineNumbersDropdown(false)}
-                          className="w-full text-left p-2 rounded hover:bg-gray-100 dark:hover:bg-[#333]"
+                          className="w-full text-left p-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
                         >
                           {opt}
                         </button>
@@ -3006,10 +3006,10 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   )}
                 </div>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Page Setup</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Page Setup</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 2. Paragraph Steppers */}
             <div className="flex flex-col justify-between h-full px-2">
@@ -3017,8 +3017,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 {/* Row 1: Indent Left & Spacing Before */}
                 <div className="flex items-center space-x-3">
                   <div className="flex items-center space-x-1.5">
-                    <span className="text-[10px] text-gray-500 font-medium w-10">Indent</span>
-                    <span className="text-[10px] text-gray-600 dark:text-gray-400">Left:</span>
+                    <span className="text-[10px] text-[var(--text-secondary)] font-medium w-10">Indent</span>
+                    <span className="text-[10px] text-gray-600 dark:text-[var(--text-muted)]">Left:</span>
                     <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1 py-0.5 text-[10px]">
                       <span className="w-6 text-center">{indentLeft}"</span>
                       <div className="flex flex-col ml-0.5">
@@ -3029,8 +3029,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   </div>
 
                   <div className="flex items-center space-x-1.5">
-                    <span className="text-[10px] text-gray-500 font-medium w-12">Spacing</span>
-                    <span className="text-[10px] text-gray-600 dark:text-gray-400">Before:</span>
+                    <span className="text-[10px] text-[var(--text-secondary)] font-medium w-12">Spacing</span>
+                    <span className="text-[10px] text-gray-600 dark:text-[var(--text-muted)]">Before:</span>
                     <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1 py-0.5 text-[10px]">
                       <span className="w-8 text-center">{spacingBefore} pt</span>
                       <div className="flex flex-col ml-0.5">
@@ -3045,7 +3045,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 <div className="flex items-center space-x-3">
                   <div className="flex items-center space-x-1.5">
                     <div className="w-10" />
-                    <span className="text-[10px] text-gray-600 dark:text-gray-400">Right:</span>
+                    <span className="text-[10px] text-gray-600 dark:text-[var(--text-muted)]">Right:</span>
                     <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1 py-0.5 text-[10px]">
                       <span className="w-6 text-center">{indentRight}"</span>
                       <div className="flex flex-col ml-0.5">
@@ -3057,7 +3057,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
 
                   <div className="flex items-center space-x-1.5">
                     <div className="w-12" />
-                    <span className="text-[10px] text-gray-600 dark:text-gray-400">After:</span>
+                    <span className="text-[10px] text-gray-600 dark:text-[var(--text-muted)]">After:</span>
                     <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1 py-0.5 text-[10px]">
                       <span className="w-8 text-center">{spacingAfter} pt</span>
                       <div className="flex flex-col ml-0.5">
@@ -3069,7 +3069,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 </div>
               </div>
 
-              <div className="flex items-center justify-center space-x-1 text-[10px] text-gray-400 dark:text-gray-500 font-normal select-none">
+              <div className="flex items-center justify-center space-x-1 text-[10px] text-[var(--text-muted)] font-medium tracking-wide select-none">
                 <span>Paragraph</span>
                 <button onClick={onOpenSettings} title="Paragraph Settings" className="hover:text-gray-600">
                   <ExternalLink className="w-2.5 h-2.5" />
@@ -3077,7 +3077,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
               </div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 3. Page Background */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -3090,7 +3090,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       setShowPageBordersDropdown(!showPageBordersDropdown);
                     }}
                     onMouseDown={(e) => e.preventDefault()}
-                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                     title="Page Borders"
                   >
                     <div className="w-4 h-5 border-2 border-indigo-600 rounded-xs mb-0.5" />
@@ -3101,7 +3101,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   {showPageBordersDropdown && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44 text-xs"
+                      className="absolute left-0 top-full mt-1 p-1 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 w-44 text-xs"
                     >
                       {['None', 'Box (Thin)', 'Box (Medium)', 'Shadow', 'Custom...'].map((b) => (
                         <button
@@ -3110,7 +3110,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                             setShowPageBordersDropdown(false);
                             onUpdatePageSettings?.({ ...(pageSettings || {}), pageBorder: b });
                           }}
-                          className="w-full text-left p-2 rounded hover:bg-gray-100 dark:hover:bg-[#333]"
+                          className="w-full text-left p-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
                         >
                           {b}
                         </button>
@@ -3127,7 +3127,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       setShowPageColorPicker(!showPageColorPicker);
                     }}
                     onMouseDown={(e) => e.preventDefault()}
-                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                    className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                     title="Page Color"
                   >
                     <Palette className="w-4 h-4 text-purple-600 mb-0.5" />
@@ -3138,7 +3138,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   {showPageColorPicker && (
                     <div
                       onClick={(e) => e.stopPropagation()}
-                      className="absolute right-0 top-full mt-1 p-2 bg-white dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl z-50 w-44"
+                      className="absolute right-0 top-full mt-1 p-2 bg-white dark:bg-[#252423] border border-[var(--border-color)] rounded-md shadow-2xl z-50 w-44"
                     >
                       {PAGE_COLORS.map((pc) => (
                         <button
@@ -3147,7 +3147,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                             onUpdatePageSettings?.({ ...(pageSettings || {}), backgroundColor: pc.color });
                             setShowPageColorPicker(false);
                           }}
-                          className="w-full flex items-center space-x-2 px-2 py-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-xs"
+                          className="w-full flex items-center space-x-2 px-2 py-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-xs"
                         >
                           <div className="w-4 h-4 rounded border border-gray-300" style={{ backgroundColor: pc.color || '#ffffff' }} />
                           <span>{pc.name}</span>
@@ -3157,7 +3157,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   )}
                 </div>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Page Background</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Page Background</div>
             </div>
           </>
         )}
@@ -3172,9 +3172,9 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={handleInsertTableOfContents}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Insert Table of Contents"
-                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                 >
-                  <Layers className="w-5 h-5 text-[#185abd] dark:text-[#5fa2f8] mb-0.5" />
+                  <Layers className="w-5 h-5 text-[var(--accent-color)] dark:text-[var(--accent-color)] mb-0.5" />
                   <span className="text-[10px] font-semibold text-center leading-tight">Insert Table of<br/>Contents</span>
                 </button>
 
@@ -3183,7 +3183,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     onClick={handleInsertTableOfContents}
                     onMouseDown={(e) => e.preventDefault()}
                     title="Update Table of Contents"
-                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-[10px]"
+                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[10px]"
                   >
                     <RefreshCw className="w-3 h-3 text-emerald-600" />
                     <span>Update Table of Contents</span>
@@ -3192,17 +3192,17 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     onClick={handleRemoveTableOfContents}
                     onMouseDown={(e) => e.preventDefault()}
                     title="Remove Table of Contents"
-                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-[10px] text-red-600"
+                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[10px] text-red-600"
                   >
                     <Trash2 className="w-3 h-3" />
                     <span>Remove Table of Contents</span>
                   </button>
                 </div>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Table of Contents</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Table of Contents</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 2. Footnotes */}
             <div className="flex flex-col justify-between h-full px-1">
@@ -3211,11 +3211,11 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={handleInsertFootnote}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Insert Footnote"
-                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                 >
                   <div className="flex items-baseline mb-0.5">
-                    <span className="text-sm font-bold text-gray-700 dark:text-gray-200">Ab</span>
-                    <span className="text-[10px] font-bold text-[#185abd]">1</span>
+                    <span className="text-sm font-bold text-[var(--text-primary)]">Ab</span>
+                    <span className="text-[10px] font-bold text-[var(--accent-color)]">1</span>
                   </div>
                   <span className="text-[10px] font-semibold text-center leading-tight">Insert<br/>Footnote</span>
                 </button>
@@ -3225,7 +3225,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     onClick={handleInsertEndnote}
                     onMouseDown={(e) => e.preventDefault()}
                     title="Insert Endnote"
-                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-[10px]"
+                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[10px]"
                   >
                     <FileText className="w-3 h-3 text-blue-500" />
                     <span>Insert Endnote</span>
@@ -3234,7 +3234,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     onClick={handleScrollToFootnotes}
                     onMouseDown={(e) => e.preventDefault()}
                     title="Show Footnotes"
-                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-[10px]"
+                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[10px]"
                   >
                     <Eye className="w-3 h-3 text-teal-600" />
                     <span>Show Footnotes</span>
@@ -3243,17 +3243,17 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     onClick={handleScrollToFootnotes}
                     onMouseDown={(e) => e.preventDefault()}
                     title="Show Endnotes"
-                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-[10px]"
+                    className="flex items-center space-x-1 px-1.5 py-0.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[10px]"
                   >
                     <Eye className="w-3 h-3 text-indigo-600" />
                     <span>Show Endnotes</span>
                   </button>
                 </div>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Footnotes</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Footnotes</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 3. Insights */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -3261,7 +3261,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 onClick={() => onOpenSearch('find')}
                 onMouseDown={(e) => e.preventDefault()}
                 title="Search Smart Insights"
-                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
               >
                 <div className="relative mb-0.5">
                   <Search className="w-4 h-4 text-blue-600" />
@@ -3269,10 +3269,10 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 </div>
                 <span className="text-[10px] mt-0.5">Search</span>
               </button>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Insights</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Insights</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 4. Citation & Bibliography */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -3280,7 +3280,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 onClick={() => onOpenCitationModal?.()}
                 onMouseDown={(e) => e.preventDefault()}
                 title="Manage Citations & Bibliography"
-                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
               >
                 <div className="w-4 h-5 border-2 border-red-500 rounded-xs flex items-center justify-center mb-0.5">
                   <span className="text-[8px] font-bold text-red-500">[]</span>
@@ -3289,7 +3289,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   Citations <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
                 </span>
               </button>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Citation & Bibliography</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Citation & Bibliography</div>
             </div>
           </>
         )}
@@ -3304,7 +3304,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={onOpenSpellCheck}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Editor / Grammar Check"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                 >
                   <Sparkles className="w-4 h-4 text-indigo-600 mb-0.5" />
                   <span className="text-[10px] flex items-center font-semibold">
@@ -3316,7 +3316,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={onOpenSpellCheck}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Spelling & Grammar"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                 >
                   <div className="flex items-center mb-0.5">
                     <span className="text-xs font-bold text-gray-700 dark:text-gray-300">ABC</span>
@@ -3331,7 +3331,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={onOpenWordCount}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Word Count"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                 >
                   <div className="text-xs font-bold text-blue-600 mb-0.5">123</div>
                   <span className="text-[10px] flex items-center text-center leading-tight">
@@ -3339,10 +3339,10 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   </span>
                 </button>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Proofing</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Proofing</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 2. Accessibility */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -3350,15 +3350,15 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 onClick={() => onOpenAccessibilityModal?.()}
                 onMouseDown={(e) => e.preventDefault()}
                 title="Check Accessibility"
-                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
               >
                 <Eye className="w-4 h-4 text-teal-600 mb-0.5" />
                 <span className="text-[10px] text-center leading-tight">Check<br/>Accessibility</span>
               </button>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Accessibility</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Accessibility</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 3. Translate */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -3366,17 +3366,17 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 onClick={() => onOpenTranslateModal?.()}
                 onMouseDown={(e) => e.preventDefault()}
                 title="Translate"
-                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
               >
                 <Languages className="w-4 h-4 text-blue-600 mb-0.5" />
                 <span className="text-[10px] flex items-center">
                   Translate <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
                 </span>
               </button>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Translate</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Translate</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 4. Comments */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -3385,7 +3385,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={handleInsertComment}
                   onMouseDown={(e) => e.preventDefault()}
                   title="New Comment"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                 >
                   <div className="relative mb-0.5">
                     <MessageSquare className="w-4 h-4 text-emerald-600" />
@@ -3398,7 +3398,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={() => {}}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Previous Comment"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-gray-500"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors text-[var(--text-secondary)]"
                 >
                   <ChevronLeft className="w-4 h-4 mb-0.5" />
                   <span className="text-[10px]">Previous</span>
@@ -3408,7 +3408,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={() => {}}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Next Comment"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-gray-500"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors text-[var(--text-secondary)]"
                 >
                   <ChevronRight className="w-4 h-4 mb-0.5" />
                   <span className="text-[10px]">Next</span>
@@ -3420,7 +3420,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   }}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Delete Comment"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors text-red-500"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors text-red-500"
                 >
                   <Trash2 className="w-4 h-4 mb-0.5" />
                   <span className="text-[10px] flex items-center">
@@ -3434,18 +3434,18 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Show Comments Pane"
                   className={`flex flex-col items-center justify-center p-1 px-1.5 rounded border transition-colors ${
                     showNavSidebar
-                      ? 'border-[#185abd] bg-blue-50 dark:bg-blue-950/40 text-[#185abd]'
-                      : 'border-transparent hover:bg-gray-100 dark:hover:bg-[#333]'
+                      ? 'border-[var(--accent-color)] bg-[var(--selection-bg)] text-[var(--accent-color)]'
+                      : 'border-transparent hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                   }`}
                 >
                   <MessageSquare className="w-4 h-4 mb-0.5" />
                   <span className="text-[10px] text-center leading-tight">Show<br/>Comments</span>
                 </button>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Comments</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Comments</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 5. Markup */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -3453,7 +3453,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 <button
                   onClick={() => {}}
                   onMouseDown={(e) => e.preventDefault()}
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-gray-500"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[var(--text-secondary)]"
                 >
                   <MessageSquare className="w-4 h-4 mb-0.5" />
                   <span className="text-[10px] flex items-center">
@@ -3462,11 +3462,11 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 </button>
 
                 <div className="flex flex-col space-y-0.5">
-                  <span className="text-[10px] text-gray-500 font-medium">Markup view:</span>
+                  <span className="text-[10px] text-[var(--text-secondary)] font-medium">Markup view:</span>
                   <select
                     value={markupViewMode}
                     onChange={(e) => setMarkupViewMode(e.target.value as any)}
-                    className="border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1.5 py-0.5 text-[10px] text-gray-700 dark:text-gray-200 focus:outline-none"
+                    className="border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1.5 py-0.5 text-[10px] text-[var(--text-primary)] focus:outline-none"
                   >
                     <option value="All Markup">All Markup</option>
                     <option value="Simple Markup">Simple Markup</option>
@@ -3475,29 +3475,29 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   </select>
                 </div>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Markup</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Markup</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 6. Tracking */}
             <div className="flex flex-col justify-between items-center h-full px-1">
               <div className="flex flex-col space-y-0.5 justify-center mt-1">
-                <span className="text-[10px] text-gray-500 font-medium">Track Changes:</span>
+                <span className="text-[10px] text-[var(--text-secondary)] font-medium">Track Changes:</span>
                 <select
                   value={trackChangesMode}
                   onChange={(e) => setTrackChangesMode(e.target.value as any)}
-                  className="border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1.5 py-0.5 text-[10px] text-gray-700 dark:text-gray-200 focus:outline-none"
+                  className="border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1.5 py-0.5 text-[10px] text-[var(--text-primary)] focus:outline-none"
                 >
                   <option value="Off">Off</option>
                   <option value="For Everyone">For Everyone</option>
                   <option value="Just Mine">Just Mine</option>
                 </select>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Tracking</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Tracking</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 7. Changes */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -3506,7 +3506,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={() => {}}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Accept Change"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-emerald-600"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-emerald-600"
                 >
                   <Check className="w-4 h-4 mb-0.5" />
                   <span className="text-[10px] flex items-center">
@@ -3518,7 +3518,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={() => {}}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Reject Change"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-red-600"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-red-600"
                 >
                   <XCircle className="w-4 h-4 mb-0.5" />
                   <span className="text-[10px] flex items-center">
@@ -3530,7 +3530,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={() => {}}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Previous Change"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-gray-500"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[var(--text-secondary)]"
                 >
                   <ChevronLeft className="w-4 h-4 mb-0.5" />
                   <span className="text-[10px]">Previous</span>
@@ -3540,7 +3540,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={() => {}}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Next Change"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-gray-500"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[var(--text-secondary)]"
                 >
                   <ChevronRight className="w-4 h-4 mb-0.5" />
                   <span className="text-[10px]">Next</span>
@@ -3550,13 +3550,13 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={() => {}}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Mark All as Read"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-blue-600"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-blue-600"
                 >
                   <CheckCheck className="w-4 h-4 mb-0.5" />
                   <span className="text-[10px] text-center leading-tight">Mark All<br/>as Read</span>
                 </button>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Changes</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Changes</div>
             </div>
           </>
         )}
@@ -3571,7 +3571,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={() => {}}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Separate Pages View"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded border border-[#185abd] bg-blue-50 dark:bg-blue-950/40 text-[#185abd] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded border border-[var(--accent-color)] bg-[var(--selection-bg)] text-[var(--accent-color)] transition-colors"
                 >
                   <FileText className="w-4 h-4 mb-0.5" />
                   <span className="text-[10px] font-semibold text-center leading-tight">Separate<br/>Pages</span>
@@ -3581,7 +3581,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={() => onToggleReadAloud?.()}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Immersive Reader"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-purple-600 transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-purple-600 transition-colors"
                 >
                   <div className="flex items-center mb-0.5">
                     <BookOpen className="w-4 h-4" />
@@ -3590,21 +3590,21 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   <span className="text-[10px] text-center leading-tight">Immersive<br/>Reader</span>
                 </button>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Document Views</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Document Views</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 2. Zoom */}
             <div className="flex flex-col justify-between items-center h-full px-1">
               <div className="flex items-center space-x-2">
                 <div className="flex items-center space-x-1">
-                  <Search className="w-3.5 h-3.5 text-gray-500" />
-                  <span className="text-[10px] text-gray-500 font-medium">Zoom:</span>
+                  <Search className="w-3.5 h-3.5 text-[var(--text-secondary)]" />
+                  <span className="text-[10px] text-[var(--text-secondary)] font-medium">Zoom:</span>
                   <select
                     value={currentZoom}
                     onChange={(e) => onZoomChange(Number(e.target.value))}
-                    className="border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1.5 py-0.5 text-[10px] text-gray-700 dark:text-gray-200 focus:outline-none"
+                    className="border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#2d2d2d] px-1.5 py-0.5 text-[10px] text-[var(--text-primary)] focus:outline-none"
                   >
                     {[50, 75, 100, 125, 150, 200].map((z) => (
                       <option key={z} value={z}>{z}%</option>
@@ -3616,7 +3616,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={() => onZoomChange(100)}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Reset to 100%"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                 >
                   <div className="w-5 h-4 border border-blue-600 rounded flex items-center justify-center text-[8px] font-bold text-blue-600 mb-0.5">
                     100
@@ -3624,10 +3624,10 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   <span className="text-[10px]">100%</span>
                 </button>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Zoom</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Zoom</div>
             </div>
 
-            <div className="w-[1px] h-12 bg-gray-200 dark:bg-gray-700 self-center mx-1 flex-shrink-0" />
+            <div className="w-[1px] h-10 bg-[var(--border-subtle)] self-center mx-1.5 flex-shrink-0" />
 
             {/* 3. Show */}
             <div className="flex flex-col justify-between items-center h-full px-1">
@@ -3638,8 +3638,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Horizontal Ruler"
                   className={`flex flex-col items-center justify-center p-1 px-1.5 rounded transition-colors ${
                     showRuler
-                      ? 'border border-[#185abd] bg-blue-50 dark:bg-blue-950/40 text-[#185abd] font-semibold'
-                      : 'hover:bg-gray-100 dark:hover:bg-[#333] text-gray-600 dark:text-gray-300'
+                      ? 'border border-[var(--accent-color)] bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[var(--text-secondary)]'
                   }`}
                 >
                   <Sliders className="w-4 h-4 mb-0.5" />
@@ -3652,8 +3652,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Navigation Pane"
                   className={`flex flex-col items-center justify-center p-1 px-1.5 rounded transition-colors ${
                     showNavSidebar
-                      ? 'border border-[#185abd] bg-blue-50 dark:bg-blue-950/40 text-[#185abd] font-semibold'
-                      : 'hover:bg-gray-100 dark:hover:bg-[#333] text-gray-600 dark:text-gray-300'
+                      ? 'border border-[var(--accent-color)] bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold'
+                      : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[var(--text-secondary)]'
                   }`}
                 >
                   <LayoutGrid className="w-4 h-4 mb-0.5" />
@@ -3664,7 +3664,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={() => onOpenSettings?.()}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Header & Footer"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                 >
                   <FileText className="w-4 h-4 text-orange-500 mb-0.5" />
                   <span className="text-[10px] text-center leading-tight">Header &<br/>Footer</span>
@@ -3674,9 +3674,9 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={handleScrollToFootnotes}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Footnotes"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                 >
-                  <span className="text-[11px] font-bold text-gray-500 mb-0.5">Ab¹</span>
+                  <span className="text-[11px] font-bold text-[var(--text-secondary)] mb-0.5">Ab¹</span>
                   <span className="text-[10px]">Footnotes</span>
                 </button>
 
@@ -3684,13 +3684,13 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   onClick={handleScrollToFootnotes}
                   onMouseDown={(e) => e.preventDefault()}
                   title="Endnotes"
-                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                 >
-                  <FileText className="w-4 h-4 text-gray-400 mb-0.5" />
+                  <FileText className="w-4 h-4 text-[var(--text-muted)] mb-0.5" />
                   <span className="text-[10px]">Endnotes</span>
                 </button>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Show</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Show</div>
             </div>
           </>
         )}
@@ -3703,10 +3703,10 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 <button
                   onClick={() => onOpenShortcuts?.()}
                   onMouseDown={(e) => e.preventDefault()}
-                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                   title="Wordo Help & Guide"
                 >
-                  <HelpCircle className="w-4 h-4 text-[#185abd] mb-0.5" />
+                  <HelpCircle className="w-4 h-4 text-[var(--accent-color)] mb-0.5" />
                   <span className="text-[10px]">Help</span>
                 </button>
 
@@ -3715,7 +3715,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     alert('Wordo Help Desk: Online support is available 24/7 in offline mode via built-in documentation and shortcuts.');
                   }}
                   onMouseDown={(e) => e.preventDefault()}
-                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                   title="Contact Support"
                 >
                   <Headphones className="w-4 h-4 text-emerald-600 mb-0.5" />
@@ -3727,7 +3727,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     prompt('We appreciate your feedback! What can we improve in Wordo?');
                   }}
                   onMouseDown={(e) => e.preventDefault()}
-                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                   title="Send Feedback"
                 >
                   <MessageCircle className="w-4 h-4 text-blue-500 mb-0.5" />
@@ -3737,7 +3737,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 <button
                   onClick={() => onOpenShortcuts?.()}
                   onMouseDown={(e) => e.preventDefault()}
-                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                   title="Keyboard Shortcuts (Ctrl+/)"
                 >
                   <Keyboard className="w-4 h-4 text-purple-600 mb-0.5" />
@@ -3747,14 +3747,14 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 <button
                   onClick={() => onOpenAbout?.()}
                   onMouseDown={(e) => e.preventDefault()}
-                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-gray-100 dark:hover:bg-[#333] transition-colors"
+                  className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                   title="What's New in Wordo 365"
                 >
                   <Megaphone className="w-4 h-4 text-amber-500 mb-0.5" />
                   <span className="text-[10px] text-center leading-tight">What's<br/>New</span>
                 </button>
               </div>
-              <div className="text-[10px] text-gray-400 dark:text-gray-500 font-normal text-center select-none">Help</div>
+              <div className="text-[10px] text-[var(--text-muted)] font-medium tracking-wide text-center select-none">Help</div>
             </div>
           </>
         )}
@@ -3848,7 +3848,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
               onClick={() => setIsRibbonCollapsed(!isRibbonCollapsed)}
               onMouseDown={(e) => e.preventDefault()}
               title="Collapse the ribbon"
-              className="p-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] text-gray-500 transition-colors"
+              className="p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[var(--text-secondary)] transition-colors"
             >
               <ChevronUp className="w-3.5 h-3.5" />
             </button>

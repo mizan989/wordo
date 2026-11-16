@@ -4,22 +4,340 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ==========================================================================
+   Wordo Design System — Apple Pages-Inspired Foundation Tokens (Pass 1)
+   ========================================================================== */
+
+:root, [data-theme="light"] {
+  /* 1. Color Palette (Light) */
+  --app-bg: #F5F5F7;
+  --surface-primary: #FFFFFF;
+  --surface-secondary: #F2F2F5;
+  --surface-tertiary: #E8E8ED;
+  --surface-floating: #FFFFFF;
+  --surface-modal: #FFFFFF;
+  --surface-overlay: rgba(0, 0, 0, 0.35);
+
+  --text-primary: #1D1D1F;
+  --text-secondary: #6E6E73;
+  --text-muted: #86868B;
+  --text-on-accent: #FFFFFF;
+
+  --border-color: #D2D2D7;
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-hover: #BCBCC0;
+  --border-active: #86868B;
+
+  --hover-bg: #EBEBEF;
+  --hover-subtle: rgba(0, 0, 0, 0.04);
+  --active-bg: #E1E1E6;
+  --active-subtle: rgba(0, 0, 0, 0.08);
+
+  --selection-bg: #DCE8FA;
+  --selection-text: #1D1D1F;
+
+  --accent-color: #007AFF;
+  --accent-hover: #0062CC;
+  --accent-active: #0051A8;
+  --accent-subtle: rgba(0, 122, 255, 0.10);
+  --accent-border: rgba(0, 122, 255, 0.25);
+
+  --destructive-color: #FF3B30;
+  --destructive-hover: #D70015;
+  --destructive-active: #B00020;
+  --destructive-subtle: rgba(255, 59, 48, 0.10);
+
+  --success-color: #30A46C;
+  --success-hover: #2B9360;
+  --success-active: #247B50;
+  --success-subtle: rgba(48, 164, 108, 0.10);
+
+  --warning-color: #FF9500;
+  --warning-hover: #D67E00;
+  --warning-subtle: rgba(255, 149, 0, 0.10);
+
+  /* 2. Elevation & Shadows (Light) */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 3px 8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 24px -4px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --shadow-popover: 0 4px 18px -2px rgba(0, 0, 0, 0.10), 0 0 0 1px var(--border-color);
+  --shadow-modal: 0 16px 44px -8px rgba(0, 0, 0, 0.18), 0 0 0 1px var(--border-color);
+  --shadow-sheet: 0 2px 10px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05);
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 3px rgba(0, 122, 255, 0.35);
+  --focus-ring-border: #007AFF;
+}
+
+.dark, [data-theme="dark"] {
+  /* 1. Color Palette (Dark) */
+  --app-bg: #1C1C1E;
+  --surface-primary: #242426;
+  --surface-secondary: #2C2C2E;
+  --surface-tertiary: #38383A;
+  --surface-floating: #2A2A2D;
+  --surface-modal: #28282B;
+  --surface-overlay: rgba(0, 0, 0, 0.65);
+
+  --text-primary: #F5F5F7;
+  --text-secondary: #A1A1A6;
+  --text-muted: #86868B;
+  --text-on-accent: #FFFFFF;
+
+  --border-color: #3A3A3C;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-hover: #48484A;
+  --border-active: #636366;
+
+  --hover-bg: #353538;
+  --hover-subtle: rgba(255, 255, 255, 0.05);
+  --active-bg: #3E3E42;
+  --active-subtle: rgba(255, 255, 255, 0.10);
+
+  --selection-bg: #263D5C;
+  --selection-text: #FFFFFF;
+
+  --accent-color: #0A84FF;
+  --accent-hover: #409CFF;
+  --accent-active: #64B5FF;
+  --accent-subtle: rgba(10, 132, 255, 0.15);
+  --accent-border: rgba(10, 132, 255, 0.35);
+
+  --destructive-color: #FF453A;
+  --destructive-hover: #FF6961;
+  --destructive-active: #FF8F88;
+  --destructive-subtle: rgba(255, 69, 58, 0.15);
+
+  --success-color: #30D158;
+  --success-hover: #34C759;
+  --success-active: #5EE07A;
+  --success-subtle: rgba(48, 209, 88, 0.15);
+
+  --warning-color: #FF9F0A;
+  --warning-hover: #FFB340;
+  --warning-subtle: rgba(255, 159, 10, 0.15);
+
+  /* 2. Elevation & Shadows (Dark) */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-md: 0 3px 8px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --shadow-lg: 0 8px 24px -4px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --shadow-popover: 0 6px 20px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--border-color);
+  --shadow-modal: 0 20px 48px rgba(0, 0, 0, 0.70), 0 0 0 1px var(--border-color);
+  --shadow-sheet: 0 4px 16px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08);
+
+  /* Focus ring */
+  --focus-ring: 0 0 0 3px rgba(10, 132, 255, 0.40);
+  --focus-ring-border: #0A84FF;
+}
+
+:root {
+  /* 3. Typography Hierarchy Tokens */
+  --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-mono-ui: ui-monospace, "SF Mono", "Cascadia Code", "Consolas", Menlo, monospace;
+
+  /* Font sizes */
+  --font-size-2xs: 0.625rem;  /* 10px */
+  --font-size-xs: 0.6875rem;  /* 11px - Compact controls, captions */
+  --font-size-sm: 0.75rem;    /* 12px - Standard UI labels, menus */
+  --font-size-base: 0.8125rem;/* 13px - Body, inputs, default control text */
+  --font-size-md: 0.875rem;   /* 14px - Section headers, modal subheads */
+  --font-size-lg: 1rem;       /* 16px - Dialog titles, primary headings */
+  --font-size-xl: 1.125rem;   /* 18px - Modal titles, backstage titles */
+
+  /* Line heights */
+  --line-height-none: 1;
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.35;
+  --line-height-normal: 1.5;
+
+  /* Font weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* 4. Radii & Geometry */
+  --radius-xs: 4px;
+  --radius-sm: 6px;   /* Small controls: mini buttons, tags, chips */
+  --radius-md: 8px;   /* Standard controls: inputs, buttons, segmented controls */
+  --radius-lg: 10px;  /* Panels and popovers: menus, popovers, floating bars */
+  --radius-xl: 14px;  /* Larger dialogs: modals, backstage view */
+  --radius-2xl: 18px; /* Prominent cards */
+  --radius-full: 9999px;
+
+  /* 5. Spacing Scale */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-1-5: 6px;
+  --space-2: 8px;
+  --space-2-5: 10px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+
+  /* 6. Layout Sizing Constants */
+  --control-height-sm: 24px; /* Small toolbar buttons */
+  --control-height-md: 28px; /* Standard inputs, buttons, dropdowns */
+  --control-height-lg: 32px; /* Large action buttons */
+  --titlebar-height: 38px;
+  --menubar-height: 28px;
+  --statusbar-height: 24px;
+  --icon-size-sm: 14px;
+  --icon-size-md: 16px;
+  --icon-size-lg: 18px;
+}
+
 @theme {
-  --color-brand-50: #eef5fc;
-  --color-brand-100: #d2e0f4;
-  --color-brand-200: #a7c4eb;
-  --color-brand-500: #185abd;
-  --color-brand-600: #1651aa;
-  --color-brand-700: #0f3b7d;
-  --font-sans: "Aptos", "Segoe UI", "Calibri", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  --font-sans: var(--font-ui);
   --font-serif: "Georgia", "Cambria", "Times New Roman", "Garamond", serif;
-  --font-mono: "Consolas", "Courier New", Courier, monospace;
+  --font-mono: var(--font-mono-ui);
+
+  --color-app: var(--app-bg);
+  --color-surface-primary: var(--surface-primary);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-surface-tertiary: var(--surface-tertiary);
+  --color-surface-floating: var(--surface-floating);
+  --color-surface-modal: var(--surface-modal);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-border-theme: var(--border-color);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-hover: var(--border-hover);
+
+  --color-hover: var(--hover-bg);
+  --color-active: var(--active-bg);
+  --color-selection: var(--selection-bg);
+
+  --color-accent: var(--accent-color);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-subtle: var(--accent-subtle);
+
+  --color-destructive: var(--destructive-color);
+  --color-destructive-hover: var(--destructive-hover);
+  --color-destructive-subtle: var(--destructive-subtle);
+
+  --color-success: var(--success-color);
+  --color-success-hover: var(--success-hover);
+  --color-success-subtle: var(--success-subtle);
+
+  --color-warning: var(--warning-color);
+  --color-warning-subtle: var(--warning-subtle);
+
+  /* Semantic aliases for existing brand references */
+  --color-brand-50: var(--selection-bg);
+  --color-brand-100: var(--accent-subtle);
+  --color-brand-200: #a7c4eb;
+  --color-brand-500: var(--accent-color);
+  --color-brand-600: var(--accent-hover);
+  --color-brand-700: var(--accent-hover);
 }
 
 @layer base {
   body {
-    font-family: var(--font-sans);
+    font-family: var(--font-ui);
+    background-color: var(--app-bg);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+}
+
+/* Apple Pages-Style Reusable Surface & Control Classes */
+.surface-primary {
+  background-color: var(--surface-primary);
+  color: var(--text-primary);
+}
+
+.surface-secondary {
+  background-color: var(--surface-secondary);
+  color: var(--text-primary);
+}
+
+.surface-tertiary {
+  background-color: var(--surface-tertiary);
+  color: var(--text-secondary);
+}
+
+.surface-popover {
+  background-color: var(--surface-floating);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-popover);
+  border-radius: var(--radius-lg);
+}
+
+.surface-modal {
+  background-color: var(--surface-modal);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-modal);
+  border-radius: var(--radius-xl);
+}
+
+.btn-apple-neutral {
+  background-color: var(--surface-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  transition: all 120ms ease;
+}
+
+.btn-apple-neutral:hover {
+  background-color: var(--hover-bg);
+  border-color: var(--border-hover);
+}
+
+.btn-apple-neutral:active {
+  background-color: var(--active-bg);
+}
+
+.btn-apple-accent {
+  background-color: var(--accent-color);
+  color: var(--text-on-accent);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  transition: all 120ms ease;
+}
+
+.btn-apple-accent:hover {
+  background-color: var(--accent-hover);
+}
+
+.btn-apple-accent:active {
+  background-color: var(--accent-active);
+}
+
+.input-apple {
+  background-color: var(--surface-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.input-apple:focus-visible {
+  outline: none;
+  border-color: var(--focus-ring-border);
+  box-shadow: var(--focus-ring);
+}
+
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-color: var(--focus-ring-border);
 }
 
 /* Microsoft 365 Cloud Fonts with full weight and style coverage */
@@ -175,26 +493,28 @@
   }
 }
 
-/* Custom scrollbars */
+/* Custom scrollbars — Native macOS style */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
 }
-.dark ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+.dark ::-webkit-scrollbar-thumb,
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.28);
 }
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.35);
+.dark ::-webkit-scrollbar-thumb:hover,
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.30);
 }
 
 /* Tiptap editor typography & styles */
