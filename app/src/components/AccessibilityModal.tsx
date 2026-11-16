@@ -121,16 +121,16 @@ export const AccessibilityModal: React.FC<AccessibilityModalProps> = ({ isOpen, 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs">
-      <div className="bg-white dark:bg-[#202020] text-gray-800 dark:text-gray-100 rounded-lg shadow-2xl border border-gray-300 dark:border-gray-700 w-full max-w-lg overflow-hidden flex flex-col">
+      <div className="bg-[var(--surface-primary)] text-[var(--text-primary)] rounded-[var(--radius-xl)] shadow-[var(--shadow-modal)] border border-[var(--border-color)] w-full max-w-lg overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-3 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-[#282828]">
+        <div className="flex items-center justify-between px-5 py-3 border-b border-[var(--border-color)] bg-[var(--surface-secondary)]">
           <div className="flex items-center space-x-2">
-            <Eye className="w-5 h-5 text-[#185abd]" />
+            <Eye className="w-5 h-5 text-[var(--text-primary)]" />
             <span className="text-sm font-semibold">Accessibility Checker</span>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 p-1 rounded-md transition-colors"
+            className="text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)] p-1 rounded-[var(--radius-sm)] transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -141,18 +141,18 @@ export const AccessibilityModal: React.FC<AccessibilityModalProps> = ({ isOpen, 
           {issues.length === 0 ? (
             <div className="text-center py-8 space-y-2">
               <CheckCircle className="w-10 h-10 text-green-500 mx-auto" />
-              <p className="font-semibold text-gray-800 dark:text-gray-200 text-sm">No accessibility issues found!</p>
-              <p className="text-xs text-gray-500">People using screen readers or assistive technology should have no difficulty reading this document.</p>
+              <p className="font-semibold text-[var(--text-primary)] text-sm">No accessibility issues found!</p>
+              <p className="text-xs text-[var(--text-muted)]">People using screen readers or assistive technology should have no difficulty reading this document.</p>
             </div>
           ) : (
             <div className="space-y-2.5">
-              <p className="text-xs font-semibold text-gray-500 dark:text-gray-400">
+              <p className="text-xs font-semibold text-[var(--text-secondary)]">
                 Inspection results ({issues.length} {issues.length === 1 ? 'item' : 'items'} to review):
               </p>
               {issues.map((issue) => (
                 <div
                   key={issue.id}
-                  className="p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-[#1c1c1c] space-y-1 text-xs"
+                  className="p-3 rounded-[var(--radius-lg)] border border-[var(--border-color)] bg-[var(--surface-secondary)] space-y-1 text-xs"
                 >
                   <div className="flex items-center space-x-2">
                     {issue.type === 'error' ? (
@@ -162,9 +162,9 @@ export const AccessibilityModal: React.FC<AccessibilityModalProps> = ({ isOpen, 
                     ) : (
                       <Info className="w-4 h-4 text-blue-500 shrink-0" />
                     )}
-                    <span className="font-semibold text-gray-800 dark:text-gray-200">{issue.title}</span>
+                    <span className="font-semibold text-[var(--text-primary)]">{issue.title}</span>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-400 text-[11px] pl-6">{issue.description}</p>
+                  <p className="text-[var(--text-secondary)] text-[11px] pl-6">{issue.description}</p>
                 </div>
               ))}
             </div>
@@ -172,10 +172,10 @@ export const AccessibilityModal: React.FC<AccessibilityModalProps> = ({ isOpen, 
         </div>
 
         {/* Footer */}
-        <div className="px-5 py-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-[#252525] flex justify-end">
+        <div className="px-5 py-3 border-t border-[var(--border-color)] bg-[var(--surface-secondary)] flex justify-end">
           <button
             onClick={onClose}
-            className="px-5 py-1.5 text-xs rounded font-medium bg-[#185abd] text-white hover:bg-[#1651aa] transition-colors shadow-xs"
+            className="px-5 py-1.5 text-xs rounded-[var(--radius-md)] font-medium bg-[var(--accent-color)] text-white hover:opacity-90 transition-opacity shadow-xs"
           >
             Close
           </button>

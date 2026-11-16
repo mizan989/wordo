@@ -36,7 +36,7 @@ const CONTEXT_FONTS = Array.from(new Set([...CLOUD_FONTS, ...STANDARD_FONTS]));
 
 const MINI_COLORS = [
   '#000000',
-  '#185abd',
+  '#007AFF',
   '#c00000',
   '#00b050',
   '#ffc000',
@@ -227,12 +227,12 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
         left: `${pos.left}px`,
         zIndex: 9999,
       }}
-      className="w-72 bg-white dark:bg-[#252526] text-gray-800 dark:text-gray-100 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 py-1.5 text-xs select-none animate-in fade-in zoom-in-95 duration-100 font-sans"
+      className="w-72 bg-[var(--surface-floating)] text-[var(--text-primary)] rounded-[var(--radius-lg)] shadow-[var(--shadow-popover)] border border-[var(--border-color)] py-1.5 text-xs select-none font-sans backdrop-blur-md"
     >
       {/* 1. Top Quick Mini-Formatting Strip */}
       <div
         onMouseDown={(e) => e.preventDefault()}
-        className="px-2 py-1 pb-2 border-b border-gray-200 dark:border-gray-700 flex flex-col space-y-1.5 bg-gray-50/70 dark:bg-[#202020] rounded-t"
+        className="px-2 py-1.5 pb-2 border-b border-[var(--border-subtle)] flex flex-col space-y-1.5 bg-[var(--surface-secondary)] rounded-t-[calc(var(--radius-lg)-1px)]"
       >
         {/* Row 1: Font & Size */}
         <div className="flex items-center space-x-1">
@@ -246,7 +246,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
                 (editor.commands as any).setFontFamily(val);
               }
             }}
-            className="h-6 px-1.5 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded text-[11px] outline-hidden flex-1 truncate"
+            className="h-6 px-1.5 bg-[var(--surface-primary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-[var(--radius-md)] text-[11px] outline-hidden flex-1 truncate hover:bg-[var(--hover-bg)]"
             title="Font Family"
           >
             {CONTEXT_FONTS.map((f) => (
@@ -266,7 +266,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
                 (editor.commands as any).setFontSize(val);
               }
             }}
-            className="h-6 px-1 bg-white dark:bg-[#2d2d2d] border border-gray-300 dark:border-gray-600 rounded text-[11px] outline-hidden w-14"
+            className="h-6 px-1 bg-[var(--surface-primary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-[var(--radius-md)] text-[11px] outline-hidden w-14 hover:bg-[var(--hover-bg)]"
             title="Font Size"
           >
             {FONT_SIZE_STEPS.map((s) => (
@@ -279,14 +279,14 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
           <button
             onClick={() => (editor.commands as any).growFontSize()}
             title="Grow Font"
-            className="h-6 px-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] font-bold text-[10px]"
+            className="h-6 px-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] font-bold text-[10px]"
           >
             A+
           </button>
           <button
             onClick={() => (editor.commands as any).shrinkFontSize()}
             title="Shrink Font"
-            className="h-6 px-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] text-[10px]"
+            className="h-6 px-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[10px]"
           >
             A-
           </button>
@@ -300,8 +300,8 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
               title="Bold (Ctrl+B)"
               className={`p-1 rounded transition-colors ${
                 editor.isActive('bold')
-                  ? 'bg-[#185abd] text-white'
-                  : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                  ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                  : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
               }`}
             >
               <Bold className="w-3.5 h-3.5" />
@@ -311,8 +311,8 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
               title="Italic (Ctrl+I)"
               className={`p-1 rounded transition-colors ${
                 editor.isActive('italic')
-                  ? 'bg-[#185abd] text-white'
-                  : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                  ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                  : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
               }`}
             >
               <Italic className="w-3.5 h-3.5" />
@@ -322,8 +322,8 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
               title="Underline (Ctrl+U)"
               className={`p-1 rounded transition-colors ${
                 editor.isActive('underline')
-                  ? 'bg-[#185abd] text-white'
-                  : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                  ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                  : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
               }`}
             >
               <Underline className="w-3.5 h-3.5" />
@@ -333,8 +333,8 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
               title="Strikethrough"
               className={`p-1 rounded transition-colors ${
                 editor.isActive('strike')
-                  ? 'bg-[#185abd] text-white'
-                  : 'hover:bg-gray-200 dark:hover:bg-[#333]'
+                  ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+                  : 'hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
               }`}
             >
               <Strikethrough className="w-3.5 h-3.5" />
@@ -350,12 +350,12 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
                   setShowHighlightPicker(false);
                 }}
                 title="Font Color"
-                className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] flex items-center"
+                className="p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] flex items-center"
               >
                 <Baseline className="w-3.5 h-3.5 text-red-600" />
               </button>
               {showColorPicker && (
-                <div className="absolute left-0 top-full mt-1 p-2 bg-white dark:bg-[#252526] border border-gray-300 dark:border-gray-600 rounded-md shadow-2xl grid grid-cols-4 gap-1.5 z-50 w-[96px] min-w-[96px]">
+                <div className="absolute left-0 top-full mt-1 p-2 bg-[var(--surface-floating)] border border-[var(--border-color)] rounded-[var(--radius-lg)] shadow-[var(--shadow-popover)] grid grid-cols-4 gap-1.5 z-50 w-[96px] min-w-[96px]">
                   {MINI_COLORS.map((c) => (
                     <button
                       key={c}
@@ -363,7 +363,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
                         editor.chain().focus().setColor(c).run();
                         setShowColorPicker(false);
                       }}
-                      className="w-4 h-4 shrink-0 rounded-xs border border-gray-300 dark:border-gray-600 hover:scale-110 transition-transform"
+                      className="w-4 h-4 shrink-0 rounded-xs border border-[var(--border-color)] hover:scale-110 transition-transform"
                       style={{ backgroundColor: c }}
                     />
                   ))}
@@ -379,12 +379,12 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
                   setShowColorPicker(false);
                 }}
                 title="Highlight Color"
-                className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] flex items-center"
+                className="p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] flex items-center"
               >
                 <Highlighter className="w-3.5 h-3.5 text-amber-500" />
               </button>
               {showHighlightPicker && (
-                <div className="absolute left-0 top-full mt-1 p-2 bg-white dark:bg-[#252526] border border-gray-300 dark:border-gray-600 rounded-md shadow-2xl grid grid-cols-3 gap-1.5 z-50 w-[76px] min-w-[76px]">
+                <div className="absolute left-0 top-full mt-1 p-2 bg-[var(--surface-floating)] border border-[var(--border-color)] rounded-[var(--radius-lg)] shadow-[var(--shadow-popover)] grid grid-cols-3 gap-1.5 z-50 w-[76px] min-w-[76px]">
                   {MINI_HIGHLIGHTS.map((c) => (
                     <button
                       key={c}
@@ -392,7 +392,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
                         editor.chain().focus().toggleHighlight({ color: c }).run();
                         setShowHighlightPicker(false);
                       }}
-                      className="w-4 h-4 shrink-0 rounded-xs border border-gray-300 dark:border-gray-600 hover:scale-110 transition-transform"
+                      className="w-4 h-4 shrink-0 rounded-xs border border-[var(--border-color)] hover:scale-110 transition-transform"
                       style={{ backgroundColor: c }}
                     />
                   ))}
@@ -404,14 +404,14 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
             <button
               onClick={() => handleApplyFormatting(() => editor.chain().focus().toggleBulletList().run())}
               title="Bullet List"
-              className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
+              className="p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <List className="w-3.5 h-3.5" />
             </button>
             <button
               onClick={() => handleApplyFormatting(() => editor.chain().focus().toggleOrderedList().run())}
               title="Numbered List"
-              className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
+              className="p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <ListOrdered className="w-3.5 h-3.5" />
             </button>
@@ -420,7 +420,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
             <button
               onClick={() => handleApplyFormatting(() => editor.chain().focus().unsetAllMarks().run())}
               title="Clear Formatting"
-              className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] text-gray-500 hover:text-red-500"
+              className="p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[var(--text-secondary)] hover:text-red-500"
             >
               <RemoveFormatting className="w-3.5 h-3.5" />
             </button>
@@ -430,7 +430,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
 
       {/* 2. Spelling Suggestions (if misspelled word clicked) */}
       {currentSpellIssue && currentSpellIssue.suggestions.length > 0 && (
-        <div className="py-1 border-b border-gray-200 dark:border-gray-700 bg-amber-50/50 dark:bg-amber-950/20">
+        <div className="py-1 border-b border-[var(--border-subtle)] bg-amber-50/50 dark:bg-amber-950/20">
           <div className="px-3 py-0.5 text-[10px] text-amber-700 dark:text-amber-400 font-semibold uppercase flex items-center space-x-1">
             <Sparkles className="w-3 h-3" />
             <span>Spelling Suggestion</span>
@@ -439,7 +439,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
             <button
               key={suggestion}
               onClick={() => handleReplaceWord(suggestion)}
-              className="w-full text-left px-3 py-1 text-xs font-semibold text-[#185abd] dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/40 flex items-center space-x-1.5"
+              className="w-full text-left px-3 py-1 text-xs font-semibold text-[var(--accent-color)] font-semibold hover:bg-[var(--hover-bg)] text-[var(--text-primary)] flex items-center space-x-1.5"
             >
               <Check className="w-3.5 h-3.5" />
               <span>{suggestion}</span>
@@ -455,12 +455,12 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
             document.execCommand('cut');
             onClose();
           }}
-          className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors"
+          className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
         >
           <span className="flex items-center">
-            <Scissors className="w-3.5 h-3.5 mr-2 text-gray-500" /> Cut
+            <Scissors className="w-3.5 h-3.5 mr-2 text-[var(--text-secondary)]" /> Cut
           </span>
-          <span className="text-[10px] text-gray-400">Ctrl+X</span>
+          <span className="text-[10px] text-[var(--text-muted)]">Ctrl+X</span>
         </button>
 
         <button
@@ -468,12 +468,12 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
             document.execCommand('copy');
             onClose();
           }}
-          className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors"
+          className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
         >
           <span className="flex items-center">
-            <Copy className="w-3.5 h-3.5 mr-2 text-gray-500" /> Copy
+            <Copy className="w-3.5 h-3.5 mr-2 text-[var(--text-secondary)]" /> Copy
           </span>
-          <span className="text-[10px] text-gray-400">Ctrl+C</span>
+          <span className="text-[10px] text-[var(--text-muted)]">Ctrl+C</span>
         </button>
 
         <button
@@ -488,16 +488,16 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
             }
             onClose();
           }}
-          className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors"
+          className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
         >
           <span className="flex items-center">
-            <Clipboard className="w-3.5 h-3.5 mr-2 text-[#185abd]" /> Paste
+            <Clipboard className="w-3.5 h-3.5 mr-2 text-[var(--accent-color)]" /> Paste
           </span>
-          <span className="text-[10px] text-gray-400">Ctrl+V</span>
+          <span className="text-[10px] text-[var(--text-muted)]">Ctrl+V</span>
         </button>
       </div>
 
-      <div className="h-[1px] bg-gray-200 dark:bg-gray-700 my-0.5" />
+      <div className="h-[1px] bg-[var(--border-subtle)] my-0.5" />
 
       {/* 4. Smart Word & Selection Tools: Synonyms, Translate, Read Aloud */}
       <div className="py-1">
@@ -506,26 +506,26 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
           <div className="relative group/syn">
             <div
               onMouseEnter={() => setShowSynonymsSubmenu(true)}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-blue-50 dark:hover:bg-blue-900/30 cursor-pointer"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] cursor-pointer"
             >
               <span className="flex items-center">
                 <Sparkles className="w-3.5 h-3.5 mr-2 text-indigo-500" /> Synonyms
               </span>
-              <ChevronRight className="w-3 h-3 text-gray-400" />
+              <ChevronRight className="w-3 h-3 text-[var(--text-muted)]" />
             </div>
             {showSynonymsSubmenu && (
               <div
                 onMouseLeave={() => setShowSynonymsSubmenu(false)}
-                className="absolute left-full top-0 w-48 bg-white dark:bg-[#252526] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl py-1 z-50 animate-in fade-in-50"
+                className="absolute left-full top-0 w-48 bg-[var(--surface-floating)] border border-[var(--border-color)] rounded-[var(--radius-lg)] shadow-[var(--shadow-popover)] py-1 z-50 animate-in fade-in-50"
               >
-                <div className="px-2.5 py-1 text-[10px] text-gray-400 font-semibold uppercase">
+                <div className="px-2.5 py-1 text-[10px] text-[var(--text-muted)] font-semibold uppercase">
                   Synonyms for "{cleanWord}"
                 </div>
                 {synonyms.map((syn) => (
                   <button
                     key={syn}
                     onClick={() => handleReplaceWord(syn)}
-                    className="w-full text-left px-3 py-1 hover:bg-blue-50 dark:hover:bg-blue-900/40 text-gray-800 dark:text-gray-200 text-xs"
+                    className="w-full text-left px-3 py-1 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[var(--text-primary)] text-xs"
                   >
                     {syn}
                   </button>
@@ -542,7 +542,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
               onOpenTranslate?.(selectedText);
               onClose();
             }}
-            className="w-full px-3 py-1.5 flex items-center hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors"
+            className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
           >
             <Languages className="w-3.5 h-3.5 mr-2 text-blue-600" />
             <span className="truncate">Translate "{selectedText.slice(0, 15)}..."</span>
@@ -555,7 +555,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
             onReadAloud?.(selectedText || state.doc.textBetween(0, state.doc.content.size, ' '));
             onClose();
           }}
-          className="w-full px-3 py-1.5 flex items-center hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors"
+          className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
         >
           <Volume2 className="w-3.5 h-3.5 mr-2 text-teal-600" />
           <span>Read Aloud</span>
@@ -564,23 +564,23 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
         {/* Link */}
         <button
           onClick={handleLink}
-          className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors"
+          className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
         >
           <span className="flex items-center">
             <LinkIcon className="w-3.5 h-3.5 mr-2 text-blue-500" />
             <span>{editor.isActive('link') ? 'Edit Link' : 'Link...'}</span>
           </span>
-          <span className="text-[10px] text-gray-400">Ctrl+K</span>
+          <span className="text-[10px] text-[var(--text-muted)]">Ctrl+K</span>
         </button>
       </div>
 
       {/* 5. Table Operations (if inside a table) */}
       {isTableActive && (
         <>
-          <div className="h-[1px] bg-gray-200 dark:bg-gray-700 my-0.5" />
+          <div className="h-[1px] bg-[var(--border-subtle)] my-0.5" />
           <div className="py-1">
-            <div className="px-3 py-0.5 text-[10px] text-gray-400 font-semibold uppercase flex items-center space-x-1">
-              <TableIcon className="w-3 h-3 text-[#185abd]" />
+            <div className="px-3 py-0.5 text-[10px] text-[var(--text-muted)] font-semibold uppercase flex items-center space-x-1">
+              <TableIcon className="w-3 h-3 text-[var(--accent-color)]" />
               <span>Table Tools</span>
             </div>
             <button
@@ -588,7 +588,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
                 editor.chain().focus().addRowBefore().run();
                 onClose();
               }}
-              className="w-full px-3 py-1 flex items-center hover:bg-blue-50 dark:hover:bg-blue-900/30"
+              className="w-full px-3 py-1 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <Plus className="w-3 h-3 mr-2 text-emerald-600" /> Insert Row Above
             </button>
@@ -597,7 +597,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
                 editor.chain().focus().addRowAfter().run();
                 onClose();
               }}
-              className="w-full px-3 py-1 flex items-center hover:bg-blue-50 dark:hover:bg-blue-900/30"
+              className="w-full px-3 py-1 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <Plus className="w-3 h-3 mr-2 text-emerald-600" /> Insert Row Below
             </button>
@@ -606,7 +606,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
                 editor.chain().focus().addColumnBefore().run();
                 onClose();
               }}
-              className="w-full px-3 py-1 flex items-center hover:bg-blue-50 dark:hover:bg-blue-900/30"
+              className="w-full px-3 py-1 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <Plus className="w-3 h-3 mr-2 text-blue-600" /> Insert Column Left
             </button>
@@ -615,7 +615,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
                 editor.chain().focus().addColumnAfter().run();
                 onClose();
               }}
-              className="w-full px-3 py-1 flex items-center hover:bg-blue-50 dark:hover:bg-blue-900/30"
+              className="w-full px-3 py-1 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <Plus className="w-3 h-3 mr-2 text-blue-600" /> Insert Column Right
             </button>
@@ -624,7 +624,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
                 editor.chain().focus().deleteRow().run();
                 onClose();
               }}
-              className="w-full px-3 py-1 flex items-center text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
+              className="w-full px-3 py-1 flex items-center text-[var(--destructive-color)] hover:bg-[var(--destructive-color)]/10"
             >
               <Trash2 className="w-3 h-3 mr-2" /> Delete Row
             </button>
@@ -633,7 +633,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
                 editor.chain().focus().deleteColumn().run();
                 onClose();
               }}
-              className="w-full px-3 py-1 flex items-center text-red-600 hover:bg-red-50 dark:hover:bg-red-950/30"
+              className="w-full px-3 py-1 flex items-center text-[var(--destructive-color)] hover:bg-[var(--destructive-color)]/10"
             >
               <Trash2 className="w-3 h-3 mr-2" /> Delete Column
             </button>
@@ -642,7 +642,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
                 editor.chain().focus().deleteTable().run();
                 onClose();
               }}
-              className="w-full px-3 py-1 flex items-center text-red-700 hover:bg-red-100 dark:hover:bg-red-950/40 font-medium"
+              className="w-full px-3 py-1 flex items-center text-[var(--destructive-color)] hover:bg-[var(--destructive-color)]/10 font-semibold"
             >
               <Trash2 className="w-3 h-3 mr-2" /> Delete Table
             </button>
@@ -650,7 +650,7 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
         </>
       )}
 
-      <div className="h-[1px] bg-gray-200 dark:bg-gray-700 my-0.5" />
+      <div className="h-[1px] bg-[var(--border-subtle)] my-0.5" />
 
       {/* 6. Select All */}
       <div className="py-0.5">
@@ -659,10 +659,10 @@ export const EditorContextMenu: React.FC<EditorContextMenuProps> = ({
             editor.chain().focus().selectAll().run();
             onClose();
           }}
-          className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-blue-50 dark:hover:bg-blue-900/30 transition-colors"
+          className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
         >
           <span>Select All</span>
-          <span className="text-[10px] text-gray-400">Ctrl+A</span>
+          <span className="text-[10px] text-[var(--text-muted)]">Ctrl+A</span>
         </button>
       </div>
     </div>

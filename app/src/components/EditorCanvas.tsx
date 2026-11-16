@@ -358,7 +358,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
                       setEditingHeader(false);
                     }
                   }}
-                  className="px-2 py-0.5 border border-[#185abd] rounded bg-white text-xs w-full text-gray-800 outline-none"
+                  className="px-2 py-0.5 border border-[var(--accent-color)] rounded-[var(--radius-sm)] bg-white text-xs w-full text-gray-800 outline-none"
                   placeholder="Enter page header text..."
                 />
               </div>
@@ -478,7 +478,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
                       setEditingFooter(false);
                     }
                   }}
-                  className="px-2 py-0.5 border border-[#185abd] rounded bg-white text-xs w-full text-gray-800 outline-none"
+                  className="px-2 py-0.5 border border-[var(--accent-color)] rounded-[var(--radius-sm)] bg-white text-xs w-full text-gray-800 outline-none"
                   placeholder="Enter page footer text..."
                 />
               </div>

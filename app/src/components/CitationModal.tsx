@@ -144,29 +144,29 @@ export const CitationModal: React.FC<CitationModalProps> = ({ isOpen, onClose, e
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs">
-      <div className="bg-white dark:bg-[#202020] text-gray-800 dark:text-gray-100 rounded-lg shadow-2xl border border-gray-300 dark:border-gray-700 w-full max-w-xl overflow-hidden flex flex-col max-h-[85vh]">
+      <div className="bg-[var(--surface-primary)] text-[var(--text-primary)] rounded-[var(--radius-xl)] shadow-[var(--shadow-modal)] border border-[var(--border-color)] w-full max-w-xl overflow-hidden flex flex-col max-h-[85vh]">
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-3 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-[#282828]">
+        <div className="flex items-center justify-between px-5 py-3 border-b border-[var(--border-color)] bg-[var(--surface-secondary)]">
           <div className="flex items-center space-x-2">
-            <BookOpen className="w-5 h-5 text-[#185abd]" />
+            <BookOpen className="w-5 h-5 text-[var(--text-primary)]" />
             <span className="text-sm font-semibold">Citations & Bibliography</span>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 p-1 rounded-md transition-colors"
+            className="text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)] p-1 rounded-[var(--radius-sm)] transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Style Selector */}
-        <div className="px-5 py-3 bg-gray-50 dark:bg-[#242424] border-b border-gray-200 dark:border-gray-700 flex items-center justify-between text-xs">
+        <div className="px-5 py-3 bg-[var(--surface-secondary)] border-b border-[var(--border-color)] flex items-center justify-between text-xs">
           <div className="flex items-center space-x-2">
             <span className="font-medium text-gray-600 dark:text-gray-300">Citation Style:</span>
             <select
               value={style}
               onChange={(e) => setStyle(e.target.value as any)}
-              className="px-2 py-1 bg-white dark:bg-[#1a1a1a] border border-gray-300 dark:border-gray-600 rounded text-xs focus:outline-hidden focus:border-[#185abd]"
+              className="px-2 py-1 bg-[var(--surface-secondary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-[var(--radius-md)] text-xs focus:outline-hidden focus:border-[var(--accent-color)]"
             >
               <option value="APA">APA (7th edition)</option>
               <option value="MLA">MLA (9th edition)</option>
@@ -177,7 +177,7 @@ export const CitationModal: React.FC<CitationModalProps> = ({ isOpen, onClose, e
           </div>
           <button
             onClick={() => setShowAddForm(!showAddForm)}
-            className="flex items-center space-x-1 px-2.5 py-1 bg-[#185abd] text-white rounded text-xs hover:bg-[#1651aa] transition-colors"
+            className="flex items-center space-x-1 px-2.5 py-1 bg-[var(--accent-color)] text-white rounded-[var(--radius-md)] text-xs hover:opacity-90 transition-opacity"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>{showAddForm ? 'Cancel New' : 'Add New Source'}</span>
@@ -187,7 +187,7 @@ export const CitationModal: React.FC<CitationModalProps> = ({ isOpen, onClose, e
         {/* Content Body */}
         <div className="p-5 overflow-y-auto flex-1 space-y-4">
           {showAddForm && (
-            <div className="p-3 bg-blue-50/60 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-md space-y-2 text-xs">
+            <div className="p-3 bg-[var(--surface-secondary)] border border-[var(--border-color)] rounded-[var(--radius-lg)] space-y-2 text-xs">
               <span className="font-semibold text-blue-900 dark:text-blue-300">Create New Source</span>
               <div className="grid grid-cols-2 gap-2">
                 <div>
@@ -246,7 +246,7 @@ export const CitationModal: React.FC<CitationModalProps> = ({ isOpen, onClose, e
               <div className="flex justify-end pt-1">
                 <button
                   onClick={handleAddSource}
-                  className="px-3 py-1 bg-[#185abd] text-white rounded font-medium hover:bg-[#1651aa]"
+                  className="px-3 py-1 bg-[var(--accent-color)] text-white rounded-[var(--radius-md)] font-medium hover:opacity-90"
                 >
                   Save Source
                 </button>
@@ -264,7 +264,7 @@ export const CitationModal: React.FC<CitationModalProps> = ({ isOpen, onClose, e
                   onClick={() => setSelectedSourceId(s.id)}
                   className={`p-2.5 flex items-center justify-between text-xs cursor-pointer transition-colors ${
                     selectedSourceId === s.id
-                      ? 'bg-blue-50 dark:bg-blue-950/40 border-l-4 border-l-[#185abd]'
+                      ? 'bg-[var(--selection-bg)] border-l-2 border-l-[var(--accent-color)]'
                       : 'hover:bg-gray-100 dark:hover:bg-[#252525]'
                   }`}
                 >
@@ -293,24 +293,24 @@ export const CitationModal: React.FC<CitationModalProps> = ({ isOpen, onClose, e
         </div>
 
         {/* Footer */}
-        <div className="px-5 py-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-[#252525] flex items-center justify-between">
+        <div className="px-5 py-3 border-t border-[var(--border-color)] bg-[var(--surface-secondary)] flex items-center justify-between">
           <button
             onClick={handleInsertBibliography}
-            className="px-3.5 py-1.5 text-xs rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#1e1e1e] hover:bg-gray-100 dark:hover:bg-[#2a2a2a] transition-colors font-medium"
+            className="px-3.5 py-1.5 text-xs rounded-[var(--radius-md)] border border-[var(--border-color)] bg-[var(--surface-primary)] text-[var(--text-primary)] hover:bg-[var(--hover-bg)] transition-colors font-medium"
           >
             Insert Works Cited / Bibliography
           </button>
           <div className="flex space-x-2">
             <button
               onClick={onClose}
-              className="px-4 py-1.5 text-xs rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-[#2a2a2a] transition-colors"
+              className="px-4 py-1.5 text-xs rounded-[var(--radius-md)] border border-[var(--border-color)] bg-[var(--surface-primary)] text-[var(--text-primary)] hover:bg-[var(--hover-bg)] transition-colors"
             >
               Close
             </button>
             <button
               onClick={handleInsertCitation}
               disabled={sources.length === 0}
-              className="px-5 py-1.5 text-xs rounded font-medium bg-[#185abd] text-white hover:bg-[#1651aa] disabled:opacity-50 transition-colors shadow-xs"
+              className="px-5 py-1.5 text-xs rounded-[var(--radius-md)] font-medium bg-[var(--accent-color)] text-white hover:opacity-90 disabled:opacity-40 transition-opacity shadow-xs"
             >
               Insert Citation
             </button>

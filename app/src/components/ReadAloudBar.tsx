@@ -120,22 +120,22 @@ export const ReadAloudBar: React.FC<ReadAloudBarProps> = ({ isOpen, onClose, edi
   };
 
   return (
-    <div className="bg-blue-50 dark:bg-[#1a2333] border-b border-blue-200 dark:border-blue-900 px-4 py-2 flex items-center justify-between shadow-xs select-none animate-fadeIn transition-colors text-xs">
+    <div className="bg-[var(--surface-primary)] border-b border-[var(--border-color)] px-4 py-2 flex items-center justify-between shadow-xs select-none text-xs text-[var(--text-primary)]">
       <div className="flex items-center space-x-3">
-        <div className="flex items-center space-x-1.5 font-semibold text-[#185abd] dark:text-blue-400">
+        <div className="flex items-center space-x-1.5 font-semibold text-[var(--accent-color)]">
           <Volume2 className="w-4 h-4 animate-pulse" />
           <span>Read Aloud</span>
         </div>
 
-        <div className="h-4 w-px bg-blue-200 dark:bg-blue-800" />
+        <div className="h-4 w-px bg-[var(--border-subtle)]" />
 
         {/* Play/Pause/Stop Controls */}
-        <div className="flex items-center space-x-1 bg-white dark:bg-[#202838] border border-blue-200 dark:border-blue-800 rounded-md p-0.5 shadow-2xs">
+        <div className="flex items-center space-x-1 bg-[var(--surface-secondary)] border border-[var(--border-color)] rounded-[var(--radius-md)] p-0.5">
           {!isPlaying ? (
             <button
               onClick={handlePlay}
               title="Play (Read Aloud)"
-              className="p-1.5 rounded hover:bg-blue-100 dark:hover:bg-blue-900/50 text-[#185abd] dark:text-blue-300 transition-colors"
+              className="p-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--accent-color)] transition-colors"
             >
               <Play className="w-3.5 h-3.5 fill-current" />
             </button>
@@ -143,7 +143,7 @@ export const ReadAloudBar: React.FC<ReadAloudBarProps> = ({ isOpen, onClose, edi
             <button
               onClick={handlePause}
               title="Pause"
-              className="p-1.5 rounded hover:bg-blue-100 dark:hover:bg-blue-900/50 text-[#185abd] dark:text-blue-300 transition-colors"
+              className="p-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--accent-color)] transition-colors"
             >
               <Pause className="w-3.5 h-3.5 fill-current" />
             </button>
@@ -152,14 +152,14 @@ export const ReadAloudBar: React.FC<ReadAloudBarProps> = ({ isOpen, onClose, edi
           <button
             onClick={handleStop}
             title="Stop"
-            className="p-1.5 rounded hover:bg-blue-100 dark:hover:bg-blue-900/50 text-gray-500 hover:text-red-500 transition-colors"
+            className="p-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-secondary)] hover:text-[var(--destructive-color)] transition-colors"
           >
             <Square className="w-3.5 h-3.5 fill-current" />
           </button>
         </div>
 
         {/* Speed Setting */}
-        <div className="flex items-center space-x-1.5 text-gray-600 dark:text-gray-300">
+        <div className="flex items-center space-x-1.5 text-[var(--text-secondary)]">
           <span className="text-[11px]">Speed:</span>
           {[0.75, 1, 1.25, 1.5].map((s) => (
             <button
@@ -167,8 +167,8 @@ export const ReadAloudBar: React.FC<ReadAloudBarProps> = ({ isOpen, onClose, edi
               onClick={() => handleRateChange(s)}
               className={`px-1.5 py-0.5 rounded text-[11px] font-medium transition-colors ${
                 rate === s
-                  ? 'bg-[#185abd] text-white shadow-2xs'
-                  : 'bg-white dark:bg-[#202838] border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40'
+                  ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold shadow-2xs'
+                  : 'bg-[var(--surface-secondary)] border border-[var(--border-color)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
               }`}
             >
               {s}x
@@ -180,14 +180,14 @@ export const ReadAloudBar: React.FC<ReadAloudBarProps> = ({ isOpen, onClose, edi
         <div className="relative">
           <button
             onClick={() => setShowSettings(!showSettings)}
-            className="flex items-center space-x-1 px-2 py-1 bg-white dark:bg-[#202838] border border-blue-200 dark:border-blue-800 rounded text-[11px] hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+            className="flex items-center space-x-1 px-2 py-1 bg-[var(--surface-secondary)] border border-[var(--border-color)] rounded-[var(--radius-md)] text-[11px] hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
           >
-            <Settings2 className="w-3 h-3 text-[#185abd]" />
+            <Settings2 className="w-3 h-3 text-[var(--accent-color)]" />
             <span>Voice</span>
           </button>
 
           {showSettings && (
-            <div className="absolute left-0 top-full mt-1 w-64 bg-white dark:bg-[#202020] border border-gray-300 dark:border-gray-700 shadow-xl rounded-md p-2 z-50">
+            <div className="absolute left-0 top-full mt-1 w-64 bg-[var(--surface-floating)] border border-[var(--border-color)] shadow-[var(--shadow-popover)] rounded-[var(--radius-lg)] p-2 z-50">
               <span className="block text-[11px] font-semibold text-gray-500 mb-1">Select Voice</span>
               <select
                 value={selectedVoice}
@@ -199,7 +199,7 @@ export const ReadAloudBar: React.FC<ReadAloudBarProps> = ({ isOpen, onClose, edi
                     setTimeout(handlePlay, 100);
                   }
                 }}
-                className="w-full text-xs p-1.5 border border-gray-300 dark:border-gray-600 rounded bg-gray-50 dark:bg-[#181818]"
+                className="w-full text-xs p-1.5 border border-[var(--border-color)] rounded-[var(--radius-md)] bg-[var(--surface-secondary)] text-[var(--text-primary)]"
               >
                 {voices.map((v) => (
                   <option key={v.name} value={v.name}>
@@ -218,7 +218,7 @@ export const ReadAloudBar: React.FC<ReadAloudBarProps> = ({ isOpen, onClose, edi
           handleStop();
           onClose();
         }}
-        className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 p-1 rounded-md"
+        className="text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)] p-1 rounded-[var(--radius-sm)]"
         title="Close Read Aloud"
       >
         <X className="w-4 h-4" />

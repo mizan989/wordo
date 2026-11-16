@@ -32,17 +32,17 @@ export const CloseConfirmModal: React.FC<CloseConfirmModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center z-[100] p-4 select-none animate-in fade-in-50">
-      <div className="bg-white dark:bg-[#252526] text-[#242424] dark:text-[#cccccc] w-full max-w-md rounded-xl shadow-2xl border border-gray-300 dark:border-gray-700 overflow-hidden text-xs">
+      <div className="bg-[var(--surface-primary)] text-[var(--text-primary)] w-full max-w-md rounded-[var(--radius-xl)] shadow-[var(--shadow-modal)] border border-[var(--border-color)] overflow-hidden text-xs">
         {/* Header */}
-        <div className="px-5 py-3.5 bg-[#f5f5f5] dark:bg-[#1e1e1e] border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
-          <div className="flex items-center space-x-2 font-bold text-sm text-[#185abd] dark:text-blue-400">
+        <div className="px-5 py-3.5 bg-[var(--surface-secondary)] border-b border-[var(--border-color)] flex items-center justify-between">
+          <div className="flex items-center space-x-2 font-bold text-sm text-[var(--text-primary)]">
             <AlertTriangle className="w-4 h-4 text-amber-500" />
             <span>Wordo — Save Document</span>
           </div>
           <button
             onClick={onCancel}
             title="Cancel and return to document"
-            className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333] transition-colors"
+            className="p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -55,10 +55,10 @@ export const CloseConfirmModal: React.FC<CloseConfirmModalProps> = ({
               <AlertTriangle className="w-5 h-5 text-amber-600 dark:text-amber-400" />
             </div>
             <div className="space-y-1.5">
-              <h3 className="font-semibold text-sm text-gray-900 dark:text-white leading-snug">
+              <h3 className="font-semibold text-sm text-[var(--text-primary)] leading-snug">
                 Do you want to save changes to &ldquo;{documentTitle}&rdquo;?
               </h3>
-              <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
+              <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
                 If you close without saving, the file and all your unsaved changes will be lost.
               </p>
             </div>
@@ -66,11 +66,11 @@ export const CloseConfirmModal: React.FC<CloseConfirmModalProps> = ({
         </div>
 
         {/* Footer Actions */}
-        <div className="px-5 py-3.5 bg-[#f5f5f5] dark:bg-[#1e1e1e] border-t border-gray-200 dark:border-gray-700 flex items-center justify-end space-x-2">
+        <div className="px-5 py-3.5 bg-[var(--surface-secondary)] border-t border-[var(--border-color)] flex items-center justify-end space-x-2">
           <button
             onClick={onSave}
             autoFocus
-            className="px-4 py-2 bg-[#185abd] hover:bg-[#1651aa] text-white rounded-lg font-medium text-xs transition-colors shadow-xs flex items-center space-x-1.5 cursor-pointer focus:ring-2 focus:ring-blue-400 focus:outline-hidden"
+            className="px-4 py-2 bg-[var(--accent-color)] hover:opacity-90 text-white rounded-[var(--radius-md)] font-medium text-xs transition-opacity shadow-xs flex items-center space-x-1.5 cursor-pointer focus:ring-2 focus:ring-[var(--accent-color)]/40 focus:outline-hidden"
           >
             <Save className="w-3.5 h-3.5" />
             <span>Save</span>
@@ -78,7 +78,7 @@ export const CloseConfirmModal: React.FC<CloseConfirmModalProps> = ({
 
           <button
             onClick={onCloseWithoutSaving}
-            className="px-3.5 py-2 bg-white dark:bg-[#2d2d2d] hover:bg-red-50 dark:hover:bg-red-950/30 text-red-600 dark:text-red-400 border border-gray-300 dark:border-gray-600 rounded-lg font-medium text-xs transition-colors flex items-center space-x-1.5 cursor-pointer"
+            className="px-3.5 py-2 bg-transparent hover:bg-[var(--destructive-color)]/10 text-[var(--destructive-color)] border border-[var(--destructive-color)]/30 rounded-[var(--radius-md)] font-medium text-xs transition-colors flex items-center space-x-1.5 cursor-pointer"
           >
             <Trash2 className="w-3.5 h-3.5" />
             <span>Close without saving</span>
@@ -86,7 +86,7 @@ export const CloseConfirmModal: React.FC<CloseConfirmModalProps> = ({
 
           <button
             onClick={onCancel}
-            className="px-3.5 py-2 bg-white dark:bg-[#2d2d2d] hover:bg-gray-100 dark:hover:bg-[#383838] text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg font-medium text-xs transition-colors cursor-pointer"
+            className="px-3.5 py-2 bg-[var(--surface-primary)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-[var(--radius-md)] font-medium text-xs transition-colors cursor-pointer"
           >
             Cancel
           </button>

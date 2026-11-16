@@ -233,31 +233,31 @@ export const InsertSymbolModal: React.FC<InsertSymbolModalProps> = ({ isOpen, on
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs">
-      <div className="bg-white dark:bg-[#202020] text-gray-800 dark:text-gray-100 rounded-lg shadow-2xl border border-gray-300 dark:border-gray-700 w-full max-w-xl overflow-hidden flex flex-col max-h-[85vh]">
+      <div className="bg-[var(--surface-primary)] text-[var(--text-primary)] rounded-[var(--radius-xl)] shadow-[var(--shadow-modal)] border border-[var(--border-color)] w-full max-w-xl overflow-hidden flex flex-col max-h-[85vh]">
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-3 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-[#282828]">
+        <div className="flex items-center justify-between px-5 py-3 border-b border-[var(--border-color)] bg-[var(--surface-secondary)]">
           <div className="flex items-center space-x-2">
-            <span className="text-lg font-semibold text-[#185abd]">Ω Symbol</span>
-            <span className="text-xs text-gray-500 dark:text-gray-400">Microsoft Word Character Palette</span>
+            <span className="text-base font-semibold text-[var(--text-primary)]">Ω Symbol</span>
+            <span className="text-xs text-gray-500 dark:text-[var(--text-muted)]">Character Palette</span>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 p-1 rounded-md transition-colors"
+            className="text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)] p-1 rounded-[var(--radius-sm)] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Search & Tabs */}
-        <div className="p-4 pb-2 border-b border-gray-200 dark:border-gray-700 space-y-3">
+        <div className="p-4 pb-2 border-b border-[var(--border-subtle)] space-y-3">
           <div className="relative">
-            <Search className="w-4 h-4 absolute left-3 top-2.5 text-gray-400" />
+            <Search className="w-4 h-4 absolute left-3 top-2.5 text-[var(--text-muted)]" />
             <input
               type="text"
               placeholder="Search symbols by name (e.g., copyright, delta, euro)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-1.5 text-sm bg-gray-100 dark:bg-[#181818] border border-gray-300 dark:border-gray-600 rounded-md focus:outline-hidden focus:border-[#185abd]"
+              className="w-full pl-9 pr-3 py-1.5 text-sm bg-[var(--surface-secondary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-[var(--radius-md)] focus:outline-hidden focus:border-[var(--accent-color)]"
             />
           </div>
 
@@ -269,8 +269,8 @@ export const InsertSymbolModal: React.FC<InsertSymbolModalProps> = ({ isOpen, on
                   onClick={() => setActiveTab(idx)}
                   className={`px-2.5 py-1 rounded transition-colors ${
                     activeTab === idx
-                      ? 'bg-[#185abd] text-white font-medium'
-                      : 'bg-gray-100 dark:bg-[#2c2c2c] hover:bg-gray-200 dark:hover:bg-[#383838]'
+                      ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold rounded-[var(--radius-md)]'
+                      : 'bg-[var(--surface-secondary)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded-[var(--radius-md)]'
                   }`}
                 >
                   {cat.name}
@@ -294,8 +294,8 @@ export const InsertSymbolModal: React.FC<InsertSymbolModalProps> = ({ isOpen, on
                 title={item.name}
                 className={`h-11 flex flex-col items-center justify-center rounded text-xl font-serif transition-all border ${
                   selectedSymbol?.char === item.char
-                    ? 'border-[#185abd] bg-blue-50 dark:bg-blue-950/40 text-[#185abd] font-bold shadow-xs'
-                    : 'border-transparent hover:border-gray-300 dark:hover:border-gray-600 hover:bg-gray-100 dark:hover:bg-[#2a2a2a]'
+                    ? 'border-[var(--accent-color)] bg-[var(--selection-bg)] text-[var(--accent-color)] font-bold rounded-[var(--radius-md)] shadow-xs'
+                    : 'border-transparent hover:border-[var(--border-color)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded-[var(--radius-md)]'
                 }`}
               >
                 {item.char}
@@ -304,20 +304,20 @@ export const InsertSymbolModal: React.FC<InsertSymbolModalProps> = ({ isOpen, on
           </div>
 
           {filteredSymbols.length === 0 && (
-            <div className="text-center py-8 text-gray-400 text-sm">No matching symbols found.</div>
+            <div className="text-center py-8 text-[var(--text-muted)] text-sm">No matching symbols found.</div>
           )}
         </div>
 
         {/* Recently Used */}
-        <div className="px-5 py-2 bg-gray-50 dark:bg-[#252525] border-t border-gray-200 dark:border-gray-700 flex items-center justify-between text-xs">
+        <div className="px-5 py-2 bg-gray-50 dark:bg-[#252525] border-t border-[var(--border-subtle)] flex items-center justify-between text-xs">
           <div className="flex items-center space-x-2">
-            <span className="text-gray-500 font-medium">Recently used:</span>
+            <span className="text-[var(--text-secondary)] font-medium">Recently used:</span>
             <div className="flex space-x-1">
               {recentSymbols.map((char) => (
                 <button
                   key={char}
                   onClick={() => handleInsert(char)}
-                  className="w-7 h-7 flex items-center justify-center border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-[#1f1f1f] hover:border-[#185abd] hover:bg-blue-50 dark:hover:bg-blue-950/30 text-sm font-serif"
+                  className="w-7 h-7 flex items-center justify-center border border-[var(--border-color)] rounded-[var(--radius-sm)] bg-[var(--surface-primary)] text-[var(--text-primary)] hover:border-[var(--accent-color)] hover:bg-[var(--selection-bg)] text-sm font-serif"
                 >
                   {char}
                 </button>
@@ -327,12 +327,12 @@ export const InsertSymbolModal: React.FC<InsertSymbolModalProps> = ({ isOpen, on
         </div>
 
         {/* Footer with Character Details & Action */}
-        <div className="px-5 py-3 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-[#202020] flex items-center justify-between">
-          <div className="text-xs text-gray-600 dark:text-gray-300">
+        <div className="px-5 py-3 border-t border-[var(--border-subtle)] bg-white dark:bg-[#202020] flex items-center justify-between">
+          <div className="text-xs text-[var(--text-secondary)]">
             {selectedSymbol ? (
               <span>
                 <span className="font-semibold">{selectedSymbol.name}</span>
-                <span className="text-gray-400 ml-2">
+                <span className="text-[var(--text-muted)] ml-2">
                   (Unicode: U+{selectedSymbol.char.charCodeAt(0).toString(16).toUpperCase().padStart(4, '0')})
                 </span>
               </span>
@@ -343,7 +343,7 @@ export const InsertSymbolModal: React.FC<InsertSymbolModalProps> = ({ isOpen, on
           <div className="flex space-x-2">
             <button
               onClick={onClose}
-              className="px-4 py-1.5 text-xs rounded border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-[#2a2a2a] transition-colors"
+              className="px-4 py-1.5 text-xs rounded-[var(--radius-md)] border border-[var(--border-color)] bg-[var(--surface-primary)] text-[var(--text-primary)] hover:bg-[var(--hover-bg)] transition-colors"
             >
               Cancel
             </button>
@@ -355,7 +355,7 @@ export const InsertSymbolModal: React.FC<InsertSymbolModalProps> = ({ isOpen, on
                   onClose();
                 }
               }}
-              className="px-5 py-1.5 text-xs rounded font-medium bg-[#185abd] text-white hover:bg-[#1651aa] disabled:opacity-50 transition-colors shadow-xs"
+              className="px-5 py-1.5 text-xs rounded-[var(--radius-md)] font-medium bg-[var(--accent-color)] text-white hover:opacity-90 disabled:opacity-40 transition-opacity shadow-xs"
             >
               Insert
             </button>

@@ -18,7 +18,7 @@ import { CLOUD_FONTS, STANDARD_FONTS } from './RibbonToolbar';
 
 const MINI_COLORS = [
   '#000000',
-  '#185abd',
+  '#007AFF',
   '#c00000',
   '#00b050',
   '#ffc000',
@@ -192,7 +192,7 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
         transform: 'translateX(-50%)',
         zIndex: 100,
       }}
-      className="flex items-center space-x-1 p-1 bg-white dark:bg-[#252526] border border-[#d1d5db] dark:border-[#444] rounded-lg shadow-2xl text-xs select-none animate-in fade-in zoom-in-95 duration-100"
+      className="flex items-center space-x-1 p-1 bg-[var(--surface-floating)] border border-[var(--border-color)] rounded-[var(--radius-lg)] shadow-[var(--shadow-popover)] text-xs select-none backdrop-blur-md"
     >
       {/* 1. Custom Font Family Dropdown */}
       <div className="relative">
@@ -208,7 +208,7 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
             setShowColorPicker(false);
             setShowHighlightPicker(false);
           }}
-          className="h-6 px-1.5 bg-gray-50 dark:bg-[#333] hover:bg-gray-100 dark:hover:bg-[#3d3d3d] border border-gray-200 dark:border-gray-600 rounded text-[11px] flex items-center justify-between space-x-1 w-24 text-gray-800 dark:text-gray-100 font-medium transition-colors"
+          className="h-6 px-1.5 bg-[var(--surface-secondary)] hover:bg-[var(--hover-bg)] border border-[var(--border-color)] rounded-[var(--radius-md)] text-[11px] flex items-center justify-between space-x-1 w-24 text-[var(--text-primary)] font-medium transition-colors"
           title="Font Family"
         >
           <span className="truncate">{currentFont}</span>
@@ -221,9 +221,9 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
               e.preventDefault();
               e.stopPropagation();
             }}
-            className="absolute left-0 top-full mt-1 w-48 max-h-60 overflow-y-auto bg-white dark:bg-[#252526] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl py-1 z-50 text-xs"
+            className="absolute left-0 top-full mt-1 w-48 max-h-60 overflow-y-auto bg-[var(--surface-floating)] border border-[var(--border-color)] rounded-[var(--radius-lg)] shadow-[var(--shadow-popover)] py-1 z-50 text-xs"
           >
-            <div className="px-2 py-0.5 text-[9px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+            <div className="px-2 py-0.5 text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-wider">
               Cloud Fonts
             </div>
             {CLOUD_FONTS.map((font) => (
@@ -235,17 +235,17 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
                   e.stopPropagation();
                   handleApplyFont(font);
                 }}
-                className={`w-full text-left px-2.5 py-1 flex items-center justify-between hover:bg-blue-50 dark:hover:bg-blue-950/40 text-[11px] ${
-                  currentFont === font ? 'text-[#185abd] dark:text-[#5fa2f8] font-semibold bg-blue-50/50 dark:bg-blue-900/20' : 'text-gray-700 dark:text-gray-200'
+                className={`w-full text-left px-2.5 py-1 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[11px] ${
+                  currentFont === font ? 'text-[var(--accent-color)] font-semibold bg-[var(--selection-bg)]' : 'text-[var(--text-primary)]'
                 }`}
                 style={{ fontFamily: `"${font}", sans-serif` }}
               >
                 <span className="truncate">{font}</span>
-                {currentFont === font && <Check className="w-3 h-3 text-[#185abd] dark:text-[#5fa2f8] flex-shrink-0" />}
+                {currentFont === font && <Check className="w-3 h-3 text-[var(--accent-color)] flex-shrink-0" />}
               </button>
             ))}
 
-            <div className="px-2 py-0.5 text-[9px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider border-t border-gray-100 dark:border-gray-800 mt-1 pt-1">
+            <div className="px-2 py-0.5 text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-wider border-t border-gray-100 dark:border-gray-800 mt-1 pt-1">
               Standard Fonts
             </div>
             {STANDARD_FONTS.map((font) => (
@@ -257,13 +257,13 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
                   e.stopPropagation();
                   handleApplyFont(font);
                 }}
-                className={`w-full text-left px-2.5 py-1 flex items-center justify-between hover:bg-blue-50 dark:hover:bg-blue-950/40 text-[11px] ${
-                  currentFont === font ? 'text-[#185abd] dark:text-[#5fa2f8] font-semibold bg-blue-50/50 dark:bg-blue-900/20' : 'text-gray-700 dark:text-gray-200'
+                className={`w-full text-left px-2.5 py-1 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[11px] ${
+                  currentFont === font ? 'text-[var(--accent-color)] font-semibold bg-[var(--selection-bg)]' : 'text-[var(--text-primary)]'
                 }`}
                 style={{ fontFamily: `"${font}", sans-serif` }}
               >
                 <span className="truncate">{font}</span>
-                {currentFont === font && <Check className="w-3 h-3 text-[#185abd] dark:text-[#5fa2f8] flex-shrink-0" />}
+                {currentFont === font && <Check className="w-3 h-3 text-[var(--accent-color)] flex-shrink-0" />}
               </button>
             ))}
           </div>
@@ -284,7 +284,7 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
             setShowColorPicker(false);
             setShowHighlightPicker(false);
           }}
-          className="h-6 px-1 bg-gray-50 dark:bg-[#333] hover:bg-gray-100 dark:hover:bg-[#3d3d3d] border border-gray-200 dark:border-gray-600 rounded text-[11px] flex items-center justify-between space-x-0.5 w-12 text-gray-800 dark:text-gray-100 font-medium transition-colors"
+          className="h-6 px-1 bg-[var(--surface-secondary)] hover:bg-[var(--hover-bg)] border border-[var(--border-color)] rounded-[var(--radius-md)] text-[11px] flex items-center justify-between space-x-0.5 w-12 text-[var(--text-primary)] font-medium transition-colors"
           title="Font Size"
         >
           <span>{currentSize}</span>
@@ -297,7 +297,7 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
               e.preventDefault();
               e.stopPropagation();
             }}
-            className="absolute left-0 top-full mt-1 w-16 max-h-48 overflow-y-auto bg-white dark:bg-[#252526] border border-gray-200 dark:border-gray-700 rounded-md shadow-2xl py-1 z-50 text-xs"
+            className="absolute left-0 top-full mt-1 w-16 max-h-48 overflow-y-auto bg-[var(--surface-floating)] border border-[var(--border-color)] rounded-[var(--radius-lg)] shadow-[var(--shadow-popover)] py-1 z-50 text-xs"
           >
             {FONT_SIZE_STEPS.map((s) => (
               <button
@@ -308,8 +308,8 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
                   e.stopPropagation();
                   handleApplySize(`${s}`);
                 }}
-                className={`w-full text-center py-1 text-[11px] hover:bg-blue-50 dark:hover:bg-blue-950/40 ${
-                  `${currentSize}` === `${s}` ? 'text-[#185abd] dark:text-[#5fa2f8] font-semibold bg-blue-50/50 dark:bg-blue-900/20' : 'text-gray-700 dark:text-gray-200'
+                className={`w-full text-center py-1 text-[11px] hover:bg-[var(--hover-bg)] ${
+                  `${currentSize}` === `${s}` ? 'text-[var(--accent-color)] font-semibold bg-[var(--selection-bg)]' : 'text-[var(--text-primary)]'
                 }`}
               >
                 {s}
@@ -327,7 +327,7 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
           (editor.commands as any).growFontSize();
         }}
         title="Grow Font"
-        className="p-1 rounded hover:bg-gray-100 dark:hover:bg-[#383838] flex items-center text-[10px] font-bold text-gray-700 dark:text-gray-200"
+        className="p-1 rounded hover:bg-[var(--hover-bg)] flex items-center text-[10px] font-bold text-[var(--text-primary)]"
       >
         A<ChevronUp className="w-2.5 h-2.5 -ml-0.5 text-blue-600" />
       </button>
@@ -338,12 +338,12 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
           (editor.commands as any).shrinkFontSize();
         }}
         title="Shrink Font"
-        className="p-1 rounded hover:bg-gray-100 dark:hover:bg-[#383838] flex items-center text-[10px] text-gray-700 dark:text-gray-200"
+        className="p-1 rounded hover:bg-[var(--hover-bg)] flex items-center text-[10px] text-[var(--text-primary)]"
       >
         A<ChevronDown className="w-2.5 h-2.5 -ml-0.5 text-blue-600" />
       </button>
 
-      <div className="w-[1px] h-3.5 bg-gray-200 dark:bg-gray-700 mx-0.5" />
+      <div className="w-[1px] h-3.5 bg-[var(--border-subtle)] mx-0.5" />
 
       {/* Formatting buttons */}
       <button
@@ -355,8 +355,8 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
         title="Bold"
         className={`p-1 rounded transition-colors ${
           editor.isActive('bold')
-            ? 'bg-[#185abd] text-white'
-            : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#333]'
+            ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+            : 'text-[var(--text-primary)] hover:bg-[var(--hover-bg)]'
         }`}
       >
         <Bold className="w-3.5 h-3.5" />
@@ -371,8 +371,8 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
         title="Italic"
         className={`p-1 rounded transition-colors ${
           editor.isActive('italic')
-            ? 'bg-[#185abd] text-white'
-            : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#333]'
+            ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+            : 'text-[var(--text-primary)] hover:bg-[var(--hover-bg)]'
         }`}
       >
         <Italic className="w-3.5 h-3.5" />
@@ -387,8 +387,8 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
         title="Underline"
         className={`p-1 rounded transition-colors ${
           editor.isActive('underline')
-            ? 'bg-[#185abd] text-white'
-            : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#333]'
+            ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+            : 'text-[var(--text-primary)] hover:bg-[var(--hover-bg)]'
         }`}
       >
         <Underline className="w-3.5 h-3.5" />
@@ -403,8 +403,8 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
         title="Strikethrough"
         className={`p-1 rounded transition-colors ${
           editor.isActive('strike')
-            ? 'bg-[#185abd] text-white'
-            : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#333]'
+            ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+            : 'text-[var(--text-primary)] hover:bg-[var(--hover-bg)]'
         }`}
       >
         <Strikethrough className="w-3.5 h-3.5" />
@@ -425,7 +425,7 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
             setShowSizeDropdown(false);
           }}
           title="Font Color"
-          className="p-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] flex items-center"
+          className="p-1 rounded hover:bg-[var(--hover-bg)] flex items-center"
         >
           <Baseline className="w-3.5 h-3.5 text-red-600" />
         </button>
@@ -435,7 +435,7 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
               e.preventDefault();
               e.stopPropagation();
             }}
-            className="absolute left-0 top-full mt-1 p-2 bg-white dark:bg-[#252526] border border-gray-300 dark:border-gray-600 rounded-md shadow-2xl grid grid-cols-4 gap-1.5 z-50 w-[96px] min-w-[96px]"
+            className="absolute left-0 top-full mt-1 p-2 bg-[var(--surface-floating)] border border-[var(--border-color)] rounded-[var(--radius-lg)] shadow-[var(--shadow-popover)] grid grid-cols-4 gap-1.5 z-50 w-[96px] min-w-[96px]"
           >
             {MINI_COLORS.map((c) => (
               <button
@@ -471,7 +471,7 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
             setShowSizeDropdown(false);
           }}
           title="Highlight Color"
-          className="p-1 rounded hover:bg-gray-100 dark:hover:bg-[#333] flex items-center"
+          className="p-1 rounded hover:bg-[var(--hover-bg)] flex items-center"
         >
           <Highlighter className="w-3.5 h-3.5 text-amber-500" />
         </button>
@@ -481,7 +481,7 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
               e.preventDefault();
               e.stopPropagation();
             }}
-            className="absolute left-0 top-full mt-1 p-2 bg-white dark:bg-[#252526] border border-gray-300 dark:border-gray-600 rounded-md shadow-2xl grid grid-cols-3 gap-1.5 z-50 w-[76px] min-w-[76px]"
+            className="absolute left-0 top-full mt-1 p-2 bg-[var(--surface-floating)] border border-[var(--border-color)] rounded-[var(--radius-lg)] shadow-[var(--shadow-popover)] grid grid-cols-3 gap-1.5 z-50 w-[76px] min-w-[76px]"
           >
             {MINI_HIGHLIGHTS.map((c) => (
               <button
@@ -502,7 +502,7 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
         )}
       </div>
 
-      <div className="w-[1px] h-3.5 bg-gray-200 dark:bg-gray-700 mx-0.5" />
+      <div className="w-[1px] h-3.5 bg-[var(--border-subtle)] mx-0.5" />
 
       {/* Link */}
       <button
@@ -514,8 +514,8 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
         title="Insert Link"
         className={`p-1 rounded ${
           editor.isActive('link')
-            ? 'bg-[#185abd] text-white'
-            : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-[#333]'
+            ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-medium rounded-[var(--radius-sm)]'
+            : 'text-[var(--text-primary)] hover:bg-[var(--hover-bg)]'
         }`}
       >
         <LinkIcon className="w-3.5 h-3.5 text-blue-500" />
@@ -529,7 +529,7 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
           editor.chain().focus().unsetAllMarks().run();
         }}
         title="Clear Formatting"
-        className="p-1 rounded text-gray-500 hover:bg-gray-100 dark:hover:bg-[#333]"
+        className="p-1 rounded text-gray-500 hover:bg-[var(--hover-bg)]"
       >
         <RemoveFormatting className="w-3.5 h-3.5" />
       </button>

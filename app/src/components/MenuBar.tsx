@@ -188,7 +188,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
           onMouseEnter={() => handleMenuMouseEnter('file')}
           className={`px-2.5 py-1 rounded transition-colors ${
             activeMenu === 'file'
-              ? 'bg-[#e0e0e0] dark:bg-[#37373d] text-[#185abd] dark:text-white font-medium'
+              ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold rounded-[var(--radius-sm)]'
               : 'hover:bg-[#e4e4e4] dark:hover:bg-[#2a2d2e]'
           }`}
         >
@@ -202,12 +202,12 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onNew();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e] transition-colors"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
             >
               <span className="flex items-center">
-                <FileText className="w-3.5 h-3.5 mr-2 text-[#185abd]" /> New Blank Document
+                <FileText className="w-3.5 h-3.5 mr-2 text-[var(--accent-color)]" /> New Blank Document
               </span>
-              <span className="text-[10px] text-gray-400">Ctrl+N</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+N</span>
             </button>
 
             <button
@@ -215,7 +215,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onNewFromTemplate();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e] transition-colors"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
             >
               <span className="flex items-center">
                 <Sparkles className="w-3.5 h-3.5 mr-2 text-amber-500" /> New from Template...
@@ -229,22 +229,22 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onOpen();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e] transition-colors"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
             >
               <span className="flex items-center">
-                <FolderOpen className="w-3.5 h-3.5 mr-2 text-[#185abd]" /> Open Document...
+                <FolderOpen className="w-3.5 h-3.5 mr-2 text-[var(--accent-color)]" /> Open Document...
               </span>
-              <span className="text-[10px] text-gray-400">Ctrl+O</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+O</span>
             </button>
 
             {/* Recent documents preview */}
             {recentDocuments.length > 0 && (
               <div className="relative group/recent">
-                <div className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e] cursor-pointer">
+                <div className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] cursor-pointer">
                   <span className="flex items-center">
-                    <Clock className="w-3.5 h-3.5 mr-2 text-gray-400" /> Open Recent
+                    <Clock className="w-3.5 h-3.5 mr-2 text-[var(--text-muted)]" /> Open Recent
                   </span>
-                  <ChevronRight className="w-3 h-3 text-gray-400" />
+                  <ChevronRight className="w-3 h-3 text-[var(--text-muted)]" />
                 </div>
                 <div className="hidden group-hover/recent:block absolute left-full top-0 w-64 bg-white dark:bg-[#1e1e1e] border border-gray-200 dark:border-[#3f3f46] rounded-md shadow-xl py-1 z-50">
                   {recentDocuments.map((doc) => (
@@ -254,10 +254,10 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                         onOpenRecent(doc);
                         closeMenu();
                       }}
-                      className="w-full text-left px-3 py-1.5 hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e] truncate"
+                      className="w-full text-left px-3 py-1.5 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] truncate"
                     >
                       <div className="font-medium truncate">{doc.title}</div>
-                      <div className="text-[10px] text-gray-400 truncate">{doc.previewSnippet || 'Empty document'}</div>
+                      <div className="text-[10px] text-[var(--text-muted)] truncate">{doc.previewSnippet || 'Empty document'}</div>
                     </button>
                   ))}
                 </div>
@@ -271,12 +271,12 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onSave();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e] transition-colors"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
             >
               <span className="flex items-center">
-                <Save className="w-3.5 h-3.5 mr-2 text-[#185abd]" /> Save
+                <Save className="w-3.5 h-3.5 mr-2 text-[var(--accent-color)]" /> Save
               </span>
-              <span className="text-[10px] text-gray-400">Ctrl+S</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+S</span>
             </button>
 
             <button
@@ -284,12 +284,12 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onSaveAs();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e] transition-colors"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
             >
               <span className="flex items-center">
-                <Save className="w-3.5 h-3.5 mr-2 text-gray-400" /> Save As...
+                <Save className="w-3.5 h-3.5 mr-2 text-[var(--text-muted)]" /> Save As...
               </span>
-              <span className="text-[10px] text-gray-400">Ctrl+Shift+S</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+Shift+S</span>
             </button>
 
             <div className="h-[1px] bg-gray-200 dark:bg-[#333] my-1" />
@@ -299,10 +299,10 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onExportDocx();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e] transition-colors"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
             >
               <span className="flex items-center">
-                <FileCheck className="w-3.5 h-3.5 mr-2 text-[#185abd]" /> Export to Word (.docx)
+                <FileCheck className="w-3.5 h-3.5 mr-2 text-[var(--accent-color)]" /> Export to Word (.docx)
               </span>
             </button>
 
@@ -311,7 +311,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onExportPdf();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e] transition-colors"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
             >
               <span className="flex items-center">
                 <Download className="w-3.5 h-3.5 mr-2 text-red-500" /> Export to PDF (.pdf)
@@ -323,7 +323,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onExportHtml();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e] transition-colors"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
             >
               <span className="flex items-center">
                 <FileCode className="w-3.5 h-3.5 mr-2 text-amber-600" /> Export to Web (.html)
@@ -335,10 +335,10 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onExportTxt();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e] transition-colors"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
             >
               <span className="flex items-center">
-                <FileText className="w-3.5 h-3.5 mr-2 text-gray-400" /> Export Plain Text (.txt)
+                <FileText className="w-3.5 h-3.5 mr-2 text-[var(--text-muted)]" /> Export Plain Text (.txt)
               </span>
             </button>
 
@@ -349,12 +349,12 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onPrint();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e] transition-colors"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
             >
               <span className="flex items-center">
-                <Printer className="w-3.5 h-3.5 mr-2 text-[#185abd]" /> Print...
+                <Printer className="w-3.5 h-3.5 mr-2 text-[var(--accent-color)]" /> Print...
               </span>
-              <span className="text-[10px] text-gray-400">Ctrl+P</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+P</span>
             </button>
 
             <div className="h-[1px] bg-gray-200 dark:bg-[#333] my-1" />
@@ -379,7 +379,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
           onMouseEnter={() => handleMenuMouseEnter('edit')}
           className={`px-2.5 py-1 rounded transition-colors ${
             activeMenu === 'edit'
-              ? 'bg-[#e0e0e0] dark:bg-[#37373d] text-[#185abd] dark:text-white font-medium'
+              ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold rounded-[var(--radius-sm)]'
               : 'hover:bg-[#e4e4e4] dark:hover:bg-[#2a2d2e]'
           }`}
         >
@@ -393,24 +393,24 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onUndo();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <span className="flex items-center">
                 <Undo2 className="w-3.5 h-3.5 mr-2" /> Undo
               </span>
-              <span className="text-[10px] text-gray-400">Ctrl+Z</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+Z</span>
             </button>
             <button
               onClick={() => {
                 onRedo();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <span className="flex items-center">
                 <Redo2 className="w-3.5 h-3.5 mr-2" /> Redo
               </span>
-              <span className="text-[10px] text-gray-400">Ctrl+Y</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+Y</span>
             </button>
 
             <div className="h-[1px] bg-gray-200 dark:bg-[#333] my-1" />
@@ -420,36 +420,36 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onCut();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <span className="flex items-center">
                 <Scissors className="w-3.5 h-3.5 mr-2" /> Cut
               </span>
-              <span className="text-[10px] text-gray-400">Ctrl+X</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+X</span>
             </button>
             <button
               onClick={() => {
                 onCopy();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <span className="flex items-center">
                 <Copy className="w-3.5 h-3.5 mr-2" /> Copy
               </span>
-              <span className="text-[10px] text-gray-400">Ctrl+C</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+C</span>
             </button>
             <button
               onClick={() => {
                 onPaste();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <span className="flex items-center">
                 <Clipboard className="w-3.5 h-3.5 mr-2" /> Paste
               </span>
-              <span className="text-[10px] text-gray-400">Ctrl+V</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+V</span>
             </button>
 
             <div className="h-[1px] bg-gray-200 dark:bg-[#333] my-1" />
@@ -459,29 +459,29 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onSelectAll();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <span>Select All</span>
-              <span className="text-[10px] text-gray-400">Ctrl+A</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+A</span>
             </button>
             <button
               onClick={() => {
                 onFind();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <span className="flex items-center">
-                <Search className="w-3.5 h-3.5 mr-2 text-[#185abd]" /> Find & Replace...
+                <Search className="w-3.5 h-3.5 mr-2 text-[var(--accent-color)]" /> Find & Replace...
               </span>
-              <span className="text-[10px] text-gray-400">Ctrl+F</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+F</span>
             </button>
             <button
               onClick={() => {
                 onClearFormat();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 text-left hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               Clear Formatting
             </button>
@@ -496,7 +496,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
           onMouseEnter={() => handleMenuMouseEnter('insert')}
           className={`px-2.5 py-1 rounded transition-colors ${
             activeMenu === 'insert'
-              ? 'bg-[#e0e0e0] dark:bg-[#37373d] text-[#185abd] dark:text-white font-medium'
+              ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold rounded-[var(--radius-sm)]'
               : 'hover:bg-[#e4e4e4] dark:hover:bg-[#2a2d2e]'
           }`}
         >
@@ -510,16 +510,16 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onInsertTable(3, 3);
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
-              <TableIcon className="w-3.5 h-3.5 mr-2 text-[#185abd]" /> Insert 3×3 Table
+              <TableIcon className="w-3.5 h-3.5 mr-2 text-[var(--accent-color)]" /> Insert 3×3 Table
             </button>
             <button
               onClick={() => {
                 onInsertImage();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <ImageIcon className="w-3.5 h-3.5 mr-2 text-green-600" /> Insert Picture...
             </button>
@@ -528,7 +528,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onInsertLink();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <LinkIcon className="w-3.5 h-3.5 mr-2 text-blue-500" /> Insert Hyperlink...
             </button>
@@ -540,7 +540,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onInsertPageBreak();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 text-left hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               Page Break
             </button>
@@ -549,7 +549,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onInsertHorizontalRule();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 text-left hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               Horizontal Line
             </button>
@@ -558,7 +558,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onInsertBlockquote();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 text-left hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               Callout Quote Block
             </button>
@@ -567,7 +567,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onInsertTaskList();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 text-left hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               Interactive Checklist
             </button>
@@ -577,7 +577,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onOpenSymbolModal?.();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 text-left hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               Special Characters & Symbols (Ω)...
             </button>
@@ -586,7 +586,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onOpenDateTimeModal?.();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 text-left hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               Date and Time...
             </button>
@@ -595,7 +595,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onOpenCitationModal?.();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 text-left hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               Citations & Bibliography...
             </button>
@@ -605,7 +605,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onOpenSettings();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 text-left hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e] text-[#185abd] font-medium"
+              className="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-[var(--accent-color)] font-medium"
             >
               Header, Footer & Presets...
             </button>
@@ -620,7 +620,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
           onMouseEnter={() => handleMenuMouseEnter('format')}
           className={`px-2.5 py-1 rounded transition-colors ${
             activeMenu === 'format'
-              ? 'bg-[#e0e0e0] dark:bg-[#37373d] text-[#185abd] dark:text-white font-medium'
+              ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold rounded-[var(--radius-sm)]'
               : 'hover:bg-[#e4e4e4] dark:hover:bg-[#2a2d2e]'
           }`}
         >
@@ -634,36 +634,36 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onFormatBold();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <span className="flex items-center">
                 <Bold className="w-3.5 h-3.5 mr-2 font-bold" /> Bold
               </span>
-              <span className="text-[10px] text-gray-400">Ctrl+B</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+B</span>
             </button>
             <button
               onClick={() => {
                 onFormatItalic();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <span className="flex items-center">
                 <Italic className="w-3.5 h-3.5 mr-2 italic" /> Italic
               </span>
-              <span className="text-[10px] text-gray-400">Ctrl+I</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+I</span>
             </button>
             <button
               onClick={() => {
                 onFormatUnderline();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <span className="flex items-center">
                 <Underline className="w-3.5 h-3.5 mr-2 underline" /> Underline
               </span>
-              <span className="text-[10px] text-gray-400">Ctrl+U</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+U</span>
             </button>
 
             <div className="h-[1px] bg-gray-200 dark:bg-[#333] my-1" />
@@ -673,7 +673,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onFormatAlign('left');
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <AlignLeft className="w-3.5 h-3.5 mr-2" /> Align Left
             </button>
@@ -682,7 +682,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onFormatAlign('center');
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <AlignCenter className="w-3.5 h-3.5 mr-2" /> Align Center
             </button>
@@ -691,7 +691,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onFormatAlign('right');
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <AlignRight className="w-3.5 h-3.5 mr-2" /> Align Right
             </button>
@@ -700,7 +700,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onFormatAlign('justify');
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <AlignJustify className="w-3.5 h-3.5 mr-2" /> Justify
             </button>
@@ -715,7 +715,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
           onMouseEnter={() => handleMenuMouseEnter('view')}
           className={`px-2.5 py-1 rounded transition-colors ${
             activeMenu === 'view'
-              ? 'bg-[#e0e0e0] dark:bg-[#37373d] text-[#185abd] dark:text-white font-medium'
+              ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold rounded-[var(--radius-sm)]'
               : 'hover:bg-[#e4e4e4] dark:hover:bg-[#2a2d2e]'
           }`}
         >
@@ -729,27 +729,27 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onToggleRuler();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <span>Horizontal Ruler</span>
-              <span className="font-semibold text-[#185abd]">{showRuler ? '✓' : ''}</span>
+              <span className="font-semibold text-[var(--accent-color)]">{showRuler ? '✓' : ''}</span>
             </button>
             <button
               onClick={() => {
                 onToggleNavSidebar();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <span>Navigation & Outline Panel</span>
-              <span className="font-semibold text-[#185abd]">{showNavSidebar ? '✓' : ''}</span>
+              <span className="font-semibold text-[var(--accent-color)]">{showNavSidebar ? '✓' : ''}</span>
             </button>
             <button
               onClick={() => {
                 onToggleTheme();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 text-left hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 text-left hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               Toggle Light / Dark Mode
             </button>
@@ -758,15 +758,15 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onToggleFocusMode?.();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <span>Focus Mode (Fullscreen)</span>
-              <span className="text-[10px] text-gray-400">Esc to exit</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Esc to exit</span>
             </button>
 
             <div className="h-[1px] bg-gray-200 dark:bg-[#333] my-1" />
 
-            <div className="px-3 py-1 text-[11px] font-semibold text-gray-400">Zoom Level</div>
+            <div className="px-3 py-1 text-[11px] font-semibold text-[var(--text-muted)]">Zoom Level</div>
             {[50, 75, 100, 125, 150, 200].map((z) => (
               <button
                 key={z}
@@ -774,7 +774,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                   onZoomChange(z);
                   closeMenu();
                 }}
-                className="w-full px-3 py-1 text-left hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+                className="w-full px-3 py-1 text-left hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
               >
                 {z}%
               </button>
@@ -790,7 +790,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
           onMouseEnter={() => handleMenuMouseEnter('tools')}
           className={`px-2.5 py-1 rounded transition-colors ${
             activeMenu === 'tools'
-              ? 'bg-[#e0e0e0] dark:bg-[#37373d] text-[#185abd] dark:text-white font-medium'
+              ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold rounded-[var(--radius-sm)]'
               : 'hover:bg-[#e4e4e4] dark:hover:bg-[#2a2d2e]'
           }`}
         >
@@ -804,19 +804,19 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onOpenWordCount();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <span className="flex items-center">
-                <FileText className="w-3.5 h-3.5 mr-2 text-[#185abd]" /> Word Count & Statistics
+                <FileText className="w-3.5 h-3.5 mr-2 text-[var(--accent-color)]" /> Word Count & Statistics
               </span>
-              <span className="text-[10px] text-gray-400">Ctrl+Shift+C</span>
+              <span className="text-[10px] text-[var(--text-muted)]">Ctrl+Shift+C</span>
             </button>
             <button
               onClick={() => {
                 onOpenSpellCheck();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <Sparkles className="w-3.5 h-3.5 mr-2 text-indigo-600" /> Spell & Grammar Checker
             </button>
@@ -825,7 +825,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onOpenRecovery();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <Clock className="w-3.5 h-3.5 mr-2 text-amber-600" /> Document Recovery Vault
             </button>
@@ -834,7 +834,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onToggleReadAloud?.();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <Volume2 className="w-3.5 h-3.5 mr-2 text-blue-500" /> Read Aloud Text-to-Speech
             </button>
@@ -843,7 +843,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onOpenTranslateModal?.();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <Languages className="w-3.5 h-3.5 mr-2 text-teal-600" /> Translate Document / Selection...
             </button>
@@ -852,7 +852,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onOpenAccessibilityModal?.();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <Eye className="w-3.5 h-3.5 mr-2 text-indigo-500" /> Check Accessibility...
             </button>
@@ -861,7 +861,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onOpenSettings();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <Settings className="w-3.5 h-3.5 mr-2 text-gray-500" /> Document Settings & Margins...
             </button>
@@ -876,7 +876,7 @@ export const MenuBar: React.FC<MenuBarProps> = ({
           onMouseEnter={() => handleMenuMouseEnter('help')}
           className={`px-2.5 py-1 rounded transition-colors ${
             activeMenu === 'help'
-              ? 'bg-[#e0e0e0] dark:bg-[#37373d] text-[#185abd] dark:text-white font-medium'
+              ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold rounded-[var(--radius-sm)]'
               : 'hover:bg-[#e4e4e4] dark:hover:bg-[#2a2d2e]'
           }`}
         >
@@ -890,16 +890,16 @@ export const MenuBar: React.FC<MenuBarProps> = ({
                 onOpenAbout();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
-              <HelpCircle className="w-3.5 h-3.5 mr-2 text-[#185abd]" /> About Wordo
+              <HelpCircle className="w-3.5 h-3.5 mr-2 text-[var(--accent-color)]" /> About Wordo
             </button>
             <button
               onClick={() => {
                 onOpenShortcuts();
                 closeMenu();
               }}
-              className="w-full px-3 py-1.5 flex items-center hover:bg-[#eef5fc] dark:hover:bg-[#2a2d2e]"
+              className="w-full px-3 py-1.5 flex items-center hover:bg-[var(--hover-bg)] text-[var(--text-primary)]"
             >
               <FileCheck className="w-3.5 h-3.5 mr-2 text-green-600" /> Keyboard Shortcuts
             </button>

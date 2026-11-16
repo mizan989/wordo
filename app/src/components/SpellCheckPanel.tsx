@@ -35,10 +35,10 @@ export const SpellCheckPanel: React.FC<SpellCheckPanelProps> = ({
   };
 
   return (
-    <aside className="w-80 bg-white dark:bg-[#252526] border-r border-[#e0e0e0] dark:border-[#383838] flex flex-col h-full shadow-sm z-10 select-none text-xs">
+    <aside className="w-80 bg-[var(--surface-primary)] border-r border-[var(--border-color)] flex flex-col h-full shadow-sm z-10 select-none text-xs">
       {/* Header */}
-      <div className="h-9 px-3 border-b border-[#e0e0e0] dark:border-[#383838] flex items-center justify-between bg-[#f5f5f5] dark:bg-[#1e1e1e]">
-        <div className="flex items-center space-x-1.5 font-semibold text-gray-700 dark:text-gray-200">
+      <div className="h-9 px-3 border-b border-[var(--border-color)] flex items-center justify-between bg-[var(--surface-secondary)]">
+        <div className="flex items-center space-x-1.5 font-semibold text-[var(--text-primary)]">
           <Sparkles className="w-4 h-4 text-indigo-600" />
           <span>Editor Proofing & Grammar</span>
         </div>
@@ -46,13 +46,13 @@ export const SpellCheckPanel: React.FC<SpellCheckPanelProps> = ({
           <button
             onClick={onRefresh}
             title="Recheck Document"
-            className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
+            className="p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded-[var(--radius-sm)]"
           >
-            <RefreshCw className="w-3.5 h-3.5 text-gray-500" />
+            <RefreshCw className="w-3.5 h-3.5 text-[var(--text-muted)]" />
           </button>
           <button
             onClick={onClose}
-            className="p-1 rounded hover:bg-gray-200 dark:hover:bg-[#333]"
+            className="p-1 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] rounded-[var(--radius-sm)]"
           >
             <X className="w-3.5 h-3.5" />
           </button>
@@ -62,25 +62,25 @@ export const SpellCheckPanel: React.FC<SpellCheckPanelProps> = ({
       {/* Issues list */}
       <div className="flex-1 overflow-y-auto p-3 space-y-3">
         {issues.length === 0 ? (
-          <div className="py-12 text-center text-gray-500 space-y-2">
+          <div className="py-12 text-center text-[var(--text-muted)] space-y-2">
             <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
-            <h4 className="font-semibold text-sm text-gray-800 dark:text-gray-200">
+            <h4 className="font-semibold text-sm text-[var(--text-primary)]">
               Document Proofing Complete
             </h4>
-            <p className="text-[11px] px-4 text-gray-400">
+            <p className="text-[11px] px-4 text-[var(--text-muted)]">
               No spelling, grammar, or punctuation errors detected in your active document.
             </p>
           </div>
         ) : (
           <>
-            <div className="text-[11px] font-semibold text-gray-500 uppercase tracking-wider">
+            <div className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-wider">
               {issues.length} {issues.length === 1 ? 'Suggestion' : 'Suggestions'}
             </div>
 
             {issues.map((issue) => (
               <div
                 key={issue.id}
-                className="p-3 bg-[#fafafa] dark:bg-[#1f1f1f] border border-gray-200 dark:border-gray-700 rounded-md shadow-xs space-y-2"
+                className="p-3 bg-[var(--surface-secondary)] border border-[var(--border-color)] rounded-[var(--radius-lg)] shadow-xs space-y-2"
               >
                 <div className="flex items-center justify-between">
                   <span
@@ -94,12 +94,12 @@ export const SpellCheckPanel: React.FC<SpellCheckPanelProps> = ({
                   >
                     {issue.type}
                   </span>
-                  <span className="font-mono text-gray-800 dark:text-gray-200 font-semibold line-through decoration-red-500">
+                  <span className="font-mono text-[var(--text-primary)] font-semibold line-through decoration-red-500">
                     {issue.word}
                   </span>
                 </div>
 
-                <p className="text-[11px] text-gray-600 dark:text-gray-300">{issue.message}</p>
+                <p className="text-[11px] text-[var(--text-secondary)]">{issue.message}</p>
 
                 {/* Suggestions */}
                 <div className="flex flex-wrap gap-1.5 pt-1">
@@ -107,7 +107,7 @@ export const SpellCheckPanel: React.FC<SpellCheckPanelProps> = ({
                     <button
                       key={idx}
                       onClick={() => handleApplySuggestion(issue, sug)}
-                      className="px-2 py-1 bg-white dark:bg-[#2d2d2d] border border-[#185abd] text-[#185abd] dark:text-[#5fa2f8] hover:bg-[#185abd] hover:text-white rounded text-xs font-medium transition-colors flex items-center shadow-2xs"
+                      className="px-2.5 py-1 bg-[var(--surface-primary)] border border-[var(--border-color)] text-[var(--accent-color)] hover:bg-[var(--selection-bg)] rounded-[var(--radius-md)] text-xs font-semibold transition-colors flex items-center shadow-2xs"
                     >
                       <ArrowRight className="w-2.5 h-2.5 mr-1" />
                       {sug}

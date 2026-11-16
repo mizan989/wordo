@@ -151,7 +151,7 @@ export const App: React.FC = () => {
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
-          class: 'text-[#185abd] underline cursor-pointer',
+          class: 'text-[var(--accent-color)] underline cursor-pointer',
         },
       }),
       Image.configure({

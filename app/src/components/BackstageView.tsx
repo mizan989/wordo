@@ -82,27 +82,27 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-[#f3f2f1] dark:bg-[#201f1e] text-gray-800 dark:text-gray-100 flex flex-row animate-in fade-in duration-150 select-none"
+      className="fixed inset-0 z-50 bg-[var(--app-bg)] text-[var(--text-primary)] flex flex-row select-none"
       onKeyDown={(e) => {
         if (e.key === 'Escape') onClose();
       }}
       tabIndex={0}
     >
       {/* 1. Left Navigation Bar - Office 365 Blue */}
-      <div className="w-64 bg-[#103f82] dark:bg-[#0c2e60] text-white flex flex-col justify-between shadow-xl flex-shrink-0">
+      <div className="w-64 bg-[var(--surface-primary)] border-r border-[var(--border-color)] text-[var(--text-primary)] flex flex-col justify-between flex-shrink-0">
         <div>
           {/* Top Return Button */}
-          <div className="p-3 border-b border-blue-900/60 flex items-center space-x-3">
+          <div className="p-3 border-b border-[var(--border-color)] flex items-center justify-between">
             <button
               onClick={onClose}
               title="Return to Document (Esc)"
-              className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-white/20 active:bg-white/30 transition-colors"
+              className="w-8 h-8 flex items-center justify-center rounded-[var(--radius-md)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
             >
-              <ArrowLeft className="w-5 h-5 text-white" />
+              <ArrowLeft className="w-4 h-4 text-[var(--text-primary)]" />
             </button>
             <div className="flex items-center space-x-2">
               <img src={wordoLogo} alt="" className="w-5 h-5 object-contain" />
-              <span className="font-semibold text-sm tracking-wide">Wordo 365</span>
+              <span className="font-semibold text-sm tracking-wide text-[var(--text-primary)]">Wordo</span>
             </div>
           </div>
 
@@ -111,7 +111,7 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
             <button
               onClick={() => setActiveTab('home')}
               className={`w-full flex items-center space-x-3 px-5 py-2.5 transition-colors ${
-                activeTab === 'home' ? 'bg-white/20 font-bold border-l-4 border-white' : 'hover:bg-white/10'
+                activeTab === 'home' ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)]'
               }`}
             >
               <Layout className="w-4 h-4" />
@@ -121,7 +121,7 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
             <button
               onClick={() => setActiveTab('new')}
               className={`w-full flex items-center space-x-3 px-5 py-2.5 transition-colors ${
-                activeTab === 'new' ? 'bg-white/20 font-bold border-l-4 border-white' : 'hover:bg-white/10'
+                activeTab === 'new' ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)]'
               }`}
             >
               <FilePlus className="w-4 h-4" />
@@ -131,7 +131,7 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
             <button
               onClick={() => setActiveTab('open')}
               className={`w-full flex items-center space-x-3 px-5 py-2.5 transition-colors ${
-                activeTab === 'open' ? 'bg-white/20 font-bold border-l-4 border-white' : 'hover:bg-white/10'
+                activeTab === 'open' ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)]'
               }`}
             >
               <FolderOpen className="w-4 h-4" />
@@ -141,7 +141,7 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
             <button
               onClick={() => setActiveTab('info')}
               className={`w-full flex items-center space-x-3 px-5 py-2.5 transition-colors ${
-                activeTab === 'info' ? 'bg-white/20 font-bold border-l-4 border-white' : 'hover:bg-white/10'
+                activeTab === 'info' ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)]'
               }`}
             >
               <Info className="w-4 h-4" />
@@ -153,7 +153,7 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                 onSave();
                 onClose();
               }}
-              className="w-full flex items-center space-x-3 px-5 py-2.5 hover:bg-white/10 transition-colors"
+              className="w-full flex items-center space-x-3 px-5 py-2.5 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)] transition-colors"
             >
               <Save className="w-4 h-4" />
               <span>Save</span>
@@ -162,7 +162,7 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
             <button
               onClick={() => setActiveTab('saveAs')}
               className={`w-full flex items-center space-x-3 px-5 py-2.5 transition-colors ${
-                activeTab === 'saveAs' ? 'bg-white/20 font-bold border-l-4 border-white' : 'hover:bg-white/10'
+                activeTab === 'saveAs' ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)]'
               }`}
             >
               <Download className="w-4 h-4" />
@@ -172,7 +172,7 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
             <button
               onClick={() => setActiveTab('print')}
               className={`w-full flex items-center space-x-3 px-5 py-2.5 transition-colors ${
-                activeTab === 'print' ? 'bg-white/20 font-bold border-l-4 border-white' : 'hover:bg-white/10'
+                activeTab === 'print' ? 'bg-[var(--selection-bg)] text-[var(--accent-color)] font-semibold' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)]'
               }`}
             >
               <Printer className="w-4 h-4" />
@@ -182,14 +182,14 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
         </div>
 
         {/* Bottom Options */}
-        <div className="py-2 border-t border-blue-900/60 text-xs font-medium space-y-0.5">
+        <div className="py-2 border-t border-[var(--border-color)] text-xs font-medium space-y-0.5">
           {onOpenSettings && (
             <button
               onClick={() => {
                 onClose();
                 onOpenSettings();
               }}
-              className="w-full flex items-center space-x-3 px-5 py-2 hover:bg-white/10 transition-colors"
+              className="w-full flex items-center space-x-3 px-5 py-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)] transition-colors"
             >
               <Settings className="w-4 h-4" />
               <span>Page & Document Options</span>
@@ -202,7 +202,7 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                 onClose();
                 onOpenShortcuts();
               }}
-              className="w-full flex items-center space-x-3 px-5 py-2 hover:bg-white/10 transition-colors"
+              className="w-full flex items-center space-x-3 px-5 py-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)] transition-colors"
             >
               <HelpCircle className="w-4 h-4" />
               <span>Keyboard Shortcuts</span>
@@ -215,7 +215,7 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                 onClose();
                 onOpenAbout();
               }}
-              className="w-full flex items-center space-x-3 px-5 py-2 hover:bg-white/10 transition-colors"
+              className="w-full flex items-center space-x-3 px-5 py-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--hover-bg)] transition-colors"
             >
               <Info className="w-4 h-4" />
               <span>About Wordo</span>
@@ -227,7 +227,7 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
               onClose();
               onCloseDocument();
             }}
-            className="w-full flex items-center space-x-3 px-5 py-2 text-red-200 hover:bg-red-900/30 transition-colors font-medium"
+            className="w-full flex items-center space-x-3 px-5 py-2 text-[var(--destructive-color)] hover:bg-[var(--destructive-color)]/10 transition-colors font-medium"
           >
             <X className="w-4 h-4" />
             <span>Close Document</span>
@@ -236,20 +236,20 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
       </div>
 
       {/* 2. Main Content Area */}
-      <div className="flex-1 overflow-y-auto p-10 bg-white dark:bg-[#1a1918]">
+      <div className="flex-1 overflow-y-auto p-10 bg-[var(--app-bg)] text-[var(--text-primary)]">
         {/* HOME TAB */}
         {activeTab === 'home' && (
           <div className="max-w-4xl space-y-8 animate-in fade-in duration-150">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Good day</h1>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <h1 className="text-2xl font-bold text-[var(--text-primary)] mb-1">Good day</h1>
+              <p className="text-sm text-[var(--text-secondary)]">
                 Create a new document or jump back into recent files.
               </p>
             </div>
 
             {/* Quick Template Cards */}
             <div>
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-3">
+              <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-3">
                 New
               </h2>
               <div className="grid grid-cols-4 gap-4">
@@ -259,12 +259,12 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                     onNew();
                     onClose();
                   }}
-                  className="flex flex-col items-center p-4 bg-gray-50 dark:bg-[#252423] hover:bg-blue-50 dark:hover:bg-[#2d2c2b] border border-gray-200 dark:border-gray-700 hover:border-[#103f82] rounded-lg transition-all text-center group"
+                  className="flex flex-col items-center p-4 bg-[var(--surface-primary)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)] shadow-[var(--shadow-card)] border border-[var(--border-color)] hover:border-[var(--accent-color)] rounded-lg transition-all text-center group"
                 >
                   <div className="w-20 h-28 bg-white dark:bg-[#333] border border-gray-300 dark:border-gray-600 rounded shadow-xs mb-3 flex items-center justify-center group-hover:shadow-md transition-shadow">
-                    <FilePlus className="w-8 h-8 text-[#103f82] dark:text-blue-400" />
+                    <FilePlus className="w-8 h-8 text-[var(--accent-color)]" />
                   </div>
-                  <span className="text-xs font-semibold text-gray-800 dark:text-gray-200">
+                  <span className="text-xs font-semibold text-[var(--text-primary)]">
                     Blank document
                   </span>
                 </button>
@@ -276,10 +276,10 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                       onNewFromTemplate(tmpl);
                       onClose();
                     }}
-                    className="flex flex-col items-center p-4 bg-gray-50 dark:bg-[#252423] hover:bg-blue-50 dark:hover:bg-[#2d2c2b] border border-gray-200 dark:border-gray-700 hover:border-[#103f82] rounded-lg transition-all text-center group"
+                    className="flex flex-col items-center p-4 bg-[var(--surface-primary)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)] shadow-[var(--shadow-card)] border border-[var(--border-color)] hover:border-[var(--accent-color)] rounded-lg transition-all text-center group"
                   >
                     <div className="w-20 h-28 bg-white dark:bg-[#333] border border-gray-300 dark:border-gray-600 rounded shadow-xs mb-3 flex flex-col justify-between p-2 group-hover:shadow-md transition-shadow">
-                      <div className="w-full h-1.5 bg-[#103f82] rounded-xs" />
+                      <div className="w-full h-1.5 bg-[var(--accent-color)] rounded-xs" />
                       <div className="space-y-1">
                         <div className="w-full h-1 bg-gray-200 dark:bg-gray-600 rounded-xs" />
                         <div className="w-3/4 h-1 bg-gray-200 dark:bg-gray-600 rounded-xs" />
@@ -287,10 +287,10 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                       </div>
                       <div className="w-1/3 h-1 bg-gray-300 dark:bg-gray-500 rounded-xs" />
                     </div>
-                    <span className="text-xs font-semibold text-gray-800 dark:text-gray-200 truncate w-full">
+                    <span className="text-xs font-semibold text-[var(--text-primary)] truncate w-full">
                       {tmpl.name}
                     </span>
-                    <span className="text-[10px] text-gray-400 mt-0.5">{tmpl.category}</span>
+                    <span className="text-[10px] text-[var(--text-muted)] mt-0.5">{tmpl.category}</span>
                   </button>
                 ))}
               </div>
@@ -299,7 +299,7 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
             {/* Recent Documents */}
             <div>
               <div className="flex items-center justify-between mb-3">
-                <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                   Recent Documents
                 </h2>
                 <button
@@ -307,7 +307,7 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                     onOpenLocalFile();
                     onClose();
                   }}
-                  className="text-xs text-[#103f82] dark:text-blue-400 hover:underline flex items-center space-x-1"
+                  className="text-xs text-[var(--accent-color)] hover:underline flex items-center space-x-1"
                 >
                   <FolderOpen className="w-3.5 h-3.5" />
                   <span>Browse Device...</span>
@@ -315,11 +315,11 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
               </div>
 
               {recentDocuments.length === 0 ? (
-                <div className="p-8 text-center border border-dashed border-gray-200 dark:border-gray-700 rounded-lg text-xs text-gray-400">
+                <div className="p-8 text-center border border-dashed border-[var(--border-color)] rounded-lg text-xs text-[var(--text-muted)]">
                   No recent documents yet.
                 </div>
               ) : (
-                <div className="divide-y divide-gray-200 dark:divide-gray-800 border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden bg-gray-50/50 dark:bg-[#252423]/50">
+                <div className="divide-y divide-[var(--border-subtle)] border border-[var(--border-color)] rounded-lg overflow-hidden bg-[var(--surface-primary)] text-[var(--text-primary)] shadow-[var(--shadow-card)]">
                   {recentDocuments.slice(0, 8).map((doc, idx) => (
                     <button
                       key={idx}
@@ -327,18 +327,18 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                         onOpenRecent(doc);
                         onClose();
                       }}
-                      className="w-full flex items-center justify-between p-3 px-4 hover:bg-blue-50 dark:hover:bg-blue-900/20 text-left transition-colors"
+                      className="w-full flex items-center justify-between p-3 px-4 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-left transition-colors"
                     >
                       <div className="flex items-center space-x-3">
-                        <FileText className="w-4 h-4 text-[#103f82] dark:text-blue-400" />
+                        <FileText className="w-4 h-4 text-[var(--accent-color)]" />
                         <div>
-                          <p className="text-xs font-medium text-gray-800 dark:text-gray-200">
+                          <p className="text-xs font-medium text-[var(--text-primary)]">
                             {doc.title}
                           </p>
-                          <p className="text-[10px] text-gray-400">{doc.filePath || 'Local Document'}</p>
+                          <p className="text-[10px] text-[var(--text-muted)]">{doc.filePath || 'Local Document'}</p>
                         </div>
                       </div>
-                      <span className="text-[10px] text-gray-400">
+                      <span className="text-[10px] text-[var(--text-muted)]">
                         {new Date(doc.lastOpened).toLocaleDateString()}
                       </span>
                     </button>
@@ -353,8 +353,8 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
         {activeTab === 'new' && (
           <div className="max-w-4xl space-y-6 animate-in fade-in duration-150">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">New Document</h1>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <h1 className="text-2xl font-bold text-[var(--text-primary)] mb-1">New Document</h1>
+              <p className="text-sm text-[var(--text-secondary)]">
                 Choose a blank template or start with a pre-designed layout.
               </p>
             </div>
@@ -366,12 +366,12 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                   onNew();
                   onClose();
                 }}
-                className="flex flex-col items-center p-4 bg-gray-50 dark:bg-[#252423] hover:bg-blue-50 dark:hover:bg-[#2d2c2b] border border-gray-200 dark:border-gray-700 hover:border-[#103f82] rounded-lg transition-all text-center group"
+                className="flex flex-col items-center p-4 bg-[var(--surface-primary)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)] shadow-[var(--shadow-card)] border border-[var(--border-color)] hover:border-[var(--accent-color)] rounded-lg transition-all text-center group"
               >
                 <div className="w-24 h-32 bg-white dark:bg-[#333] border border-gray-300 dark:border-gray-600 rounded shadow-xs mb-3 flex items-center justify-center group-hover:shadow-md transition-shadow">
-                  <FilePlus className="w-10 h-10 text-[#103f82] dark:text-blue-400" />
+                  <FilePlus className="w-10 h-10 text-[var(--accent-color)]" />
                 </div>
-                <span className="text-xs font-semibold text-gray-800 dark:text-gray-200">
+                <span className="text-xs font-semibold text-[var(--text-primary)]">
                   Blank document
                 </span>
               </button>
@@ -383,10 +383,10 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                     onNewFromTemplate(tmpl);
                     onClose();
                   }}
-                  className="flex flex-col items-center p-4 bg-gray-50 dark:bg-[#252423] hover:bg-blue-50 dark:hover:bg-[#2d2c2b] border border-gray-200 dark:border-gray-700 hover:border-[#103f82] rounded-lg transition-all text-center group"
+                  className="flex flex-col items-center p-4 bg-[var(--surface-primary)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)] shadow-[var(--shadow-card)] border border-[var(--border-color)] hover:border-[var(--accent-color)] rounded-lg transition-all text-center group"
                 >
                   <div className="w-24 h-32 bg-white dark:bg-[#333] border border-gray-300 dark:border-gray-600 rounded shadow-xs mb-3 flex flex-col justify-between p-3 group-hover:shadow-md transition-shadow">
-                    <div className="w-full h-2 bg-[#103f82] rounded-xs" />
+                    <div className="w-full h-2 bg-[var(--accent-color)] rounded-xs" />
                     <div className="space-y-1.5">
                       <div className="w-full h-1 bg-gray-200 dark:bg-gray-600 rounded-xs" />
                       <div className="w-5/6 h-1 bg-gray-200 dark:bg-gray-600 rounded-xs" />
@@ -394,10 +394,10 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                     </div>
                     <div className="w-1/2 h-1 bg-gray-300 dark:bg-gray-500 rounded-xs" />
                   </div>
-                  <span className="text-xs font-semibold text-gray-800 dark:text-gray-200 truncate w-full">
+                  <span className="text-xs font-semibold text-[var(--text-primary)] truncate w-full">
                     {tmpl.name}
                   </span>
-                  <span className="text-[10px] text-gray-400 mt-0.5">{tmpl.category}</span>
+                  <span className="text-[10px] text-[var(--text-muted)] mt-0.5">{tmpl.category}</span>
                 </button>
               ))}
             </div>
@@ -408,8 +408,8 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
         {activeTab === 'open' && (
           <div className="max-w-3xl space-y-6 animate-in fade-in duration-150">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Open</h1>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <h1 className="text-2xl font-bold text-[var(--text-primary)] mb-1">Open</h1>
+              <p className="text-sm text-[var(--text-secondary)]">
                 Open documents from your local disk or recent work.
               </p>
             </div>
@@ -420,7 +420,7 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                   onOpenLocalFile();
                   onClose();
                 }}
-                className="flex items-center space-x-2 px-5 py-3 bg-[#103f82] hover:bg-blue-800 text-white rounded-md text-xs font-semibold shadow-xs transition-colors"
+                className="flex items-center space-x-2 px-5 py-3 bg-[var(--accent-color)] hover:bg-blue-800 text-white rounded-md text-xs font-semibold shadow-xs transition-colors"
               >
                 <FolderOpen className="w-4 h-4" />
                 <span>Browse This Device</span>
@@ -428,15 +428,15 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
             </div>
 
             <div>
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-3">
+              <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-3">
                 Recent Documents
               </h2>
               {recentDocuments.length === 0 ? (
-                <div className="p-8 text-center border border-dashed border-gray-200 dark:border-gray-700 rounded-lg text-xs text-gray-400">
+                <div className="p-8 text-center border border-dashed border-[var(--border-color)] rounded-lg text-xs text-[var(--text-muted)]">
                   No recent documents found.
                 </div>
               ) : (
-                <div className="divide-y divide-gray-200 dark:divide-gray-800 border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden bg-gray-50/50 dark:bg-[#252423]/50">
+                <div className="divide-y divide-[var(--border-subtle)] border border-[var(--border-color)] rounded-lg overflow-hidden bg-[var(--surface-primary)] text-[var(--text-primary)] shadow-[var(--shadow-card)]">
                   {recentDocuments.map((doc, idx) => (
                     <button
                       key={idx}
@@ -444,18 +444,18 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                         onOpenRecent(doc);
                         onClose();
                       }}
-                      className="w-full flex items-center justify-between p-3.5 px-4 hover:bg-blue-50 dark:hover:bg-blue-900/20 text-left transition-colors"
+                      className="w-full flex items-center justify-between p-3.5 px-4 hover:bg-[var(--hover-bg)] text-[var(--text-primary)] text-left transition-colors"
                     >
                       <div className="flex items-center space-x-3">
-                        <FileText className="w-5 h-5 text-[#103f82] dark:text-blue-400" />
+                        <FileText className="w-5 h-5 text-[var(--accent-color)]" />
                         <div>
-                          <p className="text-xs font-medium text-gray-800 dark:text-gray-200">
+                          <p className="text-xs font-medium text-[var(--text-primary)]">
                             {doc.title}
                           </p>
-                          <p className="text-[10px] text-gray-400">{doc.filePath || 'Local Document'}</p>
+                          <p className="text-[10px] text-[var(--text-muted)]">{doc.filePath || 'Local Document'}</p>
                         </div>
                       </div>
-                      <span className="text-[10px] text-gray-400">
+                      <span className="text-[10px] text-[var(--text-muted)]">
                         {new Date(doc.lastOpened).toLocaleString()}
                       </span>
                     </button>
@@ -470,42 +470,42 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
         {activeTab === 'info' && (
           <div className="max-w-2xl space-y-6 animate-in fade-in duration-150">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+              <h1 className="text-2xl font-bold text-[var(--text-primary)] mb-1">
                 Document Info
               </h1>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-[var(--text-secondary)]">
                 Properties, word counts, and version recovery.
               </p>
             </div>
 
-            <div className="p-5 bg-gray-50 dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-lg space-y-3">
-              <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-3">
-                <span className="text-xs font-medium text-gray-500">Document Title:</span>
-                <span className="text-xs font-bold text-gray-800 dark:text-gray-200">
+            <div className="p-5 bg-[var(--surface-primary)] text-[var(--text-primary)] shadow-[var(--shadow-card)] border border-[var(--border-color)] rounded-lg space-y-3">
+              <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-3">
+                <span className="text-xs font-medium text-[var(--text-muted)]">Document Title:</span>
+                <span className="text-xs font-bold text-[var(--text-primary)]">
                   {documentTitle}
                 </span>
               </div>
-              <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-3">
-                <span className="text-xs font-medium text-gray-500">File Location:</span>
-                <span className="text-xs text-gray-600 dark:text-gray-300 font-mono">
+              <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-3">
+                <span className="text-xs font-medium text-[var(--text-muted)]">File Location:</span>
+                <span className="text-xs text-[var(--text-secondary)] font-mono">
                   {currentFilePath || 'Local Unsaved Buffer'}
                 </span>
               </div>
-              <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-3">
-                <span className="text-xs font-medium text-gray-500">Word Count:</span>
-                <span className="text-xs font-semibold text-gray-800 dark:text-gray-200">
+              <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-3">
+                <span className="text-xs font-medium text-[var(--text-muted)]">Word Count:</span>
+                <span className="text-xs font-semibold text-[var(--text-primary)]">
                   {stats?.words ?? 0} words
                 </span>
               </div>
-              <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-3">
-                <span className="text-xs font-medium text-gray-500">Characters:</span>
-                <span className="text-xs text-gray-800 dark:text-gray-200">
+              <div className="flex items-center justify-between border-b border-[var(--border-color)] pb-3">
+                <span className="text-xs font-medium text-[var(--text-muted)]">Characters:</span>
+                <span className="text-xs text-[var(--text-primary)]">
                   {stats?.characters ?? 0} (without spaces: {stats?.charactersWithoutSpaces ?? 0})
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-gray-500">Estimated Reading Time:</span>
-                <span className="text-xs text-gray-800 dark:text-gray-200">
+                <span className="text-xs font-medium text-[var(--text-muted)]">Estimated Reading Time:</span>
+                <span className="text-xs text-[var(--text-primary)]">
                   {stats?.readingTimeMinutes ?? 1} min
                 </span>
               </div>
@@ -540,10 +540,10 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
         {activeTab === 'saveAs' && (
           <div className="max-w-2xl space-y-6 animate-in fade-in duration-150">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+              <h1 className="text-2xl font-bold text-[var(--text-primary)] mb-1">
                 Save As & Export
               </h1>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-sm text-[var(--text-secondary)]">
                 Save a local copy or export in various document formats.
               </p>
             </div>
@@ -555,16 +555,16 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                   onExportDocx();
                   onClose();
                 }}
-                className="p-4 bg-gray-50 dark:bg-[#252423] hover:bg-blue-50 dark:hover:bg-[#2d2c2b] border border-gray-200 dark:border-gray-700 hover:border-[#103f82] rounded-lg transition-all text-left flex items-start space-x-3"
+                className="p-4 bg-[var(--surface-primary)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)] shadow-[var(--shadow-card)] border border-[var(--border-color)] hover:border-[var(--accent-color)] rounded-lg transition-all text-left flex items-start space-x-3"
               >
-                <div className="p-2 bg-blue-100 dark:bg-blue-950/50 text-[#103f82] dark:text-blue-400 rounded">
+                <div className="p-2 bg-blue-100 dark:bg-blue-950/50 text-[var(--accent-color)] rounded">
                   <FileText className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xs font-bold text-gray-900 dark:text-white">
+                  <h3 className="text-xs font-bold text-[var(--text-primary)]">
                     Download a Copy (.docx)
                   </h3>
-                  <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1">
+                  <p className="text-[11px] text-[var(--text-secondary)] mt-1">
                     Standard Microsoft Word format, fully editable.
                   </p>
                 </div>
@@ -576,16 +576,16 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                   onExportPdf();
                   onClose();
                 }}
-                className="p-4 bg-gray-50 dark:bg-[#252423] hover:bg-red-50 dark:hover:bg-[#2d2c2b] border border-gray-200 dark:border-gray-700 hover:border-red-600 rounded-lg transition-all text-left flex items-start space-x-3"
+                className="p-4 bg-[var(--surface-primary)] text-[var(--text-primary)] shadow-[var(--shadow-card)] hover:bg-red-50 dark:hover:bg-[#2d2c2b] border border-[var(--border-color)] hover:border-red-600 rounded-lg transition-all text-left flex items-start space-x-3"
               >
                 <div className="p-2 bg-red-100 dark:bg-red-950/50 text-red-600 rounded">
                   <Download className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xs font-bold text-gray-900 dark:text-white">
+                  <h3 className="text-xs font-bold text-[var(--text-primary)]">
                     Download as PDF (.pdf)
                   </h3>
-                  <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1">
+                  <p className="text-[11px] text-[var(--text-secondary)] mt-1">
                     Fixed layout document for sharing and printing.
                   </p>
                 </div>
@@ -597,16 +597,16 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                   onExportHtml();
                   onClose();
                 }}
-                className="p-4 bg-gray-50 dark:bg-[#252423] hover:bg-amber-50 dark:hover:bg-[#2d2c2b] border border-gray-200 dark:border-gray-700 hover:border-amber-600 rounded-lg transition-all text-left flex items-start space-x-3"
+                className="p-4 bg-[var(--surface-primary)] text-[var(--text-primary)] shadow-[var(--shadow-card)] hover:bg-amber-50 dark:hover:bg-[#2d2c2b] border border-[var(--border-color)] hover:border-amber-600 rounded-lg transition-all text-left flex items-start space-x-3"
               >
                 <div className="p-2 bg-amber-100 dark:bg-amber-950/50 text-amber-600 rounded">
                   <FileCode className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xs font-bold text-gray-900 dark:text-white">
+                  <h3 className="text-xs font-bold text-[var(--text-primary)]">
                     Export as Web Page (.html)
                   </h3>
-                  <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1">
+                  <p className="text-[11px] text-[var(--text-secondary)] mt-1">
                     Clean HTML markup with styling included.
                   </p>
                 </div>
@@ -618,16 +618,16 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
                   onExportTxt();
                   onClose();
                 }}
-                className="p-4 bg-gray-50 dark:bg-[#252423] hover:bg-gray-100 dark:hover:bg-[#2d2c2b] border border-gray-200 dark:border-gray-700 hover:border-gray-600 rounded-lg transition-all text-left flex items-start space-x-3"
+                className="p-4 bg-[var(--surface-primary)] text-[var(--text-primary)] shadow-[var(--shadow-card)] hover:bg-gray-100 dark:hover:bg-[#2d2c2b] border border-[var(--border-color)] hover:border-gray-600 rounded-lg transition-all text-left flex items-start space-x-3"
               >
                 <div className="p-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded">
                   <FileText className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xs font-bold text-gray-900 dark:text-white">
+                  <h3 className="text-xs font-bold text-[var(--text-primary)]">
                     Plain Text (.txt)
                   </h3>
-                  <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1">
+                  <p className="text-[11px] text-[var(--text-secondary)] mt-1">
                     Unformatted text without images or styling.
                   </p>
                 </div>
@@ -640,25 +640,25 @@ export const BackstageView: React.FC<BackstageViewProps> = ({
         {activeTab === 'print' && (
           <div className="max-w-xl space-y-6 animate-in fade-in duration-150">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Print</h1>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <h1 className="text-2xl font-bold text-[var(--text-primary)] mb-1">Print</h1>
+              <p className="text-sm text-[var(--text-secondary)]">
                 Send document to local printer or save to PDF via system print dialog.
               </p>
             </div>
 
-            <div className="p-6 bg-gray-50 dark:bg-[#252423] border border-gray-200 dark:border-gray-700 rounded-lg space-y-4">
+            <div className="p-6 bg-[var(--surface-primary)] text-[var(--text-primary)] shadow-[var(--shadow-card)] border border-[var(--border-color)] rounded-lg space-y-4">
               <button
                 onClick={() => {
                   onClose();
                   onPrint();
                 }}
-                className="flex items-center space-x-2 px-6 py-3 bg-[#103f82] hover:bg-blue-800 text-white rounded text-xs font-bold shadow-xs transition-colors"
+                className="flex items-center space-x-2 px-6 py-3 bg-[var(--accent-color)] hover:bg-blue-800 text-white rounded text-xs font-bold shadow-xs transition-colors"
               >
                 <Printer className="w-4 h-4" />
                 <span>Print Document (Ctrl+P)</span>
               </button>
 
-              <div className="text-xs text-gray-500 dark:text-gray-400 space-y-1">
+              <div className="text-xs text-[var(--text-secondary)] space-y-1">
                 <p>• Ensures page boundaries, margins, and headers/footers render accurately.</p>
                 <p>• Compatible with all CUPS and Linux print queues.</p>
               </div>

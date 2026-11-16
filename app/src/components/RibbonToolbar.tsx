@@ -979,9 +979,9 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
     let coverHtml = '';
     if (template === 'executive') {
       coverHtml = `
-        <div class="wordo-cover-page" style="padding: 48px 0; text-align: left; min-height: 850px; display: flex; flex-direction: column; justify-content: space-between; border-bottom: 2px solid #185abd; margin-bottom: 48px;">
+        <div class="wordo-cover-page" style="padding: 48px 0; text-align: left; min-height: 850px; display: flex; flex-direction: column; justify-content: space-between; border-bottom: 2px solid #007AFF; margin-bottom: 48px;">
           <div>
-            <div style="height: 8px; width: 80px; background: #185abd; margin-bottom: 32px;"></div>
+            <div style="height: 8px; width: 80px; background: #007AFF; margin-bottom: 32px;"></div>
             <h1 style="font-size: 32pt; font-weight: 800; color: #0f172a; line-height: 1.1; margin-bottom: 12px;">EXECUTIVE REPORT</h1>
             <h3 style="font-size: 16pt; font-weight: 400; color: #64748b; margin-top: 0;">Comprehensive Analysis & Strategy Document</h3>
           </div>
@@ -997,7 +997,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
       coverHtml = `
         <div class="wordo-cover-page" style="padding: 60px 0; text-align: center; min-height: 850px; display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 48px;">
           <div style="margin-top: 80px;">
-            <h1 style="font-size: 36pt; font-weight: 900; color: #185abd; letter-spacing: -0.5px; margin-bottom: 16px;">DOCUMENT TITLE</h1>
+            <h1 style="font-size: 36pt; font-weight: 900; color: #007AFF; letter-spacing: -0.5px; margin-bottom: 16px;">DOCUMENT TITLE</h1>
             <p style="font-size: 14pt; color: #475569; max-width: 600px; margin: 0 auto;">A concise subtitle or abstract detailing the purpose of this project.</p>
           </div>
           <div style="margin-bottom: 40px;">
@@ -1010,7 +1010,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
     } else {
       coverHtml = `
         <div class="wordo-cover-page" style="padding: 48px 0; min-height: 850px; display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 48px;">
-          <div style="border-left: 4px solid #185abd; padding-left: 20px;">
+          <div style="border-left: 4px solid #007AFF; padding-left: 20px;">
             <h1 style="font-size: 28pt; font-weight: bold; color: #1e293b; margin-bottom: 8px;">RESEARCH PAPER TITLE</h1>
             <p style="font-size: 12pt; color: #64748b; margin: 0;">Academic Term / Subject Area</p>
           </div>
@@ -2070,7 +2070,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     : 'border-[var(--border-color)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)]'
                 }`}
               >
-                <span className="text-[12px] font-bold text-[#2b579a] leading-none">AaBbCc</span>
+                <span className="text-[12px] font-bold text-[var(--text-primary)] font-bold leading-none">AaBbCc</span>
                 <span className="text-[10px] text-[var(--text-secondary)] mt-1">Heading 2</span>
               </button>
 
@@ -2095,7 +2095,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     .focus()
                     .setParagraph()
                     .setMark('textStyle', { fontSize: '26', fontFamily: 'Aptos' })
-                    .setColor('#185abd')
+                    .setColor('#007AFF')
                     .run();
                 }}
                 className="flex flex-col items-start px-2 py-1 rounded border border-[var(--border-color)] hover:bg-[var(--hover-bg)] text-[var(--text-primary)] min-w-[55px] text-left transition-colors"
@@ -2250,7 +2250,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                 className="flex flex-col items-center justify-center p-1 px-2 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
               >
                 <div className="w-5 h-5 flex flex-col items-center justify-center border border-gray-400 dark:border-gray-500 rounded-xs mb-0.5">
-                  <div className="w-3 h-0.5 border-b border-dashed border-[#185abd]" />
+                  <div className="w-3 h-0.5 border-b border-dashed border-[var(--accent-color)]" />
                 </div>
                 <span className="text-[10px]">Page Break</span>
               </button>
@@ -2292,7 +2292,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                           onClick={() => handleInsertTable(r + 1, c + 1)}
                           className={`w-3.5 h-3.5 shrink-0 border border-gray-300 dark:border-gray-600 cursor-pointer rounded-2xs ${
                             r < tableGrid.rows && c < tableGrid.cols
-                              ? 'bg-[#185abd]/30 border-[#185abd]'
+                              ? 'bg-[var(--accent-color)]/20 border-[var(--accent-color)]'
                               : 'bg-gray-50 dark:bg-gray-800'
                           }`}
                         />
@@ -2759,8 +2759,8 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                     className="flex flex-col items-center justify-center p-1 px-1.5 rounded hover:bg-[var(--hover-bg)] text-[var(--text-primary)] transition-colors"
                     title="Page Margins"
                   >
-                    <div className="w-4 h-5 border border-dashed border-[#185abd] dark:border-blue-400 rounded-xs flex items-center justify-center mb-0.5">
-                      <div className="w-2 h-3 bg-[#185abd]/20 dark:bg-blue-400/20" />
+                    <div className="w-4 h-5 border border-dashed border-[var(--accent-color)] rounded-xs flex items-center justify-center mb-0.5">
+                      <div className="w-2 h-3 bg-[var(--accent-color)]/20" />
                     </div>
                     <span className="text-[10px] flex items-center">
                       Margins <ChevronDown className="w-2.5 h-2.5 ml-0.5 opacity-60" />
