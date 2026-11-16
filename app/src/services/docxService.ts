@@ -19,6 +19,8 @@ import {
   Header,
   Footer,
   PageNumber,
+  LevelFormat,
+  VerticalAlign,
 } from 'docx';
 import { PlatformService } from './platform';
 
@@ -26,6 +28,7 @@ export class DocxService {
   /**
    * Imports a DOCX file from an ArrayBuffer and converts to structured HTML,
    * preserving embedded images, tables, lists, and formatting.
+   * Surfaces meaningful import warnings to the user.
    */
   public static async importDocx(arrayBuffer: ArrayBuffer): Promise<{ html: string; warnings: string[] }> {
     try {
@@ -39,9 +42,31 @@ export class DocxService {
         }),
       };
       const result = await (mammoth as any).convertToHtml({ arrayBuffer }, options);
+
+      // Clean and surface meaningful warnings without overwhelming technical internals
+      const rawMessages: string[] = result.messages?.map((m: any) => m.message) || [];
+      const userWarnings: string[] = [];
+
+      for (const msg of rawMessages) {
+        const lower = msg.toLowerCase();
+        if (lower.includes('unrecognised style') || lower.includes('unrecognized style')) {
+          // Normal harmless formatting fallback; skip spamming user
+          continue;
+        }
+        if (lower.includes('table') || lower.includes('row') || lower.includes('column')) {
+          userWarnings.push('Complex table layout was simplified to match standard editor tables.');
+        } else if (lower.includes('image') || lower.includes('drawing')) {
+          userWarnings.push('Some advanced graphics or shapes were imported as static images.');
+        } else if (lower.includes('hyperlink') || lower.includes('link')) {
+          userWarnings.push('Some hyperlink formatting was simplified.');
+        } else if (!userWarnings.includes(msg)) {
+          userWarnings.push(msg);
+        }
+      }
+
       return {
         html: result.value,
-        warnings: result.messages.map((m: any) => m.message),
+        warnings: Array.from(new Set(userWarnings)),
       };
     } catch (err: any) {
       console.error('Error importing DOCX:', err);
@@ -61,11 +86,18 @@ export class DocxService {
   ): Promise<string | false> {
     try {
       const docChildren: (Paragraph | Table)[] = [];
+      const numberingConfigs: any[] = [];
+      let listCounter = 0;
+      const exportWarnings: string[] = [];
 
       // Parse Tiptap JSON content into docx library elements
       if (editorJson && editorJson.content && Array.isArray(editorJson.content)) {
         for (const node of editorJson.content) {
-          const docElement = this.convertNodeToDocx(node);
+          const docElement = this.convertNodeToDocx(node, 0, () => {
+            listCounter++;
+            return `num_list_${listCounter}`;
+          }, numberingConfigs, exportWarnings);
+
           if (docElement) {
             if (Array.isArray(docElement)) {
               docChildren.push(...docElement);
@@ -74,6 +106,10 @@ export class DocxService {
             }
           }
         }
+      }
+
+      if (exportWarnings.length > 0) {
+        console.warn('[Wordo DOCX Export Warnings]:', exportWarnings);
       }
 
       // If document is empty, add at least one empty paragraph
@@ -155,6 +191,7 @@ export class DocxService {
       const doc = new Document({
         title: filename.replace(/\.docx$/i, ''),
         description: 'Created with Wordo',
+        numbering: numberingConfigs.length > 0 ? { config: numberingConfigs } : undefined,
         sections: [
           {
             properties: sectionProps,
@@ -179,7 +216,13 @@ export class DocxService {
     }
   }
 
-  private static convertNodeToDocx(node: any): Paragraph | Table | (Paragraph | Table)[] | null {
+  private static convertNodeToDocx(
+    node: any,
+    currentLevel: number = 0,
+    getNextListRef: () => string,
+    numberingConfigs: any[],
+    warnings: string[]
+  ): Paragraph | Table | (Paragraph | Table)[] | null {
     if (!node) return null;
 
     switch (node.type) {
@@ -225,70 +268,54 @@ export class DocxService {
 
       case 'bulletList':
       case 'bullet_list': {
-        const items: Paragraph[] = [];
-        if (node.content && Array.isArray(node.content)) {
-          for (const item of node.content) {
-            if (item.content && Array.isArray(item.content)) {
-              for (const p of item.content) {
-                const runs = this.extractParagraphRuns(p.content);
-                items.push(
-                  new Paragraph({
-                    children: runs,
-                    bullet: { level: 0 },
-                    spacing: { after: 80 },
-                  })
-                );
-              }
-            }
-          }
-        }
-        return items;
+        return this.convertListItems(node, currentLevel, 'bullet', undefined, getNextListRef, numberingConfigs, warnings);
       }
 
       case 'orderedList':
       case 'ordered_list': {
-        const items: Paragraph[] = [];
-        if (node.content && Array.isArray(node.content)) {
-          let num = 1;
-          for (const item of node.content) {
-            if (item.content && Array.isArray(item.content)) {
-              for (const p of item.content) {
-                const runs = this.extractParagraphRuns(p.content);
-                items.push(
-                  new Paragraph({
-                    children: [new TextRun({ text: `${num}. `, bold: true, font: 'Aptos' }), ...runs],
-                    spacing: { after: 80 },
-                  })
-                );
-              }
-            }
-            num++;
-          }
-        }
-        return items;
+        const startNumber = typeof node.attrs?.start === 'number' ? node.attrs.start : 1;
+        const listRef = getNextListRef();
+
+        numberingConfigs.push({
+          reference: listRef,
+          levels: [
+            {
+              level: 0,
+              format: LevelFormat.DECIMAL,
+              text: '%1.',
+              alignment: AlignmentType.LEFT,
+              start: startNumber,
+            },
+            {
+              level: 1,
+              format: LevelFormat.LOWER_LETTER,
+              text: '%2.',
+              alignment: AlignmentType.LEFT,
+              start: 1,
+            },
+            {
+              level: 2,
+              format: LevelFormat.LOWER_ROMAN,
+              text: '%3.',
+              alignment: AlignmentType.LEFT,
+              start: 1,
+            },
+            {
+              level: 3,
+              format: LevelFormat.DECIMAL,
+              text: '%4.',
+              alignment: AlignmentType.LEFT,
+              start: 1,
+            },
+          ],
+        });
+
+        return this.convertListItems(node, currentLevel, 'ordered', listRef, getNextListRef, numberingConfigs, warnings);
       }
 
       case 'taskList':
       case 'task_list': {
-        const items: Paragraph[] = [];
-        if (node.content && Array.isArray(node.content)) {
-          for (const item of node.content) {
-            const checked = item.attrs?.checked;
-            const prefix = checked ? '☑ ' : '☐ ';
-            if (item.content && Array.isArray(item.content)) {
-              for (const p of item.content) {
-                const runs = this.extractParagraphRuns(p.content);
-                items.push(
-                  new Paragraph({
-                    children: [new TextRun({ text: prefix, bold: true, font: 'Aptos' }), ...runs],
-                    spacing: { after: 80 },
-                  })
-                );
-              }
-            }
-          }
-        }
-        return items;
+        return this.convertListItems(node, currentLevel, 'task', undefined, getNextListRef, numberingConfigs, warnings);
       }
 
       case 'blockquote': {
@@ -338,22 +365,46 @@ export class DocxService {
             const cells: TableCell[] = [];
             if (rowNode.content && Array.isArray(rowNode.content)) {
               for (const cellNode of rowNode.content) {
-                const cellParagraphs: Paragraph[] = [];
+                const cellChildren: (Paragraph | Table)[] = [];
                 if (cellNode.content && Array.isArray(cellNode.content)) {
-                  for (const p of cellNode.content) {
-                    const runs = this.extractParagraphRuns(p.content);
-                    cellParagraphs.push(new Paragraph({ children: runs }));
+                  for (const childBlock of cellNode.content) {
+                    const block = this.convertNodeToDocx(childBlock, 0, getNextListRef, numberingConfigs, warnings);
+                    if (block) {
+                      if (Array.isArray(block)) {
+                        cellChildren.push(...block);
+                      } else {
+                        cellChildren.push(block);
+                      }
+                    }
                   }
                 }
-                if (cellParagraphs.length === 0) {
-                  cellParagraphs.push(new Paragraph({ text: '' }));
+                if (cellChildren.length === 0) {
+                  cellChildren.push(new Paragraph({ text: '' }));
                 }
 
                 const isHeader = cellNode.type === 'tableHeader';
-                const customBg = cellNode.attrs?.background ? cellNode.attrs.background.replace('#', '') : undefined;
+                const customBg = cellNode.attrs?.background
+                  ? cellNode.attrs.background.replace('#', '')
+                  : undefined;
+
+                const colSpan = cellNode.attrs?.colspan || undefined;
+                const rowSpan = cellNode.attrs?.rowspan || undefined;
+
+                let cellWidthConfig: any = undefined;
+                if (cellNode.attrs?.colwidth && Array.isArray(cellNode.attrs.colwidth) && cellNode.attrs.colwidth[0]) {
+                  cellWidthConfig = {
+                    size: Math.round(cellNode.attrs.colwidth[0] * 15),
+                    type: WidthType.DXA,
+                  };
+                }
+
                 cells.push(
                   new TableCell({
-                    children: cellParagraphs,
+                    children: cellChildren,
+                    columnSpan: colSpan,
+                    rowSpan: rowSpan,
+                    width: cellWidthConfig,
+                    verticalAlign: VerticalAlign.TOP,
                     shading: customBg ? { fill: customBg } : (isHeader ? { fill: 'F1F5F9' } : undefined),
                     borders: {
                       top: { style: BorderStyle.SINGLE, size: 1, color: 'CBD5E1' },
@@ -375,12 +426,110 @@ export class DocxService {
         });
       }
 
-      default:
+      default: {
+        // Fallback for unsupported nodes: preserve any text or children rather than discarding
+        if (node.content && Array.isArray(node.content)) {
+          const fallbackChildren: (Paragraph | Table)[] = [];
+          for (const sub of node.content) {
+            const childResult = this.convertNodeToDocx(sub, currentLevel, getNextListRef, numberingConfigs, warnings);
+            if (childResult) {
+              if (Array.isArray(childResult)) fallbackChildren.push(...childResult);
+              else fallbackChildren.push(childResult);
+            }
+          }
+          if (fallbackChildren.length > 0) {
+            warnings.push(`Unsupported node type '${node.type}' converted via child block fallback.`);
+            return fallbackChildren;
+          }
+        }
         if (node.text) {
+          warnings.push(`Unsupported inline node converted to text run.`);
           return new Paragraph({ text: node.text });
         }
+        warnings.push(`Skipped unrecognized empty node type '${node.type}'.`);
         return null;
+      }
     }
+  }
+
+  /**
+   * Recursively convert list items preserving nested list hierarchy and numbering
+   */
+  private static convertListItems(
+    listNode: any,
+    level: number,
+    type: 'bullet' | 'ordered' | 'task',
+    numberingRef: string | undefined,
+    getNextListRef: () => string,
+    numberingConfigs: any[],
+    warnings: string[]
+  ): Paragraph[] {
+    const paragraphs: Paragraph[] = [];
+    if (!listNode.content || !Array.isArray(listNode.content)) return paragraphs;
+
+    for (const item of listNode.content) {
+      if (!item.content || !Array.isArray(item.content)) continue;
+
+      const isChecked = item.attrs?.checked;
+      const taskPrefix = isChecked ? '☑ ' : '☐ ';
+
+      for (const child of item.content) {
+        if (child.type === 'paragraph') {
+          const runs = this.extractParagraphRuns(child.content);
+          if (type === 'bullet') {
+            paragraphs.push(
+              new Paragraph({
+                children: runs,
+                bullet: { level },
+                spacing: { after: 80 },
+              })
+            );
+          } else if (type === 'ordered' && numberingRef) {
+            paragraphs.push(
+              new Paragraph({
+                children: runs,
+                numbering: { reference: numberingRef, level },
+                spacing: { after: 80 },
+              })
+            );
+          } else if (type === 'task') {
+            paragraphs.push(
+              new Paragraph({
+                children: [new TextRun({ text: taskPrefix, bold: true, font: 'Aptos' }), ...runs],
+                indent: { left: (level + 1) * 360 },
+                spacing: { after: 80 },
+              })
+            );
+          }
+        } else if (child.type === 'bulletList' || child.type === 'bullet_list') {
+          paragraphs.push(
+            ...this.convertListItems(child, level + 1, 'bullet', undefined, getNextListRef, numberingConfigs, warnings)
+          );
+        } else if (child.type === 'orderedList' || child.type === 'ordered_list') {
+          paragraphs.push(
+            ...this.convertListItems(child, level + 1, 'ordered', numberingRef, getNextListRef, numberingConfigs, warnings)
+          );
+        } else if (child.type === 'taskList' || child.type === 'task_list') {
+          paragraphs.push(
+            ...this.convertListItems(child, level + 1, 'task', undefined, getNextListRef, numberingConfigs, warnings)
+          );
+        } else {
+          // Other nested node in list item (e.g. blockquote, codeblock)
+          const nested = this.convertNodeToDocx(child, level + 1, getNextListRef, numberingConfigs, warnings);
+          if (nested) {
+            if (Array.isArray(nested)) {
+              for (const n of nested) {
+                if (n instanceof Paragraph) paragraphs.push(n);
+              }
+            } else if (nested instanceof Paragraph) {
+              paragraphs.push(nested);
+            }
+          }
+        }
+      }
+    }
+
+    return paragraphs;
   }
 
   private static mapHighlightColor(hex?: string): any {
@@ -509,7 +658,10 @@ export class DocxService {
     return runs;
   }
 
-  private static createImageRun(src?: string, width?: number, height?: number): ImageRun | null {
+  /**
+   * Create an ImageRun with aspect-ratio preservation and max bounds fitting
+   */
+  private static createImageRun(src?: string, rawWidth?: number, rawHeight?: number): ImageRun | null {
     if (!src || typeof src !== 'string' || !src.startsWith('data:')) {
       return null;
     }
@@ -527,12 +679,30 @@ export class DocxService {
             ? 'jpg'
             : (mimeMatch?.[1] as any) || 'png';
 
+        // Proportional dimension scaling preserving aspect ratio
+        const maxWidth = 580;
+        const maxHeight = 780;
+
+        let width = rawWidth && rawWidth > 0 ? rawWidth : 450;
+        let height = rawHeight && rawHeight > 0 ? rawHeight : 300;
+
+        const aspectRatio = width / height;
+
+        if (width > maxWidth) {
+          width = maxWidth;
+          height = Math.round(maxWidth / aspectRatio);
+        }
+        if (height > maxHeight) {
+          height = maxHeight;
+          width = Math.round(maxHeight * aspectRatio);
+        }
+
         return new ImageRun({
           data: bytes,
           type: imgType,
           transformation: {
-            width: Math.min(500, width || 450),
-            height: Math.min(400, height || 300),
+            width,
+            height,
           },
         });
       }

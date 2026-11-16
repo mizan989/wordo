@@ -44,6 +44,16 @@ export class PlatformService {
 
   public static isDesktop(): boolean { return this.isTauriEnv(); }
 
+  public static async seedAuthorizedPaths(paths: string[]): Promise<void> {
+    if (this.isTauriEnv() && paths.length > 0) {
+      try {
+        await tauriInvoke<number>('seed_authorized_paths', { paths });
+      } catch (e) {
+        console.warn('[Wordo] seed_authorized_paths:', e);
+      }
+    }
+  }
+
   public static async openFileDialog(acceptTypes = '.docx,.txt,.html'): Promise<OpenedFile | null> {
     if (this.isTauriEnv()) {
       let path: string | null = null;

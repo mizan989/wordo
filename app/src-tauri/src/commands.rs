@@ -1,6 +1,8 @@
 // Native Tauri 2 command implementations for Wordo
+use std::collections::HashSet;
 use std::fs;
-use std::path::PathBuf;
+use std::path::{Component, Path, PathBuf};
+use std::sync::Mutex;
 use serde::{Serialize, Deserialize};
 use tauri::Manager;
 
@@ -26,26 +28,178 @@ pub struct FilePayload {
     pub content_base64: String,
 }
 
-/// Secure command to read file from disk
+/// Helper function to reliably normalize a path resolving '..' and '.'
+pub fn normalize_path(path: &Path) -> Result<PathBuf, String> {
+    if path.exists() {
+        return fs::canonicalize(path).map_err(|e| format!("Failed to canonicalize path: {}", e));
+    }
+
+    // For a path that doesn't exist yet, find the closest existing ancestor
+    let mut ancestors = Vec::new();
+    let mut current = path;
+    while !current.exists() {
+        if let Some(file_name) = current.file_name() {
+            ancestors.push(file_name);
+        }
+        match current.parent() {
+            Some(parent) => current = parent,
+            None => break,
+        }
+    }
+
+    if current.exists() {
+        let mut canon = fs::canonicalize(current)
+            .map_err(|e| format!("Failed to canonicalize parent: {}", e))?;
+        for part in ancestors.into_iter().rev() {
+            canon.push(part);
+        }
+        Ok(canon)
+    } else {
+        let mut normalized = PathBuf::new();
+        for component in path.components() {
+            match component {
+                Component::ParentDir => {
+                    normalized.pop();
+                }
+                Component::CurDir => {}
+                _ => normalized.push(component),
+            }
+        }
+        Ok(normalized)
+    }
+}
+
+/// Thread-safe security state maintaining explicitly authorized filesystem paths
+pub struct SecurityState {
+    pub authorized_paths: Mutex<HashSet<PathBuf>>,
+    pub auth_file_path: PathBuf,
+    pub recovery_dir: PathBuf,
+}
+
+impl SecurityState {
+    pub fn new(app_data_dir: PathBuf) -> Self {
+        let recovery_dir = app_data_dir.join("recovery");
+        let auth_file_path = app_data_dir.join("authorized_paths.json");
+        let mut set = HashSet::new();
+
+        if let Ok(canon_rec) = normalize_path(&recovery_dir) {
+            set.insert(canon_rec);
+        } else {
+            set.insert(recovery_dir.clone());
+        }
+
+        if auth_file_path.exists() {
+            if let Ok(content) = fs::read_to_string(&auth_file_path) {
+                if let Ok(paths) = serde_json::from_str::<Vec<PathBuf>>(&content) {
+                    for p in paths {
+                        if let Ok(canon) = normalize_path(&p) {
+                            set.insert(canon);
+                        } else {
+                            set.insert(p);
+                        }
+                    }
+                }
+            }
+        }
+
+        Self {
+            authorized_paths: Mutex::new(set),
+            auth_file_path,
+            recovery_dir,
+        }
+    }
+
+    pub fn authorize(&self, path: &Path) -> Result<PathBuf, String> {
+        let norm = normalize_path(path)?;
+        let mut guard = self.authorized_paths.lock().map_err(|e| e.to_string())?;
+        guard.insert(norm.clone());
+
+        if let Some(parent) = self.auth_file_path.parent() {
+            if !parent.exists() {
+                let _ = fs::create_dir_all(parent);
+            }
+        }
+        let list: Vec<PathBuf> = guard.iter().cloned().collect();
+        if let Ok(json) = serde_json::to_string(&list) {
+            let _ = fs::write(&self.auth_file_path, json);
+        }
+
+        Ok(norm)
+    }
+
+    pub fn is_authorized(&self, path: &Path) -> bool {
+        let norm = match normalize_path(path) {
+            Ok(p) => p,
+            Err(_) => return false,
+        };
+
+        if let Ok(canon_rec) = normalize_path(&self.recovery_dir) {
+            if norm.starts_with(&canon_rec) {
+                return true;
+            }
+        }
+
+        let guard = match self.authorized_paths.lock() {
+            Ok(g) => g,
+            Err(_) => return false,
+        };
+        guard.contains(&norm)
+    }
+}
+
+/// Secure command to read file from disk (authorized paths only)
 #[tauri::command]
-pub fn read_document_file(path: String) -> Result<Vec<u8>, String> {
+pub fn read_document_file(state: tauri::State<'_, SecurityState>, path: String) -> Result<Vec<u8>, String> {
     let path_buf = PathBuf::from(&path);
+    if !state.is_authorized(&path_buf) {
+        return Err(format!("Access denied: path is not authorized: {}", path));
+    }
     if !path_buf.exists() {
         return Err(format!("File does not exist: {}", path));
     }
     fs::read(&path_buf).map_err(|e| format!("Failed to read file: {}", e))
 }
 
-/// Secure command to write file to disk
+/// Secure command to write file to disk (authorized paths only)
 #[tauri::command]
-pub fn write_document_file(path: String, data: Vec<u8>) -> Result<(), String> {
+pub fn write_document_file(
+    state: tauri::State<'_, SecurityState>,
+    path: String,
+    data: Vec<u8>,
+) -> Result<(), String> {
     let path_buf = PathBuf::from(&path);
+    if !state.is_authorized(&path_buf) {
+        return Err(format!("Access denied: path is not authorized: {}", path));
+    }
     if let Some(parent) = path_buf.parent() {
         if !parent.exists() {
             fs::create_dir_all(parent).map_err(|e| format!("Failed to create directories: {}", e))?;
         }
     }
     fs::write(&path_buf, data).map_err(|e| format!("Failed to write file: {}", e))
+}
+
+/// Seed authorized paths from valid existing recent document files
+#[tauri::command]
+pub fn seed_authorized_paths(
+    state: tauri::State<'_, SecurityState>,
+    paths: Vec<String>,
+) -> Result<usize, String> {
+    let mut added = 0;
+    for p_str in paths {
+        let p = PathBuf::from(&p_str);
+        if p.exists() && p.is_file() {
+            if let Some(ext) = p.extension().and_then(|s| s.to_str()) {
+                let ext_lower = ext.to_lowercase();
+                if matches!(ext_lower.as_str(), "docx" | "txt" | "html" | "htm" | "rtf" | "odt" | "pdf") {
+                    if state.authorize(&p).is_ok() {
+                        added += 1;
+                    }
+                }
+            }
+        }
+    }
+    Ok(added)
 }
 
 /// Platform-appropriate application recovery directory
@@ -77,11 +231,12 @@ pub fn get_system_info() -> PlatformInfo {
 #[tauri::command]
 pub async fn pick_file_dialog(
     window: tauri::WebviewWindow,
+    state: tauri::State<'_, SecurityState>,
     title: Option<String>,
     accept_types: Option<String>,
 ) -> Result<Option<String>, String> {
     #[cfg(target_os = "linux")]
-    {
+    let selected_path: Option<String> = {
         let (tx, rx) = std::sync::mpsc::channel();
         let app = window.app_handle().clone();
         let win = window.clone();
@@ -139,11 +294,11 @@ pub async fn pick_file_dialog(
         })
         .map_err(|e| format!("Failed to run file chooser on main thread: {}", e))?;
 
-        rx.recv().map_err(|e| format!("Failed to receive file chooser result: {}", e))
-    }
+        rx.recv().map_err(|e| format!("Failed to receive file chooser result: {}", e))?
+    };
 
     #[cfg(not(target_os = "linux"))]
-    {
+    let selected_path: Option<String> = {
         let mut builder = window.dialog().file();
         if let Some(t) = title {
             builder = builder.set_title(t);
@@ -157,20 +312,27 @@ pub async fn pick_file_dialog(
             builder = builder.add_filter("Documents", &exts);
         }
         let file = builder.blocking_pick_file();
-        Ok(file.and_then(|f| f.into_path().ok()).map(|p| p.to_string_lossy().to_string()))
+        file.and_then(|f| f.into_path().ok()).map(|p| p.to_string_lossy().to_string())
+    };
+
+    if let Some(ref p) = selected_path {
+        let _ = state.authorize(&PathBuf::from(p));
     }
+
+    Ok(selected_path)
 }
 
 /// Native save file dialog with fully working window controls and transient parent hierarchy
 #[tauri::command]
 pub async fn save_file_dialog(
     window: tauri::WebviewWindow,
+    state: tauri::State<'_, SecurityState>,
     title: Option<String>,
     default_path: Option<String>,
     filter_extension: Option<String>,
 ) -> Result<Option<String>, String> {
     #[cfg(target_os = "linux")]
-    {
+    let selected_path: Option<String> = {
         let (tx, rx) = std::sync::mpsc::channel();
         let app = window.app_handle().clone();
         let win = window.clone();
@@ -233,11 +395,11 @@ pub async fn save_file_dialog(
         })
         .map_err(|e| format!("Failed to run save dialog on main thread: {}", e))?;
 
-        rx.recv().map_err(|e| format!("Failed to receive save dialog result: {}", e))
-    }
+        rx.recv().map_err(|e| format!("Failed to receive save dialog result: {}", e))?
+    };
 
     #[cfg(not(target_os = "linux"))]
-    {
+    let selected_path: Option<String> = {
         let mut builder = window.dialog().file();
         if let Some(t) = title {
             builder = builder.set_title(t);
@@ -250,6 +412,12 @@ pub async fn save_file_dialog(
             builder = builder.add_filter("Document", &[clean]);
         }
         let file = builder.blocking_save_file();
-        Ok(file.and_then(|f| f.into_path().ok()).map(|p| p.to_string_lossy().to_string()))
+        file.and_then(|f| f.into_path().ok()).map(|p| p.to_string_lossy().to_string())
+    };
+
+    if let Some(ref p) = selected_path {
+        let _ = state.authorize(&PathBuf::from(p));
     }
+
+    Ok(selected_path)
 }

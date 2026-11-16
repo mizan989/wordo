@@ -5,7 +5,7 @@ mod commands;
 
 use commands::{
     get_recovery_dir, get_system_info, pick_file_dialog, read_document_file, save_file_dialog,
-    write_document_file,
+    seed_authorized_paths, write_document_file, SecurityState,
 };
 use tauri::Emitter;
 
@@ -15,7 +15,12 @@ fn close_window(window: tauri::Window) {
 }
 
 fn main() {
+    let app_data_dir = dirs::data_dir()
+        .unwrap_or_else(|| std::path::PathBuf::from("."))
+        .join("WordClient");
+
     tauri::Builder::default()
+        .manage(SecurityState::new(app_data_dir))
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_fs::init())
         .on_window_event(|window, event| {
@@ -31,6 +36,7 @@ fn main() {
             get_system_info,
             pick_file_dialog,
             save_file_dialog,
+            seed_authorized_paths,
             close_window,
         ])
         .run(tauri::generate_context!())

@@ -43,6 +43,8 @@ export interface RecoveryDraft {
   contentHtml: string;
   contentJson?: any;
   pageSettings?: PageSettings;
+  filePath?: string;
+  fileFormat?: 'docx' | 'html' | 'txt';
 }
 
 export interface RecentDocument {

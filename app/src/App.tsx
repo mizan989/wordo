@@ -230,11 +230,16 @@ export const App: React.FC = () => {
     }
   }, [editor, updateDocumentStats]);
 
-  // Check for recovery draft on startup
+  // Check for recovery draft on startup and seed authorized paths for recent files
   useEffect(() => {
     const draft = StorageService.getRecoverableDraft();
     if (draft) {
       setActiveRecoveryDraft(draft);
+    }
+    const recents = StorageService.getRecentDocuments();
+    const filePaths = recents.map((r) => r.filePath).filter((p): p is string => Boolean(p));
+    if (filePaths.length > 0) {
+      PlatformService.seedAuthorizedPaths(filePaths);
     }
   }, []);
 
@@ -398,11 +403,18 @@ export const App: React.FC = () => {
     const timer = setTimeout(() => {
       const html = editor.getHTML();
       const json = editor.getJSON();
-      StorageService.saveDraft(documentTitle, html, json, pageSettings);
+      StorageService.saveDraft(
+        documentTitle,
+        html,
+        json,
+        pageSettings,
+        currentFilePath || undefined,
+        currentFileFormat
+      );
     }, 4000);
 
     return () => clearTimeout(timer);
-  }, [editor, isDirty, documentTitle, editRevision, pageSettings]);
+  }, [editor, isDirty, documentTitle, editRevision, pageSettings, currentFilePath, currentFileFormat]);
 
   // Check URL paths for Craft Anything routes
   useEffect(() => {
@@ -603,27 +615,47 @@ export const App: React.FC = () => {
       const fileData = await PlatformService.openFileDialog('.docx,.txt,.html');
       if (!fileData) return;
 
-      if (fileData.isBinary && fileData.name.toLowerCase().endsWith('.docx')) {
-        const { html } = await DocxService.importDocx(fileData.content as ArrayBuffer);
+      const lowerName = fileData.name.toLowerCase();
+      const isDocx = fileData.isBinary && lowerName.endsWith('.docx');
+      const isHtml = lowerName.endsWith('.html') || lowerName.endsWith('.htm');
+
+      if (isDocx) {
+        const { html, warnings } = await DocxService.importDocx(fileData.content as ArrayBuffer);
         editor.commands.setContent(html);
+        if (warnings && warnings.length > 0) {
+          const meaningful = warnings.filter((w) => !w.toLowerCase().includes('unrecognised style'));
+          if (meaningful.length > 0) {
+            console.info('[Wordo DOCX Import Info]:', meaningful.slice(0, 3).join('; '));
+          }
+        }
       } else if (typeof fileData.content === 'string') {
-        if (fileData.name.toLowerCase().endsWith('.html') || fileData.content.includes('<p>')) {
+        if (isHtml) {
           editor.commands.setContent(fileData.content);
         } else {
-          // Plain text: split by lines
+          // Plain text: escape HTML-sensitive characters and preserve line breaks and empty paragraphs
+          const escapeHtml = (str: string) =>
+            str
+              .replace(/&/g, '&amp;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;')
+              .replace(/"/g, '&quot;')
+              .replace(/'/g, '&#039;');
+
           const paragraphs = fileData.content
-            .split('\n')
-            .map((line) => `<p>${line || '<br/>'}</p>`)
+            .split(/\r?\n/)
+            .map((line) => (line.length === 0 ? '<p><br/></p>' : `<p>${escapeHtml(line)}</p>`))
             .join('');
-          editor.commands.setContent(paragraphs);
+          editor.commands.setContent(paragraphs || '<p><br/></p>');
         }
       }
 
       const cleanTitle = fileData.name.replace(/\.[^/.]+$/, '');
+      const ext = lowerName.split('.').pop() || 'docx';
+      const format = isHtml ? 'html' : ext === 'txt' ? 'txt' : 'docx';
+
       setDocumentTitle(cleanTitle);
-      // Imported files are kept intact on disk; Save creates a Wordo DOCX copy.
-      setCurrentFilePath(null);
-      setCurrentFileFormat('docx');
+      setCurrentFilePath(fileData.path || null);
+      setCurrentFileFormat(format);
       setIsDirty(false);
 
       StorageService.addRecentDocument(cleanTitle, editor.getText(), fileData.path, editor.getHTML(), pageSettings);
@@ -641,16 +673,50 @@ export const App: React.FC = () => {
     }
     try {
       if (recent.filePath && PlatformService.isDesktop()) {
-        const fileData = await PlatformService.readDocument(recent.filePath);
-        const html = fileData.isBinary
-          ? (await DocxService.importDocx(fileData.content as ArrayBuffer)).html
-          : fileData.name.toLowerCase().endsWith('.html')
-            ? fileData.content as string
-            : (fileData.content as string).split('\n').map((line) => `<p>${line || '<br/>'}</p>`).join('');
-        editor.commands.setContent(html);
-        if (recent.pageSettings) setPageSettings(recent.pageSettings);
-        setCurrentFilePath(null);
-        setCurrentFileFormat('docx');
+        try {
+          const fileData = await PlatformService.readDocument(recent.filePath);
+          const lowerName = (fileData.name || recent.filePath).toLowerCase();
+          const isDocx = fileData.isBinary && lowerName.endsWith('.docx');
+          const isHtml = lowerName.endsWith('.html') || lowerName.endsWith('.htm');
+
+          let html = '';
+          if (isDocx) {
+            const result = await DocxService.importDocx(fileData.content as ArrayBuffer);
+            html = result.html;
+          } else if (isHtml) {
+            html = fileData.content as string;
+          } else {
+            const escapeHtml = (str: string) =>
+              str
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+            html = (fileData.content as string)
+              .split(/\r?\n/)
+              .map((line) => (line.length === 0 ? '<p><br/></p>' : `<p>${escapeHtml(line)}</p>`))
+              .join('');
+          }
+
+          editor.commands.setContent(html);
+          if (recent.pageSettings) setPageSettings(recent.pageSettings);
+
+          setCurrentFilePath(recent.filePath);
+          const ext = lowerName.split('.').pop() || 'docx';
+          const format = isHtml ? 'html' : ext === 'txt' ? 'txt' : 'docx';
+          setCurrentFileFormat(format);
+        } catch (readErr) {
+          if (recent.contentHtml) {
+            console.warn('Original file not found on disk, falling back to cached snapshot:', readErr);
+            editor.commands.setContent(recent.contentHtml);
+            if (recent.pageSettings) setPageSettings(recent.pageSettings);
+            setCurrentFilePath(null);
+            setCurrentFileFormat('docx');
+          } else {
+            throw new Error(`Original file could not be read: ${readErr}`);
+          }
+        }
       } else if (recent.contentHtml) {
         editor.commands.setContent(recent.contentHtml);
         if (recent.pageSettings) setPageSettings(recent.pageSettings);
@@ -670,44 +736,52 @@ export const App: React.FC = () => {
   const handleSave = async (): Promise<boolean> => {
     if (!editor) return false;
     try {
-      const saved = currentFilePath && currentFileFormat !== 'docx'
-        ? await PlatformService.saveFile(
-            `${documentTitle}.${currentFileFormat}`,
-            currentFileFormat === 'html' ? editor.getHTML() : editor.getText(),
-            currentFileFormat === 'html' ? 'text/html' : 'text/plain',
-            currentFilePath,
-          )
-        : await DocxService.exportDocx(editor.getJSON(), editor.getHTML(), `${documentTitle}.docx`, pageSettings, currentFilePath || undefined);
-      if (!saved) return false;
-      const savedPath = typeof saved === 'string' && PlatformService.isDesktop() ? saved : currentFilePath;
-      if (savedPath !== currentFilePath) setCurrentFilePath(savedPath);
-      setIsDirty(false);
-      StorageService.discardRecoverableDraft();
-      StorageService.addRecentDocument(documentTitle, editor.getText(), savedPath || undefined, editor.getHTML(), pageSettings);
-      setRecentDocuments(StorageService.getRecentDocuments());
-      return true;
+      if (currentFilePath) {
+        let saved: string | boolean = false;
+        if (currentFileFormat === 'html') {
+          const fullHtml = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>${documentTitle}</title></head><body>${editor.getHTML()}</body></html>`;
+          saved = await PlatformService.saveFile(`${documentTitle}.html`, fullHtml, 'text/html', currentFilePath);
+        } else if (currentFileFormat === 'txt') {
+          saved = await PlatformService.saveFile(`${documentTitle}.txt`, editor.getText(), 'text/plain', currentFilePath);
+        } else {
+          saved = await DocxService.exportDocx(editor.getJSON(), editor.getHTML(), `${documentTitle}.docx`, pageSettings, currentFilePath);
+        }
+
+        if (!saved) return false;
+        setIsDirty(false);
+        StorageService.discardRecoverableDraft(currentFilePath);
+        StorageService.addRecentDocument(documentTitle, editor.getText(), currentFilePath, editor.getHTML(), pageSettings);
+        setRecentDocuments(StorageService.getRecentDocuments());
+        return true;
+      } else {
+        return await handleSaveAs();
+      }
     } catch (err: any) {
       alert(`Save error: ${err.message}`);
       return false;
     }
   };
 
-  const handleSaveAs = async () => {
+  const handleSaveAs = async (): Promise<boolean> => {
     const newName = window.prompt('Enter file name for Save As:', documentTitle);
-    if (!newName || !newName.trim()) return;
+    if (!newName || !newName.trim()) return false;
     const cleanName = newName.trim().replace(/\.docx$/i, '');
-    if (!editor) return;
+    if (!editor) return false;
     try {
       const saved = await DocxService.exportDocx(editor.getJSON(), editor.getHTML(), `${cleanName}.docx`, pageSettings);
-      if (!saved) return;
+      if (!saved) return false;
+      const savedPath = typeof saved === 'string' && PlatformService.isDesktop() ? saved : null;
       setDocumentTitle(cleanName);
-      setCurrentFilePath(typeof saved === 'string' && PlatformService.isDesktop() ? saved : null);
+      setCurrentFilePath(savedPath);
       setCurrentFileFormat('docx');
       setIsDirty(false);
-      StorageService.addRecentDocument(cleanName, editor.getText(), typeof saved === 'string' && PlatformService.isDesktop() ? saved : undefined, editor.getHTML(), pageSettings);
+      StorageService.discardRecoverableDraft(savedPath || undefined);
+      StorageService.addRecentDocument(cleanName, editor.getText(), savedPath || undefined, editor.getHTML(), pageSettings);
       setRecentDocuments(StorageService.getRecentDocuments());
+      return true;
     } catch (err: any) {
       alert(`Save error: ${err.message}`);
+      return false;
     }
   };
 
@@ -717,7 +791,12 @@ export const App: React.FC = () => {
   };
 
   const handleExportPdf = async () => {
-    PdfService.printDocument();
+    const canvas = document.getElementById('wordo-page-canvas');
+    if (canvas) {
+      await PdfService.exportPdf(canvas, `${documentTitle}.pdf`, pageSettings);
+    } else {
+      PdfService.printDocument();
+    }
   };
 
   const handleExportHtml = () => {

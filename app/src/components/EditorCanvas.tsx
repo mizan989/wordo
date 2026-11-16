@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Editor, EditorContent } from '@tiptap/react';
 import { PageSettings } from '../types';
 import { FloatingMiniToolbar } from './FloatingMiniToolbar';
@@ -26,10 +26,12 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
   onReadAloud,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const contentAreaRef = useRef<HTMLDivElement>(null);
   const [editingHeader, setEditingHeader] = useState(false);
   const [editingFooter, setEditingFooter] = useState(false);
   const [headerVal, setHeaderVal] = useState('');
   const [footerVal, setFooterVal] = useState('');
+  const [totalPages, setTotalPages] = useState(1);
   const [contextMenu, setContextMenu] = useState<{ isOpen: boolean; x: number; y: number }>({
     isOpen: false,
     x: 0,
@@ -40,7 +42,6 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
     e.preventDefault();
     if (!editor) return;
 
-    // Check if right-clicked outside active selection
     const coords = { left: e.clientX, top: e.clientY };
     const pos = editor.view.posAtCoords(coords);
     const { selection } = editor.state;
@@ -56,25 +57,28 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
     });
   };
 
-  if (!editor) {
-    return (
-      <div className="flex-1 flex items-center justify-center text-gray-400">
-        Loading editor...
-      </div>
-    );
-  }
+  // Standard Letter / A4 / Legal page dimension at 96 DPI
+  const paperDimensions =
+    pageSettings?.size === 'a4'
+      ? [794, 1123]
+      : pageSettings?.size === 'legal'
+      ? [816, 1344]
+      : [816, 1056];
+  const isLandscape = pageSettings?.orientation === 'landscape';
+  const pageWidthPx = isLandscape ? paperDimensions[1] : paperDimensions[0];
+  const pageMinHeightPx = isLandscape ? paperDimensions[0] : paperDimensions[1];
 
-  // Standard Letter / A4 page dimension at 96 DPI: ~816px width, ~1056px height
-  const paperDimensions = pageSettings?.size === 'a4' ? [794, 1123] : pageSettings?.size === 'legal' ? [816, 1344] : [816, 1056];
-  const pageWidthPx = pageSettings?.orientation === 'landscape' ? paperDimensions[1] : paperDimensions[0];
-  const pageMinHeightPx = pageSettings?.orientation === 'landscape' ? paperDimensions[0] : paperDimensions[1];
+  const marginTop = pageSettings?.margins?.top ?? 96;
+  const marginBottom = pageSettings?.margins?.bottom ?? 96;
+  const marginLeft = pageSettings?.margins?.left ?? 64;
+  const marginRight = pageSettings?.margins?.right ?? 64;
 
   const headerLeftText = (pageSettings?.headerLeft ?? pageSettings?.headerText ?? '').replace('{title}', documentTitle);
   const headerRightText = pageSettings?.headerRight ?? '';
   const footerLeftText = pageSettings?.footerLeft ?? pageSettings?.footerText ?? '';
   const footerRightText = pageSettings?.footerRight ?? '';
+  const showPageNumbers = pageSettings?.showPageNumbers !== false;
 
-  // Page background color styling
   const pageBgColor =
     paperTheme === 'sepia'
       ? '#fbf0d9'
@@ -83,7 +87,6 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
       : pageSettings?.pageColor || '#ffffff';
   const watermarkText = pageSettings?.watermarkText;
 
-  // Luminance calculation to dynamically adapt text color on dark tinted pages
   const isDarkPageBg = (hex: string) => {
     const c = hex.replace('#', '');
     if (c.length !== 6) return false;
@@ -109,7 +112,144 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
   };
 
   const paperName = pageSettings?.size === 'a4' ? 'A4' : pageSettings?.size === 'legal' ? 'Legal' : 'Letter';
-  const printOrientation = pageSettings?.orientation === 'landscape' ? 'landscape' : 'portrait';
+  const printOrientation = isLandscape ? 'landscape' : 'portrait';
+
+  // Usable vertical content height per page
+  const pageContentHeight = Math.max(300, pageMinHeightPx - marginTop - marginBottom);
+
+  /**
+   * Recalculate document pagination:
+   * Splits long content across pages, respects manual page breaks,
+   * and renders page headers and footers with accurate page counts.
+   */
+  const recalculatePagination = useCallback(() => {
+    if (!editor || !contentAreaRef.current) return;
+    const pmRoot = contentAreaRef.current.querySelector('.ProseMirror') as HTMLElement | null;
+    if (!pmRoot) return;
+
+    // Remove old synthetic auto-breaks before re-measuring
+    const existingAutoBreaks = pmRoot.querySelectorAll('.wordo-auto-page-break');
+    existingAutoBreaks.forEach((node) => node.remove());
+
+    const children = Array.from(pmRoot.children) as HTMLElement[];
+    let currentTop = 0;
+    let pageCount = 1;
+
+    for (let i = 0; i < children.length; i++) {
+      const child = children[i];
+      if (child.classList.contains('wordo-auto-page-break')) continue;
+
+      const isManualBreak = child.hasAttribute('data-wordo-page-break') || child.classList.contains('wordo-page-break');
+
+      if (isManualBreak) {
+        const remaining = Math.max(0, pageContentHeight - (currentTop % pageContentHeight));
+        child.style.height = `${remaining + 64}px`;
+        child.style.boxSizing = 'border-box';
+        child.setAttribute('data-page-index', String(pageCount));
+        child.setAttribute('contenteditable', 'false');
+
+        // Populate manual break widget inner content
+        const nextPage = pageCount + 1;
+        child.innerHTML = `
+          <div class="wordo-break-content flex flex-col justify-between h-full select-none" style="padding-left: ${marginLeft}px; padding-right: ${marginRight}px;">
+            <div class="wordo-break-footer flex items-center justify-between text-[11px] text-gray-400 py-2 border-t border-gray-200 dark:border-gray-800">
+              <span>${footerLeftText}</span>
+              <span>${showPageNumbers ? `Page ${pageCount} of <span class="wordo-total-pages">${pageCount}</span>` : footerRightText}</span>
+            </div>
+            <div class="wordo-break-gap w-full bg-[#eaeaea] dark:bg-[#181818] border-y border-gray-300 dark:border-gray-800 shadow-inner -mx-[${marginLeft}px]" style="height: 32px; margin-left: -${marginLeft}px; margin-right: -${marginRight}px; width: calc(100% + ${marginLeft + marginRight}px);"></div>
+            <div class="wordo-break-header flex items-center justify-between text-[11px] text-gray-400 py-2 border-b border-gray-200 dark:border-gray-800">
+              <span>${headerLeftText}</span>
+              <span>${headerRightText}</span>
+            </div>
+          </div>
+        `;
+
+        pageCount++;
+        currentTop = 0;
+      } else {
+        const childHeight = child.offsetHeight;
+        if (currentTop > 0 && currentTop + childHeight > pageContentHeight) {
+          // Automatic page break needed before this element
+          const remaining = Math.max(0, pageContentHeight - currentTop);
+          const autoBreak = document.createElement('div');
+          autoBreak.className = 'wordo-auto-page-break select-none';
+          autoBreak.setAttribute('contenteditable', 'false');
+          autoBreak.setAttribute('data-page-index', String(pageCount));
+          autoBreak.style.height = `${remaining + 64}px`;
+          autoBreak.style.boxSizing = 'border-box';
+
+          const nextPage = pageCount + 1;
+          autoBreak.innerHTML = `
+            <div class="wordo-break-content flex flex-col justify-between h-full select-none" style="padding-left: ${marginLeft}px; padding-right: ${marginRight}px;">
+              <div class="wordo-break-footer flex items-center justify-between text-[11px] text-gray-400 py-2 border-t border-gray-200 dark:border-gray-800">
+                <span>${footerLeftText}</span>
+                <span>${showPageNumbers ? `Page ${pageCount} of <span class="wordo-total-pages">${pageCount}</span>` : footerRightText}</span>
+              </div>
+              <div class="wordo-break-gap w-full bg-[#eaeaea] dark:bg-[#181818] border-y border-gray-300 dark:border-gray-800 shadow-inner" style="height: 32px; margin-left: -${marginLeft}px; margin-right: -${marginRight}px; width: calc(100% + ${marginLeft + marginRight}px);"></div>
+              <div class="wordo-break-header flex items-center justify-between text-[11px] text-gray-400 py-2 border-b border-gray-200 dark:border-gray-800">
+                <span>${headerLeftText}</span>
+                <span>${headerRightText}</span>
+              </div>
+            </div>
+          `;
+
+          pmRoot.insertBefore(autoBreak, child);
+          pageCount++;
+          currentTop = childHeight;
+        } else {
+          currentTop += childHeight;
+        }
+      }
+    }
+
+    setTotalPages(pageCount);
+
+    // Update total pages in all page break footer spans
+    const totalSpans = pmRoot.querySelectorAll('.wordo-total-pages');
+    totalSpans.forEach((span) => {
+      span.textContent = String(pageCount);
+    });
+  }, [
+    editor,
+    pageContentHeight,
+    marginLeft,
+    marginRight,
+    footerLeftText,
+    footerRightText,
+    headerLeftText,
+    headerRightText,
+    showPageNumbers,
+  ]);
+
+  // Recalculate pagination on content changes and window resize
+  useEffect(() => {
+    if (!editor) return;
+
+    const timer = setTimeout(() => {
+      recalculatePagination();
+    }, 50);
+
+    const handleUpdate = () => {
+      recalculatePagination();
+    };
+
+    editor.on('update', handleUpdate);
+    window.addEventListener('resize', handleUpdate);
+
+    return () => {
+      clearTimeout(timer);
+      editor.off('update', handleUpdate);
+      window.removeEventListener('resize', handleUpdate);
+    };
+  }, [editor, recalculatePagination]);
+
+  if (!editor) {
+    return (
+      <div className="flex-1 flex items-center justify-center text-gray-400">
+        Loading editor...
+      </div>
+    );
+  }
 
   return (
     <div
@@ -117,7 +257,31 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
       onContextMenu={handleContextMenu}
       className="wordo-canvas-scroll flex-1 overflow-auto bg-[#eaeaea] dark:bg-[#181818] p-8 flex flex-col items-center transition-colors print:p-0 print:bg-white relative"
     >
-      <style>{`@media print { @page { size: ${paperName} ${printOrientation}; margin: 0; } }`}</style>
+      <style>{`
+        @media print {
+          @page {
+            size: ${paperName} ${printOrientation};
+            margin: 0;
+          }
+          .wordo-auto-page-break,
+          .wordo-page-break {
+            break-before: page !important;
+            page-break-before: always !important;
+            height: 0 !important;
+            min-height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+          }
+          .wordo-break-content,
+          .wordo-break-gap,
+          .wordo-break-header,
+          .wordo-break-footer {
+            display: none !important;
+          }
+        }
+      `}</style>
+
       {/* Floating Selection Mini Toolbar */}
       <FloatingMiniToolbar editor={editor} />
 
@@ -161,9 +325,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
         >
           {/* Watermark Overlay (if configured) */}
           {watermarkText && (
-            <div
-              className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden"
-            >
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 overflow-hidden">
               <span
                 className="text-gray-400/20 font-bold tracking-widest uppercase transform -rotate-45"
                 style={{
@@ -176,7 +338,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
             </div>
           )}
 
-          {/* Page Header (margin zone) */}
+          {/* Page 1 Header (margin zone) */}
           <div
             onDoubleClick={() => {
               setHeaderVal(pageSettings?.headerText || headerLeftText);
@@ -185,10 +347,10 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
             title="Double-click to edit header"
             className="flex items-center justify-between text-[11px] text-gray-400 border-b border-transparent hover:border-gray-300 select-none transition-colors relative z-10 cursor-pointer"
             style={{
-              paddingTop: `${Math.max(16, (pageSettings?.margins?.top ?? 96) / 4)}px`,
+              paddingTop: `${Math.max(16, marginTop / 4)}px`,
               paddingBottom: '8px',
-              paddingLeft: `${pageSettings?.margins?.left ?? 64}px`,
-              paddingRight: `${pageSettings?.margins?.right ?? 64}px`,
+              paddingLeft: `${marginLeft}px`,
+              paddingRight: `${marginRight}px`,
             }}
           >
             {editingHeader ? (
@@ -229,6 +391,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
 
           {/* Editable Document Body (dynamic margins) */}
           <div
+            ref={contentAreaRef}
             onClick={(e) => {
               if (e.target === e.currentTarget) {
                 editor.chain().focus('end').run();
@@ -236,16 +399,16 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
             }}
             className="flex-1 cursor-text transition-all min-h-[600px] relative z-10"
             style={{
-              paddingTop: `${Math.max(16, (pageSettings?.margins?.top ?? 96) / 2)}px`,
-              paddingBottom: `${Math.max(16, (pageSettings?.margins?.bottom ?? 96) / 2)}px`,
-              paddingLeft: `${pageSettings?.margins?.left ?? 64}px`,
-              paddingRight: `${pageSettings?.margins?.right ?? 64}px`,
+              paddingTop: `${Math.max(16, marginTop / 2)}px`,
+              paddingBottom: `${Math.max(16, marginBottom / 2)}px`,
+              paddingLeft: `${marginLeft}px`,
+              paddingRight: `${marginRight}px`,
             }}
           >
             <EditorContent editor={editor} className="tiptap-content font-sans text-sm min-h-[500px]" />
           </div>
 
-          {/* Page Footer (margin zone) */}
+          {/* Last Page Footer (margin zone) */}
           <div
             onDoubleClick={() => {
               setFooterVal(pageSettings?.footerText || footerLeftText);
@@ -255,9 +418,9 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
             className="flex items-center justify-between text-[11px] text-gray-400 border-t border-transparent hover:border-gray-300 select-none transition-colors relative z-10 cursor-pointer"
             style={{
               paddingTop: '8px',
-              paddingBottom: `${Math.max(16, (pageSettings?.margins?.bottom ?? 96) / 4)}px`,
-              paddingLeft: `${pageSettings?.margins?.left ?? 64}px`,
-              paddingRight: `${pageSettings?.margins?.right ?? 64}px`,
+              paddingBottom: `${Math.max(16, marginBottom / 4)}px`,
+              paddingLeft: `${marginLeft}px`,
+              paddingRight: `${marginRight}px`,
             }}
           >
             {editingFooter ? (
@@ -291,7 +454,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
             ) : (
               <>
                 <span>{footerLeftText}</span>
-                <span>{footerRightText}</span>
+                <span>{showPageNumbers ? `Page ${totalPages} of ${totalPages}` : footerRightText}</span>
               </>
             )}
           </div>
