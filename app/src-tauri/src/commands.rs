@@ -30,11 +30,21 @@ pub struct FilePayload {
 
 /// Helper function to reliably normalize a path resolving '..' and '.'
 pub fn normalize_path(path: &Path) -> Result<PathBuf, String> {
+    // If the path itself exists (or is a symlink), inspect symlink metadata first
+    if let Ok(meta) = fs::symlink_metadata(path) {
+        if meta.file_type().is_symlink() {
+            // Dangling or invalid symlinks must NOT be treated as non-existent regular files.
+            // Canonicalization must succeed, resolving to the real target.
+            return fs::canonicalize(path)
+                .map_err(|e| format!("Cannot resolve symlink {}: {}", path.display(), e));
+        }
+    }
+
     if path.exists() {
         return fs::canonicalize(path).map_err(|e| format!("Failed to canonicalize path: {}", e));
     }
 
-    // First, resolve lexical '.' and '..' components
+    // Resolve lexical '.' and '..' components
     let mut lexical = PathBuf::new();
     for component in path.components() {
         match component {
@@ -46,6 +56,13 @@ pub fn normalize_path(path: &Path) -> Result<PathBuf, String> {
         }
     }
 
+    if let Ok(meta) = fs::symlink_metadata(&lexical) {
+        if meta.file_type().is_symlink() {
+            return fs::canonicalize(&lexical)
+                .map_err(|e| format!("Cannot resolve symlink {}: {}", lexical.display(), e));
+        }
+    }
+
     if lexical.exists() {
         return fs::canonicalize(&lexical).map_err(|e| format!("Failed to canonicalize path: {}", e));
     }
@@ -54,6 +71,12 @@ pub fn normalize_path(path: &Path) -> Result<PathBuf, String> {
     let mut ancestors = Vec::new();
     let mut current = lexical.as_path();
     while !current.exists() {
+        // If an intermediate component exists as a broken symlink, abort
+        if let Ok(meta) = fs::symlink_metadata(current) {
+            if meta.file_type().is_symlink() {
+                return Err(format!("Path contains broken symlink component: {}", current.display()));
+            }
+        }
         if let Some(file_name) = current.file_name() {
             ancestors.push(file_name);
         }
@@ -138,23 +161,26 @@ impl SecurityState {
         Ok(norm)
     }
 
-    pub fn is_authorized(&self, path: &Path) -> bool {
-        let norm = match normalize_path(path) {
-            Ok(p) => p,
-            Err(_) => return false,
-        };
+    pub fn validate_path(&self, path: &Path) -> Result<PathBuf, String> {
+        let norm = normalize_path(path)?;
 
         if let Ok(canon_rec) = normalize_path(&self.recovery_dir) {
             if norm.starts_with(&canon_rec) {
-                return true;
+                return Ok(norm);
             }
         }
 
-        let guard = match self.authorized_paths.lock() {
-            Ok(g) => g,
-            Err(_) => return false,
-        };
-        guard.contains(&norm)
+        let guard = self.authorized_paths.lock().map_err(|e| e.to_string())?;
+        if guard.contains(&norm) {
+            Ok(norm)
+        } else {
+            Err(format!("Access denied: path is not authorized: {}", path.display()))
+        }
+    }
+
+    #[allow(dead_code)]
+    pub fn is_authorized(&self, path: &Path) -> bool {
+        self.validate_path(path).is_ok()
     }
 }
 
@@ -162,12 +188,15 @@ impl SecurityState {
 #[tauri::command]
 pub fn read_document_file(state: tauri::State<'_, SecurityState>, path: String) -> Result<Vec<u8>, String> {
     let path_buf = PathBuf::from(&path);
-    if !state.is_authorized(&path_buf) {
-        return Err(format!("Access denied: path is not authorized: {}", path));
-    }
-    let norm = normalize_path(&path_buf)?;
+    let norm = state.validate_path(&path_buf)?;
     if !norm.exists() {
         return Err(format!("File does not exist: {}", path));
+    }
+    // Verify target itself is not a symlink that bypassed canonicalization
+    if let Ok(meta) = fs::symlink_metadata(&norm) {
+        if meta.file_type().is_symlink() {
+            return Err(format!("Access denied: target path is a symlink: {}", norm.display()));
+        }
     }
     fs::read(&norm).map_err(|e| format!("Failed to read file: {}", e))
 }
@@ -180,12 +209,22 @@ pub fn write_document_file(
     data: Vec<u8>,
 ) -> Result<(), String> {
     let path_buf = PathBuf::from(&path);
-    if !state.is_authorized(&path_buf) {
-        return Err(format!("Access denied: path is not authorized: {}", path));
+    let norm = state.validate_path(&path_buf)?;
+
+    // Verify target itself is not a symlink that bypassed canonicalization
+    if let Ok(meta) = fs::symlink_metadata(&norm) {
+        if meta.file_type().is_symlink() {
+            return Err(format!("Access denied: target path is a symlink: {}", norm.display()));
+        }
     }
-    let norm = normalize_path(&path_buf)?;
+
     if let Some(parent) = norm.parent() {
         if !parent.exists() {
+            if let Ok(meta) = fs::symlink_metadata(parent) {
+                if meta.file_type().is_symlink() {
+                    return Err(format!("Access denied: parent directory is a symlink: {}", parent.display()));
+                }
+            }
             fs::create_dir_all(parent).map_err(|e| format!("Failed to create directories: {}", e))?;
         }
     }
@@ -493,6 +532,47 @@ mod tests {
         let new_save_path = temp_dir.join("newly_created_folder/NewDocument.docx");
         assert!(state.authorize(&new_save_path).is_ok());
         assert!(state.is_authorized(&new_save_path));
+
+        // 6. Dangling symlink test (cannot be read or written to bypass authorization)
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::symlink;
+            let unauth_target = temp_dir.join("unauth_target.txt");
+            let dangling_link = temp_dir.join("dangling.docx");
+            symlink(&unauth_target, &dangling_link).unwrap();
+
+            // Dangling symlink cannot be normalized or authorized
+            assert!(normalize_path(&dangling_link).is_err());
+            assert!(!state.is_authorized(&dangling_link));
+
+            // Broken symlink in ancestor directory
+            let broken_dir_link = temp_dir.join("broken_dir");
+            symlink(temp_dir.join("nonexistent_sub"), &broken_dir_link).unwrap();
+            let broken_child = broken_dir_link.join("child.docx");
+            assert!(normalize_path(&broken_child).is_err());
+        }
+
+        // 7. Symlink swapping TOCTOU attack test
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::symlink;
+            let legitimate_file = temp_dir.join("legit.docx");
+            fs::write(&legitimate_file, b"legit content").unwrap();
+            assert!(state.authorize(&legitimate_file).is_ok());
+            assert!(state.is_authorized(&legitimate_file));
+
+            // Secret sensitive file
+            let sensitive_file = temp_dir.join("sensitive_secret.txt");
+            fs::write(&sensitive_file, b"TOP_SECRET").unwrap();
+
+            // Attacker swaps legit.docx with symlink to sensitive_file
+            fs::remove_file(&legitimate_file).unwrap();
+            symlink(&sensitive_file, &legitimate_file).unwrap();
+
+            // When checked now, canonicalize resolves to sensitive_file which is NOT authorized!
+            assert!(!state.is_authorized(&legitimate_file));
+            assert!(state.validate_path(&legitimate_file).is_err());
+        }
 
         let _ = fs::remove_dir_all(&temp_dir);
     }
