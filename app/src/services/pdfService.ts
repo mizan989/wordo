@@ -15,7 +15,7 @@ export class PdfService {
   /**
    * Directly exports a given HTML container element to a downloadable PDF file,
    * splitting content into correctly sized pages matching document settings
-   * and preferring vector/selectable text.
+   * (rasterized via html2canvas; text is not selectable. Use printDocument() for vector PDFs).
    */
   public static async exportPdf(
     containerElement: HTMLElement,
@@ -113,10 +113,10 @@ export class PdfService {
         const pdfBlob = pdf.output('blob');
         if (PlatformService.isDesktop()) {
           const buffer = await pdfBlob.arrayBuffer();
-          await PlatformService.saveFile(safeFilename, new Uint8Array(buffer), 'application/pdf');
-        } else {
-          pdf.save(safeFilename);
+          const saved = await PlatformService.saveFile(safeFilename, new Uint8Array(buffer), 'application/pdf');
+          return saved !== false;
         }
+        pdf.save(safeFilename);
         return true;
       }
 
@@ -179,11 +179,10 @@ export class PdfService {
       const pdfBlob = fallbackPdf.output('blob');
       if (PlatformService.isDesktop()) {
         const buffer = await pdfBlob.arrayBuffer();
-        await PlatformService.saveFile(safeFilename, new Uint8Array(buffer), 'application/pdf');
-      } else {
-        fallbackPdf.save(safeFilename);
+        const saved = await PlatformService.saveFile(safeFilename, new Uint8Array(buffer), 'application/pdf');
+        return saved !== false;
       }
-
+      fallbackPdf.save(safeFilename);
       return true;
     } catch (err) {
       console.error('Error exporting PDF:', err);

@@ -19,6 +19,8 @@ import {
   Header,
   Footer,
   PageNumber,
+  TabStopType,
+  ShadingType,
   LevelFormat,
   VerticalAlign,
 } from 'docx';
@@ -128,12 +130,15 @@ export class DocxService {
         : pageSettings?.size === 'legal'
           ? { width: 12240, height: 20160 }
           : { width: 12240, height: 15840 };
+      const pageWidthTwips = isLandscape ? dimensions.height : dimensions.width;
+      const contentWidth = Math.max(1, pageWidthTwips - leftMargin - rightMargin);
       const sectionProps: any = {
         page: {
           margin: { top: topMargin, bottom: bottomMargin, left: leftMargin, right: rightMargin },
           size: {
-            width: isLandscape ? dimensions.height : dimensions.width,
-            height: isLandscape ? dimensions.width : dimensions.height,
+            // docx swaps width/height itself when orientation is LANDSCAPE, so pass portrait values
+            width: dimensions.width,
+            height: dimensions.height,
             orientation: isLandscape ? PageOrientation.LANDSCAPE : PageOrientation.PORTRAIT,
           },
         },
@@ -146,7 +151,7 @@ export class DocxService {
       if (headerLeftText || headerRightText) {
         headerParagraphs.push(
           new Paragraph({
-            alignment: AlignmentType.BOTH,
+            tabStops: [{ type: TabStopType.RIGHT, position: contentWidth }],
             children: [
               new TextRun({ text: headerLeftText, size: 18, color: '71717A', font: 'Aptos' }),
               ...(headerRightText ? [new TextRun({ text: `\t${headerRightText}`, size: 18, color: '71717A', font: 'Aptos' })] : []),
@@ -182,7 +187,7 @@ export class DocxService {
         }
         footerParagraphs.push(
           new Paragraph({
-            alignment: AlignmentType.BOTH,
+            tabStops: [{ type: TabStopType.RIGHT, position: contentWidth }],
             children: footerRuns,
           })
         );
@@ -250,12 +255,15 @@ export class DocxService {
       case 'heading': {
         const level = node.attrs?.level || 1;
         const runs = this.extractParagraphRuns(node.content);
-        const headingLevel =
-          level === 1
-            ? HeadingLevel.HEADING_1
-            : level === 2
-            ? HeadingLevel.HEADING_2
-            : HeadingLevel.HEADING_3;
+        const headingLevels = [
+          HeadingLevel.HEADING_1,
+          HeadingLevel.HEADING_2,
+          HeadingLevel.HEADING_3,
+          HeadingLevel.HEADING_4,
+          HeadingLevel.HEADING_5,
+          HeadingLevel.HEADING_6,
+        ];
+        const headingLevel = headingLevels[Math.min(Math.max(Number(level) || 1, 1), 6) - 1];
         const alignment = this.getAlignment(node.attrs?.textAlign);
 
         return new Paragraph({
@@ -276,39 +284,7 @@ export class DocxService {
         const startNumber = typeof node.attrs?.start === 'number' ? node.attrs.start : 1;
         const listRef = getNextListRef();
 
-        numberingConfigs.push({
-          reference: listRef,
-          levels: [
-            {
-              level: 0,
-              format: LevelFormat.DECIMAL,
-              text: '%1.',
-              alignment: AlignmentType.LEFT,
-              start: startNumber,
-            },
-            {
-              level: 1,
-              format: LevelFormat.LOWER_LETTER,
-              text: '%2.',
-              alignment: AlignmentType.LEFT,
-              start: 1,
-            },
-            {
-              level: 2,
-              format: LevelFormat.LOWER_ROMAN,
-              text: '%3.',
-              alignment: AlignmentType.LEFT,
-              start: 1,
-            },
-            {
-              level: 3,
-              format: LevelFormat.DECIMAL,
-              text: '%4.',
-              alignment: AlignmentType.LEFT,
-              start: 1,
-            },
-          ],
-        });
+        numberingConfigs.push(this.createOrderedNumbering(listRef, startNumber));
 
         return this.convertListItems(node, currentLevel, 'ordered', listRef, getNextListRef, numberingConfigs, warnings);
       }
@@ -319,12 +295,18 @@ export class DocxService {
       }
 
       case 'blockquote': {
-        const runs = this.extractParagraphRuns(node.content);
-        return new Paragraph({
-          children: runs,
-          indent: { left: 720 },
-          spacing: { before: 120, after: 120 },
-        });
+        // Blockquote children are paragraph nodes, not text nodes
+        const quoteParagraphs: Paragraph[] = [];
+        for (const child of node.content || []) {
+          quoteParagraphs.push(
+            new Paragraph({
+              children: this.extractParagraphRuns(child.content),
+              indent: { left: 720 },
+              spacing: { before: 120, after: 120 },
+            })
+          );
+        }
+        return quoteParagraphs.length > 0 ? quoteParagraphs : null;
       }
 
       case 'codeBlock':
@@ -383,9 +365,7 @@ export class DocxService {
                 }
 
                 const isHeader = cellNode.type === 'tableHeader';
-                const customBg = cellNode.attrs?.background
-                  ? cellNode.attrs.background.replace('#', '')
-                  : undefined;
+                const customBg = this.toHex(cellNode.attrs?.background);
 
                 const colSpan = cellNode.attrs?.colspan || undefined;
                 const rowSpan = cellNode.attrs?.rowspan || undefined;
@@ -506,8 +486,24 @@ export class DocxService {
             ...this.convertListItems(child, level + 1, 'bullet', undefined, getNextListRef, numberingConfigs, warnings)
           );
         } else if (child.type === 'orderedList' || child.type === 'ordered_list') {
+          // A nested ordered list inside a bullet/task list has no numbering reference yet
+          let nestedRef = numberingRef;
+          if (!nestedRef) {
+            nestedRef = getNextListRef();
+            numberingConfigs.push(
+              this.createOrderedNumbering(nestedRef, typeof child.attrs?.start === 'number' ? child.attrs.start : 1)
+            );
+          }
           paragraphs.push(
-            ...this.convertListItems(child, level + 1, 'ordered', numberingRef, getNextListRef, numberingConfigs, warnings)
+            ...this.convertListItems(
+              child,
+              numberingRef ? level + 1 : 0,
+              'ordered',
+              nestedRef,
+              getNextListRef,
+              numberingConfigs,
+              warnings
+            )
           );
         } else if (child.type === 'taskList' || child.type === 'task_list') {
           paragraphs.push(
@@ -532,47 +528,35 @@ export class DocxService {
     return paragraphs;
   }
 
-  private static mapHighlightColor(hex?: string): any {
-    if (!hex) return 'yellow';
-    const clean = hex.toLowerCase().replace('#', '');
-    switch (clean) {
-      case 'ffff00':
-        return 'yellow';
-      case '00ff00':
-      case 'a3e635':
-        return 'green';
-      case '00ffff':
-      case '67e8f9':
-        return 'cyan';
-      case 'ff00ff':
-      case 'f472b6':
-        return 'magenta';
-      case '0000ff':
-        return 'blue';
-      case 'ff0000':
-        return 'red';
-      case '000080':
-        return 'darkBlue';
-      case '008080':
-        return 'darkCyan';
-      case '008000':
-        return 'darkGreen';
-      case '800080':
-        return 'darkMagenta';
-      case '800000':
-        return 'darkRed';
-      case '808000':
-        return 'darkYellow';
-      case '808080':
-        return 'darkGray';
-      case 'c0c0c0':
-      case 'cbd5e1':
-        return 'lightGray';
-      case '000000':
-        return 'black';
-      default:
-        return 'yellow';
+  private static createOrderedNumbering(reference: string, start: number = 1): any {
+    const fmt = [LevelFormat.DECIMAL, LevelFormat.LOWER_LETTER, LevelFormat.LOWER_ROMAN, LevelFormat.DECIMAL];
+    return {
+      reference,
+      levels: fmt.map((format, level) => ({
+        level,
+        format,
+        text: `%${level + 1}.`,
+        alignment: AlignmentType.LEFT,
+        start: level === 0 ? start : 1,
+      })),
+    };
+  }
+
+  private static toHex(value?: string): string | undefined {
+    if (!value) return undefined;
+    const v = String(value).trim().toLowerCase();
+    let m = v.match(/^#?([0-9a-f]{6})$/);
+    if (m) return m[1].toUpperCase();
+    m = v.match(/^#?([0-9a-f])([0-9a-f])([0-9a-f])$/);
+    if (m) return (m[1] + m[1] + m[2] + m[2] + m[3] + m[3]).toUpperCase();
+    const rgb = v.match(/^rgba?\(\s*(\d+)[\s,]+(\d+)[\s,]+(\d+)/);
+    if (rgb) {
+      return [rgb[1], rgb[2], rgb[3]]
+        .map((n) => Math.min(255, parseInt(n, 10)).toString(16).padStart(2, '0'))
+        .join('')
+        .toUpperCase();
     }
+    return undefined;
   }
 
   private static extractParagraphRuns(content: any[] | undefined): (TextRun | ExternalHyperlink | ImageRun)[] {
@@ -588,7 +572,7 @@ export class DocxService {
         let subScript = false;
         let superScript = false;
         let linkHref: string | null = null;
-        let highlight: any = undefined;
+        let highlightFill: string | undefined = undefined;
         let color: string | undefined = undefined;
         let font = 'Aptos';
         let size: number | undefined = undefined;
@@ -602,17 +586,17 @@ export class DocxService {
             if (mark.type === 'subscript') subScript = true;
             if (mark.type === 'superscript') superScript = true;
             if (mark.type === 'highlight') {
-              highlight = this.mapHighlightColor(mark.attrs?.color);
+              highlightFill = this.toHex(mark.attrs?.color) || 'FFFF00';
             }
             if (mark.type === 'link' && mark.attrs?.href) {
               linkHref = mark.attrs.href;
             }
             if (mark.type === 'textStyle') {
               if (mark.attrs?.color) {
-                color = mark.attrs.color.replace('#', '');
+                color = this.toHex(mark.attrs.color);
               }
               if (mark.attrs?.fontFamily) {
-                font = mark.attrs.fontFamily;
+                font = String(mark.attrs.fontFamily).split(',')[0].replace(/["']/g, '').trim() || font;
               }
               if (mark.attrs?.fontSize) {
                 const numeric = parseFloat(mark.attrs.fontSize.toString());
@@ -632,7 +616,7 @@ export class DocxService {
           strike,
           subScript: subScript ? true : undefined,
           superScript: superScript ? true : undefined,
-          highlight,
+          shading: highlightFill ? { type: ShadingType.CLEAR, color: 'auto', fill: highlightFill } : undefined,
           color,
           font,
           size,
@@ -648,6 +632,8 @@ export class DocxService {
         } else {
           runs.push(textRun);
         }
+      } else if (item.type === 'hardBreak') {
+        runs.push(new TextRun({ break: 1 }));
       } else if (item.type === 'image') {
         const imgRun = this.createImageRun(item.attrs?.src, item.attrs?.width, item.attrs?.height);
         if (imgRun) {
@@ -674,10 +660,12 @@ export class DocxService {
           bytes[i] = binaryString.charCodeAt(i);
         }
         const mimeMatch = parts[0].match(/image\/(jpeg|jpg|png|gif|bmp)/);
+        if (!mimeMatch) {
+          console.warn('Unsupported image type for DOCX export, skipped:', parts[0]);
+          return null;
+        }
         const imgType: 'jpg' | 'png' | 'gif' | 'bmp' =
-          mimeMatch && (mimeMatch[1] === 'jpeg' || mimeMatch[1] === 'jpg')
-            ? 'jpg'
-            : (mimeMatch?.[1] as any) || 'png';
+          mimeMatch[1] === 'jpeg' || mimeMatch[1] === 'jpg' ? 'jpg' : (mimeMatch[1] as 'png' | 'gif' | 'bmp');
 
         // Proportional dimension scaling preserving aspect ratio
         const maxWidth = 580;

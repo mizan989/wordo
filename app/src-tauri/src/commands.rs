@@ -231,43 +231,6 @@ pub fn write_document_file(
     fs::write(&norm, data).map_err(|e| format!("Failed to write file: {}", e))
 }
 
-/// Seed authorized paths from valid existing recent document files
-#[tauri::command]
-pub fn seed_authorized_paths(
-    state: tauri::State<'_, SecurityState>,
-    paths: Vec<String>,
-) -> Result<usize, String> {
-    let mut added = 0;
-    for p_str in paths {
-        let p = PathBuf::from(&p_str);
-        if p.exists() && p.is_file() {
-            if let Ok(norm) = normalize_path(&p) {
-                #[cfg(unix)]
-                let is_system = norm.starts_with("/etc")
-                    || norm.starts_with("/sys")
-                    || norm.starts_with("/proc")
-                    || norm.starts_with("/dev")
-                    || norm.starts_with("/boot")
-                    || norm.starts_with("/root");
-                #[cfg(not(unix))]
-                let is_system = false;
-
-                if !is_system {
-                    if let Some(ext) = norm.extension().and_then(|s| s.to_str()) {
-                        let ext_lower = ext.to_lowercase();
-                        if matches!(ext_lower.as_str(), "docx" | "txt" | "html" | "htm" | "rtf" | "odt" | "pdf") {
-                            if state.authorize(&norm).is_ok() {
-                                added += 1;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    Ok(added)
-}
-
 /// Platform-appropriate application recovery directory
 #[tauri::command]
 pub fn get_recovery_dir() -> Result<String, String> {

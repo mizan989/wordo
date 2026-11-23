@@ -17,7 +17,7 @@ export class StorageService {
     pageSettings?: any,
     filePath?: string,
     fileFormat?: 'docx' | 'html' | 'txt'
-  ): void {
+  ): boolean {
     try {
       const draftId = filePath
         ? `draft_${btoa(unescape(encodeURIComponent(filePath))).replace(/[^a-zA-Z0-9]/g, '_')}`
@@ -36,13 +36,13 @@ export class StorageService {
       // Always maintain active recovery draft for main session recovery
       localStorage.setItem(RECOVERY_KEY, JSON.stringify(draft));
 
-      // Also maintain association by document path
-      const allRaw = localStorage.getItem(RECOVERY_DRAFTS_KEY);
-      const allDrafts: Record<string, RecoveryDraft> = allRaw ? JSON.parse(allRaw) : {};
-      allDrafts[draftId] = draft;
-      localStorage.setItem(RECOVERY_DRAFTS_KEY, JSON.stringify(allDrafts));
+      // The per-path drafts map duplicated every draft and was never read; free its space
+      localStorage.removeItem(RECOVERY_DRAFTS_KEY);
+      return true;
     } catch (e) {
-      console.warn('Could not save recovery draft to localStorage:', e);
+      console.error('Could not save recovery draft to localStorage:', e);
+      window.dispatchEvent(new CustomEvent('wordo:autosave-failed', { detail: String(e) }));
+      return false;
     }
   }
 
@@ -61,6 +61,9 @@ export class StorageService {
           }
         }
       }
+
+      // Never fall back to another document's draft when a specific file was requested
+      if (filePath) return null;
 
       const raw = localStorage.getItem(RECOVERY_KEY);
       if (!raw) return null;
@@ -115,7 +118,7 @@ export class StorageService {
   ): void {
     try {
       const recents = this.getRecentDocuments();
-      const existingIndex = recents.findIndex((r) => (filePath && r.filePath === filePath) || r.title === title);
+      const existingIndex = recents.findIndex((r) => (filePath ? r.filePath === filePath : !r.filePath && r.title === title));
 
       const newEntry: RecentDocument = {
         id: `recent_${Date.now()}`,

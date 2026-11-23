@@ -47,8 +47,8 @@ Unlike cloud-locked document platforms, Wordo treats privacy as non-negotiable: 
 - **Rich Document Typography** — Full-spectrum formatting engine supporting styled headings, nested task lists, blockquotes, inline callouts, code syntax, and custom accent highlights
 - **Advanced Table Studio** — Full interactive data tables with row/column insertion, deletion, table resizing, header toggles, and cell alignments
 - **Bidirectional DOCX Engine** — Import DOCX documents via Mammoth and compile rich documents directly to native OpenXML (`.docx`) through the `docx` library
-- **Precise Document Geometry** — Configurable paper sizes (A4, Letter, Legal, Tabloid), portrait/landscape orientations, custom page margins, and dedicated page breaks
-- **Multi-Format Export & Print Engine** — One-click export to DOCX, HTML, Markdown, and TXT, paired with native platform vector print and PDF output
+- **Precise Document Geometry** — Configurable paper sizes (A4, Letter, Legal), portrait/landscape orientations, custom page margins, and dedicated page breaks
+- **Multi-Format Export & Print Engine** — One-click export to DOCX, HTML, Markdown, and TXT, paired with native platform print (use Print → Save as PDF for selectable-text PDFs)
 - **Crash-Resilient Draft Recovery** — Real-time draft journaling with automatic recovery banners protecting your work against unexpected power cuts or reboots
 - **Curated Template Library** — Ready-to-write presets for business letters, executive resumes, modern project proposals, research reports, and meeting summaries
 
@@ -200,7 +200,7 @@ Wordo provides an intuitive interface inspired by classic productivity suites ye
 
 - **Adaptive Ribbon Toolbar** — Multi-tab command ribbon (Home, Insert, Layout, View) organizing character styling, alignment, headers, media, tables, and page setup.
 - **Dynamic Editor Canvas** — Calibrated document page container supporting live margin boundaries, visual paper presets, and seamless zoom controls (50% to 200%).
-- **Document Settings Modal** — Precise document configuration: paper sizes (Letter, A4, Legal, Tabloid), orientation, margin presets (Normal, Narrow, Wide), and custom values.
+- **Document Settings Modal** — Precise document configuration: paper sizes (Letter, A4, Legal), orientation, margin presets (Normal, Narrow, Wide), and custom values.
 - **Template Gallery** — One-click starter layouts for business letters, technical project outlines, resume drafts, and meeting minutes.
 - **Navigation & Outline Sidebar** — Real-time table of contents dynamically indexing headings for instant navigation across long documents.
 - **Status Bar & Live Metrics** — Always-visible word count, character count, page estimates, zoom controller, and save state status indicators.
@@ -234,7 +234,7 @@ User Actions ➔ React 19 Frontend ➔ Tauri Webview (WebKit / WebView2)
 | **Editor Core** | Tiptap 3, ProseMirror | Extensible schema-driven rich text document engine |
 | **Styling & Icons** | Tailwind CSS, Lucide Icons | Clean, responsive interface typography and vector iconography |
 | **Document Processing** | `docx`, Mammoth | OpenXML DOCX parsing, generation, and formatting transformation |
-| **Export Engines** | jsPDF, html2canvas, Native Print | Vector PDF rendering and platform print dialog integration |
+| **Export Engines** | jsPDF, html2canvas, Native Print | Raster PDF export (jsPDF) and platform print dialog integration |
 | **Static Site Generator**| Python 3 (`generate_site.py`) | Production static marketing pages and standalone utility tools |
 
 ---
@@ -248,7 +248,7 @@ The application identity, window dimensions, and capability permissions are defi
 ```json
 {
   "productName": "Wordo",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "identifier": "com.wordclient.desktop",
   "app": {
     "windows": [
@@ -269,7 +269,7 @@ The application identity, window dimensions, and capability permissions are defi
 
 Paper geometry and margin presets can be customized in `presets.ts`:
 
-- **Paper Formats**: Letter (8.5 × 11 in), A4 (210 × 297 mm), Legal (8.5 × 14 in), Tabloid (11 × 17 in)
+- **Paper Formats**: Letter (8.5 × 11 in), A4 (210 × 297 mm), Legal (8.5 × 14 in)
 - **Margin Profiles**: Normal (1 in), Narrow (0.5 in), Wide (1.5 in top/bottom, 2 in left/right)
 
 ---
@@ -342,7 +342,7 @@ npm run tauri:build
 Install the compiled `.deb` package directly:
 
 ```bash
-sudo apt install ./app/src-tauri/target/release/bundle/deb/Wordo_1.0.0_amd64.deb
+sudo apt install ./app/src-tauri/target/release/bundle/deb/Wordo_2.0.0_amd64.deb
 ```
 
 For portable execution on any modern Linux distribution, use the generated `.AppImage` binary.

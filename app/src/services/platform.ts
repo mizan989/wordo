@@ -15,12 +15,6 @@ function tauriInvoke<T>(command: string, args?: Record<string, unknown>): Promis
   return invoke(command, args);
 }
 
-function tauriDialog() {
-  const dialog = (window as any).__TAURI__?.dialog;
-  if (!dialog) throw new Error('Tauri dialog plugin is unavailable');
-  return dialog;
-}
-
 function getTauriWindow() {
   const win = (window as any).__TAURI__?.window?.getCurrentWindow?.();
   if (win) return win;
@@ -44,16 +38,6 @@ export class PlatformService {
 
   public static isDesktop(): boolean { return this.isTauriEnv(); }
 
-  public static async seedAuthorizedPaths(paths: string[]): Promise<void> {
-    if (this.isTauriEnv() && paths.length > 0) {
-      try {
-        await tauriInvoke<number>('seed_authorized_paths', { paths });
-      } catch (e) {
-        console.warn('[Wordo] seed_authorized_paths:', e);
-      }
-    }
-  }
-
   public static async openFileDialog(acceptTypes = '.docx,.txt,.html'): Promise<OpenedFile | null> {
     if (this.isTauriEnv()) {
       let path: string | null = null;
@@ -63,10 +47,9 @@ export class PlatformService {
           acceptTypes,
         });
       } catch (dialogErr) {
-        console.warn('[Wordo] Native pick_file_dialog failed, falling back to plugin dialog:', dialogErr);
-        const extensions = acceptTypes.split(',').map((value) => value.trim().replace(/^\./, '')).filter(Boolean);
-        const selected = await tauriDialog().open({ multiple: false, filters: [{ name: 'Documents', extensions }] });
-        path = Array.isArray(selected) ? selected[0] : selected;
+        // Do not fall back to the JS dialog plugin: its paths are never authorized in Rust
+        console.error('[Wordo] Native pick_file_dialog failed:', dialogErr);
+        throw dialogErr;
       }
 
       if (!path) return null;
@@ -127,12 +110,8 @@ export class PlatformService {
               filterExtension: extension,
             })) || undefined;
           } catch (dialogErr) {
-            console.warn('[Wordo] Native save_file_dialog failed, falling back to plugin dialog:', dialogErr);
-            const selected = await tauriDialog().save({
-              defaultPath: filename,
-              filters: [{ name: 'Document', extensions: [extension] }],
-            });
-            path = selected || undefined;
+            console.error('[Wordo] Native save_file_dialog failed:', dialogErr);
+            throw dialogErr;
           }
         }
         if (!path) return false;

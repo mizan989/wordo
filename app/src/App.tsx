@@ -241,11 +241,6 @@ export const App: React.FC = () => {
     if (draft) {
       setActiveRecoveryDraft(draft);
     }
-    const recents = StorageService.getRecentDocuments();
-    const filePaths = recents.map((r) => r.filePath).filter((p): p is string => Boolean(p));
-    if (filePaths.length > 0) {
-      PlatformService.seedAuthorizedPaths(filePaths);
-    }
   }, []);
 
   // Keep a ref to the latest document state for the close handler

@@ -5,7 +5,7 @@ mod commands;
 
 use commands::{
     get_recovery_dir, get_system_info, pick_file_dialog, read_document_file, save_file_dialog,
-    seed_authorized_paths, write_document_file, SecurityState,
+    write_document_file, SecurityState,
 };
 use tauri::Emitter;
 
@@ -22,7 +22,6 @@ fn main() {
     tauri::Builder::default()
         .manage(SecurityState::new(app_data_dir))
         .plugin(tauri_plugin_dialog::init())
-        .plugin(tauri_plugin_fs::init())
         .on_window_event(|window, event| {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event {
                 api.prevent_close();
@@ -36,7 +35,6 @@ fn main() {
             get_system_info,
             pick_file_dialog,
             save_file_dialog,
-            seed_authorized_paths,
             close_window,
         ])
         .run(tauri::generate_context!())
