@@ -1,6 +1,6 @@
 {
   "name": "wordo",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Premium Cross-Platform Desktop Word Processor",
   "type": "module",
   "scripts": {
@@ -35,6 +35,7 @@
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
     "jspdf": "^4.2.1",
+    "jszip": "^3.10.2",
     "lucide-react": "^1.68.0",
     "mammoth": "^1.13.0",
     "react": "^19.3.1",

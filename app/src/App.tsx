@@ -620,8 +620,9 @@ export const App: React.FC = () => {
       const isHtml = lowerName.endsWith('.html') || lowerName.endsWith('.htm');
 
       if (isDocx) {
-        const { html, warnings } = await DocxService.importDocx(fileData.content as ArrayBuffer);
+        const { html, warnings, pageSettings: importedPage } = await DocxService.importDocx(fileData.content as ArrayBuffer);
         editor.commands.setContent(html);
+        if (importedPage) setPageSettings((prev) => ({ ...prev, ...importedPage }));
         if (warnings && warnings.length > 0) {
           const meaningful = warnings.filter((w) => !w.toLowerCase().includes('unrecognised style'));
           if (meaningful.length > 0) {
@@ -685,9 +686,11 @@ export const App: React.FC = () => {
           const isHtml = lowerName.endsWith('.html') || lowerName.endsWith('.htm');
 
           let html = '';
+          let importedPage: Partial<PageSettings> | undefined;
           if (isDocx) {
             const result = await DocxService.importDocx(fileData.content as ArrayBuffer);
             html = result.html;
+            importedPage = result.pageSettings;
           } else if (isHtml) {
             html = fileData.content as string;
           } else {
@@ -705,7 +708,8 @@ export const App: React.FC = () => {
           }
 
           editor.commands.setContent(html);
-          if (recent.pageSettings) setPageSettings(recent.pageSettings);
+          if (importedPage) setPageSettings((prev) => ({ ...prev, ...importedPage }));
+          else if (recent.pageSettings) setPageSettings(recent.pageSettings);
 
           if (isDocx) {
             // Recent DOCX: preserve path so Save directly updates this DOCX

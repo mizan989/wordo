@@ -46,7 +46,7 @@ Unlike cloud-locked document platforms, Wordo treats privacy as non-negotiable: 
 - **Native Desktop Architecture** — Powered by Tauri 2 and Rust for instant sub-second boot times, native windowing, and minimal RAM footprint (<30MB vs 500MB+ in typical Electron alternatives)
 - **Rich Document Typography** — Full-spectrum formatting engine supporting styled headings, nested task lists, blockquotes, inline callouts, code syntax, and custom accent highlights
 - **Advanced Table Studio** — Full interactive data tables with row/column insertion, deletion, table resizing, header toggles, and cell alignments
-- **Bidirectional DOCX Engine** — Import DOCX documents via Mammoth and compile rich documents directly to native OpenXML (`.docx`) through the `docx` library
+- **Bidirectional DOCX Engine** — Import DOCX documents with a built-in OOXML reader (fonts, sizes, colors, alignment, spacing, lists, tables, images, page setup; Mammoth is kept as a fallback) and compile rich documents directly to native OpenXML (`.docx`) through the `docx` library
 - **Precise Document Geometry** — Configurable paper sizes (A4, Letter, Legal), portrait/landscape orientations, custom page margins, and dedicated page breaks
 - **Multi-Format Export & Print Engine** — One-click export to DOCX, HTML, Markdown, and TXT, paired with native platform print (use Print → Save as PDF for selectable-text PDFs)
 - **Crash-Resilient Draft Recovery** — Real-time draft journaling with automatic recovery banners protecting your work against unexpected power cuts or reboots
@@ -233,7 +233,7 @@ User Actions ➔ React 19 Frontend ➔ Tauri Webview (WebKit / WebView2)
 | **Frontend Runtime** | React 19, TypeScript, Vite 8 | Reactive component architecture and sub-second HMR development |
 | **Editor Core** | Tiptap 3, ProseMirror | Extensible schema-driven rich text document engine |
 | **Styling & Icons** | Tailwind CSS, Lucide Icons | Clean, responsive interface typography and vector iconography |
-| **Document Processing** | `docx`, Mammoth | OpenXML DOCX parsing, generation, and formatting transformation |
+| **Document Processing** | `docx`, JSZip, Mammoth (fallback) | OpenXML DOCX parsing, generation, and formatting transformation |
 | **Export Engines** | jsPDF, html2canvas, Native Print | Raster PDF export (jsPDF) and platform print dialog integration |
 | **Static Site Generator**| Python 3 (`generate_site.py`) | Production static marketing pages and standalone utility tools |
 
@@ -248,7 +248,7 @@ The application identity, window dimensions, and capability permissions are defi
 ```json
 {
   "productName": "Wordo",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "identifier": "com.wordclient.desktop",
   "app": {
     "windows": [
@@ -300,7 +300,7 @@ wordo/
 │   │   │   ├── pageBreak.ts              # Explicit document page break node
 │   │   │   └── typography.ts             # Typographic formatting rules
 │   │   ├── services/          # Core operational services
-│   │   │   ├── docxService.ts            # DOCX import (Mammoth) & export (docx)
+│   │   │   ├── docxService.ts            # DOCX import (styled OOXML reader) & export (docx)
 │   │   │   ├── platform.ts               # Unified Tauri / Web native abstraction
 │   │   │   ├── storageService.ts         # Draft journaling & auto-save engine
 │   │   │   └── pdfService.ts             # PDF generation utilities
@@ -342,7 +342,7 @@ npm run tauri:build
 Install the compiled `.deb` package directly:
 
 ```bash
-sudo apt install ./app/src-tauri/target/release/bundle/deb/Wordo_2.0.1_amd64.deb
+sudo apt install ./app/src-tauri/target/release/bundle/deb/Wordo_2.0.2_amd64.deb
 ```
 
 For portable execution on any modern Linux distribution, use the generated `.AppImage` binary.
@@ -369,7 +369,7 @@ cd app/src-tauri && cargo check
 ## 🛡️ Reliability & Document Integrity
 
 - **Non-Destructive Draft Recovery:** Active edits are continuously saved into browser/desktop local storage. In case of unexpected termination, Wordo presents an instant restore banner upon reopen.
-- **Sanitized DOCX Import:** Incoming DOCX files are safely converted into semantic HTML via Mammoth and parsed against strict Tiptap schema rules, preventing arbitrary script injection.
+- **Sanitized DOCX Import:** Incoming DOCX files are safely converted into semantic HTML by the OOXML reader (`docxImport.ts`) and parsed against strict Tiptap schema rules, preventing arbitrary script injection.
 - **Sandboxed Native Permissions:** Tauri 2 capabilities strictly scope filesystem dialogs and operations to authorized user directories.
 - **Zero External Telemetry:** Wordo makes no background network requests, tracking beacons, or telemetry calls during document editing.
 

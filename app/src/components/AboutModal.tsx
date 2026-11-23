@@ -35,7 +35,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
           <div className="space-y-1">
             <div className="flex items-center justify-between text-[var(--text-primary)]">
               <span className="text-[var(--text-muted)]">Version</span>
-              <span className="font-mono font-semibold">2.0.1 (Production Release)</span>
+              <span className="font-mono font-semibold">2.0.2 (Production Release)</span>
             </div>
             <div className="flex items-center justify-between text-[var(--text-primary)]">
               <span className="text-[var(--text-muted)]">Architecture</span>

@@ -1,5 +1,7 @@
 // DOCX Import & Export Service using mammoth and docx with full OpenXML parity
 import mammoth from 'mammoth';
+import { importDocxStyled } from './docxImport';
+import type { PageSettings } from '../types';
 import {
   Document,
   Packer,
@@ -32,7 +34,16 @@ export class DocxService {
    * preserving embedded images, tables, lists, and formatting.
    * Surfaces meaningful import warnings to the user.
    */
-  public static async importDocx(arrayBuffer: ArrayBuffer): Promise<{ html: string; warnings: string[] }> {
+  public static async importDocx(
+    arrayBuffer: ArrayBuffer
+  ): Promise<{ html: string; warnings: string[]; pageSettings?: Partial<PageSettings> }> {
+    // Preferred path: read the OOXML directly so fonts, sizes, colors, alignment, spacing and page setup survive
+    try {
+      return await importDocxStyled(arrayBuffer);
+    } catch (styledErr) {
+      console.warn('[Wordo] Styled DOCX import failed, falling back to simplified import:', styledErr);
+    }
+    // Fallback: Mammoth (structure only; drops most visual formatting)
     try {
       const options = {
         convertImage: mammoth.images.imgElement((image: any) => {
@@ -66,6 +77,7 @@ export class DocxService {
         }
       }
 
+      userWarnings.unshift('Some formatting (fonts, sizes, colors, spacing) could not be read and was simplified.');
       return {
         html: result.value,
         warnings: Array.from(new Set(userWarnings)),
