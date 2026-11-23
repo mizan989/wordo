@@ -248,7 +248,7 @@ The application identity, window dimensions, and capability permissions are defi
 ```json
 {
   "productName": "Wordo",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "identifier": "com.wordclient.desktop",
   "app": {
     "windows": [
@@ -342,7 +342,7 @@ npm run tauri:build
 Install the compiled `.deb` package directly:
 
 ```bash
-sudo apt install ./app/src-tauri/target/release/bundle/deb/Wordo_2.0.0_amd64.deb
+sudo apt install ./app/src-tauri/target/release/bundle/deb/Wordo_2.0.1_amd64.deb
 ```
 
 For portable execution on any modern Linux distribution, use the generated `.AppImage` binary.
