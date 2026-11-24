@@ -308,7 +308,7 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
           <div
             title={headerLeftText ? 'Page Header' : undefined}
             onClick={() => editor.chain().focus('start').run()}
-            className="flex items-center justify-between text-[11px] text-gray-400 select-none relative z-10 cursor-text"
+            className="flex items-center justify-between text-[11px] text-gray-400 select-none absolute inset-x-0 top-0 z-10 cursor-text"
             style={{
               paddingTop: `${Math.max(16, marginTop / 4)}px`,
               paddingBottom: '8px',
@@ -330,7 +330,8 @@ export const EditorCanvas: React.FC<EditorCanvasProps> = ({
             }}
             className="flex-1 cursor-text transition-all min-h-[600px] relative z-10 outline-none focus:outline-none ring-0"
             style={{
-              paddingTop: `${Math.max(16, marginTop / 2)}px`,
+              // Word starts body text exactly at the top margin; the header sits inside the margin
+              paddingTop: `${marginTop}px`,
               paddingBottom: `${Math.max(16, marginBottom / 2)}px`,
               paddingLeft: `${marginLeft}px`,
               paddingRight: `${marginRight}px`,

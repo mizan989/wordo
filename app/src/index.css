@@ -574,11 +574,23 @@
   caret-color: #1D1D1F;
 }
 
+/* Word fits a line when it is within about a pixel of the margin; browsers wrap on sub-pixel overflow.
+   A 1px tolerance reproduces Word's line breaks for text that ends exactly at the margin. */
+.tiptap-content .ProseMirror > p {
+  margin-right: -1px;
+}
+
 .tiptap-content p {
   margin-top: 0;
-  margin-bottom: 0.5rem;
-  line-height: 1.5;
+  margin-bottom: 8pt;          /* Word default: 8 pt after */
+  line-height: 1.318;          /* Word default 1.08 lines x Calibri's 1.22 line height */
   color: inherit;
+}
+
+.wordo-tab {
+  display: inline-block;       /* width is set by layoutTabs() to reach the next 0.5 in tab stop */
+  width: 48px;
+  height: 0;
 }
 
 .tiptap-content h1 {
@@ -700,7 +712,7 @@
 /* Tables */
 .tiptap-content table {
   border-collapse: collapse;
-  margin: 1rem 0;
+  margin: 0;                   /* Word puts no space around tables */
   width: 100%;
   table-layout: fixed;
   overflow: hidden;

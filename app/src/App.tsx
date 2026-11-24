@@ -10,8 +10,6 @@ import Link from '@tiptap/extension-link';
 import Image from '@tiptap/extension-image';
 import { Table } from '@tiptap/extension-table';
 import { TableRow } from '@tiptap/extension-table-row';
-import { TableCell } from '@tiptap/extension-table-cell';
-import { TableHeader } from '@tiptap/extension-table-header';
 import Subscript from '@tiptap/extension-subscript';
 import Superscript from '@tiptap/extension-superscript';
 import TaskList from '@tiptap/extension-task-list';
@@ -19,6 +17,7 @@ import TaskItem from '@tiptap/extension-task-item';
 import CharacterCount from '@tiptap/extension-character-count';
 import { TypographyExtension } from './extensions/typography';
 import { PageBreak } from './extensions/pageBreak';
+import { TabNode, WordTableCell, WordTableHeader } from './extensions/wordFidelity';
 import { SearchHighlightExtension } from './extensions/searchHighlight';
 
 import { TitleBar } from './components/TitleBar';
@@ -162,8 +161,9 @@ export const App: React.FC = () => {
         resizable: true,
       }),
       TableRow,
-      TableHeader,
-      TableCell,
+      WordTableHeader,
+      WordTableCell,
+      TabNode,
       Subscript,
       Superscript,
       TaskList,

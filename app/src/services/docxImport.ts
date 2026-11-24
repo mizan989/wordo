@@ -3,6 +3,7 @@
 // Output is HTML whose inline styles are understood by the editor's extensions.
 import JSZip from 'jszip';
 import type { PageSettings } from '../types';
+import { isFontAvailable } from './fontMetrics';
 
 export interface StyledImportResult {
   html: string;
@@ -43,12 +44,42 @@ const parseXml = (xml: string): Document => new DOMParser().parseFromString(xml,
 // ---------- property models ----------
 interface RunProps {
   font?: string; size?: number; color?: string; bold?: boolean; italic?: boolean;
-  underline?: boolean; strike?: boolean; highlight?: string; vert?: string; caps?: boolean;
+  underline?: boolean; strike?: boolean; highlight?: string; vert?: string; caps?: boolean; outline?: boolean;
 }
 interface ParaProps {
   jc?: string; before?: number; after?: number; line?: number; lineRule?: string;
   left?: number; numId?: string; ilvl?: number; pageBreakBefore?: boolean;
+  border?: Record<string, { style: string; size: number; color: string; space: number }>;
 }
+interface Border { style: string; sz: number; color: string }
+type Borders = Partial<Record<'top' | 'left' | 'bottom' | 'right' | 'insideH' | 'insideV', Border>>;
+type Mar = Partial<Record<'top' | 'left' | 'bottom' | 'right', number>>;
+
+function parseBorderEl(el: Element | null): Border | undefined {
+  if (!el) return undefined;
+  const style = attr(el, 'val') || 'single';
+  const color = attr(el, 'color');
+  return { style, sz: parseInt(attr(el, 'sz') || '4', 10), color: color && color !== 'auto' && /^[0-9a-fA-F]{6}$/.test(color) ? color.toUpperCase() : '000000' };
+}
+function parseBorders(el: Element | null): Borders {
+  const out: Borders = {};
+  if (!el) return out;
+  for (const side of ['top', 'left', 'bottom', 'right', 'insideH', 'insideV'] as const) {
+    const b = parseBorderEl(kid(el, side) || (side === 'left' ? kid(el, 'start') : side === 'right' ? kid(el, 'end') : null));
+    if (b) out[side] = b;
+  }
+  return out;
+}
+function parseMar(el: Element | null): Mar {
+  const out: Mar = {};
+  if (!el) return out;
+  for (const side of ['top', 'left', 'bottom', 'right'] as const) {
+    const v = attr(kid(el, side) || (side === 'left' ? kid(el, 'start') : side === 'right' ? kid(el, 'end') : null), 'w');
+    if (v != null) out[side] = parseInt(v, 10);
+  }
+  return out;
+}
+const mergeBorders = (a: Borders, b: Borders): Borders => ({ ...a, ...b });
 const merge = <T extends object>(a: T, b: T): T => {
   const out: any = { ...a };
   for (const [k, v] of Object.entries(b)) if (v !== undefined) out[k] = v;
@@ -93,6 +124,10 @@ function parseRPr(el: Element | null, theme: Theme): RunProps {
   const fill = attr(shd, 'fill');
   if (!p.highlight && fill && fill !== 'auto' && /^[0-9a-fA-F]{6}$/.test(fill)) p.highlight = `#${fill.toUpperCase()}`;
   const va = kid(el, 'vertAlign'); if (va) p.vert = attr(va, 'val') || undefined;
+  // Outline effect: classic <w:outline/> or Word 2010 text outline with no fill
+  const outlineOn = isOn(kid(el, 'outline'));
+  const textFillNone = !!kid(kid(el, 'textFill'), 'noFill');
+  if (outlineOn || (kid(el, 'textOutline') && textFillNone)) p.outline = true;
   return p;
 }
 
@@ -116,10 +151,26 @@ function parsePPr(el: Element | null): ParaProps {
     const lv = attr(kid(np, 'ilvl'), 'val'); if (lv != null) p.ilvl = parseInt(lv, 10);
   }
   if (isOn(kid(el, 'pageBreakBefore'))) p.pageBreakBefore = true;
+  const bdr = kid(el, 'pBdr');
+  if (bdr) {
+    p.border = {};
+    for (const side of ['top', 'left', 'bottom', 'right']) {
+      const b = kid(bdr, side);
+      const val = attr(b, 'val');
+      if (!b || !val || val === 'nil' || val === 'none') continue;
+      const c = attr(b, 'color');
+      p.border[side] = {
+        style: val, size: parseInt(attr(b, 'sz') || '4', 10),
+        color: c && c !== 'auto' && /^[0-9a-fA-F]{6}$/.test(c) ? c.toUpperCase() : '000000',
+        space: parseInt(attr(b, 'space') || '0', 10),
+      };
+    }
+  }
   return p;
 }
 
-interface StyleDef { id: string; type: string; name: string; basedOn?: string; isDefault: boolean; p: ParaProps; r: RunProps }
+interface StyleDef { id: string; type: string; name: string; basedOn?: string; isDefault: boolean; p: ParaProps; r: RunProps; borders?: Borders; mar?: Mar }
+interface TableCtx { p: ParaProps; r: RunProps; borders: Borders; mar: Mar }
 
 class Importer {
   warnings = new Set<string>();
@@ -127,6 +178,9 @@ class Importer {
   defaultP: ParaProps = {};
   defaultR: RunProps = {};
   defaultParaStyle?: string;
+  defaultTableStyle?: string;
+  tableCtx: TableCtx | null = null;
+  usedFonts = new Set<string>();
   theme: Theme = {};
   rels = new Map<string, { target: string; external: boolean }>();
   numbering = new Map<string, Map<number, { fmt: string; start: number }>>();
@@ -166,9 +220,11 @@ class Importer {
           id, type: attr(s, 'type') || 'paragraph', name: (attr(kid(s, 'name'), 'val') || '').toLowerCase(),
           basedOn: attr(kid(s, 'basedOn'), 'val') || undefined, isDefault: attr(s, 'default') === '1',
           p: parsePPr(kid(s, 'pPr')), r: parseRPr(kid(s, 'rPr'), this.theme),
+          borders: parseBorders(kid(kid(s, 'tblPr'), 'tblBorders')), mar: parseMar(kid(kid(s, 'tblPr'), 'tblCellMar')),
         };
         this.styles.set(id, def);
         if (def.type === 'paragraph' && def.isDefault) this.defaultParaStyle = id;
+        if (def.type === 'table' && def.isDefault) this.defaultTableStyle = id;
       }
     }
     const relsXml = await this.text('word/_rels/document.xml.rels');
@@ -218,8 +274,19 @@ class Importer {
     }
     return out;
   }
+  private resolveTableStyle(id?: string, direct?: { borders: Borders; mar: Mar }): TableCtx {
+    let p: ParaProps = {}, r: RunProps = {}, borders: Borders = {}, mar: Mar = {};
+    for (const s of this.chain(id || this.defaultTableStyle)) {
+      p = merge(p, s.p); r = merge(r, s.r);
+      borders = mergeBorders(borders, s.borders || {}); mar = { ...mar, ...(s.mar || {}) };
+    }
+    if (direct) { borders = mergeBorders(borders, direct.borders); mar = { ...mar, ...direct.mar }; }
+    return { p, r, borders, mar };
+  }
   private resolveParaStyle(id?: string): { p: ParaProps; r: RunProps; name: string } {
-    let p = this.defaultP, r = this.defaultR, name = '';
+    let p = this.tableCtx ? merge(this.defaultP, this.tableCtx.p) : this.defaultP;
+    let r = this.tableCtx ? merge(this.defaultR, this.tableCtx.r) : this.defaultR;
+    let name = '';
     for (const s of this.chain(id || this.defaultParaStyle)) { p = merge(p, s.p); r = merge(r, s.r); name = s.name; }
     return { p, r, name };
   }
@@ -230,11 +297,13 @@ class Importer {
   }
 
   // ----- inline content -----
-  private async runToHtml(run: Element, base: RunProps, state: { skipField: number }): Promise<string> {
+  private async runToHtml(run: Element, base: RunProps, state: { skipField: number; runs: { font?: string; size?: number }[] }): Promise<string> {
     const rPr = kid(run, 'rPr');
     const direct = parseRPr(rPr, this.theme);
     const charStyle = this.resolveCharStyle(attr(kid(rPr, 'rStyle'), 'val') || undefined);
     const props = merge(merge(base, charStyle), direct);
+    if (props.font) this.usedFonts.add(props.font);
+    state.runs.push({ font: props.font, size: props.size });
 
     let out = '';
     let buf = '';
@@ -252,7 +321,7 @@ class Importer {
           buf += esc(t).replace(/ {2,}/g, (m) => ' ' + '\u00a0'.repeat(m.length - 1));
           break;
         }
-        case 'tab': if (state.skipField === 0) buf += '\u00a0\u00a0\u00a0\u00a0'; break;
+        case 'tab': if (state.skipField === 0) { flush(); out += '<span data-wordo-tab></span>'; } break;
         case 'noBreakHyphen': buf += '-'; break;
         case 'br':
         case 'cr':
@@ -282,6 +351,11 @@ class Importer {
     if (p.font) style.push(`font-family: "${p.font.replace(/["'<>&]/g, '')}"`);
     if (p.size) style.push(`font-size: ${p.size}pt`);
     if (p.color) style.push(`color: ${p.color}`);
+    if (p.outline) {
+      const oc = p.color || '#000000';
+      style.push(`-webkit-text-stroke: 0.75pt ${oc}`, '-webkit-text-fill-color: transparent');
+      return `<span data-wd-outline="${oc}" style='${style.join('; ')}'>${h}</span>`;
+    }
     return style.length ? `<span style='${style.join('; ')}'>${h}</span>` : h;
   }
 
@@ -306,7 +380,7 @@ class Importer {
     return `<img src="data:${mime};base64,${b64}"${size}>`;
   }
 
-  private async inline(parent: Element, base: RunProps, state: { skipField: number }): Promise<string> {
+  private async inline(parent: Element, base: RunProps, state: { skipField: number; runs: { font?: string; size?: number }[] }): Promise<string> {
     let out = '';
     for (const c of kids(parent)) {
       switch (ln(c)) {
@@ -372,20 +446,33 @@ class Importer {
     const heading = /^heading (\d)$/.exec(st.name);
     const tag = heading ? `h${Math.min(3, Math.max(1, parseInt(heading[1], 10)))}` : 'p'; // editor supports H1-H3
 
-    const inner = await this.inline(p, st.r, { skipField: 0 });
+    const markProps = merge(st.r, parseRPr(kid(pPr, 'rPr'), this.theme));
+    if (markProps.font) this.usedFonts.add(markProps.font);
+    const state = { skipField: 0, runs: [] as { font?: string; size?: number }[] };
+    const inner = await this.inline(p, st.r, state);
+    // Word sizes a line by its tallest run; use that run's font for the line-height conversion
+    const dominant = state.runs.length
+      ? state.runs.reduce((a, b) => ((b.size || 0) > (a.size || 0) ? b : a))
+      : markProps;
+    const lineFont = dominant.font || markProps.font;
+    const fontProps = state.runs.length ? { font: dominant.font || markProps.font, size: dominant.size || markProps.size } : markProps;
 
     const style: string[] = [];
     const align = props.jc === 'both' || props.jc === 'distribute' ? 'justify' : props.jc === 'center' ? 'center'
       : props.jc === 'right' || props.jc === 'end' ? 'right' : props.jc === 'left' || props.jc === 'start' ? 'left' : '';
     if (align) style.push(`text-align: ${align}`);
-    if (props.line && (!props.lineRule || props.lineRule === 'auto')) style.push(`line-height: ${Math.round((props.line / 240) * 100) / 100}`);
-    if ((props.before || 0) > 0) style.push('margin-top: 12pt');
-    if (props.after === 0) style.push('margin-bottom: 0px');
+    let lineAttr = '';
+    if (props.line && (!props.lineRule || props.lineRule === 'auto')) {
+      const m = Math.round((props.line / 240) * 100) / 100;
+      lineAttr = ` data-wd-line="${Number.isInteger(m * 10) ? m.toFixed(1) : m.toFixed(2)}"`;
+    }
+    style.push(`margin-top: ${(props.before || 0) / 20}pt`, `margin-bottom: ${(props.after || 0) / 20}pt`);
     const inList = !!props.numId && props.numId !== '0' && this.numbering.has(props.numId);
     if (!inList && props.left && props.left > 0) style.push(`margin-left: ${Math.min(8, Math.round(props.left / 360)) * 24}px`);
-    if (st.r.font) style.push(`font-family: "${st.r.font.replace(/["'<>&]/g, '')}"`);
-    if (st.r.size) style.push(`font-size: ${st.r.size}pt`);
-    const styleAttr = style.length ? ` style='${style.join('; ')}'` : '';
+    if (fontProps.font) style.push(`font-family: "${fontProps.font.replace(/["'<>&]/g, '')}"`);
+    if (fontProps.size) style.push(`font-size: ${fontProps.size}pt`);
+    const borderAttr = props.border && Object.keys(props.border).length ? ` data-wd-border="${esc(JSON.stringify(props.border))}"` : '';
+    const styleAttr = `${borderAttr}${lineAttr}${style.length ? ` style='${style.join('; ')}'` : ''}`;
 
     const parts = inner.split('\u0000PB\u0000');
     const pageBreak = '<div data-wordo-page-break="true" class="wordo-page-break"></div>';
@@ -407,11 +494,20 @@ class Importer {
   }
 
   private async table(tbl: Element): Promise<string> {
+    const tblPr = kid(tbl, 'tblPr');
+    const ctx = this.resolveTableStyle(attr(kid(tblPr, 'tblStyle'), 'val') || undefined, {
+      borders: parseBorders(kid(tblPr, 'tblBorders')), mar: parseMar(kid(tblPr, 'tblCellMar')),
+    });
     const grid = kids(kid(tbl, 'tblGrid'), 'gridCol').map((g) => Math.round(parseInt(attr(g, 'w') || '0', 10) / 15));
-    interface Cell { col: number; span: number; vm: string | null; html: string; rowspan: number; skip: boolean; header: boolean }
+    interface Cell { col: number; span: number; vm: string | null; html: string; rowspan: number; skip: boolean; header: boolean; tc: Element; trHeight: number; row: number }
     const rows: Cell[][] = [];
+    const prevCtx = this.tableCtx;
+    this.tableCtx = ctx;
+    let rowIdx = 0;
     for (const tr of kids(tbl, 'tr')) {
-      const header = !!kid(kid(tr, 'trPr'), 'tblHeader');
+      const trPr = kid(tr, 'trPr');
+      const header = !!kid(trPr, 'tblHeader');
+      const trHeight = parseInt(attr(kid(trPr, 'trHeight'), 'val') || '0', 10);
       const cells: Cell[] = [];
       let col = 0;
       for (const tc of kids(tr, 'tc')) {
@@ -420,11 +516,14 @@ class Importer {
         const vmEl = kid(tcPr, 'vMerge');
         const vm = vmEl ? (attr(vmEl, 'val') === 'restart' ? 'restart' : 'cont') : null;
         const html = vm === 'cont' ? '' : await this.blocks(tc);
-        cells.push({ col, span, vm, html: html || '<p></p>', rowspan: 1, skip: false, header });
+        cells.push({ col, span, vm, html: html || '<p></p>', rowspan: 1, skip: false, header, tc, trHeight, row: rowIdx });
         col += span;
       }
       rows.push(cells);
+      rowIdx++;
     }
+    this.tableCtx = prevCtx;
+
     const origins = new Map<number, Cell>();
     for (const cells of rows) {
       for (const c of cells) {
@@ -432,19 +531,51 @@ class Importer {
         else origins.set(c.col, c);
       }
     }
+
+    const cssBorder = (b?: Border) => {
+      if (!b || b.style === 'nil' || b.style === 'none') return 'none';
+      const px = Math.max(1, Math.round((b.sz / 8) * (96 / 72)));
+      const style = b.style === 'double' ? 'double' : b.style === 'dashed' ? 'dashed' : b.style === 'dotted' ? 'dotted' : 'solid';
+      return `${style === 'double' ? Math.max(3, px * 3) : px}px ${style} #${b.color}`;
+    };
+    const px = (twips: number | undefined) => Math.round(((twips ?? 0) / 15) * 100) / 100;
+    const lastRow = rows.length - 1;
+    const colCount = grid.length || Math.max(0, ...rows.map((r) => r.reduce((n, c) => n + c.span, 0)));
+
     let out = '<table><tbody>';
     for (const cells of rows) {
       out += '<tr>';
       for (const c of cells) {
         if (c.skip) continue;
+        const tcPr = kid(c.tc, 'tcPr');
+        const direct = parseBorders(kid(tcPr, 'tcBorders'));
+        const mar = { ...ctx.mar, ...parseMar(kid(tcPr, 'tcMar')) };
+        const bottomRow = c.row + c.rowspan - 1;
+        const edges = {
+          top: direct.top ?? (c.row === 0 ? ctx.borders.top : ctx.borders.insideH),
+          bottom: direct.bottom ?? (bottomRow === lastRow ? ctx.borders.bottom : ctx.borders.insideH),
+          left: direct.left ?? (c.col === 0 ? ctx.borders.left : ctx.borders.insideV),
+          right: direct.right ?? (c.col + c.span >= colCount ? ctx.borders.right : ctx.borders.insideV),
+        };
+        const css = [
+          `border-top: ${cssBorder(edges.top)}`, `border-right: ${cssBorder(edges.right)}`,
+          `border-bottom: ${cssBorder(edges.bottom)}`, `border-left: ${cssBorder(edges.left)}`,
+          `padding: ${px(mar.top)}px ${px(mar.right)}px ${px(mar.bottom)}px ${px(mar.left)}px`,
+        ];
+        const va = attr(kid(tcPr, 'vAlign'), 'val');
+        css.push(`vertical-align: ${va === 'center' ? 'middle' : va === 'bottom' ? 'bottom' : 'top'}`);
+        const fill = attr(kid(tcPr, 'shd'), 'fill');
+        if (fill && fill !== 'auto' && /^[0-9a-fA-F]{6}$/.test(fill)) css.push(`background-color: #${fill.toUpperCase()}`);
+        if (c.trHeight > 0) css.push(`height: ${px(c.trHeight)}px`);
+
         const widths = grid.slice(c.col, c.col + c.span);
         const cw = widths.length === c.span && widths.every((w) => w > 0) ? ` colwidth="${widths.join(',')}"` : '';
         const tag = c.header ? 'th' : 'td';
-        out += `<${tag}${c.span > 1 ? ` colspan="${c.span}"` : ''}${c.rowspan > 1 ? ` rowspan="${c.rowspan}"` : ''}${cw}>${c.html}</${tag}>`;
+        out += `<${tag}${c.span > 1 ? ` colspan="${c.span}"` : ''}${c.rowspan > 1 ? ` rowspan="${c.rowspan}"` : ''}${cw} data-wd-style="${esc(css.join('; '))}">${c.html}</${tag}>`;
       }
       out += '</tr>';
     }
-    return out + '</tbody></table><p></p>';
+    return out + '</tbody></table>';
   }
 
   async blocks(container: Element): Promise<string> {
@@ -455,7 +586,13 @@ class Importer {
       for (const c of kids(parent)) {
         const name = ln(c);
         if (name === 'p') out += await this.paragraph(c);
-        else if (name === 'tbl') { out += this.closeLists() + (await this.table(c)); }
+        else if (name === 'tbl') {
+          out += this.closeLists() + (await this.table(c));
+          // The editor needs a paragraph after a table (Word always has one); only add it when none follows
+          const sibs = kids(parent).filter((e) => ln(e) !== 'sectPr');
+          const next = sibs[sibs.indexOf(c) + 1];
+          if (!next || ln(next) === 'tbl') out += '<p></p>';
+        }
         else if (name === 'sdt') await walk(kid(c, 'sdtContent') || c);
         else if (name === 'sdtContent') await walk(c);
       }
@@ -552,5 +689,8 @@ export async function importDocxStyled(arrayBuffer: ArrayBuffer): Promise<Styled
   await imp.load();
   const html = await imp.blocks(body);
   const pageSettings = await imp.pageSettings(body);
+  for (const font of imp.usedFonts) {
+    if (!isFontAvailable(font)) imp.warnings.add(`Font "${font}" is not installed on this computer; a substitute font is shown.`);
+  }
   return { html: html || '<p></p>', warnings: Array.from(imp.warnings), pageSettings };
 }

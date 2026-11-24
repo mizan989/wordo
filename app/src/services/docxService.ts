@@ -25,6 +25,8 @@ import {
   ShadingType,
   LevelFormat,
   VerticalAlign,
+  Tab,
+  HeightRule,
 } from 'docx';
 import { PlatformService } from './platform';
 
@@ -233,6 +235,61 @@ export class DocxService {
     }
   }
 
+  private static paragraphBorders(json?: string | null): any {
+    if (!json) return undefined;
+    try {
+      const b = JSON.parse(json);
+      const styleMap: Record<string, any> = {
+        single: BorderStyle.SINGLE, double: BorderStyle.DOUBLE, dashed: BorderStyle.DASHED, dotted: BorderStyle.DOTTED,
+      };
+      const out: any = {};
+      for (const side of ['top', 'bottom', 'left', 'right']) {
+        const d = b[side];
+        if (d) out[side] = { style: styleMap[d.style] || BorderStyle.SINGLE, size: d.size || 4, color: d.color || '000000', space: d.space || 0 };
+      }
+      return Object.keys(out).length ? out : undefined;
+    } catch {
+      return undefined;
+    }
+  }
+
+  /** Parse the inline CSS that the importer stores on table cells (borders, padding, alignment, shading, height). */
+  private static parseCellStyle(css?: string | null): {
+    borders?: any; margins?: any; vAlign?: any; fill?: string; height?: number;
+  } {
+    if (!css) return {};
+    const decl: Record<string, string> = {};
+    for (const part of css.split(';')) {
+      const i = part.indexOf(':');
+      if (i > 0) decl[part.slice(0, i).trim()] = part.slice(i + 1).trim();
+    }
+    const out: any = {};
+    const borders: any = {};
+    for (const side of ['top', 'right', 'bottom', 'left']) {
+      const v = decl[`border-${side}`];
+      if (!v) continue;
+      if (v === 'none') { borders[side] = { style: BorderStyle.NONE, size: 0, color: 'auto' }; continue; }
+      const m = /^([\d.]+)px\s+(solid|double|dashed|dotted)\s+#?([0-9a-fA-F]{6})/.exec(v);
+      if (m) {
+        const px = parseFloat(m[1]);
+        const style = m[2] === 'double' ? BorderStyle.DOUBLE : m[2] === 'dashed' ? BorderStyle.DASHED : m[2] === 'dotted' ? BorderStyle.DOTTED : BorderStyle.SINGLE;
+        borders[side] = { style, size: m[2] === 'double' ? 4 : Math.max(2, Math.round(px * 6)), color: m[3].toUpperCase() };
+      }
+    }
+    if (Object.keys(borders).length) out.borders = borders;
+    const pad = decl['padding'];
+    if (pad) {
+      const v = pad.split(/\s+/).map((x) => Math.round(parseFloat(x) * 15));
+      if (v.length === 4 && v.every((n) => isFinite(n))) out.margins = { top: v[0], right: v[1], bottom: v[2], left: v[3] };
+    }
+    const va = decl['vertical-align'];
+    if (va) out.vAlign = va === 'middle' ? VerticalAlign.CENTER : va === 'bottom' ? VerticalAlign.BOTTOM : VerticalAlign.TOP;
+    const bg = this.toHex(decl['background-color']);
+    if (bg) out.fill = bg;
+    if (decl['height']) out.height = Math.round(parseFloat(decl['height']) * 15);
+    return out;
+  }
+
   private static convertNodeToDocx(
     node: any,
     currentLevel: number = 0,
@@ -246,21 +303,28 @@ export class DocxService {
       case 'paragraph': {
         const runs = this.extractParagraphRuns(node.content);
         const alignment = this.getAlignment(node.attrs?.textAlign);
+        // lineHeight is stored as Word's line multiple (1.0 = single); default is Word's 1.08
         const lineSpacing = node.attrs?.lineHeight
           ? Math.round(parseFloat(node.attrs.lineHeight) * 240)
-          : 276;
+          : 259;
         const indentLeft = node.attrs?.indent
           ? Math.round(node.attrs.indent * 360)
           : undefined;
 
-        const before = node.attrs?.spaceBefore ? 240 : 0;
-        const after = node.attrs?.spaceAfter === false ? 0 : 120;
+        const before = node.attrs?.marginTop != null ? Math.round(node.attrs.marginTop * 20) : node.attrs?.spaceBefore ? 240 : 0;
+        const after = node.attrs?.marginBottom != null ? Math.round(node.attrs.marginBottom * 20) : node.attrs?.spaceAfter === false ? 0 : 160;
 
         return new Paragraph({
           children: runs,
           alignment,
           indent: indentLeft ? { left: indentLeft } : undefined,
           spacing: { before, after, line: lineSpacing },
+          border: this.paragraphBorders(node.attrs?.wdBorder),
+          // Paragraph-mark formatting: keeps the height of empty paragraphs the same as in the source document
+          run: {
+            font: node.attrs?.fontFamily || undefined,
+            size: node.attrs?.fontSize ? Math.round(parseFloat(node.attrs.fontSize) * 2) : undefined,
+          },
         });
       }
 
@@ -357,6 +421,7 @@ export class DocxService {
         if (node.content && Array.isArray(node.content)) {
           for (const rowNode of node.content) {
             const cells: TableCell[] = [];
+            let rowHeight = 0;
             if (rowNode.content && Array.isArray(rowNode.content)) {
               for (const cellNode of rowNode.content) {
                 const cellChildren: (Paragraph | Table)[] = [];
@@ -377,7 +442,9 @@ export class DocxService {
                 }
 
                 const isHeader = cellNode.type === 'tableHeader';
-                const customBg = this.toHex(cellNode.attrs?.background);
+                const wd = this.parseCellStyle(cellNode.attrs?.wdStyle);
+                const customBg = wd.fill || this.toHex(cellNode.attrs?.background);
+                if (wd.height) rowHeight = Math.max(rowHeight, wd.height);
 
                 const colSpan = cellNode.attrs?.colspan || undefined;
                 const rowSpan = cellNode.attrs?.rowspan || undefined;
@@ -396,9 +463,10 @@ export class DocxService {
                     columnSpan: colSpan,
                     rowSpan: rowSpan,
                     width: cellWidthConfig,
-                    verticalAlign: VerticalAlign.TOP,
-                    shading: customBg ? { fill: customBg } : (isHeader ? { fill: 'F1F5F9' } : undefined),
-                    borders: {
+                    verticalAlign: wd.vAlign || VerticalAlign.TOP,
+                    margins: wd.margins,
+                    shading: customBg ? { fill: customBg } : (isHeader && !cellNode.attrs?.wdStyle ? { fill: 'F1F5F9' } : undefined),
+                    borders: wd.borders || {
                       top: { style: BorderStyle.SINGLE, size: 1, color: 'CBD5E1' },
                       bottom: { style: BorderStyle.SINGLE, size: 1, color: 'CBD5E1' },
                       left: { style: BorderStyle.SINGLE, size: 1, color: 'CBD5E1' },
@@ -408,13 +476,25 @@ export class DocxService {
                 );
               }
             }
-            rows.push(new TableRow({ children: cells }));
+            rows.push(new TableRow({ children: cells, height: rowHeight ? { value: rowHeight, rule: HeightRule.ATLEAST } : undefined }));
           }
         }
 
+        // Use the real column widths when every first-row cell has them (keeps narrow tables narrow)
+        const colWidths: number[] = [];
+        let widthsKnown = Array.isArray(node.content?.[0]?.content) && node.content[0].content.length > 0;
+        for (const c of node.content?.[0]?.content || []) {
+          const cw = c.attrs?.colwidth;
+          const span = c.attrs?.colspan || 1;
+          if (Array.isArray(cw) && cw.length === span && cw.every(Boolean)) colWidths.push(...cw.map((w: number) => Math.round(w * 15)));
+          else widthsKnown = false;
+        }
+        const totalWidth = colWidths.reduce((a, b) => a + b, 0);
+
         return new Table({
           rows,
-          width: { size: 100, type: WidthType.PERCENTAGE },
+          width: widthsKnown && totalWidth > 0 ? { size: totalWidth, type: WidthType.DXA } : { size: 100, type: WidthType.PERCENTAGE },
+          columnWidths: widthsKnown && totalWidth > 0 ? colWidths : undefined,
         });
       }
 
@@ -644,6 +724,8 @@ export class DocxService {
         } else {
           runs.push(textRun);
         }
+      } else if (item.type === 'tab') {
+        runs.push(new TextRun({ children: [new Tab()] }));
       } else if (item.type === 'hardBreak') {
         runs.push(new TextRun({ break: 1 }));
       } else if (item.type === 'image') {
