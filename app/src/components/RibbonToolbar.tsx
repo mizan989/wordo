@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useReducer } from 'react';
 import {
   Scissors,
   Copy,
@@ -776,12 +776,34 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
     };
   }, [editor, formatPainter]);
 
+  // Tiptap 3 does not re-render React on selection/transaction changes by default, so subscribe here.
+  // Without this the Home tab kept showing the font/size/state from the last content change.
+  const [, refreshRibbon] = useReducer((n: number) => n + 1, 0);
+  useEffect(() => {
+    if (!editor) return;
+    let frame = 0;
+    const refresh = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => refreshRibbon());
+    };
+    editor.on('selectionUpdate', refresh);
+    editor.on('transaction', refresh);
+    return () => {
+      cancelAnimationFrame(frame);
+      editor.off('selectionUpdate', refresh);
+      editor.off('transaction', refresh);
+    };
+  }, [editor]);
+  const lastSelectionRef = useRef<any>(null);
+
   if (!editor) return null;
 
-  const lastSelectionRef = useRef<any>(null);
   const isTableActive = editor.isActive('table');
-  const currentFontSize = editor.getAttributes('textStyle')?.fontSize || '11';
-  const currentFontFamily = editor.getAttributes('textStyle')?.fontFamily || selectedFont;
+  const textStyleAttrs = editor.getAttributes('textStyle');
+  const blockAttrs = editor.getAttributes(editor.isActive('heading') ? 'heading' : 'paragraph');
+  // Run formatting wins; fall back to the paragraph's own font/size (imported documents set both)
+  const currentFontSize = textStyleAttrs?.fontSize || blockAttrs?.fontSize || '11';
+  const currentFontFamily = textStyleAttrs?.fontFamily || blockAttrs?.fontFamily || selectedFont;
 
   const toggleFormatting = (mark: 'bold' | 'italic' | 'underline' | 'strike' | 'subscript' | 'superscript') => {
     if (!editor) return;
@@ -1407,6 +1429,10 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   className="h-6 px-1.5 bg-[var(--surface-secondary)] border border-[var(--border-color)] text-[var(--text-primary)] rounded-[var(--radius-md)] text-xs outline-hidden w-36 font-medium truncate hover:bg-[var(--hover-bg)]"
                   title="Font Family"
                 >
+                  {/* A document font that is not in the lists below must still show its exact name */}
+                  {!CLOUD_FONTS.includes(currentFontFamily) && !STANDARD_FONTS.includes(currentFontFamily) && (
+                    <option value={currentFontFamily}>{currentFontFamily}</option>
+                  )}
                   <optgroup label="☁️ Office 365 Cloud Fonts">
                     {CLOUD_FONTS.map((f) => (
                       <option key={f} value={f} style={{ fontFamily: `"${f}", sans-serif` }}>
