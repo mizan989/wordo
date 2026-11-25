@@ -9,6 +9,11 @@ WORKSPACE_DIR = os.path.dirname(BASE_DIR)
 DIST_DIR = os.path.join(BASE_DIR, 'dist')
 
 def create_favicon(dist_path, public_path):
+    if os.path.exists(public_path):
+        os.makedirs(os.path.dirname(dist_path), exist_ok=True)
+        shutil.copy2(public_path, dist_path)
+        return
+
     w, h = 16, 16
     bmp_header_size = 40
     pixel_bytes = w * h * 4
@@ -19,11 +24,11 @@ def create_favicon(dist_path, public_path):
     ico_header = struct.pack("<HHH", 0, 1, 1)
     ico_entry = struct.pack("<BBBBHHII", w, h, 0, 0, 1, 32, image_size, offset)
     bmp_header = struct.pack("<IIIHHIIIIII", bmp_header_size, w, h * 2, 1, 32, 0, pixel_bytes + mask_bytes, 0, 0, 0, 0)
-    
+
     b_val, g_val, r_val, a_val = 189, 90, 24, 255
     pixels = bytearray([b_val, g_val, r_val, a_val] * (w * h))
     mask = bytearray(mask_bytes)
-    
+
     data = ico_header + ico_entry + bmp_header + pixels + mask
     for p in [dist_path, public_path]:
         os.makedirs(os.path.dirname(p), exist_ok=True)
