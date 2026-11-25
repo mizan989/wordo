@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useReducer } from 'react';
+import { useUserFonts } from '../services/userFonts';
 import {
   Scissors,
   Copy,
@@ -795,6 +796,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
     };
   }, [editor]);
   const lastSelectionRef = useRef<any>(null);
+  const myFonts = useUserFonts();
 
   if (!editor) return null;
 
@@ -1420,6 +1422,10 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   }}
                   onChange={(e) => {
                     const font = e.target.value;
+                    if (font === '__manage_fonts__') {
+                      window.dispatchEvent(new CustomEvent('wordo:open-font-manager'));
+                      return;
+                    }
                     setSelectedFont(font);
                     if (lastSelectionRef.current && !lastSelectionRef.current.empty) {
                       editor.commands.setTextSelection(lastSelectionRef.current);
@@ -1430,8 +1436,17 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                   title="Font Family"
                 >
                   {/* A document font that is not in the lists below must still show its exact name */}
-                  {!CLOUD_FONTS.includes(currentFontFamily) && !STANDARD_FONTS.includes(currentFontFamily) && (
+                  {!CLOUD_FONTS.includes(currentFontFamily) && !STANDARD_FONTS.includes(currentFontFamily) && !myFonts.some((m) => m.family === currentFontFamily) && (
                     <option value={currentFontFamily}>{currentFontFamily}</option>
+                  )}
+                  {myFonts.length > 0 && (
+                    <optgroup label="My fonts">
+                      {myFonts.map((m) => (
+                        <option key={m.family} value={m.family} style={{ fontFamily: `"${m.family}", sans-serif` }}>
+                          {m.family}
+                        </option>
+                      ))}
+                    </optgroup>
                   )}
                   <optgroup label="☁️ Office 365 Cloud Fonts">
                     {CLOUD_FONTS.map((f) => (
@@ -1447,6 +1462,7 @@ export const RibbonToolbar: React.FC<RibbonToolbarProps> = ({
                       </option>
                     ))}
                   </optgroup>
+                  <option value="__manage_fonts__">⚙ Manage my fonts…</option>
                 </select>
 
                 {/* Font Size */}

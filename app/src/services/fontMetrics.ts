@@ -18,10 +18,16 @@ const FACTORS: Record<string, number> = {
 };
 export const DEFAULT_LINE_FACTOR = 1.15;
 
+// Exact factors read from fonts the user imported (override the table above)
+const MEASURED = new Map<string, number>();
+export function registerLineFactor(font: string, factor: number) {
+  MEASURED.set(font.replace(/["']/g, '').trim().toLowerCase(), factor);
+}
+
 export function lineHeightFactor(font?: string | null): number {
   if (!font) return FACTORS.calibri;
   const key = font.split(',')[0].replace(/["']/g, '').trim().toLowerCase();
-  return FACTORS[key] ?? DEFAULT_LINE_FACTOR;
+  return MEASURED.get(key) ?? FACTORS[key] ?? DEFAULT_LINE_FACTOR;
 }
 
 /** Word line multiple (1.0 = single) -> CSS unitless line-height for this font. */

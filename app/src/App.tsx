@@ -23,6 +23,8 @@ import { SearchHighlightExtension } from './extensions/searchHighlight';
 import { TitleBar } from './components/TitleBar';
 import { BackstageView } from './components/BackstageView';
 import { RibbonToolbar } from './components/RibbonToolbar';
+import { FontManagerDialog } from './components/FontManagerDialog';
+import { userFonts } from './services/userFonts';
 import { Ruler } from './components/Ruler';
 import { EditorCanvas } from './components/EditorCanvas';
 import { StatusBar } from './components/StatusBar';
@@ -133,6 +135,16 @@ export const App: React.FC = () => {
   const initialContent = '<p></p>';
 
   // Initialize Tiptap Editor
+  const [showFontManager, setShowFontManager] = useState(false);
+
+  // Load the fonts the user imported before anything is drawn, and open the manager from the font box
+  useEffect(() => {
+    userFonts.init();
+    const open = () => setShowFontManager(true);
+    window.addEventListener('wordo:open-font-manager', open);
+    return () => window.removeEventListener('wordo:open-font-manager', open);
+  }, []);
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -1112,6 +1124,7 @@ export const App: React.FC = () => {
       )}
 
       {/* Dialog Modals */}
+      <FontManagerDialog open={showFontManager} onClose={() => setShowFontManager(false)} />
       <BackstageView
         isOpen={showBackstage}
         onClose={() => setShowBackstage(false)}

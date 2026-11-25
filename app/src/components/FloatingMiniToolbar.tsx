@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { FONT_SIZE_STEPS } from '../extensions/typography';
 import { CLOUD_FONTS, STANDARD_FONTS } from './RibbonToolbar';
+import { useUserFonts } from '../services/userFonts';
 
 const MINI_COLORS = [
   '#000000',
@@ -124,6 +125,8 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
     };
   }, [editor]);
 
+  const myFonts = useUserFonts(); // hooks must run before the early return below
+
   if (!editor || !position) return null;
 
   const currentFont = editor.getAttributes('textStyle')?.fontFamily || 'Aptos';
@@ -223,7 +226,32 @@ export const FloatingMiniToolbar: React.FC<FloatingMiniToolbarProps> = ({ editor
             }}
             className="absolute left-0 top-full mt-1 w-48 max-h-60 overflow-y-auto bg-[var(--surface-floating)] border border-[var(--border-color)] rounded-[var(--radius-lg)] shadow-[var(--shadow-popover)] py-1 z-50 text-xs"
           >
-            <div className="px-2 py-0.5 text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-wider">
+            {myFonts.length > 0 && (
+              <>
+                <div className="px-2 py-0.5 text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-wider">
+                  My Fonts
+                </div>
+                {myFonts.map((m) => (
+                  <button
+                    key={m.family}
+                    type="button"
+                    onMouseDown={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleApplyFont(m.family);
+                    }}
+                    className={`w-full text-left px-2.5 py-1 flex items-center justify-between hover:bg-[var(--hover-bg)] text-[11px] ${
+                      currentFont === m.family ? 'text-[var(--accent-color)] font-semibold bg-[var(--selection-bg)]' : 'text-[var(--text-primary)]'
+                    }`}
+                    style={{ fontFamily: `"${m.family}", sans-serif` }}
+                  >
+                    <span className="truncate">{m.family}</span>
+                    {currentFont === m.family && <Check className="w-3 h-3 text-[var(--accent-color)] flex-shrink-0" />}
+                  </button>
+                ))}
+              </>
+            )}
+            <div className="px-2 py-0.5 text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-wider border-t border-gray-100 dark:border-gray-800 mt-1 pt-1">
               Cloud Fonts
             </div>
             {CLOUD_FONTS.map((font) => (

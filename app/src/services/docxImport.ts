@@ -690,7 +690,7 @@ export async function importDocxStyled(arrayBuffer: ArrayBuffer): Promise<Styled
   const html = await imp.blocks(body);
   const pageSettings = await imp.pageSettings(body);
   for (const font of imp.usedFonts) {
-    if (!isFontAvailable(font)) imp.warnings.add(`Font "${font}" is not installed on this computer; a substitute font is shown.`);
+    if (!isFontAvailable(font)) imp.warnings.add(`Font "${font}" is not installed on this computer; a substitute font is shown. Add it with the font box → "Manage my fonts…".`);
   }
   return { html: html || '<p></p>', warnings: Array.from(imp.warnings), pageSettings };
 }

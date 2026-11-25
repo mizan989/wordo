@@ -57,11 +57,13 @@ export const TabNode = Node.create({
           run();
           window.addEventListener('resize', run);
           (document as any).fonts?.ready?.then(run);
+          (document as any).fonts?.addEventListener?.('loadingdone', run);
           return {
             update: run,
             destroy: () => {
               cancelAnimationFrame(frame);
               window.removeEventListener('resize', run);
+              (document as any).fonts?.removeEventListener?.('loadingdone', run);
             },
           };
         },

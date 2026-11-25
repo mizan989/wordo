@@ -44,13 +44,16 @@ Unlike cloud-locked document platforms, Wordo treats privacy as non-negotiable: 
 **Key Capabilities:**
 
 - **Native Desktop Architecture** — Powered by Tauri 2 and Rust for instant sub-second boot times, native windowing, and minimal RAM footprint (<30MB vs 500MB+ in typical Electron alternatives)
-- **Rich Document Typography** — Full-spectrum formatting engine supporting styled headings, nested task lists, blockquotes, inline callouts, code syntax, and custom accent highlights
-- **Advanced Table Studio** — Full interactive data tables with row/column insertion, deletion, table resizing, header toggles, and cell alignments
-- **Bidirectional DOCX Engine** — Import DOCX documents with a built-in OOXML reader (fonts, sizes, colors, alignment, spacing, lists, tables, images, page setup; Mammoth is kept as a fallback) and compile rich documents directly to native OpenXML (`.docx`) through the `docx` library
-- **Precise Document Geometry** — Configurable paper sizes (A4, Letter, Legal), portrait/landscape orientations, custom page margins, and dedicated page breaks
-- **Multi-Format Export & Print Engine** — One-click export to DOCX, HTML, Markdown, and TXT, paired with native platform print (use Print → Save as PDF for selectable-text PDFs)
-- **Crash-Resilient Draft Recovery** — Real-time draft journaling with automatic recovery banners protecting your work against unexpected power cuts or reboots
-- **Curated Template Library** — Ready-to-write presets for business letters, executive resumes, modern project proposals, research reports, and meeting summaries
+- **Word-Fidelity Typography & Metrics** — Precision formatting engine supporting exact point spacing (`marginTop`/`marginBottom`), paragraph borders, outline text effects (`wdOutline`), 0.5-inch dynamic tab stops (`TabNode`), and `hhea`-calibrated Word-to-CSS line spacing (`fontMetrics.ts`)
+- **Custom User Font Manager ("Import My Fonts")** — Import local `.ttf`, `.otf`, and `.ttc` font collections directly into local IndexedDB storage (`userFonts.ts`), automatically splitting font collections, extracting exact line metrics, and registering faces via the browser `FontFace` API without system-wide installation
+- **High-Fidelity Bidirectional DOCX Engine** — Direct OpenXML/OOXML importer (`docxImport.ts`) preserving fonts, sizes, colors, alignments, spacing, indentations, paragraph/table cell borders, tab stops, lists, images, links, and page geometry (with Mammoth fallback), paired with native `.docx` export via the `docx` library
+- **Reactive Multi-Tab Ribbon & Floating Toolbars** — Multi-tab command ribbon (`Home`, `Insert`, `Layout`, `References`, `Review`, `View`, `Help`, plus contextual `Table`), selection-aware font/size controls, right-click context menu, and floating mini formatting bar
+- **Advanced Table Studio** — Interactive data tables preserving imported cell borders, padding, vertical alignment, background shading, row heights, row/column editing, and header toggles
+- **Themeable Desktop UI & Locked Paper Ink** — Refined light and dark themes with crisp white document paper contrast (`#1D1D1F` locked print ink regardless of UI theme), sepia/dark paper presets, and distraction-free Focus Mode
+- **Review, Proofing & Productivity Tools** — Built-in spell/style checker (`SpellCheckPanel`), Find & Replace with live document match highlighting, Citations & Bibliography manager, Translation assistant, Read Aloud text-to-speech bar, and Accessibility checker
+- **Precise Document Geometry & Export** — Configurable paper sizes (A4, Letter, Legal), portrait/landscape orientations, custom margins, interactive horizontal ruler, and one-click export to DOCX, HTML, TXT, rasterized PDF, or native Print-to-PDF
+- **Crash-Resilient Draft Recovery** — Real-time draft journaling with automatic recovery banners protecting your work against unexpected shutdowns
+- **Curated Template Library** — Ready-to-write presets for Corporate NDAs, Financial Reports, SOP Manuals, Software RFCs, Project Proposals, Executive Resumes, Business Letters, Employee Handbooks, and Academic Manuscripts
 
 <br>
 
@@ -158,6 +161,7 @@ sequenceDiagram
 
 **Prerequisites:**
 - **Node.js**: 18.x or higher (Node 20+ recommended)
+- **Python**: 3.11+ (used by `scripts/generate_site.py` during production builds)
 - **Rust Toolchain**: `rustc` and `cargo` (1.80+ recommended)
 - **Linux Dependencies** *(Linux only)*:
   ```bash
@@ -196,19 +200,27 @@ Open **[http://localhost:5173](http://localhost:5173)** in your browser when run
 
 ## 📄 Workspaces & Core Components
 
-Wordo provides an intuitive interface inspired by classic productivity suites yet refined with modern design principles:
+Wordo provides a clean, neutral desktop interface with macOS-inspired ergonomics and an interactive ribbon workspace:
 
-- **Adaptive Ribbon Toolbar** — Multi-tab command ribbon (Home, Insert, Layout, View) organizing character styling, alignment, headers, media, tables, and page setup.
-- **Dynamic Editor Canvas** — Calibrated document page container supporting live margin boundaries, visual paper presets, and seamless zoom controls (50% to 200%).
-- **Document Settings Modal** — Precise document configuration: paper sizes (Letter, A4, Legal), orientation, margin presets (Normal, Narrow, Wide), and custom values.
-- **Template Gallery** — One-click starter layouts for business letters, technical project outlines, resume drafts, and meeting minutes.
-- **Navigation & Outline Sidebar** — Real-time table of contents dynamically indexing headings for instant navigation across long documents.
-- **Status Bar & Live Metrics** — Always-visible word count, character count, page estimates, zoom controller, and save state status indicators.
-- **Recovery Banner** — Intelligent banner notifying you of unsaved sessions, enabling one-click restoration of previous drafting states.
+- **Adaptive Multi-Tab Ribbon Toolbar** — Reactive command ribbon (`Home`, `Insert`, `Layout`, `References`, `Review`, `View`, `Help`, plus contextual `Table`) that syncs immediately with cursor selection and block formatting, alongside a quick File dropdown and Backstage view.
+- **Dynamic Editor Canvas & Context Tools** — Calibrated multi-page canvas supporting live margins, visual paper themes (white with locked print ink, sepia, dark), watermarks, inline context menu, and a floating mini formatting toolbar.
+- **Custom Font Manager ("My Fonts")** — Dedicated `FontManagerDialog` for importing local `.ttf`, `.otf`, and `.ttc` font files or font folders directly into IndexedDB (`userFonts.ts`), automatically splitting font collections and registering true `FontFace` instances and line-height metrics.
+- **Word-Fidelity Extensions & Interactive Ruler** — Drag-and-drop horizontal margin ruler (`Ruler.tsx`), real 0.5-inch dynamic inline tab stops (`wordFidelity.ts`), exact point spacing, paragraph borders, and outline text effects (`typography.ts`).
+- **Document Settings & Presets** — Configure paper sizes (`A4`, `Letter`, `Legal`), portrait/landscape orientation, margin profiles (`Normal`, `Narrow`, `Wide`, or custom), watermarks, and header/footer presets (`Corporate Standard`, `Executive Briefing`, `Legal & Compliance`, `Academic & Research`, `Blank / Minimal`).
+- **Navigation Sidebar, Proofing & Read Aloud** — Real-time headings outline & Find/Replace sidebar (`NavigationSidebar.tsx`), spelling/style assistant (`SpellCheckPanel.tsx`), Citations manager, Translation modal, Accessibility checker, and Read Aloud text-to-speech control bar.
+- **Status Bar, Template Gallery & Recovery Banner** — Live word/character counts, proofing status, Focus Mode toggle, zoom slider, starter template gallery (`TemplateModal.tsx`), and crash recovery banner (`RecoveryBanner.tsx`).
 
 ---
 
-## ✨ Features
+## ✨ What's New in v2.0.x & Core Architecture
+
+### Recent Feature Highlights (v2.0.0 – v2.0.4)
+
+- **Clean Neutral UI & Locked Print Ink** — Refined light and dark themes powered by `@astryxdesign/theme-neutral`, keeping document paper ink locked to black (`#1D1D1F`) by default across UI themes with clean focus handling and sanitized PDF exports.
+- **High-Fidelity OOXML Styled DOCX Importer (`docxImport.ts`)** — Direct ZIP/OOXML parser reading fonts, sizes, colors, alignment, paragraph spacing/indents, borders, lists, tables, images, links, and page setup, with automatic Mammoth fallback and missing-font warnings.
+- **Word Typography & Font Metrics Parity (`fontMetrics.ts`, `wordFidelity.ts`)** — `hhea`-calibrated Word-to-CSS line-height conversion, inline 0.5-inch `TabNode` stops, paragraph/cell inline styles, and `wdOutline` text effects.
+- **Reactive Ribbon & Selection Tracking (`RibbonToolbar.tsx`)** — Live `selectionUpdate`/`transaction` subscriptions resolving run-level and block-level fonts/sizes while displaying custom document fonts in the selector.
+- **Local "Import My Fonts" Registry (`userFonts.ts`, `FontManagerDialog.tsx`)** — Import `.ttf`, `.otf`, and `.ttc` font collections into local IndexedDB storage with automatic line-factor extraction so Word documents match desktop Word typography.
 
 ### High-Performance Native Architecture
 
@@ -231,11 +243,12 @@ User Actions ➔ React 19 Frontend ➔ Tauri Webview (WebKit / WebView2)
 |---|---|---|
 | **Desktop Framework** | Tauri 2.0, Rust | Native application windowing, IPC, and high-performance system bindings |
 | **Frontend Runtime** | React 19, TypeScript, Vite 8 | Reactive component architecture and sub-second HMR development |
-| **Editor Core** | Tiptap 3, ProseMirror | Extensible schema-driven rich text document engine |
-| **Styling & Icons** | Tailwind CSS, Lucide Icons | Clean, responsive interface typography and vector iconography |
-| **Document Processing** | `docx`, JSZip, Mammoth (fallback) | OpenXML DOCX parsing, generation, and formatting transformation |
-| **Export Engines** | jsPDF, html2canvas, Native Print | Raster PDF export (jsPDF) and platform print dialog integration |
-| **Static Site Generator**| Python 3 (`generate_site.py`) | Production static marketing pages and standalone utility tools |
+| **Editor Core** | Tiptap 3, ProseMirror (`@tiptap/pm`) | Extensible schema-driven rich text engine and custom nodes/plugins |
+| **Design & Icons** | Tailwind CSS v4, `@astryxdesign/theme-neutral`, Lucide Icons | Adaptive neutral light/dark surfaces and consistent vector iconography |
+| **Document Processing** | `docx`, JSZip, Mammoth (fallback) | Direct OOXML DOCX styled import/export and schema transformation |
+| **Font Engine** | FontFace API, IndexedDB, Binary SFNT/`ttcf` Parser | Client-side `.ttf`/`.otf`/`.ttc` user font import and `hhea` line metrics |
+| **Export Engines** | jsPDF, html2canvas, Native Print | Raster PDF export (`jsPDF`) and native platform print-to-PDF dialog |
+| **Static Site Generator**| Python 3 (`generate_site.py`) | Production static landing pages and standalone browser utility tools |
 
 ---
 
@@ -248,14 +261,14 @@ The application identity, window dimensions, and capability permissions are defi
 ```json
 {
   "productName": "Wordo",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "identifier": "com.wordclient.desktop",
   "app": {
     "windows": [
       {
         "title": "Wordo",
         "width": 1280,
-        "height": 840,
+        "height": 860,
         "minWidth": 800,
         "minHeight": 600,
         "resizable": true
@@ -265,12 +278,12 @@ The application identity, window dimensions, and capability permissions are defi
 }
 ```
 
-### Document Presets (`app/src/types/presets.ts`)
+### Header & Footer Presets (`app/src/types/presets.ts`)
 
-Paper geometry and margin presets can be customized in `presets.ts`:
+Header, footer, and page-numbering templates can be customized in `presets.ts`:
 
-- **Paper Formats**: Letter (8.5 × 11 in), A4 (210 × 297 mm), Legal (8.5 × 14 in)
-- **Margin Profiles**: Normal (1 in), Narrow (0.5 in), Wide (1.5 in top/bottom, 2 in left/right)
+- **Corporate Standard**, **Executive Briefing**, **Legal & Compliance**, **Academic & Research**, and **Blank / Minimal**
+- Paper formats (**A4**, **Letter**, **Legal**) and margin profiles (**Normal**, **Narrow**, **Wide**, or custom values) are configured directly through `DocumentSettingsModal.tsx` and the Layout ribbon.
 
 ---
 
@@ -278,49 +291,70 @@ Paper geometry and margin presets can be customized in `presets.ts`:
 
 ```text
 wordo/
+├── .github/workflows/         # Automated CI checks (ci.yml) & multi-platform releases (release.yml)
+├── docs/screenshots/          # High-resolution UI showcase screenshots (1920x1014)
 ├── app/
 │   ├── public/
 │   │   ├── favicon.ico        # Multi-resolution favicon icon
-│   │   └── static/            # Static assets and local fonts
+│   │   └── static/            # Static card assets and bundled MS/Segoe UI font files
 │   ├── scripts/
 │   │   ├── generate_site.py   # Multi-page marketing & utility tool generator
-│   │   └── run_generate.js    # Cross-platform site generation runner
+│   │   ├── run_generate.js    # Cross-platform site generation runner
+│   │   └── site_templates/    # HTML templates and route captures
 │   ├── src/
 │   │   ├── assets/            # Wordo branding logo and visual assets
-│   │   ├── components/        # UI components
-│   │   │   ├── RibbonToolbar.tsx         # Formatting ribbon (Home, Insert, Layout)
-│   │   │   ├── EditorCanvas.tsx          # ProseMirror canvas & page container
-│   │   │   ├── MenuBar.tsx               # Top-level application menu
-│   │   │   ├── NavigationSidebar.tsx     # Headings outline navigator
-│   │   │   ├── StatusBar.tsx             # Words, characters, and zoom controls
-│   │   │   ├── DocumentSettingsModal.tsx # Margins, orientation, and paper size
-│   │   │   ├── TemplateModal.tsx         # Template gallery selection
-│   │   │   └── RecoveryBanner.tsx        # Auto-saved draft restore prompt
+│   │   ├── components/        # UI components & dialogs
+│   │   │   ├── TitleBar.tsx              # Custom desktop titlebar with quick actions & theme toggle
+│   │   │   ├── RibbonToolbar.tsx         # Multi-tab ribbon (Home..Help + Table)
+│   │   │   ├── FileMenuDropdown.tsx      # File quick menu
+│   │   │   ├── BackstageView.tsx         # Full-screen file & template backstage view
+│   │   │   ├── EditorCanvas.tsx          # Multi-page ProseMirror canvas & paper sheet
+│   │   │   ├── EditorContextMenu.tsx     # Context menu for editing, tables & proofing
+│   │   │   ├── FloatingMiniToolbar.tsx   # Selection-triggered mini formatting bar
+│   │   │   ├── FontManagerDialog.tsx     # Custom user font (.ttf/.otf/.ttc) manager
+│   │   │   ├── NavigationSidebar.tsx     # Headings outline & Find/Replace panel
+│   │   │   ├── SpellCheckPanel.tsx       # Spelling & style assistant
+│   │   │   ├── ReadAloudBar.tsx          # Text-to-speech playback controls
+│   │   │   ├── Ruler.tsx                 # Interactive horizontal margin ruler
+│   │   │   ├── StatusBar.tsx             # Word count, proofing indicator, Focus Mode & zoom
+│   │   │   ├── DocumentSettingsModal.tsx # Paper size, orientation, margins & presets
+│   │   │   ├── TemplateModal.tsx         # Template gallery modal
+│   │   │   ├── RecoveryBanner.tsx        # Auto-saved draft restore prompt
+│   │   │   └── *Modal.tsx / *Dialog.tsx  # About, Accessibility, Citation, Date/Time, Shortcuts,
+│   │   │                                 # Symbol, Translate, WordCount & CloseConfirm dialogs
 │   │   ├── extensions/        # Custom Tiptap extensions
 │   │   │   ├── pageBreak.ts              # Explicit document page break node
-│   │   │   └── typography.ts             # Typographic formatting rules
+│   │   │   ├── searchHighlight.ts        # Live find-and-replace match highlighter
+│   │   │   ├── typography.ts             # Word point spacing, borders, outline & fonts
+│   │   │   └── wordFidelity.ts           # Inline 0.5in TabNode stops & table cell styling
 │   │   ├── services/          # Core operational services
-│   │   │   ├── docxService.ts            # DOCX import (styled OOXML reader) & export (docx)
-│   │   │   ├── platform.ts               # Unified Tauri / Web native abstraction
-│   │   │   ├── storageService.ts         # Draft journaling & auto-save engine
-│   │   │   └── pdfService.ts             # PDF generation utilities
+│   │   │   ├── docxImport.ts             # Direct styled OOXML (.docx) reader
+│   │   │   ├── docxService.ts            # DOCX import orchestrator & OpenXML (.docx) exporter
+│   │   │   ├── fontMetrics.ts            # Font availability & Word-to-CSS line-height factors
+│   │   │   ├── userFonts.ts              # IndexedDB font store, SFNT parser & TTC splitter
+│   │   │   ├── pdfService.ts             # PDF export (jsPDF + html2canvas) & native print
+│   │   │   ├── platform.ts               # Unified Tauri IPC / Browser fallback abstraction
+│   │   │   ├── spellService.ts           # Document metrics & spell/grammar analyzer
+│   │   │   └── storageService.ts         # Draft journaling, recent files & recovery vault
 │   │   ├── templates/         # Built-in document starter templates
-│   │   ├── types/             # Document, style, and preset TypeScript definitions
+│   │   ├── types/             # Document settings, stats & header/footer presets
 │   │   ├── App.tsx            # Root application layout and state coordinator
-│   │   └── index.css          # Tailwind CSS styles and page layout rules
+│   │   ├── index.css          # Neutral theme tokens, Tailwind styles & ProseMirror layout
+│   │   └── ms-fonts.css       # Bundled Microsoft font-face declarations
 │   │
 │   ├── src-tauri/             # Rust desktop backend
 │   │   ├── capabilities/      # Tauri permission capabilities
 │   │   ├── icons/             # Multi-platform app icons (PNG, ICO, ICNS)
 │   │   ├── src/
-│   │   │   ├── commands.rs    # Tauri command invocations
+│   │   │   ├── commands.rs    # Sandboxed file dialogs, I/O & system commands
 │   │   │   └── main.rs        # Native desktop entry point
-│   │   ├── Cargo.toml         # Rust dependencies (tauri v2, serde)
+│   │   ├── Cargo.toml         # Rust dependencies (tauri v2, serde, rfd)
 │   │   └── tauri.conf.json    # Application metadata and window configuration
 │   │
 │   ├── package.json           # Frontend dependencies and build scripts
-│   └── vite.config.ts         # Vite bundler and plugin configuration
+│   └── vite.config.ts         # Vite bundler configuration
 │
+├── LICENSE                    # MIT License
 └── README.md                  # Project documentation
 ```
 
@@ -337,21 +371,21 @@ cd app
 npm run tauri:build
 ```
 
-### Linux Installation (Debian / Ubuntu)
+### Linux Installation (Debian / Ubuntu / RPM / AppImage)
 
-Install the compiled `.deb` package directly:
+Download the latest release from [GitHub Releases](https://github.com/mizan989/wordo/releases), or install the compiled local `.deb` package directly:
 
 ```bash
-sudo apt install ./app/src-tauri/target/release/bundle/deb/Wordo_2.0.3_amd64.deb
+sudo apt install ./app/src-tauri/target/release/bundle/deb/Wordo_2.0.4_amd64.deb
 ```
 
-For portable execution on any modern Linux distribution, use the generated `.AppImage` binary.
+For Fedora/RHEL systems, install the `.rpm` package, or run the portable `.AppImage` binary directly on any modern Linux distribution. Windows (`.exe` / `.msi`) and macOS (`.dmg` / `.app`) installers are also published on [GitHub Releases](https://github.com/mizan989/wordo/releases).
 
 ---
 
 ## Verification & Quality Bar
 
-Validate codebase integrity and build status:
+Validate codebase integrity and build status (matching the CI pipeline in `.github/workflows/ci.yml`):
 
 ```bash
 # Typecheck TypeScript codebase
@@ -360,8 +394,8 @@ cd app && npx tsc --noEmit
 # Build production frontend bundle & generate web pages
 cd app && npm run build
 
-# Validate Rust backend compilation
-cd app/src-tauri && cargo check
+# Validate Rust backend compilation & tests
+cd app/src-tauri && cargo check && cargo test
 ```
 
 ---
@@ -369,8 +403,8 @@ cd app/src-tauri && cargo check
 ## 🛡️ Reliability & Document Integrity
 
 - **Non-Destructive Draft Recovery:** Active edits are continuously saved into browser/desktop local storage. In case of unexpected termination, Wordo presents an instant restore banner upon reopen.
-- **Sanitized DOCX Import:** Incoming DOCX files are safely converted into semantic HTML by the OOXML reader (`docxImport.ts`) and parsed against strict Tiptap schema rules, preventing arbitrary script injection.
-- **Sandboxed Native Permissions:** Tauri 2 capabilities strictly scope filesystem dialogs and operations to authorized user directories.
+- **Sanitized DOCX & Font Import:** Incoming DOCX files are safely converted into semantic HTML by the OOXML reader (`docxImport.ts`) and parsed against strict Tiptap schema rules; imported user fonts remain isolated inside local IndexedDB storage.
+- **Sandboxed Native Permissions:** Tauri 2 capabilities strictly normalize paths, guard against symlink traversal, and scope filesystem operations to user-selected directories.
 - **Zero External Telemetry:** Wordo makes no background network requests, tracking beacons, or telemetry calls during document editing.
 
 ---
@@ -401,8 +435,9 @@ Wordo is built with gratitude towards the open-source software ecosystem:
 - [Rust](https://www.rust-lang.org/) — Memory-safe systems programming language
 - [React](https://react.dev/) & [Vite](https://vite.dev/) — Lightning-fast frontend library and build tool
 - [Tiptap](https://tiptap.dev/) & [ProseMirror](https://prosemirror.net/) — Headless, extensible rich-text editing engine
-- [Mammoth.js](https://github.com/mwilliamson/mammoth.js) & [docx](https://docx.js.org/) — Powerful OpenXML DOCX conversion libraries
-- [Tailwind CSS](https://tailwindcss.com/) — Modern utility-first styling engine
+- [JSZip](https://stuk.github.io/jszip/), [Mammoth.js](https://github.com/mwilliamson/mammoth.js) & [docx](https://docx.js.org/) — OpenXML DOCX parsing and generation libraries
+- [jsPDF](https://github.com/parallax/jsPDF) & [html2canvas](https://html2canvas.hertzen.com/) — Client-side PDF export rendering
+- [Tailwind CSS](https://tailwindcss.com/) & [Astryx Neutral](https://www.npmjs.com/package/@astryxdesign/theme-neutral) — Utility styling and neutral surface tokens
 - [Lucide Icons](https://lucide.dev/) — Clean, consistent UI iconography
 
 <div align="center">
